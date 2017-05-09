@@ -42,6 +42,7 @@ data %>%
 data_A <- (data %>% filter(Group == "A"))[[2]]
 data_B <- (data %>% filter(Group == "B"))[[2]]
 t_result <- tidy(t.test(data_A, data_B))
+t_result # result in tabular format
 ```
 
 *Simple effect size:* The task completion time of the two groups differ by `r t_result$estimate` (95% confidence interval [`r t_result$conf.low`, `r t_result$conf.high`]) seconds.
