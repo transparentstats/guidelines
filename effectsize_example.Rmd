@@ -72,8 +72,8 @@ cohen_d <- cohen.d(TaskCompletionTime_Sec ~ Group, data = data)
 
 ```{r}
 library(coin)
-data_A <- (data %>% filter(Group == "A"))[[2]]
-data_B <- (data %>% filter(Group == "B"))[[2]]
+data_A <- (data %>% filter(Group == "A"))[["TaskCompletionTime_Sec"]]
+data_B <- (data %>% filter(Group == "B"))[["TaskCompletionTime_Sec"]]
 wilcox_result <- wilcox_test(TaskCompletionTime_Sec ~ factor(Group), data = data)
 effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 ```
