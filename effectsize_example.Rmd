@@ -54,13 +54,18 @@ Effect size should be reported together with an appropriate measure of error to 
 
 # Issues with effect sizes?
 ```
-not yet ported from Google Doc
+Draft:
+
+Discuss here about Cohen’s delta, and how Cohen himself did not want people to use small, medium and large labels
 ```
 
 
 # Drawbacks to effect sizes 
 ```
-not yet ported from Google Doc
+Draft:
+How about region of practical equivalence (ROPE)
+http://doingbayesiandataanalysis.blogspot.com/2013/08/how-much-of-bayesian-posterior.html
+
 ```
 
 
