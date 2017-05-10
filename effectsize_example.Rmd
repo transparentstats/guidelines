@@ -54,13 +54,18 @@ Effect size should be reported together with an appropriate measure of error to 
 
 # Issues with effect sizes?
 ```
-not yet ported from Google Doc
+Draft:
+
+Discuss here about Cohen’s delta, and how Cohen himself did not want people to use small, medium and large labels
 ```
 
 
 # Drawbacks to effect sizes 
 ```
-not yet ported from Google Doc
+Draft:
+How about region of practical equivalence (ROPE)
+http://doingbayesiandataanalysis.blogspot.com/2013/08/how-much-of-bayesian-posterior.html
+
 ```
 
 
@@ -129,6 +134,14 @@ t_result %>%
 ```{r}
 library(effsize)
 cohen_d <- cohen.d(TaskCompletionTime_Sec ~ Group, data = data)
+
+# manual calculation
+data_A <- (data %>% filter(Group == "A"))[["TaskCompletionTime_Sec"]]
+data_B <- (data %>% filter(Group == "B"))[["TaskCompletionTime_Sec"]]
+sd_A <- sd(data_A)
+sd_B <- sd(data_B)
+sd_pool <- sqrt( (sd_A^2 + sd_B^2) / 2 )
+cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 ```
 
 **Standardized effect size:** Cohen's d = `r cohen_d$estimate` SDs with 95% confidence interval [`r cohen_d$conf.int[1]` , `r cohen_d$conf.int[2]`]
