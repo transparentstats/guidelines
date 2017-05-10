@@ -1,11 +1,49 @@
 ---
 title: "Effect size"
 output: html_notebook
+bibliography: references.bib
 ---
 ```{r}
 library(tidyverse)
 library(broom)
 ```
+
+# What is effect size?
+Broadly speaking, an effect size is *"anything that might be of interest"* [@cumming2013a], i.e., a quantity that captures the practical magnitude of the effect studied. For example, *the difference* between task completion time (in seconds) or *the difference* between error rate (in percent).
+
+Effect sizes are not as scary as you think. Effect sizes are *essentially* any way to compute the practical size of an effect. It can be something as simple as the difference between means between two treatments --- and often this is a very informative measure that can tell you whether a treatment has an effect large enough to care about. 
+
+The term *effect size* is an overloaded term: sometimes it is used to refer to *standardized* effect sizes, like Cohen’s *d*, and sometimes to *simple* effect sizes, like the difference between two means. This can lead to confusion.
+
+# Should I report simple effect sizes or standardized effect sizes?
+Cohen’s *d* --- the difference in means divided by the standard deviation --- is sometimes called a standardized effect size. Standard effect sizes are useful in some situations, for example when effects expressed in different units need to be combined or compared [@Cumming2014a] However, often reporting a simple effect size is easier to interpret [@Cumming2014a]. When the units of the data are meaningful, reporting simple effect sizes can make it easier to judge whether the size of the effect has practical significance [@Wilkinson1999a].
+
+If you are reporting standardized effect sizes, and there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, you should find another way to assess the practical significance of the effect.
+
+
+# How do you know it is large enough?
+Deciding if an effect size is “large enough” often requires expert judgement. Is a difference of 100ms a large difference in reaction time? Is a difference of 100ms a large difference in time to receive a chat message? 
+
+Often it is difficult to determine whether a certain effect is of practical importance. For example, a difference in pointing time of 100ms between two pointing techniques can be large or small depending on the application, how often it is used, the context of use, etc. In that case, it is enough to present effect sizes in a clear way and leave the judgment of practical importance to the reader.
+
+While some informal thresholds are used for Cohen’s *d* (see below), these thresholds are largely arbitrary [verify] and may not truly be domain agnostic. Those thresholds were originally proposed by Cohen based on a dataset of human heights [verify that]. Cohen himself noted that these thresholds may not be directly applicable to other domains.
+
+More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead try to think whether effect is of practical importance. This requires domain knowledge and analysis. 
+
+In practice, a researcher could (should) think in advance what would be an effect they would like to see in their data from the treatment (see "planned analyses" and "power analysis"). This would be “large enough”. (Obviously, this is subjective, and readers/reviewers may disagree.)
+
+
+
+# Why and when should effect sizes be reported?
+Taken in a broad sense, effect sizes should (by definition) be reported in quantitative research unless they are good reasons not to do so. Effect sizes are essential for understanding the practical effect or differences in measurements. Identifying the effect size(s) of interest allows turning a research question into a precise, quantitative question. For example, if a researcher is interested in showing that her technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times.
+
+For data that is sensible to characterize with means and standard deviations, an effect size can be computed between two means M1 and M2 as:
+
+<center> $d = |M_{1} - M_{2}| / SD_{\text{pool}}$</center>
+
+The above effect size, known as Cohen’s *d*, divides the absolute mean difference by $SD_{\text{pool}}$, the standard deviation of the pooled data points, (although there are [other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to the standardization). Traditionally, a *d* of 0.2--0.5 is “small,” 0.5--0.8 is “medium,” and 0.80--1.0+ is “large” [@Cohen1988a]. However, one should not blindly interpret effect size values. Instead, one should carefully consider what the practical difference is, and whether it matters in the problem domain.
+
+Sometimes, the main focus of a study is on the direction (rather than magnitude) of the effect and the effect sizes are hard to compute or to interpret. In such cases, practical significance should be the focus.
 
 
 ## Data
