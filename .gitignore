@@ -6,3 +6,7 @@
 .Rhistory
 .RData
 *.nb.html
+*.Rproj
+
+# Misc
+*~
