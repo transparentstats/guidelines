@@ -7,64 +7,53 @@ bibliography: references.bib
 library(tidyverse)
 ```
 
-# What is effect size?
-Broadly speaking, an effect size is *"anything that might be of interest"* [@Cumming2013a], i.e., a quantity that captures the practical magnitude of the effect studied. For example, *the difference* between task completion time (in seconds) or *the difference* between error rate (in percent).
+# What is an effect size?
+Broadly speaking, an effect size is *"anything that might be of interest"* [@Cumming2013a], that is, any quantity that captures the magnitude of an effect that is being studied. Examples include the mean difference (in seconds) in task completion times between two techniques, or the mean difference in error rates (in percent). These are called *simple effect sizes* or *unstandardized effect sizes*. More complex measures exist that are called *standardized effect sizes* (see [What is a standardized effect size?](#standarized)).
 
-Effect sizes are not as scary as you think. Effect sizes are *essentially* any way to compute the practical size of an effect. It can be something as simple as the difference between means between two treatments --- and often this is a very informative measure that can tell you whether a treatment has an effect large enough to care about. 
+The term "effect size" is sometimes used to refer to standardized effect sizes only, which can be confusing. It is preferable to use the term "effect size" in a broader sense to include simple effect sizes [@Cumming2013a, @Wilkinson1999a].
 
-The term *effect size* is an overloaded term: sometimes it is used to refer to *standardized* effect sizes, like Cohen’s *d*, and sometimes to *simple* effect sizes, like the difference between two means. This can lead to confusion.
+# <a name="whenwhy"></a>Why and when should effect sizes be reported?
+In quantitative experiments, effect sizes are among the most elementary and the most essential summary statistics that can be reported. Identifying the effect size(s) of interest also allows the researcher to turn a vague research question into a precise, quantitative question [@Cumming2014a]. For example, if a researcher is interested in showing that her technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times. The observed effect size will indicate not only the likely direction of the effect (e.g., whether the technique is faster), but also whether the effect is large enough to care about. 
 
-# Should I report simple effect sizes or standardized effect sizes?
-Cohen’s *d* --- the difference in means divided by the standard deviation --- is sometimes called a standardized effect size. Standard effect sizes are useful in some situations, for example when effects expressed in different units need to be combined or compared [@Cumming2014a] However, often reporting a simple effect size is easier to interpret [@Cumming2014a]. When the units of the data are meaningful, reporting simple effect sizes can make it easier to judge whether the size of the effect has practical significance [@Wilkinson1999a].
+For the sake of transparency, effect sizes (simple or standardized) should always be reported in quantitative research, unless there are good reasons not to do so. According to the American Psychological Association:
 
-If you are reporting standardized effect sizes, and there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, you should find another way to assess the practical significance of the effect.
+> For the reader to appreciate the magnitude or importance of a study's findings, it is almost always necessary to include some measure of effect size in the Results section. [@APA2001]
 
+Sometimes, effect sizes can be hard to compute or to interpret. When this is the case, and if the main focus of the study is on the direction (rather than magnitude) of the effect, reporting the results of statistical significance tests without reporting effect sizes (see the [inferential statistics FAQ]()) may be an acceptable option [citations needed].
 
-# How do you know it is large enough?
-Deciding if an effect size is “large enough” often requires expert judgement. Is a difference of 100ms a large difference in reaction time? Is a difference of 100ms a large difference in time to receive a chat message? 
+# <a name="standardized"></a>What is a standardized effect size?
 
-Often it is difficult to determine whether a certain effect is of practical importance. For example, a difference in pointing time of 100ms between two pointing techniques can be large or small depending on the application, how often it is used, the context of use, etc. In that case, it is enough to present effect sizes in a clear way and leave the judgment of practical importance to the reader.
+A standardized effect size is a unitless measure of effect size. The most common measure of standardized effect size is Cohen’s *d*, where the mean difference is divided by the standard deviation of the pooled observations [@Cohen1988a]. [Other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to standardization exist [prefer citations]. To some extent, standardized effect sizes make it possible to compare different studies in terms of how “impressive” their results are (see [How do I know my effect is large enough?](#howlarge)).
 
-While some informal thresholds are used for Cohen’s *d* (see "Why and when should effect sizes be reported?"), these thresholds are largely arbitrary [verify] and may not truly be domain agnostic. Those thresholds were originally proposed by Cohen based on a dataset of human heights [verify that]. Cohen himself noted that these thresholds may not be directly applicable to other domains.
+# Should I report simple or standardized effect sizes?
 
-More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead try to think whether effect is of practical importance. This requires domain knowledge and analysis. 
+Standardized effect sizes are useful in some situations, for example when effects obtained from different experiments and/or expressed in different units need to be combined or compared [@Cumming2014a]. However, simple effect sizes are often easier to interpret [@Cumming2014a]. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance [@Wilkinson1999a].
 
-In practice, a researcher could (should) think in advance what would be an effect they would like to see in their data from the treatment (see "planned analyses" and "power analysis"). This would be “large enough”. (Obviously, this is subjective, and readers/reviewers may disagree.)
+In most cases, simple effect sizes should be preferred over standardized effect sizes:
 
+> Only rarely will uncorrected standardized effect size be more useful than simple effect size. It is usually far better to report simple effect size. [@baguley2009standardized]
 
-
-# Why and when should effect sizes be reported?
-Taken in a broad sense, effect sizes should (by definition) be reported in quantitative research unless they are good reasons not to do so. Effect sizes are essential for understanding the practical effect or differences in measurements. Identifying the effect size(s) of interest allows turning a research question into a precise, quantitative question. For example, if a researcher is interested in showing that her technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times.
-
-For data that is sensible to characterize with means and standard deviations, an effect size can be computed between two means M1 and M2 as:
-
-<center> $d = \frac{\left|M_{1} - M_{2}\right|}{SD_{\text{pool}}}$</center>
-
-The above effect size, known as Cohen’s *d*, divides the absolute mean difference by $SD_{\text{pool}}$, the standard deviation of the pooled data points, (although there are [other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to the standardization). Traditionally, a *d* of 0.2--0.5 is “small,” 0.5--0.8 is “medium,” and 0.80--1.0+ is “large” [@Cohen1988a]. However, one should not blindly interpret effect size values. Instead, one should carefully consider what the practical difference is, and whether it matters in the problem domain.
-
-Sometimes, the main focus of a study is on the direction (rather than magnitude) of the effect and the effect sizes are hard to compute or to interpret. In such cases, practical significance should be the focus.
-
+(perhaps a bit more on drawbacks of standardized effect sizes -- Matt?)
 
 
 # How should effect sizes be reported?
-There are many ways to report effect sizes. One can choose to report simple effect sizes or standardized effect sizes (see “Why and when should effect sizes be reported?”). Effect sizes can be reported numerically or graphically. They are all acceptable, although plots tend to be easier to comprehend than numbers, and simple effect sizes are easier to interpret than standardized effect sizes for measures reported in familiar units such as completion times [@Wilkinson1999a, @Cumming2013a, Matt's ref]. 
 
-Effect size should be reported together with an appropriate measure of error to show the degree of uncertainty. For example, when reporting the mean difference, also report 95% confidence interval of difference.
+Simple and standardized effect sizes can be reported either numerically or graphically. Both formats are acceptable, although plots tend to be easier to comprehend than numbers when more than one effect size needs to be conveyed [citations needed]. Unless precise numerical values are important, it is sufficient to report all effect sizes graphically [citations needed].
 
-
-# Issues with effect sizes?
-```
-not yet ported from Google Doc
-```
+Whether it is reported numerically or graphically, an effect size expressed as a single quantity (e.g., a difference in means) is typically only a point estimate, i.e., it is merely a “best guess” of the true effect size. Therefore, it is crucial to also assess and report the uncertainty about this effect. See the [inferential statistics FAQ]() on how to do so.
 
 
-# Drawbacks to effect sizes 
-```
-not yet ported from Google Doc
-```
+# <a name="whenlarge"></a>How do I know my effect is large enough?
 
+Some rules of thumb exist to help interpret Cohen's *d*'s. For example, a Cohen's *d* of 0.2 to 0.5 is traditionally considered to be small, while a Cohen's *d* of 0.8 or more is generally considered to be large [@Cohen1988a]. However, these are nothing more than rough rules of thumb. Cohen initially proposed these thresholds based on a dataset of human heights, and he himself noted that they may not be applicable to other domains [citation needed].
 
-# How Do I Calculate an Effect Size for A NonParametric Test?
+It is generally advisable to avoid the use of arbitrary thresholds when deciding on whether an effect is large enough [citations needed], and instead try to think of whether the effect is of practical importance. This requires domain knowledge, and often a fair degree of subjective judgment. Ideally, a researcher should think in advance what effect size they would consider to be large enough, and plan the experiment, the hypotheses and the analyses accordingly (see the [experiment and analysis planning FAQ]()).
+
+Nevertheless, more often than not in HCI, it is difficult to determine whether a certain effect is of practical importance. For example, a difference in pointing time of 100 ms between two pointing techniques can be large or small depending on the application, how often it is used, its context of use, etc. In such cases, forcing artificial interpretations of practical importance can hurt transparency. In many cases, it is sufficient to present effect sizes in a clear manner and leave the judgment of practical importance to the reader.
+
+# Exemplars
+
+## How Do I Calculate an Effect Size for A NonParametric Test?
 For a nonparametric test that produces a Z-score, like the Mann-Whitney U test or the Wilcoxon Signed-Rank test, an effect size can be computed as:
 
 <center>$r = \left|\frac{Z}{\sqrt{N}}\right|$</center>
