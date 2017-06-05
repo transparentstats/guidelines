@@ -3,9 +3,6 @@ title: "Effect size"
 output: html_notebook
 bibliography: references.bib
 ---
-```{r}
-library(tidyverse)
-```
 
 # FAQ
 
@@ -64,14 +61,34 @@ In practice, a researcher could (should) think in advance what would be an effec
 
 # Exemplar analysis
 
-## Data
-Assuming between-subjects design:
-```{r}
+
+## Libraries needed for this analysis
+
+```{r setup, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(forcats)    # for fct_...()
+library(broom)      # for tidy()
+```
+
+```{r boilerplate, include = FALSE}
 set.seed(12)
+# aesthetic boilerplate
+knitr::opts_chunk$set(
+  fig.width = 3,
+  fig.height = 2
+)
+```
+
+
+## Data
+
+Assuming between-subjects design:
+
+```{r data_generation}
 n <- 20
 data <- tibble(
-  Group = rep(c("A", "B"), each = n),
-  TaskCompletionTime_Sec = c(
+  group = rep(c("A", "B"), each = n),
+  completion_time_sec = c(
     rnorm(n, mean = 12, sd = 1),
     rnorm(n, mean = 10, sd = 2)
   )
@@ -80,22 +97,20 @@ data <- tibble(
 
 ## Visualizing data
 
-```{r, fig.height=2, fig.width=3}
-pd <- position_dodge(0.2)
+```{r data_plot}
 data %>% 
-  ggplot(aes(x = Group, y = TaskCompletionTime_Sec)) +
-  geom_point(alpha = 0.2, position = pd) +
-  stat_summary(fun.data = "mean_cl_normal", geom = "pointrange") +
+  mutate(group = fct_rev(group)) %>%
+  ggplot(aes(x = group, y = completion_time_sec)) +
+  geom_point(alpha = 0.2) +
+  stat_summary(fun.data = mean_cl_normal) +
   coord_flip() +
   ylab("Task Completion Time (s)")
-
-
 ```
+
 
 ## Simple effect size
 
 ```{r}
-library(broom) # for tidy()
 data_A <- (data %>% filter(Group == "A"))[[2]]
 data_B <- (data %>% filter(Group == "B"))[[2]]
 t_result <- tidy(t.test(data_A, data_B))
