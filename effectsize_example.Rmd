@@ -7,77 +7,62 @@ bibliography: references.bib
 library(tidyverse)
 ```
 
-# What is effect size?
-Broadly speaking, an effect size is *"anything that might be of interest"* [@Cumming2013a], i.e., a quantity that captures the practical magnitude of the effect studied. For example, *the difference* between task completion time (in seconds) or *the difference* between error rate (in percent).
+# FAQ
 
-Effect sizes are not as scary as you think. Effect sizes are *essentially* any way to compute the practical size of an effect. It can be something as simple as the difference between means between two treatments --- and often this is a very informative measure that can tell you whether a treatment has an effect large enough to care about. 
+## What is effect size?
+Broadly speaking, an effect size is *"anything that might be of interest"* [@Cumming2013a]; it is some quantity that captures the practical magnitude of the effect studied. 
 
-The term *effect size* is an overloaded term: sometimes it is used to refer to *standardized* effect sizes, like Cohen’s *d*, and sometimes to *simple* effect sizes, like the difference between two means. This can lead to confusion.
+Effect sizes are not as scary as you might think. While the term *effect size* may conjure up the image of arcane statistical formulas in your mind---much like the term *test statistic* might---the most useful effect sizes are often much simpler, and more intuitive, than perhaps should even warrant a specialized term. An effect sizes is *essentially* any way to compute the practical size of an effect. It can be something as simple as the difference between the means of two treatments, and often this is a very informative measure that can tell you whether a treatment has an effect large enough to care about. For example, the *difference* in task completion time (in seconds) between two interfaces or the *difference* in error rate (in percent) between two interfaces.
 
-# Should I report simple effect sizes or standardized effect sizes?
-Cohen’s *d* --- the difference in means divided by the standard deviation --- is sometimes called a standardized effect size. Standard effect sizes are useful in some situations, for example when effects expressed in different units need to be combined or compared [@Cumming2014a] However, often reporting a simple effect size is easier to interpret [@Cumming2014a]. When the units of the data are meaningful, reporting simple effect sizes can make it easier to judge whether the size of the effect has practical significance [@Wilkinson1999a].
-
-If you are reporting standardized effect sizes, and there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, you should find another way to assess the practical significance of the effect.
+The term *effect size* is an overloaded term: sometimes it is used to refer to *standardized* effect sizes, like Cohen’s *d*, and sometimes to *simple* effect sizes, like the difference between two means. This can lead to confusion. In the rest of this document we will qualify the term *effect size* as *simple* or *standardized* whenever used to be as unambiguous as possible.
 
 
-# How do you know it is large enough?
-Deciding if an effect size is “large enough” often requires expert judgement. Is a difference of 100ms a large difference in reaction time? Is a difference of 100ms a large difference in time to receive a chat message? 
-
-Often it is difficult to determine whether a certain effect is of practical importance. For example, a difference in pointing time of 100ms between two pointing techniques can be large or small depending on the application, how often it is used, the context of use, etc. In that case, it is enough to present effect sizes in a clear way and leave the judgment of practical importance to the reader.
-
-While some informal thresholds are used for Cohen’s *d* (see "Why and when should effect sizes be reported?"), these thresholds are largely arbitrary [verify] and may not truly be domain agnostic. Those thresholds were originally proposed by Cohen based on a dataset of human heights [verify that]. Cohen himself noted that these thresholds may not be directly applicable to other domains.
-
-More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead try to think whether effect is of practical importance. This requires domain knowledge and analysis. 
-
-In practice, a researcher could (should) think in advance what would be an effect they would like to see in their data from the treatment (see "planned analyses" and "power analysis"). This would be “large enough”. (Obviously, this is subjective, and readers/reviewers may disagree.)
+## Why and when should effect sizes be reported?
+Taken in a broad sense, effect sizes should be reported in quantitative research unless there are good reasons not to do so. Effect sizes are essential for understanding the practical effect importance of research. Identifying the effect size of interest can turn a research question into a precise, quantitative question. For example, if a researcher is interested in showing that their technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times.
 
 
+## How should effect sizes be reported?
+There are many ways to report effect sizes. One can choose to report simple effect sizes or standardized effect sizes (see "Should simple effect sizes or standardized effect sizes be reported?"). Effect sizes can be reported numerically or graphically. They are all acceptable, although plots tend to be easier to comprehend than numbers, and simple effect sizes are easier to interpret than standardized effect sizes for measures reported in familiar units such as completion times [@Wilkinson1999a, @Cumming2013a, @Cummings2011]. 
 
-# Why and when should effect sizes be reported?
-Taken in a broad sense, effect sizes should (by definition) be reported in quantitative research unless they are good reasons not to do so. Effect sizes are essential for understanding the practical effect or differences in measurements. Identifying the effect size(s) of interest allows turning a research question into a precise, quantitative question. For example, if a researcher is interested in showing that her technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times.
-
-For data that is sensible to characterize with means and standard deviations, an effect size can be computed between two means M1 and M2 as:
-
-<center> $d = \frac{\left|M_{1} - M_{2}\right|}{SD_{\text{pool}}}$</center>
-
-The above effect size, known as Cohen’s *d*, divides the absolute mean difference by $SD_{\text{pool}}$, the standard deviation of the pooled data points, (although there are [other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to the standardization). Traditionally, a *d* of 0.2--0.5 is “small,” 0.5--0.8 is “medium,” and 0.80--1.0+ is “large” [@Cohen1988a]. However, one should not blindly interpret effect size values. Instead, one should carefully consider what the practical difference is, and whether it matters in the problem domain.
-
-Sometimes, the main focus of a study is on the direction (rather than magnitude) of the effect and the effect sizes are hard to compute or to interpret. In such cases, practical significance should be the focus.
+Effect size should be reported together with an appropriate measure of error to show the degree of uncertainty. For example, when reporting the mean difference, one could report the standard error, a confidence interval (e.g. 95% CI or 68% CI), or a Bayesian posterior distribution, depending on the model or test used.
 
 
+## Should simple effect sizes or standardized effect sizes be reported?
+Cohen’s *d* --- the difference in means divided by the standard deviation --- is sometimes called a standardized effect size (there are others). Standardized effect sizes may be useful in some situations, for example when effects measured in different units need to be combined or compared, although even this practice is controversial [@Cumming2014a] as it can rely on assumptions about the effects being measured that are difficult to verify [@Cummings2011]. 
 
-# How should effect sizes be reported?
-There are many ways to report effect sizes. One can choose to report simple effect sizes or standardized effect sizes (see “Why and when should effect sizes be reported?”). Effect sizes can be reported numerically or graphically. They are all acceptable, although plots tend to be easier to comprehend than numbers, and simple effect sizes are easier to interpret than standardized effect sizes for measures reported in familiar units such as completion times [@Wilkinson1999a, @Cumming2013a, Matt's ref]. 
+Often, a simple effect size is easier to interpret [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful, a simple effect size can make it easier to judge whether the size of the effect has practical significance [@Wilkinson1999a]; it allows experts to use their domain knowledge to judge the practical size of the effect [@Cumming2014a; @Cummings2011]. Barring a strong, domain- or problem-specific argument for reporting a standardized effect size instead of a simple one, simple effect sizes should be preferred as being more transparent and easier to interpret.
 
-Effect size should be reported together with an appropriate measure of error to show the degree of uncertainty. For example, when reporting the mean difference, also report 95% confidence interval of difference.
-
-
-# Issues with effect sizes?
-```
-Draft:
-
-Discuss here about Cohen’s delta, and how Cohen himself did not want people to use small, medium and large labels
-```
+If a standardized effect size is reported, it should be accompanied by an argument for its applicability to the domain. If there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, it should also be accompanied by another assessment of the practical significance of the effect.
 
 
-# Drawbacks to effect sizes 
-```
-Draft:
-How about region of practical equivalence (ROPE)
-http://doingbayesiandataanalysis.blogspot.com/2013/08/how-much-of-bayesian-posterior.html
+## How do you know if an effect size is large enough?
+Deciding if an effect size is “large enough” often requires expert judgement. Is a difference of 100ms a large difference in reaction time? Is a difference of 100ms a large difference in time to receive a chat message? Expert judgment combined with reference to prior studies of related phenomena can help adjudicate.
 
-```
+This is why we believe simple effect sizes are more transparent, since they provide the information necessary for an expert in the area to use their judgment to assess the practical impact of an effect size. For example, a difference in reaction time of 100ms is above the threshold of human perception, and therefore likely of practical impact. A difference of 100ms in receiving a chat message in an asynchronous chat application is likely less impactful, as it is small compared to the amount of time a chat message is generally expected to take. A difference in pointing time of 100ms between two pointing techniques might be large or small depending on the application, how often it is used, the context of use, etc. Presenting simple effect sizes in a clear way---with units---allows the expert author to argue why the effect size may or may not have practical importance *and* allow the expert reader to make their own judgment.
 
 
-# How Do I Calculate an Effect Size for A NonParametric Test?
-For a nonparametric test that produces a Z-score, like the Mann-Whitney U test or the Wilcoxon Signed-Rank test, an effect size can be computed as:
+## What about "small", "medium", and "large" values of Cohen's *d*?
+In some literatures, informal thresholds are used for standardized effect sizes like Cohen’s *d*, labeling them "small", "medium", or "large". These thresholds are largely arbitrary [@Cummings2011] and are not truly domain agnostic. These thresholds were originally proposed by Cohen based on a dataset of human heights and IQs [@Cohen1977], but Cohen, in the very text where he first introduced them, noted that these thresholds may not be directly applicable to other domains:
 
-<center>$r = \left|\frac{Z}{\sqrt{N}}\right|$</center>
+> The terms "small", "medium", and "large" are relative, not only to
+each other, but to the area of behavioral science or even more particularly
+to the specific content and research method being employed in any given
+investigation... In the face of this relativity, there is
+a certain risk inherent in offering conventional operational definitions for
+these terms for use in power analysis in as diverse a field of inquiry as behavioral
+science. This risk is nevertheless accepted in the belief that more
+is to be gained than lost by supplying a common conventional frame of
+reference which is recommended for use only when no better basis for estimating
+the ES index is available. [@Cohen1977]
 
-Above, Z is the Z-score and N is the number of observations in all groups [@Rosenthal1991a, p. 19). The result, *r*, is a variance-based effect size, like Pearson *r*, not a Cohen *d*-family effect size. The *r* can be squared to estimate the percentage of variance explained, however it will not be exactly equivalent to the Pearson *r*. 
+Cohen recommended the use of these thresholds only when no better frame of reference for assessing practical importance was available; he believed the risk in offering conventional thresholds was small. **We disagree.** We believe that hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand. Once adopted, these thresholds make reports more opaque: by standardizing away the units of measurement, it can become more difficult for domain experts to judge practical importance. Therefore, we recommend against the unjustified use of standardized effect sizes and thresholds on them. 
 
-According to [@Cohen1988a], an *r* of 0.1 is “small,” of 0.3 is “medium,” and of 0.5 is “large.” However, one should take care when interpreting effect sizes rotely. Instead, consider the practical differences emerging in one’s study and whether those differences are meaningful in the world.
+More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead to try to think whether the effect is of practical importance. This requires domain knowledge and analysis, often aided by simple effect sizes.
 
+In practice, a researcher could (should) think in advance what would be an effect size they would like to see in their data from the treatment, and then design an experiment that is likely to be able to detect an effect of this size (see "planned analyses" and "power analysis"). This would be "large enough".
+
+
+# Exemplar analysis
 
 ## Data
 Assuming between-subjects design:
