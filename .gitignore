@@ -5,7 +5,6 @@
 .Rproj.user
 .Rhistory
 .RData
-*.nb.html
 *.Rproj
 
 # Misc
