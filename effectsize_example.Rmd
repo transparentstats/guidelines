@@ -1,6 +1,10 @@
 ---
 title: "Effect size"
-output: html_notebook
+output: 
+  html_notebook: 
+    fig_height: 2
+    fig_width: 3
+    toc: yes
 bibliography: references.bib
 ---
 
@@ -72,11 +76,6 @@ library(broom)      # for tidy()
 
 ```{r boilerplate, include = FALSE}
 set.seed(12)
-# aesthetic boilerplate
-knitr::opts_chunk$set(
-  fig.width = 3,
-  fig.height = 2
-)
 ```
 
 
@@ -97,47 +96,46 @@ data <- tibble(
 
 ## Visualizing data
 
-```{r data_plot}
+```{r data_plot, fig.height = 2, fig.width = 4}
 data %>% 
   mutate(group = fct_rev(group)) %>%
   ggplot(aes(x = group, y = completion_time_sec)) +
   geom_point(alpha = 0.2) +
   stat_summary(fun.data = mean_cl_normal) +
   coord_flip() +
-  ylab("Task Completion Time (s)")
+  ylab("Task completion time (s)")
 ```
 
 
 ## Simple effect size
 
 ```{r}
-data_A <- (data %>% filter(Group == "A"))[[2]]
-data_B <- (data %>% filter(Group == "B"))[[2]]
-t_result <- tidy(t.test(data_A, data_B))
-t_result # result in tabular format
+t_result <- 
+  t.test(completion_time_sec ~ group, data = data) %>%
+  tidy() # put result in tabular format
+t_result
 ```
 
 *Simple effect size:* The task completion time of the two groups differ by `r t_result$estimate` (95% confidence interval [`r t_result$conf.low`, `r t_result$conf.high`]) seconds.
 
-```{r, fig.height=1, fig.width=3}
+```{r, fig.height = 1, fig.width = 4}
 t_result %>% 
-  ggplot(aes(x = 1, y = estimate, ymin = conf.low, ymax = conf.high)) +
-  geom_pointrange() +
-  geom_hline(yintercept = 0, color = "red") +
-  coord_flip() +
-  ylab("Difference in task completion time (s)") +
-  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())
+  ggplot(aes(y = "A - B", x = estimate, xmin = conf.low, xmax = conf.high)) +
+  geom_pointrangeh() +
+  geom_vline(xintercept = 0, linetype="dashed") +
+  xlab("Difference in task completion time (s)") +
+  ylab("")
 ```
 
 ## Standardized effect size
 
 ```{r}
 library(effsize)
-cohen_d <- cohen.d(TaskCompletionTime_Sec ~ Group, data = data)
+cohen_d <- cohen.d(completion_time_sec ~ group, data = data)
 
 # manual calculation
-data_A <- (data %>% filter(Group == "A"))[["TaskCompletionTime_Sec"]]
-data_B <- (data %>% filter(Group == "B"))[["TaskCompletionTime_Sec"]]
+data_A <- (data %>% filter(group == "A"))[["completion_time_sec"]]
+data_B <- (data %>% filter(group == "B"))[["completion_time_sec"]]
 sd_A <- sd(data_A)
 sd_B <- sd(data_B)
 sd_pool <- sqrt( (sd_A^2 + sd_B^2) / 2 )
@@ -152,9 +150,9 @@ cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 
 ```{r}
 library(coin)
-data_A <- (data %>% filter(Group == "A"))[["TaskCompletionTime_Sec"]]
-data_B <- (data %>% filter(Group == "B"))[["TaskCompletionTime_Sec"]]
-wilcox_result <- wilcox_test(TaskCompletionTime_Sec ~ factor(Group), data = data)
+data_A <- (data %>% filter(group == "A"))[["completion_time_sec"]]
+data_B <- (data %>% filter(group == "B"))[["completion_time_sec"]]
+wilcox_result <- wilcox_test(completion_time_sec ~ factor(group), data = data)
 effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 ```
 
