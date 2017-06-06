@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>effect sizes</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<hr>
+
+<p>title: &quot;Effect size&quot;
+output: html_notebook</p>
+
+<h2 id="toc_0">bibliography: references.bib</h2>
+
+<div><pre><code class="language-{r}">library(tidyverse)</code></pre></div>
+
+<h1 id="toc_1">What is an effect size?</h1>
+
+<p>Broadly speaking, an effect size is <em>&quot;anything that might be of interest&quot;</em> [@Cumming2013a], that is, any quantity that captures the magnitude of an effect that is being studied. Examples include the mean difference (in seconds) in task completion times between two techniques, or the mean difference in error rates (in percent). These are called <em>simple effect sizes</em> or <em>unstandardized effect sizes</em>. More complex measures exist that are called <em>standardized effect sizes</em> (see <a href="#standarized">What is a standardized effect size?</a>).</p>
+
+<p>The term &quot;effect size&quot; is sometimes used to refer to standardized effect sizes only, which can be confusing. It is preferable to use the term &quot;effect size&quot; in a broader sense to include simple effect sizes [@Cumming2013a, @Wilkinson1999a].</p>
+
+<h1 id="toc_2"><a name="whenwhy"></a>Why and when should effect sizes be reported?</h1>
+
+<p>In quantitative experiments, effect sizes are among the most elementary and the most essential summary statistics that can be reported. Identifying the effect size(s) of interest also allows the researcher to turn a vague research question into a precise, quantitative question [@Cumming2014a]. For example, if a researcher is interested in showing that her technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times. The observed effect size will indicate not only the likely direction of the effect (e.g., whether the technique is faster), but also whether the effect is large enough to care about. </p>
+
+<p>For the sake of transparency, effect sizes (simple or standardized) should always be reported in quantitative research, unless there are good reasons not to do so. According to the American Psychological Association:</p>
+
+<blockquote>
+<p>For the reader to appreciate the magnitude or importance of a study&#39;s findings, it is almost always necessary to include some measure of effect size in the Results section. [@APA2001]</p>
+</blockquote>
+
+<p>Sometimes, effect sizes can be hard to compute or to interpret. When this is the case, and if the main focus of the study is on the direction (rather than magnitude) of the effect, reporting the results of statistical significance tests without reporting effect sizes (see the <a href="">inferential statistics FAQ</a>) may be an acceptable option [citations needed].</p>
+
+<h1 id="toc_3"><a name="standardized"></a>What is a standardized effect size?</h1>
+
+<p>A standardized effect size is a unitless measure of effect size. The most common measure of standardized effect size is Cohen’s <em>d</em>, where the mean difference is divided by the standard deviation of the pooled observations [@Cohen1988a]. <a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/">Other approaches</a> to standardization exist [prefer citations]. To some extent, standardized effect sizes make it possible to compare different studies in terms of how “impressive” their results are (see <a href="#howlarge">How do I know my effect is large enough?</a>).</p>
+
+<h1 id="toc_4">Should I report simple or standardized effect sizes?</h1>
+
+<p>Standardized effect sizes are useful in some situations, for example when effects obtained from different experiments and/or expressed in different units need to be combined or compared [@Cumming2014a]. However, simple effect sizes are often easier to interpret [@Cumming2014a]. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance [@Wilkinson1999a].</p>
+
+<p>In most cases, simple effect sizes should be preferred over standardized effect sizes:</p>
+
+<blockquote>
+<p>Only rarely will uncorrected standardized effect size be more useful than simple effect size. It is usually far better to report simple effect size. [@baguley2009standardized]</p>
+</blockquote>
+
+<p>(perhaps a bit more on drawbacks of standardized effect sizes -- Matt?)</p>
+
+<h1 id="toc_5">How should effect sizes be reported?</h1>
+
+<p>Simple and standardized effect sizes can be reported either numerically or graphically. Both formats are acceptable, although plots tend to be easier to comprehend than numbers when more than one effect size needs to be conveyed [citations needed]. Unless precise numerical values are important, it is sufficient to report all effect sizes graphically [citations needed].</p>
+
+<p>Whether it is reported numerically or graphically, an effect size expressed as a single quantity (e.g., a difference in means) is typically only a point estimate, i.e., it is merely a “best guess” of the true effect size. Therefore, it is crucial to also assess and report the uncertainty about this effect. See the <a href="">inferential statistics FAQ</a> on how to do so.</p>
+
+<h1 id="toc_6"><a name="whenlarge"></a>How do I know my effect is large enough?</h1>
+
+<p>Some rules of thumb exist to help interpret Cohen&#39;s <em>d</em>&#39;s. For example, a Cohen&#39;s <em>d</em> of 0.2 to 0.5 is traditionally considered to be small, while a Cohen&#39;s <em>d</em> of 0.8 or more is generally considered to be large [@Cohen1988a]. However, these are nothing more than rough rules of thumb. Cohen initially proposed these thresholds based on a dataset of human heights, and he himself noted that they may not be applicable to other domains [citation needed].</p>
+
+<p>It is generally advisable to avoid the use of arbitrary thresholds when deciding on whether an effect is large enough [citations needed], and instead try to think of whether the effect is of practical importance. This requires domain knowledge, and often a fair degree of subjective judgment. Ideally, a researcher should think in advance what effect size they would consider to be large enough, and plan the experiment, the hypotheses and the analyses accordingly (see the <a href="">experiment and analysis planning FAQ</a>).</p>
+
+<p>Nevertheless, more often than not in HCI, it is difficult to determine whether a certain effect is of practical importance. For example, a difference in pointing time of 100 ms between two pointing techniques can be large or small depending on the application, how often it is used, its context of use, etc. In such cases, forcing artificial interpretations of practical importance can hurt transparency. In many cases, it is sufficient to present effect sizes in a clear manner and leave the judgment of practical importance to the reader.</p>
+
+<h1 id="toc_7">Exemplars</h1>
+
+<h2 id="toc_8">How Do I Calculate an Effect Size for A NonParametric Test?</h2>
+
+<p>For a nonparametric test that produces a Z-score, like the Mann-Whitney U test or the Wilcoxon Signed-Rank test, an effect size can be computed as:</p>
+
+<p><center>$r = \left|\frac{Z}{\sqrt{N}}\right|$</center></p>
+
+<p>Above, Z is the Z-score and N is the number of observations in all groups [@Rosenthal1991a, p. 19). The result, <em>r</em>, is a variance-based effect size, like Pearson <em>r</em>, not a Cohen <em>d</em>-family effect size. The <em>r</em> can be squared to estimate the percentage of variance explained, however it will not be exactly equivalent to the Pearson <em>r</em>. </p>
+
+<p>According to [@Cohen1988a], an <em>r</em> of 0.1 is “small,” of 0.3 is “medium,” and of 0.5 is “large.” However, one should take care when interpreting effect sizes rotely. Instead, consider the practical differences emerging in one’s study and whether those differences are meaningful in the world.</p>
+
+<h2 id="toc_9">Data</h2>
+
+<p>Assuming between-subjects design:
+<code>{r}
+set.seed(12)
+n &lt;- 20
+data &lt;- tibble(
+  Group = rep(c(&quot;A&quot;, &quot;B&quot;), each = n),
+  TaskCompletionTime_Sec = c(
+    rnorm(n, mean = 12, sd = 1),
+    rnorm(n, mean = 10, sd = 2)
+  )
+)
+</code></p>
+
+<h2 id="toc_10">Visualizing data</h2>
+
+<div><pre><code class="language-{r,">pd &lt;- position_dodge(0.2)
+data %&gt;% 
+  ggplot(aes(x = Group, y = TaskCompletionTime_Sec)) +
+  geom_point(alpha = 0.2, position = pd) +
+  stat_summary(fun.data = &quot;mean_cl_normal&quot;, geom = &quot;pointrange&quot;) +
+  coord_flip() +
+  ylab(&quot;Task Completion Time (s)&quot;)
+
+</code></pre></div>
+
+<h2 id="toc_11">Simple effect size</h2>
+
+<div><pre><code class="language-{r}">library(broom) # for tidy()
+data_A &lt;- (data %&gt;% filter(Group == &quot;A&quot;))[[2]]
+data_B &lt;- (data %&gt;% filter(Group == &quot;B&quot;))[[2]]
+t_result &lt;- tidy(t.test(data_A, data_B))
+t_result # result in tabular format</code></pre></div>
+
+<p><em>Simple effect size:</em> The task completion time of the two groups differ by <code>r t_result$estimate</code> (95% confidence interval [<code>r t_result$conf.low</code>, <code>r t_result$conf.high</code>]) seconds.</p>
+
+<div><pre><code class="language-{r,">t_result %&gt;% 
+  ggplot(aes(x = 1, y = estimate, ymin = conf.low, ymax = conf.high)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 0, color = &quot;red&quot;) +
+  coord_flip() +
+  ylab(&quot;Difference in task completion time (s)&quot;) +
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())</code></pre></div>
+
+<h2 id="toc_12">Standardized effect size</h2>
+
+<div><pre><code class="language-{r}">library(effsize)
+cohen_d &lt;- cohen.d(TaskCompletionTime_Sec ~ Group, data = data)</code></pre></div>
+
+<p><strong>Standardized effect size:</strong> Cohen&#39;s d = <code>r cohen_d$estimate</code> SDs with 95% confidence interval [<code>r cohen_d$conf.int[1]</code> , <code>r cohen_d$conf.int[2]</code>]</p>
+
+<h2 id="toc_13">Non-parametric effect size</h2>
+
+<div><pre><code class="language-{r}">library(coin)
+data_A &lt;- (data %&gt;% filter(Group == &quot;A&quot;))[[&quot;TaskCompletionTime_Sec&quot;]]
+data_B &lt;- (data %&gt;% filter(Group == &quot;B&quot;))[[&quot;TaskCompletionTime_Sec&quot;]]
+wilcox_result &lt;- wilcox_test(TaskCompletionTime_Sec ~ factor(Group), data = data)
+effect_r &lt;- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))</code></pre></div>
+
+<p><strong>Non-parametric effect size:</strong> Variance-based effect size <em>r</em>  = <code>r effect_r</code>.</p>
+
+<h1 id="toc_14">References</h1>
+
+
+
+
+</body>
+
+</html>
