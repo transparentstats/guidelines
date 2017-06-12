@@ -1,143 +1,201 @@
 ---
 title: "Effect size"
-output: html_notebook
+output:
+  html_notebook:
+    toc: yes
+    toc_float:
+      collapsed: false
 bibliography: references.bib
 ---
-```{r}
+
+# FAQ
+
+## What is effect size?
+Broadly speaking, an effect size is *"anything that might be of interest"* [@Cumming2013a]; it is some quantity that captures the practical magnitude of the effect studied. 
+
+While the term *effect size* may conjure up the image of arcane statistical formulas---much like the term *test statistic* might---the most useful effect sizes are often much simpler, and more intuitive, than perhaps should even warrant a specialized term. An effect size is *essentially* any way to compute the practical size of an effect. It can be something as simple as the difference between the means of two treatments, and often this is a very informative measure that can tell you whether a treatment has an effect large enough to care about. For example, the *difference* in task completion time (in seconds) between two interfaces or the *difference* in error rate (in percentage points) between two interfaces.
+
+The term *effect size* is an overloaded term: sometimes it is used to refer to *standardized* effect sizes, like Cohen’s *d*, and sometimes to *simple* effect sizes, like the difference between two means. This can lead to confusion. In the rest of this document we will qualify the term *effect size* as *simple* or *standardized* whenever used to be as unambiguous as possible.
+
+
+## Why and when should effect sizes be reported?
+Taken in a broad sense, effect sizes should always be reported in quantitative research unless there are good reasons not to do so. Effect sizes are essential for understanding the practical importance of research. Identifying the effect size of interest can turn a broader research question into a precise, quantitative question. For example, if a researcher is interested in showing that their technique is faster than a baseline technique, an appropriate choice of effect size could be the mean difference in completion time.
+
+
+## How should effect sizes be reported? {#how}
+There are many ways to report effect sizes. One can choose to report simple effect sizes or standardized effect sizes (see [Should simple effect sizes or standardized effect sizes be reported?](#simple_v_standardized)). Effect sizes can be reported textually or graphically. They are all acceptable, although graphical reports tend to be easier to comprehend than textual reports, and simple effect sizes are easier to interpret than standardized effect sizes for measures reported in familiar units such as completion times [@Wilkinson1999a, @Cumming2013a, @Cummings2011]. 
+
+Effect size should be reported together with an appropriate measure of error to show the degree of uncertainty. For example, when reporting the mean difference, one could report the standard error, a confidence interval (e.g. a 95% CI or a 68% CI), or a Bayesian posterior distribution, depending on the model or test used.
+
+In sum, an effect size report should include:
+
+- The direction of the effect if applicable (e.g., given a difference between two treatments `A` and `B`, indicate if the measured effect is `A - B` or `B - A`).
+- The type of estimate reported (e.g., mean difference)
+- The type of uncertainty reported (e.g., 95% CI)
+- The units of the effect size if applicable, or the type of standardized effect size if it is a unitless effect size. 
+
+
+
+## Should simple effect sizes or standardized effect sizes be reported? {#simple_v_standardized}
+Cohen’s *d* --- the difference in means divided by the standard deviation --- is sometimes called a standardized effect size (there are others). Standardized effect sizes may be useful in some situations, for example when effects measured in different units need to be combined or compared, although even this practice is controversial [@Cumming2014a] as it can rely on assumptions about the effects being measured that are difficult to verify [@Cummings2011]. 
+
+Often, a simple effect size is easier to interpret and justify [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful, a simple effect size can make it easier to judge whether the size of the effect has practical significance [@Wilkinson1999a]; it allows experts to use their domain knowledge to judge the practical size of the effect [@Cumming2014a; @Cummings2011]. Barring a strong, domain- or problem-specific argument for reporting a standardized effect size instead of a simple one, simple effect sizes should be preferred as being more transparent and easier to interpret.
+
+If a standardized effect size is reported, it should be accompanied by an argument for its applicability to the domain. If there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, it should also be accompanied by another assessment of the practical significance of the effect.
+
+
+## How do you know if an effect size is large enough?
+Deciding if an effect size is “large enough” often requires expert judgement. Is a difference of 100ms a large difference in reaction time? Is a difference of 100ms a large difference in time to receive a chat message? Expert judgment combined with reference to prior studies of related phenomena can help adjudicate.
+
+We believe simple effect sizes are more transparent, because they provide the information necessary for an expert in the area to use their judgment to assess the practical impact of an effect size. For example, a difference in reaction time of 100ms is above the threshold of human perception, and therefore likely of practical impact. A difference of 100ms in receiving a chat message in an asynchronous chat application is likely less impactful, as it is small compared to the amount of time a chat message is generally expected to take. A difference in pointing time of 100ms between two pointing techniques might be large or small depending on the application, how often it is used, the context of use, etc. Presenting simple effect sizes in a clear way---with units---allows the expert author to argue why the effect size may or may not have practical importance *and* allow the expert reader to make their own judgment.
+
+In practice, a researcher should think in advance what would be an effect size they would like to see in their data from the treatment, and then design an experiment that is likely to be able to detect an effect of this size (see "planned analyses" and "power analysis"). This might then be considered "large enough" for that experiment.
+
+
+## What about "small", "medium", and "large" values of Cohen's *d*?
+In some literatures, informal thresholds are used for standardized effect sizes like Cohen’s *d*, labeling them "small", "medium", or "large". These thresholds are largely arbitrary [@Cummings2011] and are not truly domain agnostic. These thresholds were originally proposed by Cohen based on human heights and intelligence quotients [@Cohen1977], but Cohen, in the very text where he first introduced them, noted that these thresholds may not be directly applicable to other domains:
+
+> The terms "small", "medium", and "large" are relative, not only to
+each other, but to the area of behavioral science or even more particularly
+to the specific content and research method being employed in any given
+investigation... In the face of this relativity, there is
+a certain risk inherent in offering conventional operational definitions for
+these terms for use in power analysis in as diverse a field of inquiry as behavioral
+science. This risk is nevertheless accepted in the belief that more
+is to be gained than lost by supplying a common conventional frame of
+reference which is recommended for use only when no better basis for estimating
+the ES index is available. [@Cohen1977]
+
+Cohen recommended the use of these thresholds only when no better frame of reference for assessing practical importance was available; he believed the risk in offering conventional thresholds was small. **We disagree.** We believe that hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand. Once adopted, these thresholds make reports more opaque: by standardizing away the units of measurement, it can become more difficult for domain experts to judge practical importance. Therefore, like Cummings [@Cummings2011], **we recommend against the use of standardized effect sizes interpreted using Cohen's thresholds**; justification should be provided both for the use of standardized effect sizes and thresholds on them, and those justifications should not refer to arbitrary standards like those proposed by Cohen.
+
+More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead to try to think whether the effect is of practical importance. This requires domain knowledge and analysis, often aided by simple effect sizes.
+
+
+# Exemplar 1: Simple effect size
+
+
+## Libraries needed for this analysis
+
+```{r setup, warning = FALSE, message = FALSE}
 library(tidyverse)
+library(forcats)    # for fct_...()
+library(broom)      # for tidy()
+library(ggstance)   # for geom_pointrangeh()
 ```
 
-# What is effect size?
-Broadly speaking, an effect size is *"anything that might be of interest"* [@Cumming2013a], i.e., a quantity that captures the practical magnitude of the effect studied. For example, *the difference* between task completion time (in seconds) or *the difference* between error rate (in percent).
-
-Effect sizes are not as scary as you think. Effect sizes are *essentially* any way to compute the practical size of an effect. It can be something as simple as the difference between means between two treatments --- and often this is a very informative measure that can tell you whether a treatment has an effect large enough to care about. 
-
-The term *effect size* is an overloaded term: sometimes it is used to refer to *standardized* effect sizes, like Cohen’s *d*, and sometimes to *simple* effect sizes, like the difference between two means. This can lead to confusion.
-
-# Should I report simple effect sizes or standardized effect sizes?
-Cohen’s *d* --- the difference in means divided by the standard deviation --- is sometimes called a standardized effect size. Standard effect sizes are useful in some situations, for example when effects expressed in different units need to be combined or compared [@Cumming2014a] However, often reporting a simple effect size is easier to interpret [@Cumming2014a]. When the units of the data are meaningful, reporting simple effect sizes can make it easier to judge whether the size of the effect has practical significance [@Wilkinson1999a].
-
-If you are reporting standardized effect sizes, and there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, you should find another way to assess the practical significance of the effect.
-
-
-# How do you know it is large enough?
-Deciding if an effect size is “large enough” often requires expert judgement. Is a difference of 100ms a large difference in reaction time? Is a difference of 100ms a large difference in time to receive a chat message? 
-
-Often it is difficult to determine whether a certain effect is of practical importance. For example, a difference in pointing time of 100ms between two pointing techniques can be large or small depending on the application, how often it is used, the context of use, etc. In that case, it is enough to present effect sizes in a clear way and leave the judgment of practical importance to the reader.
-
-While some informal thresholds are used for Cohen’s *d* (see "Why and when should effect sizes be reported?"), these thresholds are largely arbitrary [verify] and may not truly be domain agnostic. Those thresholds were originally proposed by Cohen based on a dataset of human heights [verify that]. Cohen himself noted that these thresholds may not be directly applicable to other domains.
-
-More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead try to think whether effect is of practical importance. This requires domain knowledge and analysis. 
-
-In practice, a researcher could (should) think in advance what would be an effect they would like to see in their data from the treatment (see "planned analyses" and "power analysis"). This would be “large enough”. (Obviously, this is subjective, and readers/reviewers may disagree.)
-
-
-
-# Why and when should effect sizes be reported?
-Taken in a broad sense, effect sizes should (by definition) be reported in quantitative research unless they are good reasons not to do so. Effect sizes are essential for understanding the practical effect or differences in measurements. Identifying the effect size(s) of interest allows turning a research question into a precise, quantitative question. For example, if a researcher is interested in showing that her technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times.
-
-For data that is sensible to characterize with means and standard deviations, an effect size can be computed between two means M1 and M2 as:
-
-<center> $d = \frac{\left|M_{1} - M_{2}\right|}{SD_{\text{pool}}}$</center>
-
-The above effect size, known as Cohen’s *d*, divides the absolute mean difference by $SD_{\text{pool}}$, the standard deviation of the pooled data points, (although there are [other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to the standardization). Traditionally, a *d* of 0.2--0.5 is “small,” 0.5--0.8 is “medium,” and 0.80--1.0+ is “large” [@Cohen1988a]. However, one should not blindly interpret effect size values. Instead, one should carefully consider what the practical difference is, and whether it matters in the problem domain.
-
-Sometimes, the main focus of a study is on the direction (rather than magnitude) of the effect and the effect sizes are hard to compute or to interpret. In such cases, practical significance should be the focus.
-
-
-
-# How should effect sizes be reported?
-There are many ways to report effect sizes. One can choose to report simple effect sizes or standardized effect sizes (see “Why and when should effect sizes be reported?”). Effect sizes can be reported numerically or graphically. They are all acceptable, although plots tend to be easier to comprehend than numbers, and simple effect sizes are easier to interpret than standardized effect sizes for measures reported in familiar units such as completion times [@Wilkinson1999a, @Cumming2013a, Matt's ref]. 
-
-Effect size should be reported together with an appropriate measure of error to show the degree of uncertainty. For example, when reporting the mean difference, also report 95% confidence interval of difference.
-
-
-# Issues with effect sizes?
+```{r boilerplate, include = FALSE}
+set.seed(12)
+format_num <- function(...) format(..., digits = 2)
 ```
-Draft:
-
-Discuss here about Cohen’s delta, and how Cohen himself did not want people to use small, medium and large labels
-```
-
-
-# Drawbacks to effect sizes 
-```
-Draft:
-How about region of practical equivalence (ROPE)
-http://doingbayesiandataanalysis.blogspot.com/2013/08/how-much-of-bayesian-posterior.html
-
-```
-
-
-# How Do I Calculate an Effect Size for A NonParametric Test?
-For a nonparametric test that produces a Z-score, like the Mann-Whitney U test or the Wilcoxon Signed-Rank test, an effect size can be computed as:
-
-<center>$r = \left|\frac{Z}{\sqrt{N}}\right|$</center>
-
-Above, Z is the Z-score and N is the number of observations in all groups [@Rosenthal1991a, p. 19). The result, *r*, is a variance-based effect size, like Pearson *r*, not a Cohen *d*-family effect size. The *r* can be squared to estimate the percentage of variance explained, however it will not be exactly equivalent to the Pearson *r*. 
-
-According to [@Cohen1988a], an *r* of 0.1 is “small,” of 0.3 is “medium,” and of 0.5 is “large.” However, one should take care when interpreting effect sizes rotely. Instead, consider the practical differences emerging in one’s study and whether those differences are meaningful in the world.
 
 
 ## Data
-Assuming between-subjects design:
-```{r}
-set.seed(12)
+
+Imagine a between-subjects design, with completion time (in milliseconds) measured in two groups, `A` and `B`, with 20 subjects each.
+
+```{r data_generation}
 n <- 20
 data <- tibble(
-  Group = rep(c("A", "B"), each = n),
-  TaskCompletionTime_Sec = c(
-    rnorm(n, mean = 12, sd = 1),
-    rnorm(n, mean = 10, sd = 2)
+  group = rep(c("A", "B"), each = n),
+  completion_time_ms = c(
+    rnorm(n, mean = 170, sd = 80),
+    rnorm(n, mean = 50, sd = 20)
   )
 )
 ```
 
-## Visualizing data
+A good first step in any analysis is always to visualize the data:
 
-```{r, fig.height=2, fig.width=3}
-pd <- position_dodge(0.2)
+```{r data_plot, fig.height = 2, fig.width = 4}
 data %>% 
-  ggplot(aes(x = Group, y = TaskCompletionTime_Sec)) +
-  geom_point(alpha = 0.2, position = pd) +
-  stat_summary(fun.data = "mean_cl_normal", geom = "pointrange") +
+  mutate(group = fct_rev(group)) %>%  # to display groups in alphabetical order
+  ggplot(aes(x = group, y = completion_time_ms)) +
+  geom_point(alpha = 0.2) +
+  stat_summary(fun.data = mean_cl_normal) +
   coord_flip() +
-  ylab("Task Completion Time (s)")
-
-
+  ylab("Completion time (ms)")
 ```
 
-## Simple effect size
+This plot shows all observed completion times, as well as the mean completion time and 95% confidence interval of the mean in each condition.
 
-```{r}
-library(broom) # for tidy()
-data_A <- (data %>% filter(Group == "A"))[[2]]
-data_B <- (data %>% filter(Group == "B"))[[2]]
-t_result <- tidy(t.test(data_A, data_B))
-t_result # result in tabular format
+## Calculating simple effect size
+
+Since we have meaningful units (milliseconds), we will use a t-test to compute a simple effect size (the mean difference in seconds) and its associated confidence interval, following [our recommendations on how to report effect size](#how).
+
+```{r t_test}
+t_result <- 
+  t.test(completion_time_ms ~ group, data = data) %>%
+  tidy()    # put result in tidy tabular format
+t_result
 ```
 
-*Simple effect size:* The task completion time of the two groups differ by `r t_result$estimate` (95% confidence interval [`r t_result$conf.low`, `r t_result$conf.high`]) seconds.
+The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
 
-```{r, fig.height=1, fig.width=3}
+
+## Reporting simple effect size
+
+Ideally, we would have space in our paper to report the effect size graphically:
+
+```{r ci_plot, fig.height = 1, fig.width = 5}
 t_result %>% 
-  ggplot(aes(x = 1, y = estimate, ymin = conf.low, ymax = conf.high)) +
-  geom_pointrange() +
-  geom_hline(yintercept = 0, color = "red") +
-  coord_flip() +
-  ylab("Difference in task completion time (s)") +
-  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())
+  ggplot(aes(y = "A - B", x = estimate, xmin = conf.low, xmax = conf.high)) +
+  geom_pointrangeh() +
+  geom_vline(xintercept = 0, linetype="dashed") +
+  xlab("Mean difference in completion time (ms) with 95% CI") +
+  ylab("")
+```
+
+This graphical report includes all of the [elements of an effect size report that we recommend](#how):
+
+- The direction of the difference (indicated by the label `A - B`)
+- The type of estimate reported (mean difference)
+- The type of uncertainty indicated (95% CI)
+- The units (ms)
+
+Space may not always permit the graphical report. While it can be less easy to interpret, an alternative is a textual report. **Such a report should still include all of the four elements listed above.** For example:
+
+> Group `A` had a greater mean completion time than group `B` by `r format_num(t_result$estimate)` milliseconds (95% CI: [`r format_num(t_result$conf.low)`, `r format_num(t_result$conf.high)`]).
+
+
+## Interpreting effect size: same result, different domains = different interpretations
+
+Because simple effect sizes include units, we can use our expert judgment to interpret the report. Authors may wish to do so in order to put their result in context. Because the report above includes everything necessary for other experts to come to their own conclusion, providing our own interpretation does not prevent readers from applying their own judgment and coming to different conclusions.
+
+To illustrate the effect of domain on interpreting effect size, we will imagine two different domains that might have led to the same result reported above, and write a different interpretation of the data for each.
+
+
+### Domain 1: Physical prototyping
+
+Imagine the above study was from the comparison of a novel physical user interface prototyping system (treatment `B`) to the previous state of the art (`A`), and the completion time referred to the time for feedback to be given to the user after they perform an input action. We might report the following interpretation of the results:
+
+> Technique `B` offers a **large** improvement in feedback time (~`r format_num(t_result$conf.low)`--`r format_num(t_result$conf.high)`ms mean decrease), resulting in feedback times that tend to be less than the threshold of human perception (less than about 100ms). By contrast, the larger feedback times offered by technique `A` tended to be above that threshold, possibly degrading users' experience of the prototypes built using that technique.
+
+
+### Domain 2: Chatbots
+
+Imagine the same quantitative results, now in the context of a natural language chat bot designed to answer users' questions. Here, technique `A` will be the novel system, with improved natural language capabilities compared to the previous state-of-the-art technique, `B`. We might report the following interpretation of the results:
+
+> While technique `A` takes longer to respond to chat messages (~`r format_num(t_result$conf.low)`--`r format_num(t_result$conf.high)`ms increase in mean response time), we believe this difference is acceptable in the context of an asynchronous chat interface in which users do not expect instantaneous responses. When weighed against the improved natural language capabilites of technique `A`, we believe this **small** increase in response time for messages is worth the improved message content.
+
+The same effect size is plausibly described as **large** in domain 1 and **small** in domain 2, illustrating the importance of expert interpretation to reporting and understanding effect size and the difficulty in applying pre-defined thresholds across domains.
+
+
+
+# Exemplar 2: Standardized effect size
+
+```
+TODO: This needs a domain where we can argue that Cohen's d is an exemplar analysis, then repeat structure of exemplar 1 with it
 ```
 
 ## Standardized effect size
 
 ```{r}
 library(effsize)
-cohen_d <- cohen.d(TaskCompletionTime_Sec ~ Group, data = data)
+cohen_d <- cohen.d(completion_time_ms ~ group, data = data)
 
 # manual calculation
-data_A <- (data %>% filter(Group == "A"))[["TaskCompletionTime_Sec"]]
-data_B <- (data %>% filter(Group == "B"))[["TaskCompletionTime_Sec"]]
+data_A <- (data %>% filter(group == "A"))[["completion_time_ms"]]
+data_B <- (data %>% filter(group == "B"))[["completion_time_ms"]]
 sd_A <- sd(data_A)
 sd_B <- sd(data_B)
 sd_pool <- sqrt( (sd_A^2 + sd_B^2) / 2 )
@@ -148,13 +206,19 @@ cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 
 
 
+# Exemplar 3: Non-parametric effect size
+
+```
+TODO: This needs a domain where we can argue that the nonparametric approach is an exemplar analysis, then repeat structure of exemplar 1 with it
+```
+
 ## Non-parametric effect size
 
 ```{r}
 library(coin)
-data_A <- (data %>% filter(Group == "A"))[["TaskCompletionTime_Sec"]]
-data_B <- (data %>% filter(Group == "B"))[["TaskCompletionTime_Sec"]]
-wilcox_result <- wilcox_test(TaskCompletionTime_Sec ~ factor(Group), data = data)
+data_A <- (data %>% filter(group == "A"))[["completion_time_ms"]]
+data_B <- (data %>% filter(group == "B"))[["completion_time_ms"]]
+wilcox_result <- wilcox_test(completion_time_ms ~ factor(group), data = data)
 effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 ```
 
