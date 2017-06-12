@@ -7,5 +7,8 @@
 .RData
 *.Rproj
 
+# output
+*.html
+
 # Misc
 *~

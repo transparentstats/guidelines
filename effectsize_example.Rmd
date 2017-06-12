@@ -71,7 +71,7 @@ Cohen recommended the use of these thresholds only when no better frame of refer
 More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead to try to think whether the effect is of practical importance. This requires domain knowledge and analysis, often aided by simple effect sizes.
 
 
-# Exemplar 1: Simple effect size
+# Exemplar: Simple effect size
 
 
 ## Libraries needed for this analysis
@@ -181,7 +181,7 @@ The same effect size is plausibly described as **large** in domain 1 and **small
 
 
 
-# Exemplar 2: Standardized effect size
+# Exemplar: Standardized effect size
 
 ```
 TODO: This needs a domain where we can argue that Cohen's d is an exemplar analysis, then repeat structure of exemplar 1 with it
@@ -206,7 +206,7 @@ cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 
 
 
-# Exemplar 3: Non-parametric effect size
+# Exemplar: Non-parametric effect size
 
 ```
 TODO: This needs a domain where we can argue that the nonparametric approach is an exemplar analysis, then repeat structure of exemplar 1 with it
@@ -225,5 +225,128 @@ effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 **Non-parametric effect size:** Variance-based effect size *r*  = `r effect_r`.
 
 
+
+# Exemplar: Within-subject experiment 
+
+Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.
+
+In this example, we'll compare two interfaces for visualizing data.
+
+* Independent Variable **x**: the two interfaces
+* Independent Variable **y**: the size of the dataset visualized (small, medium, and large)
+* Independent Variable **z**: a property such as interface color (red, green, yellow, blue), where we don't expect any effect
+
+We run each subject through each combination of these variables 20 times to get (2 x) × (3 y) × (4 z) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some reponse (e.g., error or reponse time) in each trial.
+
+
+
+## Subjects, conditions, and repetitions
+In this example, there are 10 subjects (`id` column). Because this is simulated data, we're using subject id to represent individual performance differences. Because within-subject experiments partly account for individual differences, they often need far fewer subjects than between-subject designs. Repetitions also help reduce noise.
+
+
+```{r within-library, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(afex) # for aov_ez()
+```
+
+```{r within-seed, include=FALSE}
+set.seed(456) # make the output consistent
+```
+
+```{r within-setup}
+data = expand.grid(
+  id = rnorm(10, 5, 0.5), # individual differences
+  x = 0:1, # independent variable
+  y = 0:2, # independent variable
+  z = 0:3, # independent variable
+  repetition = 1:20 # each subject run in each condition multiple times
+)
+```
+
+## Simulate some noisy effects
+We'll simulate an experiment with a main effect of `x` and `y` and an interaction between them. However, `z` and its interactions will not have an impact.
+
+```{r within-simulate}
+data = data %>% mutate(
+  response_time = 
+    id + # additive individual differences
+    x * .2 + # main effect of x
+    y * .1 + # main effect of y
+    z * 0 + 
+    x*y * .3 + # interaction effect between x and y
+    y*z * 0 + 
+    x*z * 0 + 
+    x*y*z * 0 + 
+    rnorm(n()) # noise
+)
+```
+
+Even though we used numbers to simulate the model, the independent variables and subject ID are all factors.
+```{r within-factor}
+data = data %>% mutate(id = factor(id), x = factor(x), y = factor(y), z = factor(z))
+```
+
+## Compute effect sizes
+While **Cohen's d** is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [Olejnik & Alginam 2003, Bakeman 2005]. This property makes it more easily applicable to meta-analyses.
+
+For those accustomed to Cohen's d, it's important to be aware that $\eta_{G}^{2}$ is typically smaller, with a Cohen's d of 0.2 being equivalent to a $\eta_{G}^{2}$ of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects. 
+
+```{r within-anova}
+results = afex::aov_ez(
+  data = data, 
+  id = 'id', # subject id column
+  dv = 'response_time', # dependent variable
+  within = c('x', 'y', 'z'), # within-subject independent variables
+  between = NULL ,# between-subject independent variables
+  anova_table = list(es = 'ges') # effect size = generalized eta squared
+)
+```
+
+*Note: the warning indicates that the aov_ez function automatically collapses repetitions into a mean, which may be a problem if an experiment is not fully counterballanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
+
+```{r  within-anova-cleanup}
+anovaResults = results$anova_table %>% 
+  rownames_to_column('effect') %>%  # put effect names in a column
+  select(-`Pr(>F)`) # no need to show p-values
+anovaResults %>% knitr::kable() # cleanup the ouput
+```
+
+*Note that the fractional degrees of freedom result from a Greenhousse-Geisser sphericity correction.*
+
+```
+TODO: Boostrapped 95%CIs for effect sizes
+Pro: people should
+Con: would make the guide even longer
+Maybe push into another guideline?
+```
+
+## Reporting the results
+
+Looking at the `F` and `ges` (generalized eta squared) columns, there are clear main effects for `x` and `y` and an interaction between `x` and `y`. However `z` and the other 2-way and 3-way interactions show only negligeable effects.
+
+```{r within-format, include=FALSE}
+# format the anova results for a report, and trim to 3 significant digits
+formatGES = function(anovaTable, effectName) {
+  cutoff = 0.01
+  row = (1:nrow(anovaTable))[anovaTable$effect == effectName]
+  return(paste0(
+    'F~',
+    signif(anovaTable[row, 'num Df'], 3), ',',
+    signif(anovaTable[row, 'den Df'], 3), '~=',
+    signif(anovaTable[row, 'F'], 3), ', $\\eta_{G}^{2}$=',
+    signif(anovaTable[row, 'ges'], 3)
+  ))
+}
+```
+
+
+ - **x:** `r formatGES(anovaResults, 'x')`
+ - **y:** `r formatGES(anovaResults, 'y')`
+ - **x** × **y:** `r formatGES(anovaResults, 'x:y')`
+ - **z** did not have a substantive effect (`r formatGES(anovaResults, 'z')`)
+ - Report any interaction for which there is reason to believe an effect could occur. Otherwise, you can simply state that other 2-way and 3-way interactions did not have substantive effect sizes. However, when in doubt, report everything!
+
 # References
 
+ - Roger Bakeman. Recommended effect size statistics for repeated measures designs. Behavior Research Methods. 2005.
+ - Stephen Olejnik, James Algina. Generalized eta and omega squared statistics: measures of effect size for some common research designs. Psychological Methods. 2003.
