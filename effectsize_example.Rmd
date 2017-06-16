@@ -331,7 +331,7 @@ results = afex::aov_ez(
 )
 ```
 
-*Note: the warning indicates that the aov_ez function automatically collapses repetitions into a mean, which may be a problem if an experiment is not fully counterballanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
+*Note: the warning indicates that the aov_ez function automatically collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
 
 ```{r  within-anova-cleanup}
 anovaResults <- 
