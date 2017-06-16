@@ -234,7 +234,11 @@ cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 
 # Exemplar: Nonparametric effect size
 
+For a nonparametric test that produces a Z-score, like the Mann-Whitney U test or the Wilcoxon Signed-Rank test, an effect size can be computed as:
 
+<center>$r = \left|\frac{Z}{\sqrt{N}}\right|$</center>
+
+Above, Z is the Z-score and N is the number of observations in all groups [@Rosenthal1991a, p. 19). The result, *r*, is a variance-based effect size, like Pearson *r*, not a Cohen *d*-family effect size. The *r* can be squared to estimate the percentage of variance explained, however it will not be exactly equivalent to the Pearson *r*. 
 
 ```
 TODO: This needs a domain where we can argue that the nonparametric approach is an exemplar analysis, then repeat structure of exemplar 1 with it
