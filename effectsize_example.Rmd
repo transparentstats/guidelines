@@ -62,7 +62,7 @@ Deciding if an effect size is “large enough” often requires expert judgement
 
 We believe simple effect sizes are more transparent, because they provide the information necessary for an expert in the area to use their judgment to assess the practical impact of an effect size. For example, a difference in reaction time of 100ms is above the threshold of human perception, and therefore likely of practical impact. A difference of 100ms in receiving a chat message in an asynchronous chat application is likely less impactful, as it is small compared to the amount of time a chat message is generally expected to take. A difference in pointing time of 100ms between two pointing techniques might be large or small depending on the application, how often it is used, the context of use, etc. Presenting simple effect sizes in a clear way---with units---allows the expert author to argue why the effect size may or may not have practical importance *and* allow the expert reader to make their own judgment.
 
-In practice, a researcher should think in advance what would be an effect size they would like to see in their data from the treatment, and then design an experiment that is likely to be able to detect an effect of this size (see "planned analyses" and "power analysis"). This might then be considered "large enough" for that experiment.
+In practice, a researcher should think in advance what would be an effect size they would like to see in their data from the treatment, and then design an experiment that is likely to be able to detect an effect of this size (see [planned analyses](planned_analyses) and [power analysis](power_analysis). This might then be considered "large enough" for that experiment.
 
 ▸ Exemplar: [simple effect size](#exemplar_simple_effect_size) (specifically in the "Interpreting effect size" sub-section)
 
@@ -138,7 +138,7 @@ This plot shows all observed completion times, as well as the mean completion ti
 
 ## Calculating simple effect size
 
-Since we have meaningful units (milliseconds), we will use a t-test to compute a simple effect size (the mean difference in seconds) and its associated confidence interval, following [our recommendations on how to report effect size](#how).
+Since we have meaningful units (milliseconds), we will use a *t*-test to compute a simple effect size (the mean difference in milliseconds) and its associated confidence interval, following [our recommendations on how to report effect size](#faq_how_reporting).
 
 ```{r t_test}
 t_result <- 
@@ -212,12 +212,13 @@ ggsave("figures/effectsize/p_simple_effect_size.pdf", p_simple_effect_size, heig
 
 ```
 TODO: This needs a domain where we can argue that Cohen's d is an exemplar analysis, then repeat structure of exemplar 1 with it
+May be an example of existing meta-analysis in HCI.
 ```
 
 ## Standardized effect size
 
 ```{r}
-library(effsize)
+library(effsize)  # for cohen.d()
 cohen_d <- cohen.d(completion_time_ms ~ group, data = data)
 
 # manual calculation
