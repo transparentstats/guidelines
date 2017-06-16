@@ -91,7 +91,7 @@ library(ggstance)   # for geom_pointrangeh()
 
 ```{r boilerplate, include = FALSE}
 set.seed(12)
-format_num <- function(...) format(..., digits = 2)
+format_num <- function(x, k = 2) format(round(x, k), nsmall = k)
 ```
 
 
@@ -210,7 +210,9 @@ sd_pool <- sqrt( (sd_A^2 + sd_B^2) / 2 )
 cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 ```
 
-**Standardized effect size:** Cohen's d = `r cohen_d$estimate` SDs with 95% confidence interval [`r cohen_d$conf.int[1]` , `r cohen_d$conf.int[2]`]
+**Standardized effect size:** Cohen's d = `r format_num(cohen_d$estimate)` SDs with 95% confidence interval [`r format_num(cohen_d$conf.int[1])` , `r format_num(cohen_d$conf.int[2])`]
+
+
 <a id="exemplar_nonparametric_effect_size"></a>
 
 # Exemplar: Nonparametric effect size
@@ -231,7 +233,7 @@ wilcox_result <- wilcox_test(completion_time_ms ~ factor(group), data = data)
 effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 ```
 
-**Non-parametric effect size:** Variance-based effect size *r*  = `r effect_r`.
+**Non-parametric effect size:** Variance-based effect size *r*  = `r format_num(effect_r)`.
 
 <a id="exemplar_within_subjects_experiment"></a>
 
