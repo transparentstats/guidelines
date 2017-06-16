@@ -17,13 +17,15 @@ While the term *effect size* may conjure up the image of arcane statistical form
 
 The term *effect size* is an overloaded term: sometimes it is used to refer to *standardized* effect sizes, like Cohen’s *d*, and sometimes to *simple* effect sizes, like the difference between two means. This can lead to confusion. In the rest of this document we will qualify the term *effect size* as *simple* or *standardized* whenever used to be as unambiguous as possible.
 
+▸ Exemplar: [simple effect size](#exemplar_simple_effect_size) and [standardized effect size](#exemplar_standardized_effect_size)
 
 ## Why and when should effect sizes be reported?
 Taken in a broad sense, effect sizes should always be reported in quantitative research unless there are good reasons not to do so. Effect sizes are essential for understanding the practical importance of research. Identifying the effect size of interest can turn a broader research question into a precise, quantitative question. For example, if a researcher is interested in showing that their technique is faster than a baseline technique, an appropriate choice of effect size could be the mean difference in completion time.
 
+<a id="faq_how_reporting"></a>
 
-## How should effect sizes be reported? {#how}
-There are many ways to report effect sizes. One can choose to report simple effect sizes or standardized effect sizes (see [Should simple effect sizes or standardized effect sizes be reported?](#simple_v_standardized)). Effect sizes can be reported textually or graphically. They are all acceptable, although graphical reports tend to be easier to comprehend than textual reports, and simple effect sizes are easier to interpret than standardized effect sizes for measures reported in familiar units such as completion times [@Wilkinson1999a, @Cumming2013a, @Cummings2011]. 
+## How should effect sizes be reported?
+There are many ways to report effect sizes. One can choose to report simple effect sizes or standardized effect sizes (see [Should simple effect sizes or standardized effect sizes be reported?](#faq_simple_v_standardized)). Effect sizes can be reported textually or graphically. They are all acceptable, although graphical reports tend to be easier to comprehend than textual reports, and simple effect sizes are easier to interpret than standardized effect sizes for measures reported in familiar units such as completion times [@Wilkinson1999a, @Cumming2013a, @Cummings2011]. 
 
 Effect size should be reported together with an appropriate measure of error to show the degree of uncertainty. For example, when reporting the mean difference, one could report the standard error, a confidence interval (e.g. a 95% CI or a 68% CI), or a Bayesian posterior distribution, depending on the model or test used.
 
@@ -34,9 +36,11 @@ In sum, an effect size report should include:
 - The type of uncertainty reported (e.g., 95% CI)
 - The units of the effect size if applicable, or the type of standardized effect size if it is a unitless effect size. 
 
+▸ Exemplar: [simple effect size](#exemplar_simple_effect_size) (specifically in the "Reporting simple effect size" sub-section)
 
+<a id="faq_simple_v_standardized"></a>
 
-## Should simple effect sizes or standardized effect sizes be reported? {#simple_v_standardized}
+## Should simple effect sizes or standardized effect sizes be reported?
 Cohen’s *d* --- the difference in means divided by the standard deviation --- is sometimes called a standardized effect size (there are others). Standardized effect sizes may be useful in some situations, for example when effects measured in different units need to be combined or compared, although even this practice is controversial [@Cumming2014a] as it can rely on assumptions about the effects being measured that are difficult to verify [@Cummings2011]. 
 
 Often, a simple effect size is easier to interpret and justify [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful, a simple effect size can make it easier to judge whether the size of the effect has practical significance [@Wilkinson1999a]; it allows experts to use their domain knowledge to judge the practical size of the effect [@Cumming2014a; @Cummings2011]. Barring a strong, domain- or problem-specific argument for reporting a standardized effect size instead of a simple one, simple effect sizes should be preferred as being more transparent and easier to interpret.
@@ -51,6 +55,7 @@ We believe simple effect sizes are more transparent, because they provide the in
 
 In practice, a researcher should think in advance what would be an effect size they would like to see in their data from the treatment, and then design an experiment that is likely to be able to detect an effect of this size (see "planned analyses" and "power analysis"). This might then be considered "large enough" for that experiment.
 
+▸ Exemplar: [simple effect size](#exemplar_simple_effect_size) (specifically in the "Interpreting effect size" sub-section)
 
 ## What about "small", "medium", and "large" values of Cohen's *d*?
 In some literatures, informal thresholds are used for standardized effect sizes like Cohen’s *d*, labeling them "small", "medium", or "large". These thresholds are largely arbitrary [@Cummings2011] and are not truly domain agnostic. These thresholds were originally proposed by Cohen based on human heights and intelligence quotients [@Cohen1977], but Cohen, in the very text where he first introduced them, noted that these thresholds may not be directly applicable to other domains:
@@ -70,6 +75,7 @@ Cohen recommended the use of these thresholds only when no better frame of refer
 
 More generally, it is beneficial to avoid the use of arbitrary thresholds or dichotomous thinking when deciding on whether an effect is large enough, and instead to try to think whether the effect is of practical importance. This requires domain knowledge and analysis, often aided by simple effect sizes.
 
+<a id="exemplar_simple_effect_size"></a>
 
 # Exemplar: Simple effect size
 
@@ -181,6 +187,8 @@ The same effect size is plausibly described as **large** in domain 1 and **small
 
 
 
+<a id="exemplar_standardized_effect_size"></a>
+
 # Exemplar: Standardized effect size
 
 ```
@@ -203,16 +211,17 @@ cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 ```
 
 **Standardized effect size:** Cohen's d = `r cohen_d$estimate` SDs with 95% confidence interval [`r cohen_d$conf.int[1]` , `r cohen_d$conf.int[2]`]
+<a id="exemplar_nonparametric_effect_size"></a>
+
+# Exemplar: Nonparametric effect size
 
 
-
-# Exemplar: Non-parametric effect size
 
 ```
 TODO: This needs a domain where we can argue that the nonparametric approach is an exemplar analysis, then repeat structure of exemplar 1 with it
 ```
 
-## Non-parametric effect size
+## Nonparametric effect size
 
 ```{r}
 library(coin)
@@ -224,9 +233,9 @@ effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 
 **Non-parametric effect size:** Variance-based effect size *r*  = `r effect_r`.
 
+<a id="exemplar_within_subjects_experiment"></a>
 
-
-# Exemplar: Within-subject experiment 
+# Exemplar: Within-subjects experiment 
 
 Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.
 
