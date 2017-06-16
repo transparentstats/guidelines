@@ -8,6 +8,13 @@ output:
 bibliography: references.bib
 ---
 
+<div style="text-align:center">
+![](figures/effectsize/teaser.png)
+</div>
+```
+TODO: generate the teaser figure in code
+```
+
 # FAQ
 
 ## What is effect size?
@@ -113,13 +120,16 @@ data <- tibble(
 A good first step in any analysis is always to visualize the data:
 
 ```{r data_plot, fig.height = 2, fig.width = 4}
-data %>% 
+p_data <-  # save for the teaser figure
+  data %>% 
   mutate(group = fct_rev(group)) %>%  # to display groups in alphabetical order
   ggplot(aes(x = group, y = completion_time_ms)) +
   geom_point(alpha = 0.2) +
   stat_summary(fun.data = mean_cl_normal) +
   coord_flip() +
-  ylab("Completion time (ms)")
+  ylab("Completion time (ms)") +
+  xlab("Group")
+p_data
 ```
 
 This plot shows all observed completion times, as well as the mean completion time and 95% confidence interval of the mean in each condition.
@@ -143,12 +153,14 @@ The `tidy()`ed output of the `t.test()` function includes an estimate of the mea
 Ideally, we would have space in our paper to report the effect size graphically:
 
 ```{r ci_plot, fig.height = 1, fig.width = 5}
-t_result %>% 
+p_simple_effect_size <-   # save for the teaser figure
+  t_result %>% 
   ggplot(aes(y = "A - B", x = estimate, xmin = conf.low, xmax = conf.high)) +
   geom_pointrangeh() +
   geom_vline(xintercept = 0, linetype="dashed") +
   xlab("Mean difference in completion time (ms) with 95% CI") +
   ylab("")
+p_simple_effect_size
 ```
 
 This graphical report includes all of the [elements of an effect size report that we recommend](#how):
@@ -185,6 +197,11 @@ Imagine the same quantitative results, now in the context of a natural language 
 
 The same effect size is plausibly described as **large** in domain 1 and **small** in domain 2, illustrating the importance of expert interpretation to reporting and understanding effect size and the difficulty in applying pre-defined thresholds across domains.
 
+```{r teaser_figure, include = FALSE}
+library(Cairo)  # for ggsave() that don't use unicode character for points
+ggsave("figures/effectsize/p_data.pdf", p_data, height = 1, width = 3, device = cairo_pdf)
+ggsave("figures/effectsize/p_simple_effect_size.pdf", p_simple_effect_size, height = 1, width = 3, device = cairo_pdf)
+```
 
 
 <a id="exemplar_standardized_effect_size"></a>
