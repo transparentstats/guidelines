@@ -54,6 +54,8 @@ Often, a simple effect size is easier to interpret and justify [@Cumming2014a; @
 
 If a standardized effect size is reported, it should be accompanied by an argument for its applicability to the domain. If there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, it should also be accompanied by another assessment of the practical significance of the effect.
 
+For meta-analysis, standardized effect sizes can be derived from simple effect sizes [reported with complete information](#faq_how_reporting).
+
 
 ## How do you know if an effect size is large enough?
 Deciding if an effect size is “large enough” often requires expert judgement. Is a difference of 100ms a large difference in reaction time? Is a difference of 100ms a large difference in time to receive a chat message? Expert judgment combined with reference to prior studies of related phenomena can help adjudicate.
