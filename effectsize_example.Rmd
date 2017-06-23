@@ -100,7 +100,7 @@ library(ggstance)   # for geom_pointrangeh()
 
 ```{r boilerplate, include = FALSE}
 set.seed(12)
-format_num <- function(x, k = 2) format(round(x, k), nsmall = k)
+format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
 
@@ -174,7 +174,7 @@ This graphical report includes all of the [elements of an effect size report tha
 
 Space may not always permit the graphical report. While it can be less easy to interpret, an alternative is a textual report. **Such a report should still include all of the four elements listed above.** For example:
 
-> Group `A` had a greater mean completion time than group `B` by `r format_num(t_result$estimate)` milliseconds (95% CI: [`r format_num(t_result$conf.low)`, `r format_num(t_result$conf.high)`]).
+> Group `A` had a greater mean completion time than group `B` by `r format_num(t_result$estimate, 2)` milliseconds (95% CI: [`r format_num(t_result$conf.low, 2)`, `r format_num(t_result$conf.high, 2)`]).
 
 
 ## Interpreting effect size: same result, different domains = different interpretations
@@ -188,14 +188,14 @@ To illustrate the effect of domain on interpreting effect size, we will imagine 
 
 Imagine the above study was from the comparison of a novel physical user interface prototyping system (treatment `B`) to the previous state of the art (`A`), and the completion time referred to the time for feedback to be given to the user after they perform an input action. We might report the following interpretation of the results:
 
-> Technique `B` offers a **large** improvement in feedback time (~`r format_num(t_result$conf.low)`--`r format_num(t_result$conf.high)`ms mean decrease), resulting in feedback times that tend to be less than the threshold of human perception (less than about 100ms). By contrast, the larger feedback times offered by technique `A` tended to be above that threshold, possibly degrading users' experience of the prototypes built using that technique.
+> Technique `B` offers a **large** improvement in feedback time (~`r format_num(t_result$conf.low, 2)`--`r format_num(t_result$conf.high, 2)`ms mean decrease), resulting in feedback times that tend to be less than the threshold of human perception (less than about 100ms). By contrast, the larger feedback times offered by technique `A` tended to be above that threshold, possibly degrading users' experience of the prototypes built using that technique.
 
 
 ### Domain 2: Chatbots
 
 Imagine the same quantitative results, now in the context of a natural language chat bot designed to answer users' questions. Here, technique `A` will be the novel system, with improved natural language capabilities compared to the previous state-of-the-art technique, `B`. We might report the following interpretation of the results:
 
-> While technique `A` takes longer to respond to chat messages (~`r format_num(t_result$conf.low)`--`r format_num(t_result$conf.high)`ms increase in mean response time), we believe this difference is acceptable in the context of an asynchronous chat interface in which users do not expect instantaneous responses. When weighed against the improved natural language capabilites of technique `A`, we believe this **small** increase in response time for messages is worth the improved message content.
+> While technique `A` takes longer to respond to chat messages (~`r format_num(t_result$conf.low, 2)`--`r format_num(t_result$conf.high, 2)`ms increase in mean response time), we believe this difference is acceptable in the context of an asynchronous chat interface in which users do not expect instantaneous responses. When weighed against the improved natural language capabilites of technique `A`, we believe this **small** increase in response time for messages is worth the improved message content.
 
 The same effect size is plausibly described as **large** in domain 1 and **small** in domain 2, illustrating the importance of expert interpretation to reporting and understanding effect size and the difficulty in applying pre-defined thresholds across domains.
 
@@ -257,7 +257,7 @@ wilcox_result <- wilcox_test(completion_time_ms ~ factor(group), data = data)
 effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 ```
 
-**Non-parametric effect size:** Variance-based effect size *r*  = `r format_num(effect_r)`.
+**Non-parametric effect size:** Variance-based effect size *r*  = `r format_num(effect_r, 2)`.
 
 <a id="exemplar_within_subjects_experiment"></a>
 
