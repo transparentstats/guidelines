@@ -3,10 +3,8 @@ title: "Effect size"
 output:
   html_document:
     toc: yes
-  html_notebook:
-    toc: yes
     toc_float:
-      collapsed: no
+      collapsed: yes
 bibliography: references.bib
 ---
 
