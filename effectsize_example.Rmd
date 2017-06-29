@@ -6,6 +6,7 @@ output:
     toc_float:
       collapsed: yes
 bibliography: references.bib
+link-citations: true
 ---
 
 <div style="text-align:center">
@@ -80,7 +81,7 @@ In most cases, simple effect sizes should be preferred over standardized effect 
 
 > Only rarely will uncorrected standardized effect size be more useful than simple effect size. It is usually far better to report simple effect size. [@baguley2009standardized]
 
-Simple effect sizes are often easier to interpret and justify [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance [@Wilkinson1999a,@Cummings2011].
+Simple effect sizes are often easier to interpret and justify [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance [@Wilkinson1999a; @Cummings2011].
 
 Barring a strong, domain- or problem-specific argument for reporting a standardized effect size instead of a simple one, simple effect sizes should be preferred as being more transparent and easier to interpret.
 
@@ -119,7 +120,7 @@ is to be gained than lost by supplying a common conventional frame of
 reference which is recommended for use only when no better basis for estimating
 the ES index is available. [@Cohen1977]
 
-Cohen recommended the use of these thresholds only when no better frame of reference for assessing practical importance was available. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [@Baguley2004; @Lenth2001]; Lenth has called this usage "canned effect sizes" [@Lenth2001]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. Like Cummings [@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
+Cohen recommended the use of these thresholds only when no better frame of reference for assessing practical importance was available. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [@Baguley2004; @Lenth2001]; Lenth has called this usage "canned effect sizes" [@Lenth2001]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. Like Cummings [-@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
 
 
 <a id="exemplar_simple_effect_size"></a>
@@ -361,7 +362,7 @@ data <-
 
 
 ## Compute effect sizes
-While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003, @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
+While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
 
 For those accustomed to Cohen's *d*, it's important to be aware that $\eta_{G}^{2}$ is typically smaller, with a Cohen's d of 0.2 being equivalent to a $\eta_{G}^{2}$ of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects. 
 
