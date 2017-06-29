@@ -24,7 +24,7 @@ Broadly speaking, an effect size is "anything that might be of interest" [@Cummi
 
 In HCI, common examples of effect size include the mean difference (e.g., in seconds) in task completion times between two techniques, or the mean difference in error rates (e.g., in percent). These are called *simple effect sizes* (or *unstandardized effect sizes*).
 
-More complex measures of effect size exist called *standardized effect sizes* (see [What is a standardized effect size?](#faq_standarized)). Although the term *effect size* is often used to refer to standardized effect sizes only, using the term in a broader sense can avoid unnecessary confusion [@Cumming2013a, @Wilkinson1999a]. In this document, "effect size" refers to both simple and standardized effect sizes.
+More complex measures of effect size exist called *standardized effect sizes* (see [What is a standardized effect size?](#faq_standarized)). Although the term *effect size* is often used to refer to standardized effect sizes only, using the term in a broader sense can avoid unnecessary confusion [@Cumming2013a; @Wilkinson1999a]. In this document, "effect size" refers to both simple and standardized effect sizes.
 
 
 <a id="faq_when_why"></a>
@@ -79,7 +79,7 @@ Standardized effect sizes are useful in some situations, for example when effect
 
 In most cases, simple effect sizes should be preferred over standardized effect sizes:
 
-> Only rarely will uncorrected standardized effect size be more useful than simple effect size. It is usually far better to report simple effect size. [@baguley2009standardized]
+> Only rarely will uncorrected standardized effect size be more useful than simple effect size. It is usually far better to report simple effect size. [@Baguley2009]
 
 Simple effect sizes are often easier to interpret and justify [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance [@Wilkinson1999a; @Cummings2011].
 
