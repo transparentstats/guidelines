@@ -119,7 +119,7 @@ is to be gained than lost by supplying a common conventional frame of
 reference which is recommended for use only when no better basis for estimating
 the ES index is available. [@Cohen1977]
 
-Cohen recommended the use of these thresholds only when no better frame of reference for assessing practical importance was available. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [citation needed]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. Like Cummings [@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
+Cohen recommended the use of these thresholds only when no better frame of reference for assessing practical importance was available. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [@Baguley2004; @Lenth2001]; Lenth has called this usage "canned effect sizes" [@Lenth2001]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. Like Cummings [@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
 
 
 <a id="exemplar_simple_effect_size"></a>
