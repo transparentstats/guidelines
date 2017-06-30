@@ -1,10 +1,12 @@
 ---
 title: "Effect size"
 output:
+  html_document:
+    toc: yes
   html_notebook:
     toc: yes
     toc_float:
-      collapsed: false
+      collapsed: no
 bibliography: references.bib
 ---
 
@@ -96,6 +98,9 @@ library(tidyverse)
 library(forcats)    # for fct_...()
 library(broom)      # for tidy()
 library(ggstance)   # for geom_pointrangeh()
+library(brms)       # for brm()
+library(tidybayes)  # for mean_qi(); use devtools::install_github("mjskay/tidybayes") to install
+import::from(MASS, mvrnorm)
 ```
 This function is for formatting numbers:
 
@@ -114,13 +119,13 @@ n <- 20
 data <- tibble(
   group = rep(c("A", "B"), each = n),
   completion_time_ms = c(
-    rnorm(n, mean = 170, sd = 80),
-    rnorm(n, mean = 50, sd = 20)
+    rlnorm(n, meanlog = log(170), sdlog = 0.3),
+    rlnorm(n, meanlog = log(50), sdlog = 0.4)
   )
 )
 ```
 
-Note that our model allows for negative completion times, but we will ignore this for the sake of simplicity. With `set.seed(12)` and `n = 20`, we will only get positive numbers.
+We assume a log-normal model of completion times, which is a commonly-used model of completion time [citation needed] and ensures completion times are all positive.
 
 A good first step in any analysis is always to visualize the data:
 
@@ -141,9 +146,11 @@ This plot shows all observed completion times, as well as the mean completion ti
 
 ## Calculating simple effect size
 
-Since we have meaningful units (milliseconds), we will use the *difference* in mean completion times as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size. To this end, we will compute a *Student's t distribution confidence interval*.
+Since we have meaningful units (milliseconds), we will use the *difference* in mean completion times as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size. We will show two different approaches to calculating the uncertainty around this different. 
 
-Again for simplicity, we will not use a log transformation as suggested in the [data transformation](data_transformation) guidelines.
+### Approach 1: Difference in means with Student's t confidence interval
+
+While the response distributions are non-normal, the sampling distribution of the difference in means will still be approximately symmetrical [citation needed / double check this], so we can compute a *Student's t distribution confidence interval* for the difference in means.
 
 ```{r t_test}
 t_result <- 
@@ -153,6 +160,126 @@ t_result
 ```
 
 The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
+
+### Approach 2a: Ratio of medians with Student's t confidence interval on log-scale
+
+For responses that are assumed to be log-normal, an alternative is to calculate the mean difference on the log scale. Because the mean on the log scale of a log-normal distribution is equal to the median of the distribution of the untransformed responses, this is equivalent to calculating a ratio of medians on the untransformed scale (in this case, a ratio of median response times). See the [data transformation](data_transformation) guideline for more information.
+
+```{r log_t_test}
+log_t_result <- 
+  t.test(log(completion_time_ms) ~ group, data = data) %>%
+  tidy()    # put result in tidy tabular format
+log_t_result
+```
+
+We can transform this into a ratio of median response times:
+
+```{r log_t_to_ratio}
+log_t_ratios <- log_t_result %>%
+  mutate_at(vars(estimate, estimate1, estimate2, conf.low, conf.high), exp)
+log_t_ratios
+```
+
+This output shows the estimated median response times (`estimate1` and `estimate2`), and an estimate of the ratio between them (`estimate = estimate1/estimate2`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval of that ratio.
+
+### Approach 2b: log-normal regression with marginal estimate of difference in means using simulation
+
+We can run a linear regression that is equivalent to approach 2a:
+
+```{r}
+m_log <- lm(log(completion_time_ms) ~ group, data = data)
+m_log
+```
+
+Then we can simulate means on the log scale from the sampling distribution of the coefficients of this model, and use the fact that if a random variable $X$ is log-normally distributed with mean $\mu$ and standard deviation $\sigma$:
+
+$$
+\log(X) \sim \mathrm{Normal}(\mu, \sigma^2)
+$$
+
+Then the mean of $X$ is (see [here](https://en.wikipedia.org/wiki/Log-normal_distribution)):
+
+$$
+\mathbf{E}[X] = e^{\mu+\frac{\sigma^2}{2}}
+$$
+
+We can use the sampling distribution of the coefficients of `m_log` to generate samples of $\mu$ in each group, then translate these samples (along with an estimate of $\sigma$) onto the outcome scale, then derive intervals on that scale (this is sort of treating the sampling distribution as a Bayesian posterior):
+
+```{r}
+log_result <- 
+  mvrnorm(10000, mu = coef(m_log), Sigma = vcov(m_log)) %>%
+  as_data_frame() %>%
+  mutate(
+    sigma = sigma(m_log), # Using MLE estimate of residual SD
+                          # could also sample from sqrt(rgamma(nrow(.), (n - 1)/2, ((n - 1)/sigma(m_log)^2)/2))
+                          # but results are similar
+    
+    mu_A = `(Intercept)`,
+    mean_A = exp(mu_A + sigma^2 / 2),
+    
+    mu_B = `(Intercept)` + groupB,
+    mean_B = exp(mu_B + sigma^2 / 2),
+    
+    mean_difference = mean_A - mean_B
+  ) %>%
+  mean_qi(mean_difference) %>%
+  mutate(method = "lognormal regression")
+log_result
+```
+
+This approach does not account for non-constant variance on the log scale, however. The next approach does.
+
+### Approach 3: log-normal regression with marginal estimate of difference in means using Bayesian regression
+
+For this approach, we will use a Bayesian log-normal regression model to estimate the mean and variance of the response distribution in each group on a log scale. We will then transform these parameters into a difference in means on the original (millisecond) scale, as in approach 2b.
+
+First, a Bayesian log-normal regression with default priors:
+
+```{r, results = "hide"}
+m_log_bayes <- brm(brmsformula(
+    completion_time_ms ~ group,
+    sigma ~ group
+  ), data = data, family = lognormal)
+```
+
+We can use samples from the posterior distribution to derive the mean response time in each condition and a credible interval around their difference:
+
+```{r}
+log_bayes_result <- m_log_bayes %>%
+  as_data_frame() %>%
+  mutate(
+    mu_A = b_Intercept,
+    sigma_A = exp(b_sigma_Intercept),
+    mean_A = exp(mu_A + sigma_A^2 / 2),
+    
+    mu_B = b_Intercept + b_groupB,
+    sigma_B = exp(b_sigma_Intercept + b_sigma_groupB),
+    mean_B = exp(mu_B + sigma_B^2 / 2),
+    
+    mean_difference = mean_A - mean_B
+  ) %>%
+  mean_qi(mean_difference) %>%
+  mutate(method = "lognormal regression (Bayesian)")
+log_bayes_result
+```
+
+This gives the estimated mean difference between conditions in milliseconds (`mean_difference`), as well as the lower (`mean_difference.lower`) and upper (`mean_difference.upper`) bounds of the 95% quantile credible interval of that ratio.
+
+### Comparing approaches
+
+All approaches that give estimates for the difference in means that are essentially the same:
+
+```{r}
+t_result %>%
+  transmute(
+    mean_difference = estimate, mean_difference.lower = conf.low, mean_difference.upper = conf.high,
+    mean_difference.prob = 0.95, method
+  ) %>%
+  bind_rows(log_result, log_bayes_result) %>%
+  ggplot(aes(y = method, x = mean_difference, xmin = mean_difference.lower, xmax = mean_difference.upper)) + 
+  geom_pointrangeh() +
+  geom_vline(xintercept = 0)
+```
 
 
 ## Reporting simple effect size
