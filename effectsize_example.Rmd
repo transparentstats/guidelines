@@ -146,7 +146,7 @@ This plot shows all observed completion times, as well as the mean completion ti
 
 ## Calculating simple effect size
 
-Since we have meaningful units (milliseconds), we will use the *difference* in mean completion times as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size. We will show two different approaches to calculating the uncertainty around this different. 
+Since we have meaningful units (milliseconds), we will use the *difference* in mean completion times as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size. We will show several different approaches to calculating the uncertainty around this effect. 
 
 ### Approach 1: Difference in means with Student's t confidence interval
 
