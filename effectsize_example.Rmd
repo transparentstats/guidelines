@@ -136,9 +136,9 @@ library(forcats)    # for fct_...()
 library(broom)      # for tidy()
 library(ggstance)   # for geom_pointrangeh()
 ```
+This function is for formatting numbers:
 
 ```{r boilerplate, include = FALSE}
-set.seed(12)
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
@@ -148,6 +148,7 @@ format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdi
 Imagine a between-subjects design, with completion time (in milliseconds) measured in two groups, `A` and `B`, with 20 subjects each.
 
 ```{r data_generation}
+set.seed(12)
 n <- 20
 data <- tibble(
   group = rep(c("A", "B"), each = n),
@@ -157,6 +158,8 @@ data <- tibble(
   )
 )
 ```
+
+Note that our model allows for negative completion times, but we will ignore this for the sake of simplicity. With `set.seed(12)` and `n = 20`, we will only get positive numbers.
 
 A good first step in any analysis is always to visualize the data:
 
@@ -177,7 +180,9 @@ This plot shows all observed completion times, as well as the mean completion ti
 
 ## Calculating simple effect size
 
-Since we have meaningful units (milliseconds), we will use a *t*-test to compute a simple effect size (the mean difference in milliseconds) and its associated confidence interval, following [our recommendations on how to report effect size](#faq_how_reporting).
+Since we have meaningful units (milliseconds), we will use the *difference* in mean completion times as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size. To this end, we will compute a *Student's t distribution confidence interval*.
+
+Again for simplicity, we will not use a log transformation as suggested in the [data transformation](data_transformation) guidelines.
 
 ```{r t_test}
 t_result <- 
