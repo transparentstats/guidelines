@@ -134,7 +134,7 @@ Cohen recommended the use of these thresholds only when no better frame of refer
 library(tidyverse)
 library(forcats)    # for fct_...()
 library(broom)      # for tidy()
-library(ggstance)   # for geom_pointrangeh()
+library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
 library(brms)       # for brm()
 library(tidybayes)  # for mean_qi(); use devtools::install_github("mjskay/tidybayes") to install
 import::from(MASS, mvrnorm)
@@ -171,6 +171,7 @@ p_data <-  # save for the teaser figure
   data %>% 
   ggplot(aes(x = completion_time_ms)) +
   geom_dotplot(binwidth=5) +
+  stat_summaryh(aes(y = 0, xintercept = ..x..), fun.x = mean, geom = "vline", color = "red", linetype = "dashed") +
   facet_grid(group ~ ., switch="y") +
   scale_y_continuous(breaks = NULL) +
   geom_vline(xintercept = 0) +
@@ -179,7 +180,7 @@ p_data <-  # save for the teaser figure
 p_data
 ```
 
-This plot shows all observed completion times in each group.
+This plot shows all observed completion times in each group, and the dashed red line indicates the mean in each group.
 
 ## Calculating simple effect size
 
