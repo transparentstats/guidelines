@@ -181,7 +181,7 @@ This plot shows all observed completion times in each group (black dots) along w
 
 ## Calculating simple effect size
 
-Since we have meaningful units (milliseconds), we will use the *difference* in mean completion time as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size. We will show several different approaches to calculating the uncertainty around this effect. 
+Since we have meaningful units (milliseconds), we will use the *difference* in mean completion time as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size.
 
 There are several possible approaches to estimating the uncertainty in the difference between the two groups. For simplicity, we show one possible approach in this exemplar, but we provide a non-exhaustive comparison of a few other approaches in the [effect size guideline supplement](effectsize_supplement.Rmd).
 
@@ -197,6 +197,7 @@ t_result
 ```
 
 The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
+
 
 ## Reporting simple effect size
 

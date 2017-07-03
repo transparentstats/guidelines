@@ -207,11 +207,11 @@ get_prior(brmsformula(
 
 This shows priors on the log-scale mean and priors on the log-scale standard deviation (`sigma`).
 
-First, we'll assume that completion time is something like a pointing task: not reasonably faster than 10ms or slower than 10s (10000ms). On log scale, that is between approximately $\log(10) \approx 2$ and $\log(10000) \approx 9$, so we'll center our prior intercept between these ($(9+2)/2$) and give it a 95% interval that covers them (sd of $(9-2)/4$: $\mathrm{\Normal}(5.5, 1.75)$.
+First, we'll assume that completion time is something like a pointing task: not reasonably faster than 10ms or slower than 2s (2000ms). On log scale, that is between approximately $\log(10) \approx 2$ and $\log(2000) \approx 8$, so we'll center our prior intercept between these ($(8+2)/2$) and give it a 95% interval that covers them (sd of $(8-2)/4$: $\mathrm{\Normal}(5, 1.5)$.
 
 For differences in log mean, we'll assume that times will not be more than about 100$\times$ difference in either direction: a zero-centered normal prior with standard deviation $\approx log(100)/2 \approx 2.3$: $\mathrm{Normal}(0, 2.3)$.
 
-For standard deviation, we will assume that individual differences are not generally as large: somewhere between 1ms and 1000ms. $\log(1) = 0$ and $\log(1000) \approx 7$, so we'll set a $\mathrm{Normal}(3.5, 1.75)$ prior on the intercept of the standard deviation on log scale.
+For standard deviation, we will assume that individual differences are not generally as large: somewhere between 10ms and 1000ms. $\log(1) = 0$ and $\log(1000) \approx 7$, so we'll set a $\mathrm{Normal}(3.5, 1.75)$ prior on the intercept of the standard deviation on log scale.
 
 Finally, for differences in log-scale standard deviation, we'll assume zero-centered with similar magnitude to the intercept: $\mathrm{Normal}(0, 1.75)$  [todo: not sure I've got sensible sd priors here].
 
