@@ -1,22 +1,10 @@
----
-title: "Effect size"
-output:
-  html_document:
-    toc: yes
-    toc_float:
-      collapsed: yes
-bibliography: references.bib
-link-citations: true
----
-
+# Effect size
 <div style="text-align:center">
-![](figures/effectsize/teaser.png)
+```{r}
+knitr::include_graphics("figures/effectsize/teaser.png")
+# TODO: generate the teaser figure in code
+```
 </div>
-```
-TODO: generate the teaser figure in code
-```
-
-# FAQ
 
 ## What is an effect size?
 
@@ -125,10 +113,10 @@ Cohen recommended the use of these thresholds only when no better frame of refer
 
 <a id="exemplar_simple_effect_size"></a>
 
-# Exemplar: Simple effect size
+## Exemplar: Simple effect size
 
 
-## Libraries needed for this analysis
+### Libraries needed for this analysis
 
 ```{r setup, warning = FALSE, message = FALSE}
 library(tidyverse)
@@ -143,7 +131,7 @@ format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdi
 ```
 
 
-## Data
+### Data
 
 Imagine a between-subjects design, with completion time (in milliseconds) measured in two groups, `A` and `B`, with 20 subjects each.
 
@@ -178,7 +166,7 @@ p_data
 
 This plot shows all observed completion times, as well as the mean completion time and 95% confidence interval of the mean in each condition.
 
-## Calculating simple effect size
+### Calculating simple effect size
 
 Since we have meaningful units (milliseconds), we will use the *difference* in mean completion times as our effect size. Following [our recommendations on how to report effect size](#faq_how_reporting), we also need to report the uncertainty around the sample effect size. To this end, we will compute a *Student's t distribution confidence interval*.
 
@@ -194,7 +182,7 @@ t_result
 The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
 
 
-## Reporting simple effect size
+### Reporting simple effect size
 
 Ideally, we would have space in our paper to report the effect size graphically:
 
@@ -221,21 +209,21 @@ Space may not always permit the graphical report. While it can be less easy to i
 > Group `A` had a greater mean completion time than group `B` by `r format_num(t_result$estimate, 2)` milliseconds (95% CI: [`r format_num(t_result$conf.low, 2)`, `r format_num(t_result$conf.high, 2)`]).
 
 
-## Interpreting effect size: same result, different domains = different interpretations
+### Interpreting effect size: same result, different domains = different interpretations
 
 Because simple effect sizes include units, we can use our expert judgment to interpret the report. Authors may wish to do so in order to put their result in context. Because the report above includes everything necessary for other experts to come to their own conclusion, providing our own interpretation does not prevent readers from applying their own judgment and coming to different conclusions.
 
 To illustrate the effect of domain on interpreting effect size, we will imagine two different domains that might have led to the same result reported above, and write a different interpretation of the data for each.
 
 
-### Domain 1: Physical prototyping
+#### Domain 1: Physical prototyping
 
 Imagine the above study was from the comparison of a novel physical user interface prototyping system (treatment `B`) to the previous state of the art (`A`), and the completion time referred to the time for feedback to be given to the user after they perform an input action. We might report the following interpretation of the results:
 
 > Technique `B` offers a **large** improvement in feedback time (~`r format_num(t_result$conf.low, 2)` -- `r format_num(t_result$conf.high, 2)`ms mean decrease), resulting in feedback times that tend to be less than the threshold of human perception (less than about 100ms). By contrast, the larger feedback times offered by technique `A` tended to be above that threshold, possibly degrading users' experience of the prototypes built using that technique.
 
 
-### Domain 2: Chatbots
+#### Domain 2: Chatbots
 
 Imagine the same quantitative results, now in the context of a natural language chat bot designed to answer users' questions. Here, technique `A` will be the novel system, with improved natural language capabilities compared to the previous state-of-the-art technique, `B`. We might report the following interpretation of the results:
 
@@ -252,14 +240,14 @@ ggsave("figures/effectsize/p_simple_effect_size.pdf", p_simple_effect_size, heig
 
 <a id="exemplar_standardized_effect_size"></a>
 
-# Exemplar: Standardized effect size
+## Exemplar: Standardized effect size
 
 ```
 TODO: This needs a domain where we can argue that Cohen's d is an exemplar analysis, then repeat structure of exemplar 1 with it
 May be an example of existing meta-analysis in HCI.
 ```
 
-## Standardized effect size
+### Standardized effect size
 
 ```{r}
 library(effsize)  # for cohen.d()
@@ -279,7 +267,7 @@ cohen_d_manual <- abs(mean(data_A) - mean(data_B))/sd_pool
 
 <a id="exemplar_nonparametric_effect_size"></a>
 
-# Exemplar: Nonparametric effect size
+## Exemplar: Nonparametric effect size
 
 For a nonparametric test that produces a Z-score, like the Mann-Whitney U test or the Wilcoxon Signed-Rank test, an effect size can be computed as:
 
@@ -291,7 +279,7 @@ Above, Z is the Z-score and N is the number of observations in all groups [@Rose
 TODO: This needs a domain where we can argue that the nonparametric approach is an exemplar analysis, then repeat structure of exemplar 1 with it
 ```
 
-## Nonparametric effect size
+### Nonparametric effect size
 
 ```{r}
 library(coin)
@@ -305,7 +293,7 @@ effect_r <- abs(wilcox_result@statistic@teststatistic / sqrt(nrow(data)))
 
 <a id="exemplar_within_subjects_experiment"></a>
 
-# Exemplar: Within-subjects experiment 
+## Exemplar: Within-subjects experiment 
 
 Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.
 
@@ -319,7 +307,7 @@ We run each subject through each combination of these variables 20 times to get 
 
 
 
-## Subjects, conditions, and repetitions
+### Subjects, conditions, and repetitions
 In this example, there are 10 subjects (`id` column). Because this is simulated data, we're using subject `id` to represent individual performance differences. Because within-subjects experiments partly account for individual differences, they often need far fewer subjects than between-subject designs. Repetitions also help reduce noise.
 
 ```{r within-setup}
@@ -333,7 +321,7 @@ data <- expand.grid(
 )
 ```
 
-## Simulate some noisy effects
+### Simulate some noisy effects
 We'll simulate an experiment with a main effect of `layout` and `size` and an interaction between them. However, `color` and its interactions will not have an impact.
 
 ```{r within-simulate}
@@ -366,7 +354,7 @@ data <-
 ```
 
 
-## Compute effect sizes
+### Compute effect sizes
 While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
 
 For those accustomed to Cohen's *d*, it's important to be aware that $\eta_{G}^{2}$ is typically smaller, with a Cohen's d of 0.2 being equivalent to a $\eta_{G}^{2}$ of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects. 
@@ -405,7 +393,7 @@ Con: would make the guide even longer
 Maybe push into another guideline?
 ```
 
-## Reporting the results
+### Reporting the results
 
 Looking at the `F` and `ges` (generalized eta squared) columns, there are clear main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions show only negligeable effects.
 
@@ -431,6 +419,3 @@ formatGES <- function(anovaTable, effectName) {
  - **color** did not have a substantive effect (`r formatGES(anovaResults, 'color')`)
 
 Report any interaction for which there is reason to believe an effect could occur. Otherwise, you can simply state that other 2-way and 3-way interactions did not have substantive effect sizes. However, when in doubt, report everything!
-
-# References
-<!-- will be automatically generated from "references.bib" -->
