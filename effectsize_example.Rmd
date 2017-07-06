@@ -159,7 +159,7 @@ data <- tibble(
 )
 ```
 
-We assume a log-normal model of completion times, which is a commonly-used model of completion time [citation needed] and ensures completion times are all positive.
+We assume a log-normal model of completion times, which is a commonly-used model of completion time [@Sauro2010] and ensures completion times are all positive.
 
 A good first step in any analysis is always to visualize the data:
 
@@ -187,7 +187,7 @@ There are several possible approaches to estimating the uncertainty in the diffe
 
 ### Difference in means with Student's t confidence interval
 
-While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on $(-\infty, +\infty)$ and approximately symmetrical [citation needed / double check this], so we can compute a *Student's t distribution confidence interval* for the difference in means.
+While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on $(-\infty, +\infty)$ and approximately symmetrical (per the central limit theorem), so we can compute a *Student's t distribution confidence interval* for the difference in means.
 
 ```{r t_test}
 t_result <- 
