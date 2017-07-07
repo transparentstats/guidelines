@@ -29,6 +29,11 @@ import::from(MASS, mvrnorm)
 
 ```{r boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
+
+# recommended code to speed up stan
+# see https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
 ```
 
 
