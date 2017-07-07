@@ -5,7 +5,6 @@
 .Rproj.user
 .Rhistory
 .RData
-*.Rproj
 
 # output
 *.html
