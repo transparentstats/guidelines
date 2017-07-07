@@ -5,10 +5,12 @@
 .Rproj.user
 .Rhistory
 .RData
-*.Rproj
 
 # output
 *.html
 
 # Misc
 *~
+_book
+_bookdown_files
+_main.rds
