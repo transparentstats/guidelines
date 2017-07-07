@@ -214,11 +214,11 @@ get_prior(brmsformula(
 
 This shows priors on the log-scale mean and priors on the log-scale standard deviation (`sigma`).
 
-First, we'll assume that completion time is something like a pointing task: not reasonably faster than 10ms or slower than 2s (2000ms). On log scale, that is between approximately $\log(10) \approx 2$ and $\log(2000) \approx 8$, so we'll center our prior intercept between these ($(8+2)/2$) and give it a 95% interval that covers them (sd of $(8-2)/4$): $\mathrm{\Normal}(5, 1.5)$.
+First, we'll assume that completion time is something like a pointing task: not reasonably faster than 10ms or slower than 2s (2000ms). On log scale, that is between approximately $\log(10) \approx 2$ and $\log(2000) \approx 8$, so we'll center our prior intercept between these ($(8+2)/2$) and give it a 95% interval that covers them (sd of $(8-2)/4$): $\mathrm{Normal}(5, 1.5)$.
 
 For differences in log mean, we'll assume that times will not be more than about 100$\times$ difference in either direction: a zero-centered normal prior with standard deviation $\approx log(100)/2 \approx 2.3$: $\mathrm{Normal}(0, 2.3)$.
 
-Since the standard deviation is estimated using a submodel that itself uses a log link, we have to make a prior on the log scale of log standard deviation. For standard deviation on the log scale, let's assume a baseline of around 100ms response time. Then, our prior on standard deviation on the log scale could reasonbly be as small as one reflecting individual differences on the order of 10ms: $log(110) - log(100) \approx 0.1 \approx e^-2.4$, or as large as one reflecting a difference of 1 second: $log(1100) - log(100) \approx 2.4 \approx e^0.9$. So we'll center our log log sd prior at $(0.9 + -2.4)/2$ and give it a 95% interval that covers them (sd of $(0.9 - -2.4)/4$): $\mathrm{\Normal}(-0.75, 0.825)$.
+Since the standard deviation is estimated using a submodel that itself uses a log link, we have to make a prior on the log scale of log standard deviation. For standard deviation on the log scale, let's assume a baseline of around 100ms response time. Then, our prior on standard deviation on the log scale could reasonbly be as small as one reflecting individual differences on the order of 10ms: $log(110) - log(100) \approx 0.1 \approx e^-2.4$, or as large as one reflecting a difference of 1 second: $log(1100) - log(100) \approx 2.4 \approx e^0.9$. So we'll center our log log sd prior at $(0.9 + -2.4)/2$ and give it a 95% interval that covers them (sd of $(0.9 - -2.4)/4$): $\mathrm{Normal}(-0.75, 0.825)$.
 
 Finally, for differences in log log standard deviation, we'll assume zero-centered with similar magnitude to the intercept: $\mathrm{Normal}(0, 0.825)$.
 
@@ -293,6 +293,8 @@ t_interval %>%
   geom_pointrangeh() +
   geom_vline(xintercept = 0)
 ```
+
+The Bayesian estimates include posterior distributions shown as violin plots in gray.
 
 # References
 <!-- will be automatically generated from "references.bib" -->
