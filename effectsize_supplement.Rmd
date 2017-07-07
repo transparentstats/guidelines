@@ -1,23 +1,14 @@
----
-title: "Supplement: Effect size"
-output:
-  html_document:
-    toc: yes
-    toc_float:
-      collapsed: yes
-bibliography: references.bib
-link-citations: true
----
+# Supplement: Effect size 
 
 This document is a supplement to the [effect size guideline](effectsize_example.html).
 
 
-# Exemplar: Simple effect size: Alternative approaches
+## Exemplar: Simple effect size: Alternative approaches
 
 The [simple effect size exemplar](effectsize_example.html#exemplar_simple_effect_size) demonstrates one common technique for esitmating mean differences in resposne time and the uncertainty around them (Student's t confidence intervals). This supplement demonstrates several possible approaches one might take to calculate differences in response time, and compares them. It is not intended to be exhaustive.
 
 
-## Libraries needed for this analysis
+### Libraries needed for this analysis
 
 ```{r setup, warning = FALSE, message = FALSE}
 library(tidyverse)
@@ -41,7 +32,7 @@ format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdi
 ```
 
 
-## Data
+### Data
 
 We will use the same data as the simple effect size exemplar: 
 
@@ -60,9 +51,9 @@ data <- tibble(
 See that exemplar for more information.
 
 
-## Calculating simple effect size
+### Calculating simple effect size
 
-### Approach 1: Difference in means with Student's t confidence interval
+#### Approach 1: Difference in means with Student's t confidence interval
 
 This is the approach used in the exemplar. While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on $(-\infty, +\infty)$ and approximately symmetrical (per the central limit theorem), so we can compute a *Student's t distribution confidence interval* for the difference in means.
 
@@ -75,7 +66,7 @@ t_interval
 
 The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
 
-### Approach 2a: Ratio of geometric means with Student's t confidence interval on log-scale
+#### Approach 2a: Ratio of geometric means with Student's t confidence interval on log-scale
 
 For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the [data transformation](data_transformation) guideline for more information.
 
@@ -101,7 +92,7 @@ However, since we have some sense in this context of how large or small we might
 In this case, the geometric mean of condition A is roughly `r format_num(log_t_ratios$estimate1)` and of B is roughly `r format_num(log_t_ratios$estimate2)`. A is about `r format_num(log_t_ratios$estimate)` $\times$ B, with a 95% confidence interval of [`r format_num(log_t_ratios$conf.low)`$\times$, `r format_num(log_t_ratios$conf.high)`$\times$]. So we have: `r format_num(log_t_ratios$estimate2)` $\times$ `r format_num(log_t_ratios$estimate)` $\approx$ `r format_num(log_t_ratios$estimate1)`.
 
 
-### Approach 2b: log-normal regression with marginal estimate of difference in means using simulation
+#### Approach 2b: log-normal regression with marginal estimate of difference in means using simulation
 
 We can run a linear regression that is equivalent to approach 2a:
 
@@ -159,7 +150,7 @@ log_interval
 This approach does not account for non-constant variance on the log scale, however. The next approach does.
 
 
-### Approach 3a: log-normal regression with marginal estimate of difference in means using Bayesian regression (uninformed priors)
+#### Approach 3a: log-normal regression with marginal estimate of difference in means using Bayesian regression (uninformed priors)
 
 For this approach, we will use a Bayesian log-normal regression model to estimate the mean and variance of the response distribution in each group on a log scale. We will then transform these parameters into a difference in means on the original (millisecond) scale, as in approach 2b.
 
@@ -201,7 +192,7 @@ log_bayes_interval
 This gives the estimated mean difference between conditions in milliseconds (`mean_difference`), as well as the lower (`mean_difference.lower`) and upper (`mean_difference.upper`) bounds of the 95% quantile credible interval of that ratio.
 
 
-### Approach 3b: log-normal regression with marginal estimate of difference in means using Bayesian regression (weakly informed priors)
+#### Approach 3b: log-normal regression with marginal estimate of difference in means using Bayesian regression (weakly informed priors)
 
 Finally, let's run the same analysis with weakly informed priors based on what we might believe reasonable ranges of the effect are. To see what priors we can set in `brm` models, we can use the `get_prior()` function:
 
@@ -295,6 +286,3 @@ t_interval %>%
 ```
 
 The Bayesian estimates include posterior distributions shown as violin plots in gray.
-
-# References
-<!-- will be automatically generated from "references.bib" -->
