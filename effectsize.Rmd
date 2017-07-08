@@ -110,7 +110,6 @@ library(forcats)    # for fct_...()
 library(broom)      # for tidy()
 library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
 ```
-This function is for formatting numbers:
 
 ```{r boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
