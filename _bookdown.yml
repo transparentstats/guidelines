@@ -5,5 +5,6 @@ new_session: yes
 rmd_files:
   - "index.Rmd"
   - "effectsize.Rmd"
-  - "effectsize_supplement.Rmd"
+  - "appendix.Rmd"
+  - "appendix_effectsize.Rmd"
   - "references.Rmd"

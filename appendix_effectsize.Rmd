@@ -1,11 +1,11 @@
-# Supplement: Effect size 
+# Effect size appendix {#appendix_effectsize}
 
-This document is a supplement to the [effect size guideline](effectsize_example.html).
+This appendix contains supplements to the [effect size guideline](#effectsize).
 
 
-## Exemplar: Simple effect size: Alternative approaches
+## Alternative approaches for simple effect size exemplar {#appendix_effectsize_simple}
 
-The [simple effect size exemplar](effectsize_example.html#exemplar_simple_effect_size) demonstrates one common technique for esitmating mean differences in resposne time and the uncertainty around them (Student's t confidence intervals). This supplement demonstrates several possible approaches one might take to calculate differences in response time, and compares them. It is not intended to be exhaustive.
+The [simple effect size exemplar](#effectsize_exemplar_simple) demonstrates one common technique for esitmating mean differences in resposne time and the uncertainty around them (Student's t confidence intervals). This supplement demonstrates several possible approaches one might take to calculate differences in response time, and compares them. It is not intended to be exhaustive.
 
 
 ### Libraries needed for this analysis
@@ -16,9 +16,10 @@ library(forcats)    # for fct_...()
 library(broom)      # for tidy()
 library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
 
-# for brm(). Requires rstan; see here for installation instructions: 
+# See here for rstan installation instructions: 
 # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
-library(brms)       
+library(rstan)
+library(brms)       # for brm() (requires rstan)
 
 # for mean_qi(). Use devtools::install_github("mjskay/tidybayes") to install.
 library(tidybayes)
@@ -73,7 +74,7 @@ The `tidy()`ed output of the `t.test()` function includes an estimate of the mea
 
 #### Approach 2a: Ratio of geometric means with Student's t confidence interval on log-scale
 
-For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the [data transformation](data_transformation) guideline for more information.
+For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the [data transformation](#transformation) guideline for more information.
 
 ```{r log_t_test}
 log_t_interval <- 
