@@ -223,9 +223,9 @@ These priors can be specified as follows:
 
 ```{r}
 log_bayes_priors <- c(
-    prior(normal(5.5, 1.75), class = b, coef = intercept),
+    prior(normal(5.5, 1.75), coef = Intercept),
     prior(normal(0, 2.3), class = b, coef = groupB),
-    prior(normal(-0.75, 0.825), class = b, coef = intercept, nlpar = sigma),
+    prior(normal(-0.75, 0.825), coef = Intercept, nlpar = sigma),
     prior(normal(0, 0.825), class = b, coef = groupB, nlpar = sigma)
   )
 log_bayes_priors
@@ -275,7 +275,7 @@ This gives the estimated mean difference between conditions in milliseconds (`es
 
 All approaches that give estimates for the difference in means give very similar results:
 
-```{r}
+```{r model_comparison, fig.height = 2.5, fig.width = 6, warning = FALSE}
 bayes_samples = bind_rows(log_bayes_samples, log_bayes_informed_samples)
 
 bind_rows(t_interval, log_interval, log_bayes_interval, log_bayes_informed_interval) %>%
