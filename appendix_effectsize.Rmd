@@ -146,9 +146,9 @@ log_interval <-
     mean_B = exp(mu_B + sigma^2 / 2),
     
     # get samples of the difference in means on the original scale
-    mean_difference = mean_A - mean_B
+    estimate = mean_A - mean_B
   ) %>%
-  mean_qi(mean_difference) %>%
+  mean_qi(estimate) %>%
   mutate(method = "lognormal regression")
 log_interval
 ```
@@ -174,7 +174,7 @@ Similar to approach 2b, we will derive samples of the mean difference, this time
 ```{r}
 log_bayes_samples <- 
   m_log_bayes %>%
-  as_data_frame() %>%
+  as_sample_tibble() %>%
   mutate(
     mu_A = b_Intercept,
     sigma_A = exp(b_sigma_Intercept),
@@ -184,18 +184,18 @@ log_bayes_samples <-
     sigma_B = exp(b_sigma_Intercept + b_sigma_groupB),
     mean_B = exp(mu_B + sigma_B^2 / 2),
     
-    mean_difference = mean_A - mean_B
+    estimate = mean_A - mean_B
   ) %>%
   mutate(method = "lognormal regression (Bayesian, uninformed)") %>%
   group_by(method)
 
 log_bayes_interval <- 
   log_bayes_samples %>%
-  mean_qi(mean_difference)
+  mean_qi(estimate)
 log_bayes_interval
 ```
 
-This gives the estimated mean difference between conditions in milliseconds (`mean_difference`), as well as the lower (`mean_difference.lower`) and upper (`mean_difference.upper`) bounds of the 95% quantile credible interval of that ratio.
+This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that ratio.
 
 
 #### Approach 3b: log-normal regression with marginal estimate of difference in means using Bayesian regression (weakly informed priors)
@@ -245,7 +245,7 @@ Similar to approach 2b, we will derive samples of the mean difference, this time
 ```{r}
 log_bayes_informed_samples <- 
   m_log_bayes_informed %>%
-  as_data_frame() %>%
+  as_sample_tibble() %>%
   mutate(
     mu_A = b_Intercept,
     sigma_A = exp(b_sigma_Intercept),
@@ -255,19 +255,19 @@ log_bayes_informed_samples <-
     sigma_B = exp(b_sigma_Intercept + b_sigma_groupB),
     mean_B = exp(mu_B + sigma_B^2 / 2),
     
-    mean_difference = mean_A - mean_B
+    estimate = mean_A - mean_B
   ) %>%
   mutate(method = "lognormal regression (Bayesian, weakly informed)") %>%
   group_by(method)
 
 log_bayes_informed_interval <- 
   log_bayes_informed_samples %>%
-  mean_qi(mean_difference)
+  mean_qi(estimate)
 
 log_bayes_informed_interval
 ```
 
-This gives the estimated mean difference between conditions in milliseconds (`mean_difference`), as well as the lower (`mean_difference.lower`) and upper (`mean_difference.upper`) bounds of the 95% quantile credible interval of that ratio.
+This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that ratio.
 
 
 
@@ -278,16 +278,10 @@ All approaches that give estimates for the difference in means give very similar
 ```{r}
 bayes_samples = bind_rows(log_bayes_samples, log_bayes_informed_samples)
 
-t_interval %>%
-  transmute(
-    mean_difference = estimate, mean_difference.lower = conf.low, mean_difference.upper = conf.high,
-    mean_difference.prob = 0.95, method
-  ) %>%
-  bind_rows(log_interval, log_bayes_interval, log_bayes_informed_interval) %>%
-  ggplot(aes(y = method, x = mean_difference, xmin = mean_difference.lower, xmax = mean_difference.upper)) + 
-  geom_violinh(aes(y = method, x = mean_difference), data = bayes_samples, 
-    inherit.aes = FALSE, color = NA, fill = "gray65") +
-  geom_pointrangeh() +
+bind_rows(t_interval, log_interval, log_bayes_interval, log_bayes_informed_interval) %>%
+  ggplot(aes(x = estimate, y = method)) + 
+  geom_violinh(data = bayes_samples, color = NA, fill = "gray65") +
+  geom_pointrangeh(aes(xmin = conf.low, xmax = conf.high)) +
   geom_vline(xintercept = 0)
 ```
 
