@@ -7,19 +7,19 @@ May be an example of existing meta-analysis in HCI.
 
 ### Libraries needed for this analysis
 
-```{r setup, warning = FALSE, message = FALSE}
+```{r es-standard-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(effsize)  # for cohen.d()
 ```
 
-```{r boilerplate, include = FALSE}
+```{r es-simple-boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
 
 ### Standardized effect size
 
-```{r data_generation}
+```{r es-standard-data_generation}
 set.seed(12)
 n <- 20
 data <- tibble(

@@ -1,14 +1,13 @@
 language:
   ui:
     chapter_name: "Chapter "
-new_session: yes
+new_session: no
 rmd_files:
   - "index.Rmd"
-  - "effectsize.Rmd"
-  - "effectsize_exemplar_simple.Rmd"
-  - "effectsize_exemplar_within.Rmd"
-  - "effectsize_exemplar_standardized.Rmd"
-  - "effectsize_exemplar_nonparametric.Rmd"
-  - "appendix.Rmd"
-  - "appendix_effectsize.Rmd"
-  - "references.Rmd"
+  - "guides/effectsize.Rmd"
+  - "guides/effectsize_exemplar_simple.Rmd"
+  - "guides/effectsize_exemplar_within.Rmd"
+  - "guides/effectsize_exemplar_standardized.Rmd"
+  - "guides/effectsize_exemplar_nonparametric.Rmd"
+  - "guides/appendix.Rmd"
+  - "guides/references.Rmd"

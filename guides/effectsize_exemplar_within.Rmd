@@ -13,13 +13,13 @@ We run each subject through each combination of these variables 20 times to get 
 
 ### Libraries needed for this analysis
 
-```{r setup, warning = FALSE, message = FALSE}
+```{r es-within-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(broom)      # for tidy()
 library(afex)       # for aov_ez()
 ```
 
-```{r boilerplate, include = FALSE}
+```{r es-within-boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 

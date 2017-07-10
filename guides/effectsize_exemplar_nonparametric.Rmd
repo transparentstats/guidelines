@@ -12,19 +12,19 @@ TODO: This needs a domain where we can argue that the nonparametric approach is 
 
 ### Libraries needed for this analysis
 
-```{r setup, warning = FALSE, message = FALSE}
+```{r es-nonparametric-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(coin)        # for wilcox_test
 ```
 
-```{r boilerplate, include = FALSE}
+```{r nonparametric-boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
 
 ### Nonparametric effect size
 
-```{r data_generation}
+```{r es-nonparametric-data_generation}
 set.seed(12)
 n <- 20
 data <- tibble(

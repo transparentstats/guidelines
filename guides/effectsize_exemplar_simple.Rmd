@@ -3,14 +3,14 @@
 
 ### Libraries needed for this analysis
 
-```{r setup, warning = FALSE, message = FALSE}
+```{r es-simple-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(forcats)    # for fct_...()
 library(broom)      # for tidy()
 library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
 ```
 
-```{r boilerplate, include = FALSE}
+```{r simple-boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
@@ -19,7 +19,7 @@ format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdi
 
 Imagine a between-subjects design, with completion time (in milliseconds) measured in two groups, `A` and `B`, with 20 subjects each.
 
-```{r data_generation}
+```{r es-simple-data_generation}
 set.seed(12)
 n <- 20
 data <- tibble(
@@ -35,7 +35,7 @@ We assume a log-normal model of completion times, which is a commonly-used model
 
 A good first step in any analysis is always to visualize the data:
 
-```{r data_plot, fig.height = 2, fig.width = 4}
+```{r es-simple-data_plot, fig.height = 2, fig.width = 4}
 p_data <-  # save for the teaser figure
   data %>% 
   ggplot(aes(x = completion_time_ms)) +
@@ -61,7 +61,7 @@ There are several possible approaches to estimating the uncertainty in the diffe
 
 While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on $(-\infty, +\infty)$ and approximately symmetrical (per the central limit theorem), so we can compute a *Student's t distribution confidence interval* for the difference in means.
 
-```{r t_test}
+```{r es-simple-t_test}
 t_result <- 
   t.test(completion_time_ms ~ group, data = data) %>%
   tidy()    # put result in tidy tabular format
@@ -75,7 +75,7 @@ The `tidy()`ed output of the `t.test()` function includes an estimate of the mea
 
 Ideally, we would have space in our paper to report the effect size graphically:
 
-```{r ci_plot, fig.height = 1, fig.width = 5}
+```{r es-simple-ci_plot, fig.height = 1, fig.width = 5}
 p_simple_effect_size <-   # save for the teaser figure
   t_result %>% 
   ggplot(aes(y = "A - B", x = estimate, xmin = conf.low, xmax = conf.high)) +
@@ -120,7 +120,7 @@ Imagine the same quantitative results, now in the context of a natural language 
 
 The same effect size is plausibly described as **large** in domain 1 and **small** in domain 2, illustrating the importance of expert interpretation to reporting and understanding effect size and the difficulty in applying pre-defined thresholds across domains.
 
-```{r teaser_figure, include = FALSE}
+```{r es-simple-teaser_figure, include = FALSE}
 library(Cairo)  # for ggsave() that don't use unicode character for points
 ggsave("figures/effectsize/p_data.pdf", p_data, height = 1, width = 3, device = cairo_pdf)
 ggsave("figures/effectsize/p_simple_effect_size.pdf", p_simple_effect_size, height = 1, width = 3, device = cairo_pdf)
