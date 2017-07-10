@@ -1,1 +1,1 @@
-# Likert-scale data
+# Likert-scale data {#likert}

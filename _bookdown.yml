@@ -2,4 +2,9 @@ language:
   ui:
     chapter_name: "Chapter "
 new_session: yes
-rmd_files: ["index.Rmd", "effectsize.Rmd", "references.Rmd"]
+rmd_files:
+  - "index.Rmd"
+  - "effectsize.Rmd"
+  - "appendix.Rmd"
+  - "appendix_effectsize.Rmd"
+  - "references.Rmd"
