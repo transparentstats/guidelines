@@ -14,7 +14,7 @@ output:
       edit: https://github.com/transparentstats/guidelines/edit/master/%s
 documentclass: book
 date: "`r Sys.Date()`"
-bibliography: [references.bib]
+bibliography: [guides/references.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: transparentstats/guidelines
