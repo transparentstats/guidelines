@@ -1,0 +1,137 @@
+## Exemplar: Within-subjects experiment {#effectsize_exemplar_within} 
+
+Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.
+
+In this example, we'll compare two interfaces for visualizing data.
+
+* Independent Variable **layout**: the two layouts of the interface
+* Independent Variable **size**: the size of the dataset visualized (small, medium, and large)
+* Independent Variable **color**: interface color, where we don't expect any effect
+
+We run each subject through each combination of these variables 20 times to get (2 interfaces) × (3 sizes) × (4 colors) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some reponse (e.g., reponse time) in each trial.
+
+
+### Libraries needed for this analysis
+
+```{r setup, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(broom)      # for tidy()
+library(afex)       # for aov_ez()
+```
+
+```{r boilerplate, include = FALSE}
+format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
+```
+
+
+### Subjects, conditions, and repetitions
+In this example, there are 10 subjects (`id` column). Because this is simulated data, we're using subject `id` to represent individual performance differences. Because within-subjects experiments partly account for individual differences, they often need far fewer subjects than between-subject designs. Repetitions also help reduce noise.
+
+```{r within-setup}
+set.seed(456) # make the output consistent
+data <- expand.grid(
+  id = rnorm(6, 5, 0.5), # individual differences
+  layout = 0:1, # independent variable
+  size = 0:2, # independent variable
+  color = 0:3, # independent variable
+  repetition = 1:20 # each subject runs in each condition multiple times
+)
+```
+
+### Simulate some noisy effects
+We'll simulate an experiment with a main effect of `layout` and `size` and an interaction between them. However, `color` and its interactions will not have an impact.
+
+```{r within-simulate}
+data <- 
+  data %>% 
+  mutate(
+  response_time = 
+    id + # additive individual differences
+    layout * .4 + # main effect of layout
+    size * .2 + # main effect of size
+    color * 0 + 
+    layout * size * .5 + # 2-way interaction
+    size * color * 0 + 
+    layout * color * 0 + 
+    layout * size * color * 0 + 
+    rnorm(n()) # noise
+)
+```
+
+Even though we used numbers to simulate the model, the independent variables and subject ID are all factors.
+```{r within-factor}
+data <- 
+  data %>% 
+  mutate(
+    id = factor(id), 
+    layout = factor(layout), 
+    size = factor(size), 
+    color = factor(color)
+  )
+```
+
+
+### Compute effect sizes
+While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
+
+For those accustomed to Cohen's *d*, it's important to be aware that $\eta_{G}^{2}$ is typically smaller, with a Cohen's d of 0.2 being equivalent to a $\eta_{G}^{2}$ of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects. 
+
+```{r within-anova}
+results = afex::aov_ez(
+  data = data, 
+  id = 'id', # subject id column
+  dv = 'response_time', # dependent variable
+  within = c('layout', 'size', 'color'), # within-subject independent variables
+  between = NULL ,# between-subject independent variables
+  anova_table = list(es = 'ges') # effect size = generalized eta squared
+)
+```
+
+*Note: the warning indicates that the aov_ez function automatically collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
+
+```{r  within-anova-cleanup}
+anovaResults <- 
+  results$anova_table %>% 
+  rownames_to_column('effect') %>%  # put effect names in a column
+  select(-`Pr(>F)`) # no need to show p-values
+  
+anovaResults %>% 
+  tidy() %>% 
+  rename(F = statistic)
+```
+
+*Note that the fractional degrees of freedom result from a Greenhousse-Geisser sphericity correction.*
+
+```
+TODO: Boostrapped 95%CIs for effect sizes
+Pro: people should
+Con: would make the guide even longer
+Maybe push into another guideline?
+```
+
+### Reporting the results
+
+Looking at the `F` and `ges` (generalized eta squared) columns, there are clear main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions show only negligeable effects.
+
+```{r within-format, include=FALSE}
+# format the anova results for a report, and trim to 3 significant digits
+formatGES <- function(anovaTable, effectName) {
+  cutoff = 0.01
+  row = (1:nrow(anovaTable))[anovaTable$effect == effectName]
+  return(paste0(
+    'F~',
+    signif(anovaTable[row, 'num Df'], 3), ',',
+    signif(anovaTable[row, 'den Df'], 3), '~ = ',
+    signif(anovaTable[row, 'F'], 3), ', $\\eta_{G}^{2}$ = ',
+    signif(anovaTable[row, 'ges'], 3)
+  ))
+}
+```
+
+
+ - **layout:** `r formatGES(anovaResults, 'layout')`
+ - **size:** `r formatGES(anovaResults, 'size')`
+ - **layout** × **size:** `r formatGES(anovaResults, 'layout:size')`
+ - **color** did not have a substantive effect (`r formatGES(anovaResults, 'color')`)
+
+Report any interaction for which there is reason to believe an effect could occur. Otherwise, you can simply state that other 2-way and 3-way interactions did not have substantive effect sizes. However, when in doubt, report everything!
