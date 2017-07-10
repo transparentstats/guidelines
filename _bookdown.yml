@@ -2,6 +2,7 @@ language:
   ui:
     chapter_name: "Chapter "
 new_session: no
+after_chapter_script: clear_vars_and_pkgs.R
 rmd_files:
   - "index.Rmd"
   - "guides/effectsize.Rmd"
