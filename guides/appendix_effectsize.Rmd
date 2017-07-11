@@ -9,8 +9,29 @@ The [simple effect size exemplar](#effectsize_exemplar_simple) demonstrates one 
 
 
 ### Libraries needed for this analysis
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+# which libraries are needed
+list.of.libraries = c("tidyverse", "ggstance", "brms", "rstan", "import", "devtools")
+# check if libraries are installed
+new.packages = list.of.libraries[!(list.of.libraries %in% installed.packages()[,"Package"])]
+# install missing libraries
+if(length(new.packages) > 0) 
+  install.packages(new.packages, repos = "http://cran.us.r-project.org")
+# special case for github libraries
+list.of.libraries = tibble::tribble(
+  ~name, ~repository,
+  "tidybayes", "mjskay/tidybayes"
+)
+# check which libraries are installed
+new.packages = dplyr::filter(list.of.libraries, !(name %in% installed.packages()[,"Package"]))
+# install missing libraries
+for (p in new.packages$repository)
+  devtools::install_github(p)
 
-```{r setup, warning = FALSE, message = FALSE}
+```
+
+
+```{r appendix-es-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(forcats)    # for fct_...()
 library(broom)      # for tidy()
@@ -42,7 +63,7 @@ options(mc.cores = parallel::detectCores())
 
 We will use the same data as the simple effect size exemplar: 
 
-```{r data_generation}
+```{r appendix-es-data_generation}
 set.seed(12)
 n <- 20
 data <- tibble(
