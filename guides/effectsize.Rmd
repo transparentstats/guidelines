@@ -41,7 +41,7 @@ Ideally, an effect size report should include:
 - The type of uncertainty information reported (e.g., a 95% CI)
 - The units of the effect size if applicable, or the type of standardized effect size if it is a unitless effect size. 
 
-This information can be reported either numerically or graphically. Both formats are acceptable, although plots tend to be easier to comprehend than numbers when more than one effect size needs to be conveyed [@loftus1993picture; @kastellec2007using]. Unless precise numerical values are important, it is sufficient (and often preferable) to report all effect sizes graphically. Researchers should avoid plotting point estimates without also plotting uncertainty information (using, e.g., error bars).
+This information can be reported either numerically or graphically. Both formats are acceptable, although plots tend to be easier to comprehend than numbers when more than one effect size needs to be conveyed [@Loftus1993; @Kastellec2007]. Unless precise numerical values are important, it is sufficient (and often preferable) to report all effect sizes graphically. Researchers should avoid plotting point estimates without also plotting uncertainty information (using, e.g., error bars).
 
 ▸ Exemplar: [simple effect size](#effectsize_exemplar_simple) (specifically in the "Reporting simple effect size" sub-section)
 
