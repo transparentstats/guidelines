@@ -6,15 +6,3 @@
 .Rhistory
 .RData
 *.Rproj
-
-# output
-*.html
-!docs/*.html
-
-# Misc
-_book
-_bookdown_files
-_main.rds
-_main.Rmd
-figures/effectsize/p_data.pdf
-figures/effectsize/p_simple_effect_size.pdf
