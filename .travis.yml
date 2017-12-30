@@ -9,7 +9,7 @@ before_script:
 script:
 - ./_build.sh
 - ./_deploy.sh
-sudo: false
+sudo: true
 cache:
   packages: yes
   directories:
