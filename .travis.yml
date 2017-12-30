@@ -21,14 +21,14 @@ r_binary_packages:
 - tidyverse
 - forcats
 - broom
-- ggstance
 - Cairo
 - effsize
 - coin
+- rstan
+- devtools
+- MASS
+r_packages:
+- ggstance
 - afex
 - import
 - brms
-- rstan
-- import
-- devtools
-- MASS
