@@ -17,7 +17,7 @@ cache:
 r_github_packages:
 - rstudio/bookdown
 - mjskay/tidybayes
-r_packages:
+r_binary_packages:
 - tidyverse
 - forcats
 - broom
