@@ -26,7 +26,6 @@ r_packages:
 - effsize
 - coin
 - afex
-- tidybayes
 - import
 - brms
 - rstan
