@@ -1,0 +1,152 @@
+# Transparent Statistics Guiding Principles
+
+**Version:** 1.0
+
+**Contributed to the writing:** Pierre Dragicevic, Chat Wacharamanotham, Matthew Kay
+
+**Gave feedback:** 
+
+**Endorsed:** 
+
+(If you wish to contribute to this chapter, make sure to check this [guidelines](#appendix_principles_contribute))
+
+## Introduction
+
+Human-computer interaction (HCI) is a large, multidisciplinary field drawing on a variety of approaches for analyzing quantitative data. However, many of our existing practices have drawn increasing criticism, such as our overreliance on mechanical statistical testing procedures, our lack of replications and meta-analyses, and our unwillingness to share data and study materials. These issues have been discussed within HCI (Wilson et al, 2011; Kaptein and Robertson, 2012; Dragicevic, 2016; Kay et al., 2016; Cockburn et al., 2018) and (to a much larger extent) in other fields (Cohen, 1994; Gigerenzer, 2004; Ioannidis, 2005; Simmons et al., 2011; Giner-Sorolla, 2012; Cumming, 2014; Nosek et al., 2017). Poor statistical practice and the lack of transparency in statistical reporting hamper the progress of knowledge and undermine the scientific credibility of affected disciplines, as witnessed by the growing number of press articles reporting a "crisis of confidence" in the most visible of these disciplines.
+
+The purpose of this document is not to admonish an entire field of researchers for their existing practices nor to urge them to adopt a specific set of methods. There is no universal inference procedure that can act as a substitute for good statistical reasoning (Gigerenzer and Marewski, 2015). The multifaceted nature of HCI also means we need to embrace a variety of practices. A fixed set of DOs and DON'Ts would be both too brittle to change over time and too restrictive in the face of the various ways of generating knowledge in our field. Instead, we propose to advance a general vision of *transparent statistics* that HCI researchers can draw inspiration from, and that is largely method-agnostic. We refer to transparent statistics simply as *"a philosophy of statistical reporting whose purpose is to advance scientific knowledge rather than to persuade"*. Regardless of the methods used, we aim to provide guidance that makes the communication of those methods more transparent, that makes reproduction and replication of work easier, and that makes evaluation of work (e.g., by peer reviewers) easier and more fair.
+
+To that end, a "transparent statistics" initiative was started in 2016, whose purpose is to discuss ways of promoting transparent statistics at CHI and suggest a series of incremental changes within the community (Transparent, 2017). These include more specific author and reviewer guidelines, exemplars for authors, and "badges" (Open, 2017). The goal of the initiative is to address questions such as: what can an author do to improve the transparency of their communication? What can a reviewer do to encourage and reward transparency? What changes to the review process might encourage transparency and incentivize researchers? In this way we hope to avoid the time-honored tradition of admonishing researchers for doing statistics poorly, and instead encourage them—and guide them—to do better. The goal of the present document is to lay out the high-level principles on which other "transparent statistics" documents and guidelines will be based. This document is not meant to be fixed in stone, but is meant to be constantly evolving and iteratively refined by the CHI community.
+
+
+## Guiding Principles
+
+Again, transparent statistics is *"a philosophy of statistical reporting whose purpose is to advance scientific knowledge rather than to persuade"*. This idea is not new. For example, the following quote from Ronald Fisher captures the essence of transparent statistics:
+
+> “we have the duty of [...] communicating our conclusions in intelligible form, in recognition of the right of other free minds to utilize them in making their own decisions.” (Fisher, 1955).
+
+More recent writings have emphasized the importance of contributing useful and accurate knowledge over telling compelling and convincing stories (Giner-Sorolla, 2012; Dragicevic, 2016). Based on these visions, we propose a set of nine guiding principles for writing transparent statistical reports: 1) faithfulness, 2) robustness, 3) resilience, 4) process transparency, 5) clarity, 6) simplicity, 7) non-contingency, 8) precision and economy, and 9) material availability.
+
+
+### 1. Faithfulness {-}
+
+At the most basic level, a CHI statistical report should strive to be faithful to the data and the phenomena studied. This means that it should strive to capture and convey the "truth" as accurately as possible, especially concerning the uncertainty within the data. Major sources of uncertainty need to be carefully assessed and propagated to the presentations and interpretations of the results, all the way up to the final conclusions. Conclusions should be nuanced and stress the uncertainty in the data and in the process.
+
+* *Example:* It is evident that any major error in an analysis will result in findings that are likely not faithful to the data and the phenomena studied. This includes effect estimates that are very different from the true effect, but also measures of uncertainty that fail to capture the true uncertainty.
+
+* *Example:* Exaggerating findings by presenting uncertain results as certain is unfaithful to the data.
+
+* *Example:* A study report that analyzes all its data carefully but fails to acknowledge important issues with data validity (e.g., non-random condition assignment) is faithful to the data but unfaithful to the phenomena studied. The same goes with over-generalizing findings.
+
+
+### 2. Robustness {-}
+
+In order to minimize the likelihood of inaccurate (unfaithful) results, data analysis and reporting strategies that are robust to departures from statistical assumptions should ideally be preferred.
+
+Given that statistical assumptions are never met perfectly, the question should not be "are the assumptions met?" but instead "what are the likely consequences of such and such departure?". Thus, it is hugely beneficial for researchers to know how their methods behave depending on the nature and degree of possible departures, so that they can explain it in their report when necessary. When uncertain, methods that are known for their robustness are safer choices.
+
+* *Example:* ANOVA is robust to the normality assumption, and can in some cases give accurate results with unusual distributions and very small sample sizes (Norman, 2010).
+* *Example:* Bootstrapping is very robust to departures from its statistical assumptions, even though these assumptions are implausible (Kirby and Gerlanc, 2013).
+
+
+### 3. Resilience {-}
+
+Data analysis and reporting strategies should be resilient to statistical noise, i.e., they should yield similar outcomes across hypothetical replications of the same study. Researchers should ask themselves how their statistical report would change if they took another random sample from the same population, and should try to make claims that are as robust as possible to these changes.
+
+In practice, the principle of resilience implies that researchers should avoid presenting statistical noise as signal, either by overfitting, or by overinterpreting patterns in results. It also implies that study reports should be smooth functions of the data. This means that data analysis and presentation strategies should be chosen so that similar experimental datasets yield similar results, interpretations and conclusions (Dixon, 2003; Dragicevic, 2016; Dragicevic, 2017). The principle of resilience is important and is directly relevant to the issue of study replicability.
+
+* *Example:* Presenting a bar chart of means without error bars and commenting on the emerging patterns is akin to overfitting and is thus not resilient.
+* *Example:* Computing and reporting 95% interval estimates is resilient, but drawing binary conclusions based on whether they contain zero is not, because two very similar datasets may yield seemingly very different scientific conclusions (Cumming, 2013).
+* *Example:* For the same reasons, computing Bayes Factors and interpreting them strictly based on conventional thresholds violates the principle of resilience (Lakens, 2016).
+
+
+### 4. Process Transparency {-}
+
+A core aspect of transparent statistics is that data analysis and reporting strategies need to be explained rather than implied. The decisions made during the analysis and report writing should be communicated as explicitly as possible, as the results of an analysis cannot be fairly assessed and understood if many decisions remain concealed (Giner-Sorolla, 2012; Gelman and Loken, 2014).
+
+At the most basic level, researchers should ideally state which portions of their data analysis were planned before the data was seen, and which portions were not. Analyses that are fully planned can be referred to as prespecified, while analyses that are largely unplanned should be referred to as exploratory (Cumming, 2014, p.10). Both types of analysis are valid, although the former allows to support stronger claims than the latter.
+
+Process transparency also implies faithfully reporting what were the research goals, the research questions, and (optionally) the researcher's expectations prior to seeing the data (Kerr, 1998; Gelman and Loken, 2014; Cockburn et al., 2018). Results from analyses need to be reported whether or not they meet the researcher's initial expectations. When this is not the case, the rationale for selecting results needs be explained. Finally, sharing data and analysis scripts greatly benefits process transparency.
+
+* *Example:* Hypothesizing after the results are known (or "HARKing") strongly goes against process transparency (Kerr, 1998). Researchers who do not have clear expectations should state research questions instead of hypotheses (Cumming, 2013).
+* *Example:* Cherry-picking "convenient" results (e.g., results that best support the hypotheses), or trying multiple alternative analyses and reporting only those that are convenient clearly violates process transparency (Simmons et al., 2011).
+* *Example:* Even when a researcher has no preference for a given hypothesis and no intention to p-hack, cherry-picking results to give the impression of a coherent story also goes against process transparency (Giner-Sorolla, 2012; Gelman and Loken, 2014).
+* *Example:* Provided an analysis is presented as exploratory, trying multiple analyses and reporting the most interesting and informative results by taking a neutral stance is perfectly acceptable and does not go against process transparency (Tukey, 1977). Transparency can however be increased by explaining what has been tried.
+
+
+### 5. Clarity {-}
+
+Study reports should be as easy to understand as possible, because as explained by Ronald Fisher (quoted above), readers and reviewers cannot judge an analysis without understanding. There are two facets of clarity: *ease of processing and accessibility*.
+
+Study reports should be easy to process, even when they target experts. When results can be communicated more effectively with visual representations than with numerals, visual representations should be preferred (Loftus, 1993; Gelman, 2002). Although a study report should communicate as much relevant information as possible, information overload must be avoided by reporting non-essential information in appendices or in supplemental material.
+
+Second, study reports should ideally be accessible to most members of the HCI community, instead of being comprehensible by only a handful of specialists. The more accessible an analysis is, the more the "free minds" who can judge it. Thus a study report should be more an exercise of pedagogy than an exercise of rhetoric. The goal of a statistical report is not to signal expertise, but to explain.
+
+* *Example:* Using statistics for defensive purposes by generating p-cluttered reports rather than informative plots violates the principle of clarity.
+* *Example:* Excessive numbers of significant digits are difficult to process thus they go against the principle of clarity (Ehrenberg, 1977), in addition to giving a misleading impression of precision (Taylor, 1997).
+
+
+### 6. Simplicity {-}
+
+When choosing between two data analysis procedures, the simplest procedure should ideally be preferred even if it is slightly inferior in other respects. A focus on simplicity follows from the principles of clarity and ease of processing, and it makes both researcher mistakes and reader misinterpretations less likely to occur. In other words, the KISS principle (Keep It Simple, Stupid) is as relevant in transparent statistics as in any other domain.
+
+
+### 7. Non-contingency {-}
+
+When possible and outside exploratory analyses, data analysis and reporting strategies should avoid decisions that are contingent on data, e.g., “if the data turns out like this, compute this, or report that”. This principle follows from the principles of process transparency, clarity, and simplicity, because data-contingent procedures are hard to explain and easy to leave unexplained (Gelman and Loken, 2014). It is also a corollary of the principle of resilience because any dichotomous decision decreases a procedure’s resilience to statistical noise.
+
+Carefully planning an analysis is a good way to make sure that the principle of non-contingency is met (Cumming, 2014), especially if all the analysis code has been written ahead of time based on pilot data (Dragicevic, 2016). Pre-registering an analysis further increases transparency by allowing anyone to verify that the plan has been followed (Nosek et al., 2017; Cockburn et al., 2018). In exploratory analyses and in complex modeling problems, which are often data-contingent by nature, the principle of non-contingency should be applied to the best effort.
+
+* *Example:* Using a test of normality to decide whether to use parametric or non-parametric methods violates the principle of non-contingency, in addition to not being very useful (Stewart-Oaten, 1995; Wierdsma, 2013). If the test of normality is not mentioned in the report, it additionally violates the principle of process transparency.
+* *Example:* Selective reporting of data (i.e., cherry-picking) violates the non-contingency principle, and generally also the principles of faithfulness and of process transparency. It is only acceptable if the analysis is clearly presented as exploratory, and if the goal of the selection is to learn from the data rather than to support a convenient hypothesis or story.
+
+
+### 8. Precision and economy {-}
+
+Data quality (Gelman, 2017) and high statistical power (Cohen, 1990), which in the estimation world translates to high statistical precision (Cumming, 2012; Kruschke and Liddell, 2017), are important goals to pursue. This is because even if full transparency is achieved, a study report where nothing conclusive can be said would be a waste of readers' time, and may prompt them to seek inexistent patterns. Precision depends on experiment design, but also on the choice of analysis methods -- thus analysis methods that yield high precision should be prefered. However, researchers should strive to avoid false precision, e.g., reporting numerical results with way more significant digits than justified by their uncertainty (Taylor, 1996).
+
+Analysis and reporting strategies that waste statistical power and precision (e.g., by dichotomizing continuous variables) should also be ideally avoided (Dragicevic, 2016). Though the economy principle is not directly related to transparency, it is generally advisable not to waste data. It is a sensible goal for researchers to try to learn as much as possible from a study, provided that the principles of faithfulness and process transparency are carefully kept in mind. For similar reasons, while it is essential that researchers do not read too much in their data and do not fall for confirmation bias, exploratory analyses are often very informative and should thus be encouraged. The best study reports combine prespecified with exploratory analyses, while clearly distinguishing between the two.
+
+
+### 9. Material availability {-}
+
+Sharing as much study material as possible is a core part of transparent statistics, as it greatly facilitates peer scrutiny and replication. Being able to run the experimental software and examine what participants saw (the techniques, tasks, instructions, and questions asked) is essential in order for other researchers to understand the details of a study. In addition, sharing the source code of the experimental software greatly facilitates replication. Similarly, experimental data (all data files and if possible analysis scripts) is necessary for conducting re-analyses and meta-analyses. Although uploading supplementary material makes sense during the reviewing phase, to be really useful all material should be freely shared online upon paper acceptance, ideally on a website that can guarantee long-term accessibility.
+
+
+## References
+
+* (Cockburn et al., 2018) Cockburn A., Gutwin C., Dix A. HARK no more: on the preregistration of CHI experiments. ACM CHI 2018, in press.
+* (Cohen, 1994) Cohen. The earth is round (p < .05). American Psychologist, 49 (1994), pp. 997–1003.
+* (Cumming, 2013) Cumming G. Understanding the new statistics: Effect sizes, confidence intervals, and meta-analysis. Routledge; 2013 Jun 19.
+* (Cumming, 2014) Cumming, Geoff. "The new statistics: Why and how." Psychological science 25.1 (2014): 7-29.
+* (Dixon, 2003) Dixon P. The p-value fallacy and how to avoid it. Canadian Journal of Experimental Psychology/Revue canadienne de psychologie experimentale. 2003 Sep;57(3):189.
+* (Dragicevic, 2016) Dragicevic P. Fair statistical communication in HCI. In Modern Statistical Methods for HCI 2016 (pp. 291-330). Springer International Publishing.
+* (Dragicevic, 2017) Pierre Dragicevic. 2017. Statistical Dances: Why no Statistical Analysis is Reliable and What to do About it. Recorded seminar, GRICAD, Grenoble. (2017). https://tinyurl.com/gricad-dance.
+* (Earp and Trafimow, 2015) Earp BD, Trafimow D. Replication, falsification, and the crisis of confidence in social psychology. Frontiers in psychology. 2015;6.
+* (Ehrenberg, 1977) Ehrenberg AS. Rudiments of numeracy. Journal of the Royal Statistical Society. Series A (General). 1977 Jan 1:277-97.
+* (Fisher, 1955) Fisher R. Statistical methods and scientific induction. Journal of the Royal Statistical Society. Series B (Methodological). 1955 Jan 1:69-78.
+* (Gelman, 2002) Gelman A, Pasarica C, Dodhia R. Let's practice what we preach: turning tables into graphs. The American Statistician. 2002 May 1;56(2):121-30.
+* (Gelman and Loken, 2014) Gelman A, Loken E. The garden of forking paths: Why multiple comparisons can be a problem, even when there is no “fishing expedition” or “p-hacking” and the research hypothesis was posited ahead of time. Department of Statistics, Columbia University. 2013 Nov 14.
+* (Gelman, 2017) Gelman, Andrew. "Ethics and Statistics: Honesty and Transparency Are Not Enough." Chance 30.1 (2017): 37-39.
+* (Gigerenzer, 2004) Gigerenzer, G. Mindless statistics. The Journal of Socio-Economics, 2004, 33(5), 587-606.
+* (Gigerenzer and Marewski, 2015) Gigerenzer G, Marewski JN. Surrogate science: The idol of a universal method for scientific inference. Journal of Management. 2015 Feb;41(2):421-40.
+* (Giner-Sorolla, 2012) Giner-Sorolla R. Science or art? How aesthetic standards grease the way through the publication bottleneck but undermine science. Perspectives on Psychological Science. 2012 Nov;7(6):562-71.
+* (Ioannidis, 2005) Ioannidis JP. Why most published research findings are false. PLoS medicine. 2005 Aug 30;2(8):e124.
+* (Kaptein and Robertson, 2012) Kaptein M, Robertson J. Rethinking statistical analysis methods for CHI. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems 2012 May 5 (pp. 1105-1114). ACM.
+* (Kay et al., 2016) Kay M, Nelson GL, Hekler EB. Researcher-centered design of statistics: Why Bayesian statistics better fit the culture and incentives of HCI. In Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems 2016 May 7 (pp. 4521-4532). ACM.
+* (Kerr, 1998) Kerr NL. HARKing: Hypothesizing after the results are known. Personality and Social Psychology Review. 1998 Aug;2(3):196-217.
+* (Kirby and Gerlanc, 2013) Kirby KN, Gerlanc D. BootES: An R package for bootstrap confidence intervals on effect sizes. Behavior research methods. 2013 Dec 1;45(4):905-27.
+* (Kruschke and Liddell, 2017) Kruschke JK, Liddell TM. The Bayesian New Statistics: Hypothesis testing, estimation, meta-analysis, and power analysis from a Bayesian perspective. Psychonomic Bulletin & Review. 2017 Feb 7:1-29.
+* (Lakens, 2016) Dance of the Bayes factors.
+* http://daniellakens.blogspot.fr/2016/07/dance-of-bayes-factors.html. Blog post, last visited 29 Dec 2017.
+* (Loftus, 1993) Loftus GR. A picture is worth a thousand p values: On the irrelevance of hypothesis testing in the microcomputer age. Behavior Research Methods, Instruments, & Computers. 1993 Jun 1;25(2):250-6.
+* (Norman, 2010) Norman G. Likert scales, levels of measurement and the “laws” of statistics. Advances in health sciences education. 2010 Dec 1;15(5):625-32.
+* (Nosek et al., 2017) Nosek, B.A., Ebersole, C.R., DeHaven, A. and Mellor, D., 2017. The Preregistration Revolution.
+* (Open, 2017) Open Science Badges. https://cos.io/our-services/open-science-badges/. Website, last visited 29 Dec 2017.
+* (Simmons et al., 2011) Simmons JP, Nelson LD, Simonsohn U. False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological science. 2011 Nov;22(11):1359-66.
+* (Stewart-Oaten, 1995) Stewart-Oaten A. Rules and judgments in statistics: three examples. Ecology. 1995 Sep 1;76(6):2001-9.
+* (Taylor, 1997) Taylor J. Introduction to error analysis, the study of uncertainties in physical measurements. 1997 Aug.
+* (Transparent, 2017) Transparent Statistics in Human–Computer Interaction. http://transparentstatistics.org/ Website, last visited 29 Dec 2017.
+* (Tukey, 1977) Tukey, John W. "Exploratory data analysis." (1977): 2.
+* (Wierdsma, 2013) Wierdsma A (2013) What is wrong with tests of normality? http://tinyurl.com/normality-wrong Online, last visited 29 Dec 2017.
+* (Wilson et al., 2011) Wilson ML, Mackay W, Chi E, Bernstein M, Russell D, Thimbleby H. RepliCHI-CHI should be replicating and validating results more: discuss. In CHI'11 Extended Abstracts on Human Factors in Computing Systems 2011 May 7 (pp. 463-466). ACM.

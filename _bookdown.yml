@@ -5,11 +5,13 @@ new_session: no
 after_chapter_script: clear_vars_and_pkgs.R
 rmd_files:
   - "index.Rmd"
+  - "guides/principles.Rmd"
   - "guides/effectsize.Rmd"
   - "guides/effectsize_exemplar_simple.Rmd"
   - "guides/effectsize_exemplar_within.Rmd"
   - "guides/effectsize_exemplar_standardized.Rmd"
   - "guides/effectsize_exemplar_nonparametric.Rmd"
   - "guides/appendix.Rmd"
+  - "guides/appendix_principles_contribute.Rmd"
   - "guides/appendix_effectsize.Rmd"
   - "guides/references.Rmd"
