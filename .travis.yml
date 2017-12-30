@@ -9,7 +9,7 @@ before_script:
 script:
 - ./_build.sh
 - ./_deploy.sh
-sudo: true
+sudo: false
 cache:
   packages: yes
   directories:
@@ -17,7 +17,7 @@ cache:
 r_github_packages:
 - rstudio/bookdown
 - mjskay/tidybayes
-r_binary_packages:
+r_packages:
 - tidyverse
 - forcats
 - broom
@@ -27,52 +27,6 @@ r_binary_packages:
 - rstan
 - devtools
 - MASS
-- checkmate
-- bitops
-- irlba
-- Formula
-- latticeExtra
-- acepack
-- data.table
-- htmlTable
-- viridis
-- SparseM
-- MatrixModels
-- httpuv
-- sourcetools
-- htmlwidgets
-- miniUI
-- RCurl
-- RJSONIO
-- packrat
-- igraph
-- crosstalk
-- minqa
-- nloptr
-- estimability
-- xtable
-- Hmisc
-- quantreg
-- shiny
-- colourpicker
-- DT
-- dygraphs
-- gtools
-- shinyjs
-- shinythemes
-- xts
-- Brobdingnag
-- lme4
-- lsmeans
-- pbkrtest
-- car
-- loo
-- bayesplot
-- bridgesampling
-- matrixStats
-- coda
-- abind
-r_packages:
 - ggstance
 - afex
 - import
