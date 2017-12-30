@@ -1,0 +1,11 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+h1.title {
+  font-weight: 700;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal strong {
+  font-weight: 500;
+}

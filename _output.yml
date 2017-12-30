@@ -1,0 +1,2 @@
+bookdown::gitbook:
+  df_print: kable

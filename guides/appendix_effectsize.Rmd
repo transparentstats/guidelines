@@ -1,0 +1,309 @@
+# Effect size appendix {#appendix_effectsize}
+
+This appendix contains supplements to the [effect size guideline](#effectsize).
+
+
+## Alternative approaches for simple effect size exemplar {#appendix_effectsize_simple}
+
+The [simple effect size exemplar](#effectsize_exemplar_simple) demonstrates one common technique for esitmating mean differences in resposne time and the uncertainty around them (Student's t confidence intervals). This supplement demonstrates several possible approaches one might take to calculate differences in response time, and compares them. It is not intended to be exhaustive.
+
+
+### Libraries needed for this analysis
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+# which libraries are needed
+list.of.libraries = c("tidyverse", "ggstance", "brms", "rstan", "import", "devtools")
+# check if libraries are installed
+new.packages = list.of.libraries[!(list.of.libraries %in% installed.packages()[,"Package"])]
+# install missing libraries
+if(length(new.packages) > 0) 
+  install.packages(new.packages, repos = "http://cran.us.r-project.org")
+# special case for github libraries
+list.of.libraries = tibble::tribble(
+  ~name, ~repository,
+  "tidybayes", "mjskay/tidybayes"
+)
+# check which libraries are installed
+new.packages = dplyr::filter(list.of.libraries, !(name %in% installed.packages()[,"Package"]))
+# install missing libraries
+for (p in new.packages$repository)
+  devtools::install_github(p)
+
+```
+
+
+```{r appendix-es-setup, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(forcats)    # for fct_...()
+library(broom)      # for tidy()
+library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
+
+# See here for rstan installation instructions: 
+# https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
+library(rstan)
+library(brms)       # for brm() (requires rstan)
+
+# for mean_qi(). Use devtools::install_github("mjskay/tidybayes") to install.
+library(tidybayes)
+
+# requires `import` package to be installed: use install.packages("import")
+import::from(MASS, mvrnorm)
+```
+
+```{r boilerplate, include = FALSE}
+format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
+
+# recommended code to speed up stan
+# see https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+```
+
+
+### Data
+
+We will use the same data as the simple effect size exemplar: 
+
+```{r appendix-es-data_generation}
+set.seed(12)
+n <- 20
+data <- tibble(
+  group = rep(c("A", "B"), each = n),
+  completion_time_ms = c(
+    rlnorm(n, meanlog = log(170), sdlog = 0.3),
+    rlnorm(n, meanlog = log(50), sdlog = 0.4)
+  )
+)
+```
+
+See that exemplar for more information.
+
+
+### Calculating simple effect size
+
+#### Approach 1: Difference in means with Student's t confidence interval
+
+This is the approach used in the exemplar. While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on $(-\infty, +\infty)$ and approximately symmetrical (per the central limit theorem), so we can compute a *Student's t distribution confidence interval* for the difference in means.
+
+```{r t_test}
+t_interval <- 
+  t.test(completion_time_ms ~ group, data = data) %>%
+  tidy()    # put result in tidy tabular format
+t_interval
+```
+
+The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
+
+#### Approach 2a: Ratio of geometric means with Student's t confidence interval on log-scale
+
+For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the [data transformation](#transformation) guideline for more information.
+
+```{r log_t_test}
+log_t_interval <- 
+  t.test(log(completion_time_ms) ~ group, data = data) %>%
+  tidy()    # put result in tidy tabular format
+log_t_interval
+```
+
+We can transform this difference (in the log scale) into a ratio of geometric mean response times:
+
+```{r log_t_to_ratio}
+log_t_ratios <- log_t_interval %>%
+  mutate_at(vars(estimate, estimate1, estimate2, conf.low, conf.high), exp)
+log_t_ratios
+```
+
+This output shows the estimated geometric mean response times (`estimate1` and `estimate2`), and an estimate of the ratio between them (`estimate = estimate1/estimate2`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval of that ratio. This allows us to estimate how many times slower or faster a given condition is. 
+
+However, since we have some sense in this context of how large or small we might want response times to be on the original scale (e.g., people tend to perceive differences on the order of 100ms), it may be easier to interpret effect sizes if we calculate them on that scale.
+
+In this case, the geometric mean of condition A is roughly `r format_num(log_t_ratios$estimate1)` and of B is roughly `r format_num(log_t_ratios$estimate2)`. A is about `r format_num(log_t_ratios$estimate)` $\times$ B, with a 95% confidence interval of [`r format_num(log_t_ratios$conf.low)`$\times$, `r format_num(log_t_ratios$conf.high)`$\times$]. So we have: `r format_num(log_t_ratios$estimate2)` $\times$ `r format_num(log_t_ratios$estimate)` $\approx$ `r format_num(log_t_ratios$estimate1)`.
+
+
+#### Approach 2b: log-normal regression with marginal estimate of difference in means using simulation
+
+We can run a linear regression that is equivalent to approach 2a:
+
+```{r}
+m_log <- lm(log(completion_time_ms) ~ group, data = data)
+m_log
+```
+
+This model estimates the geometric means in each group. However, we want to know the difference in means on the original (time) scale, not on the log scale.
+
+We can translate the log-scale means into means on the original scale using the fact that if a random variable $X$ is log-normally distributed with mean $\mu$ and standard deviation $\sigma$:
+
+$$
+\log(X) \sim \mathrm{Normal}(\mu, \sigma^2)
+$$
+
+Then the mean of $X$ is (see [here](https://en.wikipedia.org/wiki/Log-normal_distribution)):
+
+$$
+\mathbf{E}[X] = e^{\mu+\frac{\sigma^2}{2}}
+$$
+
+We will use the sampling distribution of the coefficients of `m_log` to generate samples of $\mu$ in each group, then translate these samples (along with an estimate of $\sigma$) onto the outcome scale. Given an estimate of the coefficients ($\boldsymbol{\hat\beta}$) and an estimate of the covariance matrix ($\boldsymbol{\hat\Sigma}$), the sampling distribution of the coefficients on a log scale is a multivariate normal distribution:
+
+
+$$
+\mathrm{Normal}(\boldsymbol{\hat\beta}, \boldsymbol{\hat\Sigma})
+$$
+We can sample from that distribution and use the estimated log-scale standard deviation ($\hat\sigma$) to generate sample means on the untransformed scale, which we can use to derive a difference of means on the original scale and a confidence interval around that difference (this is sort of treating the sampling distribution as a Bayesian posterior):
+
+```{r}
+log_interval <- 
+  mvrnorm(10000, mu = coef(m_log), Sigma = vcov(m_log)) %>%
+  as_data_frame() %>%
+  mutate(
+    sigma = sigma(m_log), # Using MLE estimate of residual SD. Could also sample from 
+                          # sqrt(rgamma(nrow(.), (n - 1)/2, ((n - 1)/sigma(m_log)^2)/2))
+                          # but results are similar
+    
+    # get samples of means for each group on the original scale
+    mu_A = `(Intercept)`,
+    mean_A = exp(mu_A + sigma^2 / 2),
+    
+    mu_B = `(Intercept)` + groupB,
+    mean_B = exp(mu_B + sigma^2 / 2),
+    
+    # get samples of the difference in means on the original scale
+    estimate = mean_A - mean_B
+  ) %>%
+  mean_qi(estimate) %>%
+  mutate(method = "lognormal regression")
+log_interval
+```
+
+This approach does not account for non-constant variance on the log scale, however. The next approach does.
+
+
+#### Approach 3a: log-normal regression with marginal estimate of difference in means using Bayesian regression (uninformed priors)
+
+For this approach, we will use a Bayesian log-normal regression model to estimate the mean and variance of the response distribution in each group on a log scale. We will then transform these parameters into a difference in means on the original (millisecond) scale, as in approach 2b.
+
+For this approach, we will use a Bayesian log-normal regression with uninformed priors. This model is the same as the `lm` model in approach 2, except that it also allows the variance to be different in each group (in other words, it does not assume *constant variance* between groups, also known as *homoskedasticity*).
+
+```{r, results = "hide"}
+m_log_bayes <- brm(brmsformula(
+    completion_time_ms ~ group,
+    sigma ~ group    # allow variance to be different in each group
+  ), data = data, family = lognormal)
+```
+
+Similar to approach 2b, we will derive samples of the mean difference, this time from the posterior distribution. We will use these to derive a credible interval (Bayesian analog to a confidence interval) around the mean difference:
+
+```{r}
+log_bayes_samples <- 
+  m_log_bayes %>%
+  as_sample_tibble() %>%
+  mutate(
+    mu_A = b_Intercept,
+    sigma_A = exp(b_sigma_Intercept),
+    mean_A = exp(mu_A + sigma_A^2 / 2),
+    
+    mu_B = b_Intercept + b_groupB,
+    sigma_B = exp(b_sigma_Intercept + b_sigma_groupB),
+    mean_B = exp(mu_B + sigma_B^2 / 2),
+    
+    estimate = mean_A - mean_B
+  ) %>%
+  mutate(method = "lognormal regression (Bayesian, uninformed)") %>%
+  group_by(method)
+
+log_bayes_interval <- 
+  log_bayes_samples %>%
+  mean_qi(estimate)
+log_bayes_interval
+```
+
+This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that ratio.
+
+
+#### Approach 3b: log-normal regression with marginal estimate of difference in means using Bayesian regression (weakly informed priors)
+
+Finally, let's run the same analysis with weakly informed priors based on what we might believe reasonable ranges of the effect are. To see what priors we can set in `brm` models, we can use the `get_prior()` function:
+
+```{r}
+get_prior(brmsformula(
+    completion_time_ms ~ group,
+    sigma ~ group
+  ), data = data, family = lognormal)
+```
+
+This shows priors on the log-scale mean and priors on the log-scale standard deviation (`sigma`).
+
+First, we'll assume that completion time is something like a pointing task: not reasonably faster than 10ms or slower than 2s (2000ms). On log scale, that is between approximately $\log(10) \approx 2$ and $\log(2000) \approx 8$, so we'll center our prior intercept between these ($(8+2)/2$) and give it a 95% interval that covers them (sd of $(8-2)/4$): $\mathrm{Normal}(5, 1.5)$.
+
+For differences in log mean, we'll assume that times will not be more than about 100$\times$ difference in either direction: a zero-centered normal prior with standard deviation $\approx log(100)/2 \approx 2.3$: $\mathrm{Normal}(0, 2.3)$.
+
+Since the standard deviation is estimated using a submodel that itself uses a log link, we have to make a prior on the log scale of log standard deviation. For standard deviation on the log scale, let's assume a baseline of around 100ms response time. Then, our prior on standard deviation on the log scale could reasonbly be as small as one reflecting individual differences on the order of 10ms: $log(110) - log(100) \approx 0.1 \approx e^-2.4$, or as large as one reflecting a difference of 1 second: $log(1100) - log(100) \approx 2.4 \approx e^0.9$. So we'll center our log log sd prior at $(0.9 + -2.4)/2$ and give it a 95% interval that covers them (sd of $(0.9 - -2.4)/4$): $\mathrm{Normal}(-0.75, 0.825)$.
+
+Finally, for differences in log log standard deviation, we'll assume zero-centered with similar magnitude to the intercept: $\mathrm{Normal}(0, 0.825)$.
+
+These priors can be specified as follows:
+
+```{r}
+log_bayes_priors <- c(
+    prior(normal(5.5, 1.75), coef = Intercept),
+    prior(normal(0, 2.3), class = b, coef = groupB),
+    prior(normal(-0.75, 0.825), coef = Intercept, nlpar = sigma),
+    prior(normal(0, 0.825), class = b, coef = groupB, nlpar = sigma)
+  )
+log_bayes_priors
+```
+
+Then we can re-run the model from approach 3a with those priors:
+
+```{r, results = "hide"}
+m_log_bayes_informed <- brm(brmsformula(
+    completion_time_ms ~ group,
+    sigma ~ group
+  ), data = data, family = lognormal, prior = log_bayes_priors)
+```
+
+Similar to approach 2b, we will derive samples of the mean difference, this time from the posterior distribution. We will use these to derive a credible interval (Bayesian analog to a confidence interval) around the mean difference:
+
+```{r}
+log_bayes_informed_samples <- 
+  m_log_bayes_informed %>%
+  as_sample_tibble() %>%
+  mutate(
+    mu_A = b_Intercept,
+    sigma_A = exp(b_sigma_Intercept),
+    mean_A = exp(mu_A + sigma_A^2 / 2),
+    
+    mu_B = b_Intercept + b_groupB,
+    sigma_B = exp(b_sigma_Intercept + b_sigma_groupB),
+    mean_B = exp(mu_B + sigma_B^2 / 2),
+    
+    estimate = mean_A - mean_B
+  ) %>%
+  mutate(method = "lognormal regression (Bayesian, weakly informed)") %>%
+  group_by(method)
+
+log_bayes_informed_interval <- 
+  log_bayes_informed_samples %>%
+  mean_qi(estimate)
+
+log_bayes_informed_interval
+```
+
+This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that ratio.
+
+
+
+### Comparing approaches
+
+All approaches that give estimates for the difference in means give very similar results:
+
+```{r model_comparison, fig.height = 2.5, fig.width = 6, warning = FALSE}
+bayes_samples = bind_rows(log_bayes_samples, log_bayes_informed_samples)
+
+bind_rows(t_interval, log_interval, log_bayes_interval, log_bayes_informed_interval) %>%
+  ggplot(aes(x = estimate, y = method)) + 
+  geom_violinh(data = bayes_samples, color = NA, fill = "gray65") +
+  geom_pointrangeh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0)
+```
+
+The Bayesian estimates include posterior distributions shown as violin plots in gray.
