@@ -28,3 +28,8 @@ r_packages:
 - afex
 - tidybayes
 - import
+- brms
+- rstan
+- import
+- devtools
+- MASS
