@@ -13,5 +13,5 @@ rmd_files:
   - "guides/effectsize_exemplar_nonparametric.Rmd"
   - "guides/appendix.Rmd"
   - "guides/appendix_principles_contribute.Rmd"
-  - "guides/appendix_effectsize.Rmd"
+#  - "guides/appendix_effectsize.Rmd"
   - "guides/references.Rmd"
