@@ -8,6 +8,11 @@
 *.Rproj
 
 # output
+*.html
+!docs/*.html
 
 # Misc
+_book
+_bookdown_files
+_main.rds
 *~
