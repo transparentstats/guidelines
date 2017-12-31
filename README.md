@@ -35,13 +35,3 @@ requires the `bookdown` package), then go to `Menu -> View -> Show Build`.
 1. Click the `Build Book` button.
 
 1. The output will be in the `_book` directory.
-
-
-
-## Index of Guidelines
-
-* Effect Size
-
-
-
-
