@@ -6,8 +6,7 @@
 This is the source repostory for the Transparent Statistics in HCI Guidelines. You can read the most recent released 
 version of the guidelines [here](https://transparentstats.github.io/guidelines/).
 
-The [master](/transparentstats/guidelines/) branch contains the source for the current "in progress" version of the
-guidelines. The source for the most recent released version of the guidelines is on the
+(*N.B. the branch organization described in this paragraph may change) The [master](/transparentstats/guidelines/) branch contains the source for the current "in progress" version of the guidelines. The source for the most recent released version of the guidelines is on the
 [release](/transparentstats/guidelines/tree/release) branch. 
 
 
