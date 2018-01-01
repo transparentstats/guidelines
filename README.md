@@ -6,14 +6,14 @@
 This is the source repostory for the Transparent Statistics in HCI Guidelines. You can read the most recent released 
 version of the guidelines [here](https://transparentstats.github.io/guidelines/).
 
-(*N.B. the branch organization described in this paragraph may change) The [master](/transparentstats/guidelines/) branch contains the source for the current "in progress" version of the guidelines. The source for the most recent released version of the guidelines is on the
+(*N.B. the branch organization described in this paragraph may change*) The [master](/transparentstats/guidelines/) branch contains the source for the current "in progress" version of the guidelines. The source for the most recent released version of the guidelines is on the
 [release](/transparentstats/guidelines/tree/release) branch. 
 
 
 ## How to contribute
 
 We welcome contributions in all forms: comments, suggestions, edits, and proposed topics. To learn how to contribute,
-read [Contributing to the Guideline](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines)
+read [Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines)
 on the wiki. We also have a [Style Guide](https://github.com/transparentstats/guidelines/wiki/Style-Guide) and a 
 contributor [Code of Conduct](https://github.com/transparentstats/guidelines/wiki/Code-of-Conduct).
 
