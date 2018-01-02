@@ -3,10 +3,9 @@
 [![Build Status](https://travis-ci.org/transparentstats/guidelines.svg?branch=master)](https://travis-ci.org/transparentstats/guidelines)
 
 
-This is the source repostory for the Transparent Statistics in HCI Guidelines. You can read the most recent released 
-version of the guidelines [here](https://transparentstats.github.io/guidelines/).
+This is the source repostory for the Transparent Statistics in HCI Guidelines. You can read the current **in-development** version of the guidelines [here](https://transparentstats.github.io/guidelines/).
 
-(*N.B. the branch organization described in this paragraph may change*) The [master](https://github.com/transparentstats/guidelines) branch contains the source for the current "in progress" version of the guidelines. The source for the most recent released version of the guidelines is on the
+The [master](https://github.com/transparentstats/guidelines) branch contains the source for the current **in-development** version of the guidelines. After our first release, the source for the most recent **released** version of the guidelines will be on the
 [release](https://github.com/transparentstats/guidelines/tree/release) branch. 
 
 
