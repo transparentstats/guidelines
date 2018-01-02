@@ -6,7 +6,9 @@ knitr::include_graphics("figures/effectsize/teaser.png")
 ```
 </div>
 
-## What is an effect size?
+## FAQ
+
+### What is an effect size?
 
 Broadly speaking, an effect size is "anything that might be of interest" [@Cumming2013a]; it is some quantity that captures the magnitude of the effect studied.
 
@@ -15,7 +17,7 @@ In HCI, common examples of effect size include the mean difference (e.g., in sec
 More complex measures of effect size exist called *standardized effect sizes* (see [What is a standardized effect size?](#effectsize_faq_standardized)). Although the term *effect size* is often used to refer to standardized effect sizes only, using the term in a broader sense can avoid unnecessary confusion [@Cumming2013a; @Wilkinson1999a]. In this document, "effect size" refers to both simple and standardized effect sizes.
 
 
-## Why and when should effect sizes be reported? {#effectsize_faq_when_why}
+### Why and when should effect sizes be reported? {#effectsize_faq_when_why}
 
 In quantitative experiments, effect sizes are among the most elementary and essential summary statistics that can be reported. Identifying the effect size(s) of interest also allows the researcher to turn a vague research question into a precise, quantitative question [@Cumming2014a]. For example, if a researcher is interested in showing that their technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times. The observed effect size will indicate not only the likely direction of the effect (e.g., whether the technique is faster or slower), but also whether the effect is large enough to care about. 
 
@@ -26,7 +28,7 @@ For the sake of transparency, effect sizes should always be reported in quantita
 Sometimes, effect sizes can be hard to compute or to interpret. When this is the case, and if the main focus of the study is on the direction (rather than magnitude) of the effect, reporting the results of statistical significance tests without reporting effect sizes (see the [inferential statistics FAQ](#inferential)) may be an acceptable option.
 
 
-## How should effect sizes be reported? {#effectsize_faq_how_reporting}
+### How should effect sizes be reported? {#effectsize_faq_how_reporting}
 
 The first choice is on whether to report simple effect sizes or standardized effect sizes. For this question, see [Should simple effect sizes or standardized effect sizes be reported?](#effectsize_faq_simple_v_standardized) 
 
@@ -46,12 +48,12 @@ This information can be reported either numerically or graphically. Both formats
 ▸ Exemplar: [simple effect size](#effectsize_exemplar_simple) (specifically in the "Reporting simple effect size" sub-section)
 
 
-## What is a standardized effect size? {#effectsize_faq_standardized}
+### What is a standardized effect size? {#effectsize_faq_standardized}
 
 A standardized effect size is a unitless measure of effect size. The most common measure of standardized effect size is Cohen’s *d*, where the mean difference is divided by the standard deviation of the pooled observations [@Cohen1988a]. [Other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to standardization exist [prefer citations]. To some extent, standardized effect sizes make it possible to compare different studies in terms of how “impressive” their results are (see [How do I know my effect is large enough?](#effectsize_faq_large_enough)); however, this practice is not without criticism (see the section *Standardized mean differences let us compare and summarize results when studies use different outcome scales* of [@Cummings2011]).
 
 
-## Should simple or standardized effect sizes be reported?  {#effectsize_faq_simple_v_standardized}
+### Should simple or standardized effect sizes be reported?  {#effectsize_faq_simple_v_standardized}
 
 While the term *effect size* may conjure up the image of arcane statistical formulas, the most useful effect sizes are often much simpler, and more intuitive, than perhaps should even warrant a specialized term. An effect size is essentially any way to compute the practical size of an effect.
 
@@ -70,7 +72,7 @@ If a standardized effect size is reported, it should be accompanied by an argume
 ▸ Exemplar: [simple effect size](#effectsize_exemplar_simple) and [standardized effect size](#effectsize_exemplar_standardized)
 
 
-## How do I know my effect is large enough? {#effectsize_faq_large_enough}
+### How do I know my effect is large enough? {#effectsize_faq_large_enough}
 
 Although there exist rules of thumb to help interpret standardized effect sizes, these are not universally accepted. See [What about Cohen's small, medium, and large effect sizes?](#effectsize_faq_small_medium_large)
 
@@ -81,7 +83,7 @@ Nevertheless, more often than not in HCI, it is difficult to determine whether a
 Simple effect sizes are often a better choice, because they provide the information necessary for an expert in the area to use their judgment to assess the practical impact of an effect size. For example, a difference in reaction time of 100ms is above the threshold of human perception, and therefore likely of practical impact. A difference of 100ms in receiving a chat message in an asynchronous chat application is likely less impactful, as it is small compared to the amount of time a chat message is generally expected to take. A difference in pointing time of 100ms between two pointing techniques might be large or small depending on the application, how often it is used, the context of use, etc. Presenting simple effect sizes in a clear way---with units---allows the expert author to argue why the effect size may or may not have practical importance *and* allow the expert reader to make their own judgment.
 
 
-## What about Cohen's small, medium, and large effect sizes? {#effectsize_faq_small_medium_large}
+### What about Cohen's small, medium, and large effect sizes? {#effectsize_faq_small_medium_large}
 
 Conventional thresholds are sometimes used for standardized effect sizes like Cohen’s *d*, labeling them "small", "medium", or "large". These thresholds are however largely arbitrary [@Cummings2011]. They were originally proposed by Cohen based on human heights and intelligence quotients [@Cohen1977], but Cohen, in the very text where he first introduced them, noted that these thresholds may not be directly applicable to other domains:
 
