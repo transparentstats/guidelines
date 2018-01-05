@@ -6,6 +6,14 @@ knitr::include_graphics("figures/effectsize/teaser.png")
 ```
 </div>
 
+**Version:** 1.0
+
+**Contributed to the writing:** Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic
+
+**Gave feedback:** 
+
+**Endorsed:** 
+
 ## FAQ
 
 ### What is an effect size?
