@@ -1,5 +1,5 @@
 ---
-title: "Transparent Statistics in HCI"
+title: "Transparent Statistics Guidelines"
 author: "Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)"
 description: "Guidelines, FAQ, and exemplar analyses"
 site: "bookdown::bookdown_site"
