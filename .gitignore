@@ -9,7 +9,7 @@
 
 # output
 *.html
-!docs/*.html
+docs
 
 # Misc
 *~

@@ -10,7 +10,7 @@ output:
     config:
       toc:
         before: |
-          <li><a href="./index.html">Transparent Statistics in HCI</a></li>
+          <li><a href="./index.html">Transparent Statistics Guidelines</a></li>
       edit: https://github.com/transparentstats/guidelines/edit/master/%s
 documentclass: book
 date: "`r Sys.Date()`"
