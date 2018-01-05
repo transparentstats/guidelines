@@ -1,3 +1,8 @@
 # p values {#pvalues}
 
-This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1Qn-aNgOlQhbY4v3anI1EuX9PDOzETLGzg1QZmjxvgpM)
+<mark>
+This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1Qn-aNgOlQhbY4v3anI1EuX9PDOzETLGzg1QZmjxvgpM).
+We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>

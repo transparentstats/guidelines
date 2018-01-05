@@ -1,5 +1,10 @@
 ## Exemplar: Simple effect size {#effectsize_exemplar_simple}
 
+<mark>
+This section is in *alpha*. We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>
 
 ### Libraries needed for this analysis
 

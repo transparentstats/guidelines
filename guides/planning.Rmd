@@ -1,3 +1,8 @@
 # Experiment and analysis planning {#planning}
 
-This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1Qyp3WbFuD-99PttCo4ZPNHwlDs5cqMYL_YB8EWAful0/edit)
+<mark>
+This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1Qyp3WbFuD-99PttCo4ZPNHwlDs5cqMYL_YB8EWAful0/edit).
+We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>

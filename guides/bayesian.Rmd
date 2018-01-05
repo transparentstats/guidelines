@@ -1,3 +1,8 @@
 # Bayesian inference {#bayesian}
 
-This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1FI-6Bb5pTCNm84xFfpaeoPdbwVTYtfmeAdOkiKIIJ7Q/edit)
+<mark>
+This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1FI-6Bb5pTCNm84xFfpaeoPdbwVTYtfmeAdOkiKIIJ7Q/edit).
+We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>

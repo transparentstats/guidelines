@@ -1,5 +1,11 @@
 ## Exemplar: Within-subjects experiment {#effectsize_exemplar_within} 
 
+<mark>
+This section is in *alpha*. We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>
+
 Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.
 
 In this example, we'll compare two interfaces for visualizing data.

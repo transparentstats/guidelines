@@ -1,5 +1,11 @@
 ## Exemplar: Nonparametric effect size {#effectsize_exemplar_nonparametric}
 
+<mark>
+This section is in *alpha*. We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>
+
 For a nonparametric test that produces a Z-score, like the Mann-Whitney U test or the Wilcoxon Signed-Rank test, an effect size can be computed as:
 
 <center>$r = \left|\frac{Z}{\sqrt{N}}\right|$</center>
