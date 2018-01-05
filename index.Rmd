@@ -22,3 +22,8 @@ github-repo: transparentstats/guidelines
 
 # Preface {-}
 <!-- TODO: consider content from https://docs.google.com/document/d/1HAZ3IzV8NDs87MfHxqpjPGgRIoH15Eop3hs57BIccJg -->
+
+This document grew out of a Special Interest Group and Workshop to develop guidelines for transparent statistical communication in Human-Computer Interaction research.
+
+We welcome help and feedback at all levels! If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
