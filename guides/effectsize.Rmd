@@ -8,7 +8,7 @@ knitr::include_graphics("figures/effectsize/teaser.png")
 
 **Version:** 1.0
 
-**Contributed to the writing:** Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic, Jacob O. Wobbrock, Janne Lindqvist, Yea-Seul Kim
+**Contributed to the writing:** Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic, Jacob O. Wobbrock, Janne Lindqvist, Yea-Seul Kim, Amelia McNamara
 
 **Gave feedback:** 
 
