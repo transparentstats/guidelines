@@ -21,7 +21,6 @@ We run each subject through each combination of these variables 20 times to get 
 
 ```{r es-within-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
-library(broom)      # for tidy()
 library(afex)       # for aov_ez()
 ```
 
@@ -31,12 +30,14 @@ format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdi
 
 
 ### Subjects, conditions, and repetitions
-In this example, there are 6 subjects (`id` column).
+In this example, there are 6 subjects (`subject` column).
 
 ```{r within-setup}
-set.seed(456) # make the output consistent
+set.seed(543) # make the output consistent
+SUBJECT_COUNT = 6
+
 data <- expand.grid(
-  id = rnorm(6, 5, 0.5), # individual differences
+  subject = paste('Subject', LETTERS[1:SUBJECT_COUNT]), # subject IDs
   layout = 0:1, # independent variable
   size = 0:2, # independent variable
   color = 0:3, # independent variable
@@ -45,26 +46,43 @@ data <- expand.grid(
 ```
 
 ### Individual differences
-Not all subjects behave the same way. Some people might be tired, bad at the task, or just not trying very hard. These performance differences can't be directly measured, but they can substantially impact the results. Here, we'll simulate individual differences by giving each subject a random performance multiplier.
+Not all subjects behave the same way. Some people might be tired, bad at the task, or just not trying very hard. These performance differences can't be directly measured, but they can substantially impact the results. We'll simulate these individual differences by giving each subject a random performance handicap.
+
+```{r}
+# build a table of subject performance multipliers
+individualDifferences <- tibble(subject = unique(data$subject))
+individualDifferences$handicap <- rnorm(SUBJECT_COUNT, 20, 4) # individual differences
+
+# put it in the main dataset
+data <- data %>% left_join(individualDifferences, by = "subject")
+```
+
 
 ### Simulate some noisy effects
 We'll simulate an experiment with a main effect of `layout` and `size` and an interaction between them. However, `color` and its interactions will not have an impact.
 
 ```{r within-simulate}
+
+# simulate the response times with a clean model
 data <- 
   data %>% 
   mutate(
   response_time = 
-    id + # additive individual differences
     layout * .4 + # main effect of layout
     size * .2 + # main effect of size
     color * 0 + 
-    layout * size * .5 + # 2-way interaction
+    layout * size * .6 + # 2-way interaction
     size * color * 0 + 
     layout * color * 0 + 
-    layout * size * color * 0 + 
-    rnorm(n()) # noise
+    layout * size * color * 0
 )
+
+# add some reponse noise
+data <- data %>% mutate(response_time = response_time + rnorm(n()))
+
+# add noise from individual handicaps
+data <- data %>% mutate(response_time = 30 + handicap*2 + response_time * handicap)
+
 ```
 
 Even though we used numbers to simulate the model, the independent variables and subject ID are all factors.
@@ -72,31 +90,50 @@ Even though we used numbers to simulate the model, the independent variables and
 data <- 
   data %>% 
   mutate(
-    id = factor(id), 
+    subject = factor(subject), 
     layout = factor(layout), 
-    size = factor(size), 
     color = factor(color)
   )
 ```
 
+### A look at the data
+
+Let's get an overview of the results by graphing each subject's average response time for each condition.
+
+```{r within-sneak-peak}
+data %>% 
+  group_by(layout, size, color, subject) %>% 
+  summarize(response_time = mean(response_time)) %>% 
+ggplot() + 
+  aes(y=response_time, x=size, linetype=layout, color=color, group=paste(layout,color,subject)) + 
+  geom_line(size=1.5) + 
+  scale_color_brewer(palette='Set1') + 
+  facet_wrap(~subject) + 
+  labs(title='Response times for each subject') +
+  theme_bw()
+```
+
+Despite a lot of variability in raw values between subjects (individual differences), we can see some consistent patterns. The dashed lines are higher (main effect) and more sloped (interaction) than the solid lines. But there doesn't seem to be any consistent ordering of the colors.
+
 
 ### Compute effect sizes
-While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
+While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, repetition skews the measure to be very high. Experiment results with lots of repetition can be more reliably interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
 
 For those accustomed to Cohen's *d*, it's important to be aware that $\eta_{G}^{2}$ is typically smaller, with a Cohen's d of 0.2 being equivalent to a $\eta_{G}^{2}$ of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects. 
 
 ```{r within-anova}
 results = afex::aov_ez(
   data = data, 
-  id = 'id', # subject id column
+  id = 'subject', # subject id column
   dv = 'response_time', # dependent variable
   within = c('layout', 'size', 'color'), # within-subject independent variables
   between = NULL ,# between-subject independent variables
+  fun_aggregate = mean, # average multiple repetitions together for each subject*condition
   anova_table = list(es = 'ges') # effect size = generalized eta squared
 )
 ```
 
-*Note: the warning indicates that the aov_ez function automatically collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
+*Note: `fun_aggregate = mean` collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
 
 ```{r  within-anova-cleanup}
 anovaResults <- 
@@ -104,12 +141,8 @@ anovaResults <-
   rownames_to_column('effect') %>%  # put effect names in a column
   select(-`Pr(>F)`) # no need to show p-values
   
-anovaResults %>% 
-  tidy() %>% 
-  rename(F = statistic)
+anovaResults %>% as.tibble()
 ```
-
-*Note that the fractional degrees of freedom result from a Greenhousse-Geisser sphericity correction.*
 
 ```
 TODO: Boostrapped 95%CIs for effect sizes
