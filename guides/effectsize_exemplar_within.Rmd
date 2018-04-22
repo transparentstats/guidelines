@@ -6,15 +6,15 @@ If you would like to contribute, please see
 [Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
 </mark>
 
-Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.
+Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times. This "*within-subject*" experiment design combined with many repetitions per condition can substantially reduce any noise from individual differences, allowing for more precise measurements despite a small number of subjects.
 
-In this example, we'll compare two interfaces for visualizing data.
+In this example, we'll pretend we've run an experiment that compared different interfaces for visualizing data. Here are the parameters that we manipulate in the experiment:
 
 * Independent Variable **layout**: the two layouts of the interface
 * Independent Variable **size**: the size of the dataset visualized (small, medium, and large)
 * Independent Variable **color**: interface color, where we don't expect any effect
 
-We run each subject through each combination of these variables 20 times to get (2 interfaces) × (3 sizes) × (4 colors) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some reponse (e.g., reponse time) in each trial.
+We run each subject through each combination of these variables 20 times to get (2 layouts) × (3 sizes) × (4 colors) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some reponse (e.g., reponse time) in each trial.
 
 
 ### Libraries needed for this analysis
@@ -31,7 +31,7 @@ format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdi
 
 
 ### Subjects, conditions, and repetitions
-In this example, there are 10 subjects (`id` column). Because this is simulated data, we're using subject `id` to represent individual performance differences. Because within-subjects experiments partly account for individual differences, they often need far fewer subjects than between-subject designs. Repetitions also help reduce noise.
+In this example, there are 6 subjects (`id` column).
 
 ```{r within-setup}
 set.seed(456) # make the output consistent
@@ -43,6 +43,9 @@ data <- expand.grid(
   repetition = 1:20 # each subject runs in each condition multiple times
 )
 ```
+
+### Individual differences
+Not all subjects behave the same way. Some people might be tired, bad at the task, or just not trying very hard. These performance differences can't be directly measured, but they can substantially impact the results. Here, we'll simulate individual differences by giving each subject a random performance multiplier.
 
 ### Simulate some noisy effects
 We'll simulate an experiment with a main effect of `layout` and `size` and an interaction between them. However, `color` and its interactions will not have an impact.
