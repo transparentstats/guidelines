@@ -138,12 +138,12 @@ results = afex::aov_ez(
 *Note: `fun_aggregate = mean` collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
 
 ```{r  within-anova-cleanup}
-anovaResults <- 
+anova_results <- 
   results$anova_table %>% 
   rownames_to_column('effect') %>%  # put effect names in a column
   select(-`Pr(>F)`) # no need to show p-values
   
-anovaResults %>% as.tibble()
+anova_results %>% as.tibble()
 ```
 
 Looking at the `F` and `ges` (generalized eta squared) columns, `layout` and `size` and the interaction between `layout` and `size` account for much more of the noise than `color` and the other 2-way and 3-way interactions do.
@@ -166,7 +166,7 @@ We'll use a technique called bootstrapping, which checks the effect size for man
 
 ```{r}
 # data used for bootstrapping will collapse by each subject-condition combination
-dataAggregated <- data %>% 
+data_aggregated <- data %>% 
   group_by(layout, size, color, subject) %>% 
   summarize(response_time = mean(response_time))
 ```
@@ -178,27 +178,27 @@ Each iteration of the bootstrap samples the original dataset and runs the analys
 ```{r within-bootstrap-by-subject}
 
 # run one iteration of the bootstrap procedure
-analyzeIteration <- function(x) {
-  subjects <- unique(dataAggregated$subject)
+analyze_one_iteration <- function(x) {
+  subjects <- unique(data_aggregated$subject)
   
   # select subjects at random with replacement
-  bootSubjects <- sample(subjects, length(subjects), replace=TRUE)
+  sampled_subjects <- sample(subjects, length(subjects), replace=TRUE)
   
   # get all the results for one subject
   # and give them a new unique subject id
-  getOneSubjectsData <- function(i) {
-    dataAggregated %>% 
-      filter(subject == bootSubjects[i]) %>% 
-      mutate(subject = paste(bootSubjects[i], i))
+  get_one_subjects_data <- function(i) {
+    data_aggregated %>% 
+      filter(subject == sampled_subjects[i]) %>% 
+      mutate(subject = paste(sampled_subjects[i], i))
   }
   
   # get all of the boostrapped subjects' data
-  bootData <- lapply(1:length(bootSubjects), getOneSubjectsData) %>% 
+  boot_data <- lapply(1:length(sampled_subjects), get_one_subjects_data) %>% 
     bind_rows()
   
   # compute the effect sizes the same way we did without bootstrapping
   afex::aov_ez(
-    data = bootData, 
+    data = boot_data, 
     id = 'subject', # subject id column
     dv = 'response_time', # dependent variable
     within = c('layout', 'size', 'color'), # within-subject independent variables
@@ -219,11 +219,11 @@ The bootstrap needs to run many times to determine how a subset of the data impa
 ```{r within-bootstrap-bootstrap iterator}
 
 # run many iterations of the bootstrap procedure
-analyzeManyIterations = function (bootstrapIterationCount) {
+analyze_many_iterations = function (bootstrap_iteration_count) {
   # each core needs to reload the libraries
   library(tidyverse)
   library(afex)
-  lapply(1:bootstrapIterationCount, function(x) analyzeIteration(x)) %>% 
+  lapply(1:bootstrap_iteration_count, function(x) analyze_one_iteration(x)) %>% 
     bind_rows()
 }
 ```
@@ -236,24 +236,25 @@ Bootstrapping can be slow, especially with thousands of iterations. Splitting th
 BOOTSTRAP_COUNT <- 100 # at least 5k recommended. Use lower values for quicker testing.
 
 # Initiate cluster
-coreCount <- detectCores() - 1
-coreCount <- ifelse(coreCount < 1, 1, coreCount)
-cl <- makeCluster(coreCount)
-clusterExport(cl, "analyzeIteration")
-clusterExport(cl, "dataAggregated")
+core_count <- detectCores() - 1
+core_count <- ifelse(core_count < 1, 1, core_count)
+my_cluster <- makeCluster(core_count)
+# make sure each core in the cluster defines these functions
+clusterExport(my_cluster, "analyze_one_iteration")
+clusterExport(my_cluster, "data_aggregated")
 # how many times should each core iterate 
-bootstrapIterationCount <- BOOTSTRAP_COUNT / coreCount
+bootstrap_iteration_count <- BOOTSTRAP_COUNT / core_count
 # run the bootstrap and output the time
 system.time(
-  bootResults <- parLapply(
-    cl, # the cluster of cores
-    rep(bootstrapIterationCount, coreCount), # how many runs for each core
-    analyzeManyIterations) # the function to run in each core
+  boot_results <- parLapply(
+    my_cluster, # the cluster of cores
+    rep(bootstrap_iteration_count, core_count), # how many runs for each core
+    analyze_many_iterations) # the function to run in each core
 )
 # the cluster is no longer needed
-stopCluster(cl)
+stopCluster(my_cluster)
 # cleanup
-rm(coreCount, cl, bootstrapIterationCount, dataAggregated)
+rm(core_count, my_cluster, bootstrap_iteration_count, data_aggregated)
 ```
 
 ### Getting a confidence interval from a bootstrap
@@ -266,32 +267,32 @@ PERCENTILE_LO <- 0.025
 PERCENTILE_HI <- 0.975
 
 # put all the boostraped results together
-bootResults <- bind_rows(bootResults)
-bootResults <- 
-  bootResults %>% 
+boot_results <- bind_rows(boot_results)
+boot_results <- 
+  boot_results %>% 
   group_by(effect) %>% 
   summarize(
-    ESPercentileLo = unname(quantile(ges, probs = PERCENTILE_LO)),
-    ESPercentileHi = unname(quantile(ges, probs = PERCENTILE_HI)))
+    effectsize_conf_low = unname(quantile(ges, probs = PERCENTILE_LO)),
+    effectsize_conf_high = unname(quantile(ges, probs = PERCENTILE_HI)))
 
 # add the low and hi end estimates to the effect size table
-anovaResults <- 
-  anovaResults %>% 
-  left_join(bootResults, by = 'effect')
+anova_results <- 
+  anova_results %>% 
+  left_join(boot_results, by = 'effect')
 # show the table
-anovaResults %>% as.tibble()
+anova_results %>% as.tibble()
 ```
 
 ### Plot the effect sizes
 
 ```{r within-boostrap-4}
 
-anovaResults %>% 
+anova_results %>% 
   # reverse order the factors so that they appear in proper order in the plot
   mutate(effect = fct_rev(fct_inorder(effect))) %>% 
   
   # plot and mapping
-  ggplot(aes(x = effect, y = ges, ymin = ESPercentileLo, ymax = ESPercentileHi)) +
+  ggplot(aes(x = effect, y = ges, ymin = effectsize_conf_low, ymax = effectsize_conf_high)) +
     # reference line of no-effect
     geom_hline(yintercept = 0, linetype = 'dotted') +
     # point- and interval-estimates
@@ -313,17 +314,17 @@ Generalized eta squared (GES) represents the proportion of variance in the resul
 
 ```{r within-format, include=FALSE}
 # format the anova results for a report, and trim to 3 significant digits
-formatGES <- function(anovaTable, effectName) {
+formatGES <- function(anova_table, effectName) {
   cutoff = 0.01
-  row = (1:nrow(anovaTable))[anovaTable$effect == effectName]
+  row = (1:nrow(anova_table))[anova_table$effect == effectName]
   return(paste0(
     'F~',
-    signif(anovaTable[row, 'num Df'], 3), ',',
-    signif(anovaTable[row, 'den Df'], 3), '~ = ',
-    signif(anovaTable[row, 'F'], 3), ', $\\eta_{G}^{2}$ = ',
-    signif(anovaTable[row, 'ges'], 3), '  95% CI [',
-    signif(anovaTable[row, 'ESPercentileLo'], 3), ', ',
-    signif(anovaTable[row, 'ESPercentileHi'], 3), ']'
+    signif(anova_table[row, 'num Df'], 3), ',',
+    signif(anova_table[row, 'den Df'], 3), '~ = ',
+    signif(anova_table[row, 'F'], 3), ', $\\eta_{G}^{2}$ = ',
+    signif(anova_table[row, 'ges'], 3), '  95% CI [',
+    signif(anova_table[row, 'effectsize_conf_low'], 3), ', ',
+    signif(anova_table[row, 'effectsize_conf_high'], 3), ']'
   ))
 }
 ```
@@ -331,14 +332,14 @@ formatGES <- function(anovaTable, effectName) {
 
 Strong effects:
 
- - **layout:** `r formatGES(anovaResults, 'layout')`
- - **size:** `r formatGES(anovaResults, 'size')`
- - **layout** × **size:** `r formatGES(anovaResults, 'layout:size')`
+ - **layout:** `r formatGES(anova_results, 'layout')`
+ - **size:** `r formatGES(anova_results, 'size')`
+ - **layout** × **size:** `r formatGES(anova_results, 'layout:size')`
  
 Minimally impactful:
 
- - **color** `r formatGES(anovaResults, 'color')`
- - **layout** × **color:** `r formatGES(anovaResults, 'layout:color')`
- - **size** × **color:** `r formatGES(anovaResults, 'size:color')`
- - **layout** × **size** × **color:** `r formatGES(anovaResults, 'layout:size:color')`
+ - **color** `r formatGES(anova_results, 'color')`
+ - **layout** × **color:** `r formatGES(anova_results, 'layout:color')`
+ - **size** × **color:** `r formatGES(anova_results, 'size:color')`
+ - **layout** × **size** × **color:** `r formatGES(anova_results, 'layout:size:color')`
 
