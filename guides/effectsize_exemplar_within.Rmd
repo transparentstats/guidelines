@@ -152,8 +152,7 @@ Looking at the `F` and `ges` (generalized eta squared) columns, there appear to 
 
 ### Bootstrapping
 
-
-**Draft. Needs work.**
+<mark> Draft. Needs work. </mark>
 
 But that only gives us one value, whereas we want a confidence interval.
 
@@ -290,7 +289,7 @@ ggplot(anovaResults) +
 
 ### Reporting the results
 
-Looking at the `F` and `ges` (generalized eta squared) columns, there are clear main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions show only negligeable effects.
+Generalized eta squared (GES) represents the proportion of variance in the results explained by each variable. The previous graph shows clear main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions are relatively much smaller, barely above zero. There is no useful cutoff for what counts as a "significant" effect, so think in terms of relative size -- which variables best explain the variance in the results? 
 
 ```{r within-format, include=FALSE}
 # format the anova results for a report, and trim to 3 significant digits
@@ -310,9 +309,16 @@ formatGES <- function(anovaTable, effectName) {
 ```
 
 
+Strong effects:
+
  - **layout:** `r formatGES(anovaResults, 'layout')`
  - **size:** `r formatGES(anovaResults, 'size')`
  - **layout** × **size:** `r formatGES(anovaResults, 'layout:size')`
- - **color** did not have a substantive effect (`r formatGES(anovaResults, 'color')`)
+ 
+Minimally impactful:
 
-Report any interaction for which there is reason to believe an effect could occur. Otherwise, you can simply state that other 2-way and 3-way interactions did not have substantive effect sizes. However, when in doubt, report everything!
+ - **color** `r formatGES(anovaResults, 'color')`
+ - **layout** × **color:** `r formatGES(anovaResults, 'layout:color')`
+ - **size** × **color:** `r formatGES(anovaResults, 'size:color')`
+ - **layout** × **size** × **color:** `r formatGES(anovaResults, 'layout:size:color')`
+
