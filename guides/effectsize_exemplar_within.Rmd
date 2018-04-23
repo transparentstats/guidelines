@@ -22,6 +22,7 @@ We run each subject through each combination of these variables 20 times to get 
 ```{r es-within-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(afex)       # for aov_ez()
+library(parallel)   # for parLapply()
 ```
 
 ```{r es-within-boilerplate, include = FALSE}
@@ -105,7 +106,8 @@ data %>%
   group_by(layout, size, color, subject) %>% 
   summarize(response_time = mean(response_time)) %>% 
 ggplot() + 
-  aes(y=response_time, x=size, linetype=layout, color=color, group=paste(layout,color,subject)) + 
+  aes(y=response_time, x=size, linetype=layout, color=color, 
+      group=paste(layout,color,subject)) + 
   geom_line(size=1.5) + 
   scale_color_brewer(palette='Set1') + 
   facet_wrap(~subject) + 
@@ -144,12 +146,147 @@ anovaResults <-
 anovaResults %>% as.tibble()
 ```
 
+Looking at the `F` and `ges` (generalized eta squared) columns, there appear to be strong main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions show only negligeable effects.
+
+
+
+### Bootstrapping
+
+
+**Draft. Needs work.**
+
+But that only gives us one value, whereas we want a confidence interval.
+
+We'll use a technique called bootstrapping, which checks the effect size for many random permutations of the data.
+
+1. Randomly sample with replacement (meaning the same value might be sampled more than once) to build a new dataset
+1. Perform the analysis on this new dataset
+1. Do that many times
+1. Sort the results for each effect and find the 95% confidence interval
+
+
+#### Each iteration
+
+Each iteration of the bootstrap samples the original dataset and runs the analysis on this permutation.
+
+```{r within-bootstrap-by-subject}
+
+# run one iteration of the bootstrap procedure
+analyzeIteration <- function(x) {
+  subjects <- unique(dataAggregated$subject)
+  
+  # select subjects at random with replacement
+  bootSubjects <- sample(subjects, length(subjects), replace=TRUE)
+  
+  # get all the results for one subject
+  # and give them a new uniwue subject id
+  getOneSubjectsData <- function(i) {
+    dataAggregated %>% 
+      filter(subject == bootSubjects[i]) %>% 
+      mutate(subject = paste(bootSubjects[i], i))
+  }
+  
+  # get all of the boostrapped subjects' data
+  bootData <- lapply(1:length(bootSubjects), getOneSubjectsData) %>% 
+    bind_rows()
+  
+  # compute the effect sizes the same way we did without bootstrapping
+  afex::aov_ez(
+    data = bootData, 
+    id = 'subject', # subject id column
+    dv = 'response_time', # dependent variable
+    within = c('layout', 'size', 'color'), # within-subject independent variables
+    between = NULL ,# between-subject independent variables
+    #fun_aggregate = mean,
+    anova_table = list(es = 'ges') # effect size = generalized eta squared
+  )$anova_table %>% 
+    as.tibble() %>% 
+    rownames_to_column('effect') %>% # put effect names in a column
+    return()
+}
 ```
-TODO: Boostrapped 95%CIs for effect sizes
-Pro: people should
-Con: would make the guide even longer
-Maybe push into another guideline?
+
+#### Iterate
+
+The bootstrap needs to run many times to determine how a subset of the data impacts
+
+```{r within-bootstrap-bootstrap iterator}
+
+# run many iterations of the bootstrap procedure
+analyzeManyIterations = function (bootstrapIterationCount) {
+  # each core needs to reload the libraries
+  library(tidyverse)
+  library(afex)
+  lapply(1:bootstrapIterationCount, function(x) analyzeIteration(x)) %>% 
+    bind_rows()
+}
+
+# data used for bootstrapping will collapse by each subject-condition combination
+dataAggregated <- data %>% 
+  group_by(layout, size, color, subject) %>% 
+  summarize(response_time = mean(response_time))
+
 ```
+
+
+#### Parallelize
+
+Bootstrapping can be slow, especially with thousands of iterations. Splitting the iterations across processor cores cuts down on the wait time.
+
+```{r within-parallelize-boostrap, cache=TRUE}
+BOOTSTRAP_COUNT <- 100 # at least 5k recommended. Use lower values for quicker testing
+
+# Initiate cluster
+coreCount <- detectCores() - 1
+cl <- makeCluster(coreCount)
+clusterExport(cl, "analyzeIteration")
+clusterExport(cl, "dataAggregated")
+# how many times should each core iterate 
+bootstrapIterationCount <- BOOTSTRAP_COUNT / coreCount
+# run the bootstrap and output the time
+system.time(
+  bootResults <- parLapply(cl, rep(bootstrapIterationCount, coreCount), analyzeManyIterations)
+)
+# the cluster is no longer needed
+stopCluster(cl)
+# cleanup
+rm(coreCount, cl, bootstrapIterationCount, dataAggregated)
+```
+
+### Getting a confidence interval from a bootstrap
+
+Each bootstrap iterations ran one anaylsis, so wwe now have many results. So for each effect size, we sort the results and find the range of the inner 95%.
+
+```{r within-boostrap-3}
+# inner 95%
+PERCENTILE_LO <- 0.025
+PERCENTILE_HI <- 0.975
+
+# put all the boostraped results together
+bootResults <- bind_rows(bootResults)
+bootResults <- 
+  bootResults %>% 
+  group_by(effect) %>% 
+  summarize(
+    ESPercentileLo = unname(quantile(ges, probs = PERCENTILE_LO)),
+    ESPercentileHi = unname(quantile(ges, probs = PERCENTILE_HI)))
+
+anovaResults <- 
+  anovaResults %>% 
+  left_join(bootResults, by = 'effect')
+anovaResults %>% as.tibble()
+  
+ggplot(anovaResults) +
+  aes(y=forcats::fct_rev(forcats::fct_inorder(effect)), x=ges) +
+  geom_vline(xintercept = 0, linetype = 'dotted') +
+  geom_segment(aes(x=ESPercentileLo, xend=ESPercentileHi, yend=effect), size=1) +
+  geom_point(size=3) +
+  scale_x_continuous(expand = c(0,0)) + expand_limits(x = -0.05) +
+  expand_limits(x = max(anovaResults$ESPercentileHi) * 1.05) +
+  labs(x=expression(paste('Effect size ', eta[G]^2)), y='Effect') +
+  theme_bw()
+```
+
 
 ### Reporting the results
 
@@ -165,7 +302,9 @@ formatGES <- function(anovaTable, effectName) {
     signif(anovaTable[row, 'num Df'], 3), ',',
     signif(anovaTable[row, 'den Df'], 3), '~ = ',
     signif(anovaTable[row, 'F'], 3), ', $\\eta_{G}^{2}$ = ',
-    signif(anovaTable[row, 'ges'], 3)
+    signif(anovaTable[row, 'ges'], 3), ' 95% CI [',
+    signif(anovaTable[row, 'ESPercentileLo'], 3), ', ',
+    signif(anovaTable[row, 'ESPercentileHi'], 3), ']'
   ))
 }
 ```
