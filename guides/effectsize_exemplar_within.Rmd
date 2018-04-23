@@ -298,6 +298,8 @@ anovaResults %>%
     geom_pointrange() +
     # ensures that we see the reference line
     expand_limits(x = 0) +
+    # labels
+    labs(y = expression(paste('Effect size ', eta[G]^2))) +
     # flip to horizontal plot and apply black-and-white theme
     coord_flip() +
     theme_bw()
@@ -319,7 +321,7 @@ formatGES <- function(anovaTable, effectName) {
     signif(anovaTable[row, 'num Df'], 3), ',',
     signif(anovaTable[row, 'den Df'], 3), '~ = ',
     signif(anovaTable[row, 'F'], 3), ', $\\eta_{G}^{2}$ = ',
-    signif(anovaTable[row, 'ges'], 3), ' 95% CI [',
+    signif(anovaTable[row, 'ges'], 3), '  95% CI [',
     signif(anovaTable[row, 'ESPercentileLo'], 3), ', ',
     signif(anovaTable[row, 'ESPercentileHi'], 3), ']'
   ))
