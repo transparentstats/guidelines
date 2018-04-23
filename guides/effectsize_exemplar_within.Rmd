@@ -237,6 +237,7 @@ BOOTSTRAP_COUNT <- 100 # at least 5k recommended. Use lower values for quicker t
 
 # Initiate cluster
 coreCount <- detectCores() - 1
+ifelse(coreCount < 1, 1, coreCount)
 cl <- makeCluster(coreCount)
 clusterExport(cl, "analyzeIteration")
 clusterExport(cl, "dataAggregated")
