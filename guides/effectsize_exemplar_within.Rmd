@@ -29,8 +29,9 @@ library(parallel)   # for parLapply()
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
+### Simulate a dataset
 
-### Subjects, conditions, and repetitions
+#### Subjects, conditions, and repetitions
 In this example, there are 6 subjects (`subject` column).
 
 ```{r within-setup}
@@ -46,7 +47,7 @@ data <- expand.grid(
 )
 ```
 
-### Individual differences
+#### Individual differences
 Not all subjects behave the same way. Some people might be tired, bad at the task, or just not trying very hard. These performance differences can't be directly measured, but they can substantially impact the results. We'll simulate these individual differences by giving each subject a random performance handicap.
 
 ```{r}
@@ -58,8 +59,7 @@ individualDifferences$handicap <- rnorm(SUBJECT_COUNT, 20, 4) # individual diffe
 data <- data %>% left_join(individualDifferences, by = "subject")
 ```
 
-
-### Simulate some noisy effects
+#### Simulate some noisy effects
 We'll simulate an experiment with a main effect of `layout` and `size` and an interaction between them. However, `color` and its interactions will not have an impact.
 
 ```{r within-simulate}
@@ -146,23 +146,30 @@ anovaResults <-
 anovaResults %>% as.tibble()
 ```
 
-Looking at the `F` and `ges` (generalized eta squared) columns, there appear to be strong main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions show only negligeable effects.
-
+Looking at the `F` and `ges` (generalized eta squared) columns, `layout` and `size` and the interaction between `layout` and `size` account for much more of the noise than `color` and the other 2-way and 3-way interactions do.
 
 
 ### Bootstrapping
 
 <mark> Draft. Needs work. </mark>
 
-But that only gives us one value, whereas we want a confidence interval.
+But that only gives us one one point estimate per effect, whereas we want a confidence interval.
 
-We'll use a technique called bootstrapping, which checks the effect size for many random permutations of the data.
+We'll use a technique called bootstrapping, which checks the effect size for many randomized samples of the data. Importantly, bootstrapping samples "with replacement", meaning that items can be sampled more than once or not at all. If a small subset of the observations are driving an effect, they won't impact all of the samples. Consequently, the spread of the bootstrapped confidence intervals shows how consistent the results are for different samples. 
 
 1. Randomly sample with replacement (meaning the same value might be sampled more than once) to build a new dataset
 1. Perform the analysis on this new dataset
 1. Do that many times
 1. Sort the results for each effect and find the 95% confidence interval
 
+#### Prepare for bootstrapping
+
+```{r}
+# data used for bootstrapping will collapse by each subject-condition combination
+dataAggregated <- data %>% 
+  group_by(layout, size, color, subject) %>% 
+  summarize(response_time = mean(response_time))
+```
 
 #### Each iteration
 
@@ -178,7 +185,7 @@ analyzeIteration <- function(x) {
   bootSubjects <- sample(subjects, length(subjects), replace=TRUE)
   
   # get all the results for one subject
-  # and give them a new uniwue subject id
+  # and give them a new unique subject id
   getOneSubjectsData <- function(i) {
     dataAggregated %>% 
       filter(subject == bootSubjects[i]) %>% 
@@ -219,25 +226,18 @@ analyzeManyIterations = function (bootstrapIterationCount) {
   lapply(1:bootstrapIterationCount, function(x) analyzeIteration(x)) %>% 
     bind_rows()
 }
-
-# data used for bootstrapping will collapse by each subject-condition combination
-dataAggregated <- data %>% 
-  group_by(layout, size, color, subject) %>% 
-  summarize(response_time = mean(response_time))
-
 ```
-
 
 #### Parallelize
 
 Bootstrapping can be slow, especially with thousands of iterations. Splitting the iterations across processor cores cuts down on the wait time.
 
 ```{r within-parallelize-boostrap, cache=TRUE}
-BOOTSTRAP_COUNT <- 100 # at least 5k recommended. Use lower values for quicker testing
+BOOTSTRAP_COUNT <- 100 # at least 5k recommended. Use lower values for quicker testing.
 
 # Initiate cluster
 coreCount <- detectCores() - 1
-ifelse(coreCount < 1, 1, coreCount)
+coreCount <- ifelse(coreCount < 1, 1, coreCount)
 cl <- makeCluster(coreCount)
 clusterExport(cl, "analyzeIteration")
 clusterExport(cl, "dataAggregated")
@@ -245,7 +245,10 @@ clusterExport(cl, "dataAggregated")
 bootstrapIterationCount <- BOOTSTRAP_COUNT / coreCount
 # run the bootstrap and output the time
 system.time(
-  bootResults <- parLapply(cl, rep(bootstrapIterationCount, coreCount), analyzeManyIterations)
+  bootResults <- parLapply(
+    cl, # the cluster of cores
+    rep(bootstrapIterationCount, coreCount), # how many runs for each core
+    analyzeManyIterations) # the function to run in each core
 )
 # the cluster is no longer needed
 stopCluster(cl)
@@ -271,20 +274,34 @@ bootResults <-
     ESPercentileLo = unname(quantile(ges, probs = PERCENTILE_LO)),
     ESPercentileHi = unname(quantile(ges, probs = PERCENTILE_HI)))
 
+# add the low and hi end estimates to the effect size table
 anovaResults <- 
   anovaResults %>% 
   left_join(bootResults, by = 'effect')
+# show the table
 anovaResults %>% as.tibble()
+```
+
+### Plot the effect sizes
+
+```{r within-boostrap-4}
+
+anovaResults %>% 
+  # reverse order the factors so that they appear in proper order in the plot
+  mutate(effect = fct_rev(fct_inorder(effect))) %>% 
   
-ggplot(anovaResults) +
-  aes(y=forcats::fct_rev(forcats::fct_inorder(effect)), x=ges) +
-  geom_vline(xintercept = 0, linetype = 'dotted') +
-  geom_segment(aes(x=ESPercentileLo, xend=ESPercentileHi, yend=effect), size=1) +
-  geom_point(size=3) +
-  scale_x_continuous(expand = c(0,0)) + expand_limits(x = -0.05) +
-  expand_limits(x = max(anovaResults$ESPercentileHi) * 1.05) +
-  labs(x=expression(paste('Effect size ', eta[G]^2)), y='Effect') +
-  theme_bw()
+  # plot and mapping
+  ggplot(aes(x = effect, y = ges, ymin = ESPercentileLo, ymax = ESPercentileHi)) +
+    # reference line of no-effect
+    geom_hline(yintercept = 0, linetype = 'dotted') +
+    # point- and interval-estimates
+    geom_pointrange() +
+    # ensures that we see the reference line
+    expand_limits(x = 0) +
+    # flip to horizontal plot and apply black-and-white theme
+    coord_flip() +
+    theme_bw()
+
 ```
 
 
