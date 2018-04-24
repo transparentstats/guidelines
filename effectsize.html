@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Transparent Statistics Guidelines</title>
   <meta name="description" content="Guidelines, FAQ, and exemplar analyses">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Transparent Statistics Guidelines" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)">
 
 
-<meta name="date" content="2018-02-28">
+<meta name="date" content="2018-04-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,10 +138,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_within"><i class="fa fa-check"></i><b>2.3</b> Exemplar: Within-subjects experiment</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-1"><i class="fa fa-check"></i><b>2.3.1</b> Libraries needed for this analysis</a></li>
-<li class="chapter" data-level="2.3.2" data-path="effectsize.html"><a href="effectsize.html#subjects-conditions-and-repetitions"><i class="fa fa-check"></i><b>2.3.2</b> Subjects, conditions, and repetitions</a></li>
-<li class="chapter" data-level="2.3.3" data-path="effectsize.html"><a href="effectsize.html#simulate-some-noisy-effects"><i class="fa fa-check"></i><b>2.3.3</b> Simulate some noisy effects</a></li>
+<li class="chapter" data-level="2.3.2" data-path="effectsize.html"><a href="effectsize.html#simulate-a-dataset"><i class="fa fa-check"></i><b>2.3.2</b> Simulate a dataset</a></li>
+<li class="chapter" data-level="2.3.3" data-path="effectsize.html"><a href="effectsize.html#a-look-at-the-data"><i class="fa fa-check"></i><b>2.3.3</b> A look at the data</a></li>
 <li class="chapter" data-level="2.3.4" data-path="effectsize.html"><a href="effectsize.html#compute-effect-sizes"><i class="fa fa-check"></i><b>2.3.4</b> Compute effect sizes</a></li>
-<li class="chapter" data-level="2.3.5" data-path="effectsize.html"><a href="effectsize.html#reporting-the-results"><i class="fa fa-check"></i><b>2.3.5</b> Reporting the results</a></li>
+<li class="chapter" data-level="2.3.5" data-path="effectsize.html"><a href="effectsize.html#bootstrapping"><i class="fa fa-check"></i><b>2.3.5</b> Bootstrapping</a></li>
+<li class="chapter" data-level="2.3.6" data-path="effectsize.html"><a href="effectsize.html#getting-a-confidence-interval-from-a-bootstrap"><i class="fa fa-check"></i><b>2.3.6</b> Getting a confidence interval from a bootstrap</a></li>
+<li class="chapter" data-level="2.3.7" data-path="effectsize.html"><a href="effectsize.html#plot-the-effect-sizes"><i class="fa fa-check"></i><b>2.3.7</b> Plot the effect sizes</a></li>
+<li class="chapter" data-level="2.3.8" data-path="effectsize.html"><a href="effectsize.html#reporting-the-results"><i class="fa fa-check"></i><b>2.3.8</b> Reporting the results</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_standardized"><i class="fa fa-check"></i><b>2.4</b> Exemplar: Standardized effect size</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-2"><i class="fa fa-check"></i><b>2.4.1</b> Libraries needed for this analysis</a></li>
@@ -179,11 +182,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="effectsize" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Effect size</h1>
 <div style="text-align:center">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;figures/effectsize/teaser.png&quot;</span>)</code></pre></div>
-<p><img src="figures/effectsize/teaser.png" width="128" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">TODO</span><span class="co">: generate the teaser figure in code</span></code></pre></div>
+<p><img src="figures/effectsize/teaser.png" /><!-- --></p>
 </div>
-<p><strong>Version:</strong> 1.0</p>
+<p><strong>Version:</strong> 1.1</p>
 <p><strong>Contributed to the writing:</strong> Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic, Jacob O. Wobbrock, Janne Lindqvist, Yea-Seul Kim, Amelia McNamara</p>
 <p><strong>Gave feedback:</strong></p>
 <p><strong>Endorsed:</strong></p>
@@ -386,91 +387,122 @@ p_simple_effect_size</code></pre></div>
 <div id="effectsize_exemplar_within" class="section level2">
 <h2><span class="header-section-number">2.3</span> Exemplar: Within-subjects experiment</h2>
 <p><mark> This section is in <em>alpha</em>. We welcome help and feedback at all levels! If you would like to contribute, please see <a href="https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines">Contributing to the Guidelines</a>. </mark></p>
-<p>Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.</p>
-<p>In this example, we’ll compare two interfaces for visualizing data.</p>
+<p>Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times. This “<em>within-subject</em>” experiment design combined with many repetitions per condition can substantially reduce any noise from individual differences, allowing for more precise measurements despite a small number of subjects.</p>
+<p>In this example, we’ll pretend we’ve run an experiment that compared different interfaces for visualizing data. Here are the parameters that we manipulate in the experiment:</p>
 <ul>
 <li>Independent Variable <strong>layout</strong>: the two layouts of the interface</li>
 <li>Independent Variable <strong>size</strong>: the size of the dataset visualized (small, medium, and large)</li>
 <li>Independent Variable <strong>color</strong>: interface color, where we don’t expect any effect</li>
 </ul>
-<p>We run each subject through each combination of these variables 20 times to get (2 interfaces) × (3 sizes) × (4 colors) × (20 repetitions) = 480 trials per subject. We measure some reponse (e.g., reponse time) in each trial.</p>
+<p>We run each subject through each combination of these variables 20 times to get (2 layouts) × (3 sizes) × (4 colors) × (20 repetitions) = 480 trials per subject. We measure some reponse (e.g., reponse time) in each trial.</p>
 <div id="libraries-needed-for-this-analysis-1" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Libraries needed for this analysis</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(broom)      <span class="co"># for tidy()</span>
-<span class="kw">library</span>(afex)       <span class="co"># for aov_ez()</span></code></pre></div>
+<span class="kw">library</span>(afex)       <span class="co"># for aov_ez()</span>
+<span class="kw">library</span>(parallel)   <span class="co"># for parLapply()</span></code></pre></div>
 </div>
-<div id="subjects-conditions-and-repetitions" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> Subjects, conditions, and repetitions</h3>
-<p>In this example, there are 10 subjects (<code>id</code> column). Because this is simulated data, we’re using subject <code>id</code> to represent individual performance differences. Because within-subjects experiments partly account for individual differences, they often need far fewer subjects than between-subject designs. Repetitions also help reduce noise.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">456</span>) <span class="co"># make the output consistent</span>
+<div id="simulate-a-dataset" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Simulate a dataset</h3>
+<div id="subjects-conditions-and-repetitions" class="section level4">
+<h4><span class="header-section-number">2.3.2.1</span> Subjects, conditions, and repetitions</h4>
+<p>In this example, there are 6 subjects (<code>subject</code> column).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">543</span>) <span class="co"># make the output consistent</span>
+SUBJECT_COUNT =<span class="st"> </span><span class="dv">6</span>
+
 data &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(
-  <span class="dt">id =</span> <span class="kw">rnorm</span>(<span class="dv">6</span>, <span class="dv">5</span>, <span class="fl">0.5</span>), <span class="co"># individual differences</span>
+  <span class="dt">subject =</span> <span class="kw">paste</span>(<span class="st">&#39;Subject&#39;</span>, LETTERS[<span class="dv">1</span><span class="op">:</span>SUBJECT_COUNT]), <span class="co"># subject IDs</span>
   <span class="dt">layout =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="co"># independent variable</span>
   <span class="dt">size =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">2</span>, <span class="co"># independent variable</span>
   <span class="dt">color =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">3</span>, <span class="co"># independent variable</span>
   <span class="dt">repetition =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span> <span class="co"># each subject runs in each condition multiple times</span>
 )</code></pre></div>
 </div>
-<div id="simulate-some-noisy-effects" class="section level3">
-<h3><span class="header-section-number">2.3.3</span> Simulate some noisy effects</h3>
+<div id="individual-differences" class="section level4">
+<h4><span class="header-section-number">2.3.2.2</span> Individual differences</h4>
+<p>Not all subjects behave the same way. Some people might be tired, bad at the task, or just not trying very hard. These performance differences can’t be directly measured, but they can substantially impact the results. We’ll simulate these individual differences by giving each subject a random performance handicap.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># build a table of subject performance multipliers</span>
+individualDifferences &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">subject =</span> <span class="kw">unique</span>(data<span class="op">$</span>subject))
+individualDifferences<span class="op">$</span>handicap &lt;-<span class="st"> </span><span class="kw">rnorm</span>(SUBJECT_COUNT, <span class="dv">20</span>, <span class="dv">4</span>) <span class="co"># individual differences</span>
+
+<span class="co"># put it in the main dataset</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(individualDifferences, <span class="dt">by =</span> <span class="st">&quot;subject&quot;</span>)</code></pre></div>
+</div>
+<div id="simulate-some-noisy-effects" class="section level4">
+<h4><span class="header-section-number">2.3.2.3</span> Simulate some noisy effects</h4>
 <p>We’ll simulate an experiment with a main effect of <code>layout</code> and <code>size</code> and an interaction between them. However, <code>color</code> and its interactions will not have an impact.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate the response times with a clean model</span>
+data &lt;-<span class="st"> </span>
 <span class="st">  </span>data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(
   <span class="dt">response_time =</span> 
-    id <span class="op">+</span><span class="st"> </span><span class="co"># additive individual differences</span>
-<span class="st">    </span>layout <span class="op">*</span><span class="st"> </span>.<span class="dv">4</span> <span class="op">+</span><span class="st"> </span><span class="co"># main effect of layout</span>
+    layout <span class="op">*</span><span class="st"> </span>.<span class="dv">4</span> <span class="op">+</span><span class="st"> </span><span class="co"># main effect of layout</span>
 <span class="st">    </span>size <span class="op">*</span><span class="st"> </span>.<span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="co"># main effect of size</span>
 <span class="st">    </span>color <span class="op">*</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span>layout <span class="op">*</span><span class="st"> </span>size <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="co"># 2-way interaction</span>
+<span class="st">    </span>layout <span class="op">*</span><span class="st"> </span>size <span class="op">*</span><span class="st"> </span>.<span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="co"># 2-way interaction</span>
 <span class="st">    </span>size <span class="op">*</span><span class="st"> </span>color <span class="op">*</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span>layout <span class="op">*</span><span class="st"> </span>color <span class="op">*</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span>layout <span class="op">*</span><span class="st"> </span>size <span class="op">*</span><span class="st"> </span>color <span class="op">*</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">rnorm</span>(<span class="kw">n</span>()) <span class="co"># noise</span>
+<span class="st">    </span>layout <span class="op">*</span><span class="st"> </span>size <span class="op">*</span><span class="st"> </span>color <span class="op">*</span><span class="st"> </span><span class="dv">0</span>
 )</code></pre></div>
+<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add some reponse noise</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">response_time =</span> response_time <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">n</span>()))
+
+<span class="co"># add noise from individual handicaps</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">response_time =</span> <span class="dv">30</span> <span class="op">+</span><span class="st"> </span>handicap<span class="op">*</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>response_time <span class="op">*</span><span class="st"> </span>handicap)</code></pre></div>
 <p>Even though we used numbers to simulate the model, the independent variables and subject ID are all factors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>
 <span class="st">  </span>data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">id =</span> <span class="kw">factor</span>(id), 
+    <span class="dt">subject =</span> <span class="kw">factor</span>(subject), 
     <span class="dt">layout =</span> <span class="kw">factor</span>(layout), 
-    <span class="dt">size =</span> <span class="kw">factor</span>(size), 
     <span class="dt">color =</span> <span class="kw">factor</span>(color)
   )</code></pre></div>
 </div>
+</div>
+<div id="a-look-at-the-data" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> A look at the data</h3>
+<p>Let’s get an overview of the results by graphing each subject’s average response time for each condition.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(layout, size, color, subject) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">response_time =</span> <span class="kw">mean</span>(response_time)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">aes</span>(<span class="dt">y=</span>response_time, <span class="dt">x=</span>size, <span class="dt">linetype=</span>layout, <span class="dt">color=</span>color, 
+      <span class="dt">group=</span><span class="kw">paste</span>(layout,color,subject)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&#39;Set1&#39;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>subject) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&#39;Response times for each subject&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/within-sneak-peak-1.png" width="672" /></p>
+<p>Despite a lot of variability in raw values between subjects (individual differences), we can see some consistent patterns. The dashed lines are higher (main effect) and more sloped (interaction) than the solid lines. But there doesn’t seem to be any consistent ordering of the colors.</p>
+</div>
 <div id="compute-effect-sizes" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Compute effect sizes</h3>
-<p>While <strong>Cohen’s <em>d</em> </strong> is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the <strong>eta squared (<span class="math inline">\(\eta^{2}\)</span>)</strong> family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, <strong>generalized eta squared (<span class="math inline">\(\eta_{G}^{2}\)</span>)</strong>, is particularly suited for providing comparable effect sizes in both between and within-subject designs <span class="citation">(Olejnik and Algina <a href="#ref-Olejnik2003">2003</a>; Bakeman <a href="#ref-Bakeman2005">2005</a>)</span>. This property makes it more easily applicable to meta-analyses.</p>
+<p>While <strong>Cohen’s <em>d</em> </strong> is often used for simple 2-factor, single-trial, between-subject designs, repetition skews the measure to be very high. Experiment results with lots of repetition can be more reliably interpretted with the <strong>eta squared (<span class="math inline">\(\eta^{2}\)</span>)</strong> family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, <strong>generalized eta squared (<span class="math inline">\(\eta_{G}^{2}\)</span>)</strong>, is particularly suited for providing comparable effect sizes in both between and within-subject designs <span class="citation">(Olejnik and Algina <a href="#ref-Olejnik2003">2003</a>; Bakeman <a href="#ref-Bakeman2005">2005</a>)</span>. This property makes it more easily applicable to meta-analyses.</p>
 <p>For those accustomed to Cohen’s <em>d</em>, it’s important to be aware that <span class="math inline">\(\eta_{G}^{2}\)</span> is typically smaller, with a Cohen’s d of 0.2 being equivalent to a <span class="math inline">\(\eta_{G}^{2}\)</span> of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results =<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_ez</span>(
   <span class="dt">data =</span> data, 
-  <span class="dt">id =</span> <span class="st">&#39;id&#39;</span>, <span class="co"># subject id column</span>
+  <span class="dt">id =</span> <span class="st">&#39;subject&#39;</span>, <span class="co"># subject id column</span>
   <span class="dt">dv =</span> <span class="st">&#39;response_time&#39;</span>, <span class="co"># dependent variable</span>
   <span class="dt">within =</span> <span class="kw">c</span>(<span class="st">&#39;layout&#39;</span>, <span class="st">&#39;size&#39;</span>, <span class="st">&#39;color&#39;</span>), <span class="co"># within-subject independent variables</span>
   <span class="dt">between =</span> <span class="ot">NULL</span> ,<span class="co"># between-subject independent variables</span>
+  <span class="dt">fun_aggregate =</span> mean, <span class="co"># average multiple repetitions together for each subject*condition</span>
   <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&#39;ges&#39;</span>) <span class="co"># effect size = generalized eta squared</span>
 )</code></pre></div>
-<pre><code>## Warning: More than one observation per cell, aggregating the data using
-## mean (i.e, fun_aggregate = mean)!</code></pre>
-<p><em>Note: the warning indicates that the aov_ez function automatically collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anovaResults &lt;-<span class="st"> </span>
+<p><em>Note: <code>fun_aggregate = mean</code> collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anova_results &lt;-<span class="st"> </span>
 <span class="st">  </span>results<span class="op">$</span>anova_table <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="st">&#39;effect&#39;</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># put effect names in a column</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>) <span class="co"># no need to show p-values</span>
   
-anovaResults <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">tidy</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">rename</span>(<span class="dt">F =</span> statistic)</code></pre></div>
-<pre><code>## Warning in tidy.anova(.): The following column names in ANOVA output were
-## not recognized or transformed: effect, num.Df, den.Df, MSE, ges</code></pre>
+anova_results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.tibble</span>()</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
 <tr class="header">
 <th align="left">effect</th>
-<th align="right">num.Df</th>
-<th align="right">den.Df</th>
+<th align="right">num Df</th>
+<th align="right">den Df</th>
 <th align="right">MSE</th>
 <th align="right">F</th>
 <th align="right">ges</th>
@@ -481,77 +513,307 @@ anovaResults <span class="op">%&gt;%</span><span class="st"> </span>
 <td align="left">layout</td>
 <td align="right">1</td>
 <td align="right">5</td>
-<td align="right">0.0628181</td>
-<td align="right">415.8246232</td>
-<td align="right">0.4579266</td>
+<td align="right">86.61117</td>
+<td align="right">186.9153824</td>
+<td align="right">0.5489428</td>
 </tr>
 <tr class="even">
 <td align="left">size</td>
 <td align="right">2</td>
 <td align="right">10</td>
-<td align="right">0.0817993</td>
-<td align="right">104.8159409</td>
-<td align="right">0.3567318</td>
+<td align="right">51.97262</td>
+<td align="right">108.2961322</td>
+<td align="right">0.4583589</td>
 </tr>
 <tr class="odd">
 <td align="left">color</td>
 <td align="right">3</td>
 <td align="right">15</td>
-<td align="right">0.0287555</td>
-<td align="right">1.2685908</td>
-<td align="right">0.0035267</td>
+<td align="right">14.50618</td>
+<td align="right">0.9125176</td>
+<td align="right">0.0029764</td>
 </tr>
 <tr class="even">
 <td align="left">layout:size</td>
 <td align="right">2</td>
 <td align="right">10</td>
-<td align="right">0.0311379</td>
-<td align="right">101.2790368</td>
-<td align="right">0.1694197</td>
+<td align="right">31.84102</td>
+<td align="right">59.8437233</td>
+<td align="right">0.2226922</td>
 </tr>
 <tr class="odd">
 <td align="left">layout:color</td>
 <td align="right">3</td>
 <td align="right">15</td>
-<td align="right">0.0312760</td>
-<td align="right">1.0331263</td>
-<td align="right">0.0031251</td>
+<td align="right">19.24758</td>
+<td align="right">0.1492400</td>
+<td align="right">0.0006474</td>
 </tr>
 <tr class="even">
 <td align="left">size:color</td>
 <td align="right">6</td>
 <td align="right">30</td>
-<td align="right">0.0366975</td>
-<td align="right">3.2407090</td>
-<td align="right">0.0225560</td>
+<td align="right">21.02831</td>
+<td align="right">0.4695047</td>
+<td align="right">0.0044335</td>
 </tr>
 <tr class="odd">
 <td align="left">layout:size:color</td>
 <td align="right">6</td>
 <td align="right">30</td>
-<td align="right">0.0480365</td>
-<td align="right">0.9095516</td>
-<td align="right">0.0084067</td>
+<td align="right">20.73981</td>
+<td align="right">1.4065459</td>
+<td align="right">0.0129870</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><em>Note that the fractional degrees of freedom result from a Greenhousse-Geisser sphericity correction.</em></p>
-<pre><code>TODO: Boostrapped 95%CIs for effect sizes
-Pro: people should
-Con: would make the guide even longer
-Maybe push into another guideline?</code></pre>
+<p>Looking at the <code>F</code> and <code>ges</code> (generalized eta squared) columns, <code>layout</code> and <code>size</code> and the interaction between <code>layout</code> and <code>size</code> account for much more of the noise than <code>color</code> and the other 2-way and 3-way interactions do.</p>
+</div>
+<div id="bootstrapping" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Bootstrapping</h3>
+<p><mark> Draft. Needs work. </mark></p>
+<p>But that only gives us one one point estimate per effect, whereas we want a confidence interval.</p>
+<p>We’ll use a technique called bootstrapping, which checks the effect size for many randomized samples of the data. Importantly, bootstrapping samples “with replacement”, meaning that items can be sampled more than once or not at all. If a small subset of the observations are driving an effect, they won’t impact all of the samples. Consequently, the spread of the bootstrapped confidence intervals shows how consistent the results are for different samples.</p>
+<ol style="list-style-type: decimal">
+<li>Randomly sample with replacement (meaning the same value might be sampled more than once) to build a new dataset</li>
+<li>Perform the analysis on this new dataset</li>
+<li>Do that many times</li>
+<li>Sort the results for each effect and find the 95% confidence interval</li>
+</ol>
+<div id="prepare-for-bootstrapping" class="section level4">
+<h4><span class="header-section-number">2.3.5.1</span> Prepare for bootstrapping</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># data used for bootstrapping will collapse by each subject-condition combination</span>
+data_aggregated &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(layout, size, color, subject) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">response_time =</span> <span class="kw">mean</span>(response_time))</code></pre></div>
+</div>
+<div id="each-iteration" class="section level4">
+<h4><span class="header-section-number">2.3.5.2</span> Each iteration</h4>
+<p>Each iteration of the bootstrap samples the original dataset and runs the analysis on this permutation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run one iteration of the bootstrap procedure</span>
+analyze_one_iteration &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  subjects &lt;-<span class="st"> </span><span class="kw">unique</span>(data_aggregated<span class="op">$</span>subject)
+  
+  <span class="co"># select subjects at random with replacement</span>
+  sampled_subjects &lt;-<span class="st"> </span><span class="kw">sample</span>(subjects, <span class="kw">length</span>(subjects), <span class="dt">replace=</span><span class="ot">TRUE</span>)
+  
+  <span class="co"># get all the results for one subject</span>
+  <span class="co"># and give them a new unique subject id</span>
+  get_one_subjects_data &lt;-<span class="st"> </span><span class="cf">function</span>(i) {
+    data_aggregated <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">filter</span>(subject <span class="op">==</span><span class="st"> </span>sampled_subjects[i]) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">mutate</span>(<span class="dt">subject =</span> <span class="kw">paste</span>(sampled_subjects[i], i))
+  }
+  
+  <span class="co"># get all of the boostrapped subjects&#39; data</span>
+  boot_data &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(sampled_subjects), get_one_subjects_data) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">bind_rows</span>()
+  
+  <span class="co"># compute the effect sizes the same way we did without bootstrapping</span>
+  afex<span class="op">::</span><span class="kw">aov_ez</span>(
+    <span class="dt">data =</span> boot_data, 
+    <span class="dt">id =</span> <span class="st">&#39;subject&#39;</span>, <span class="co"># subject id column</span>
+    <span class="dt">dv =</span> <span class="st">&#39;response_time&#39;</span>, <span class="co"># dependent variable</span>
+    <span class="dt">within =</span> <span class="kw">c</span>(<span class="st">&#39;layout&#39;</span>, <span class="st">&#39;size&#39;</span>, <span class="st">&#39;color&#39;</span>), <span class="co"># within-subject independent variables</span>
+    <span class="dt">between =</span> <span class="ot">NULL</span> ,<span class="co"># between-subject independent variables</span>
+    <span class="co">#fun_aggregate = mean,</span>
+    <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="st">&#39;ges&#39;</span>) <span class="co"># effect size = generalized eta squared</span>
+  )<span class="op">$</span>anova_table <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">as.tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rownames_to_column</span>(<span class="st">&#39;effect&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># put effect names in a column</span>
+<span class="st">    </span><span class="kw">return</span>()
+}</code></pre></div>
+</div>
+<div id="iterate" class="section level4">
+<h4><span class="header-section-number">2.3.5.3</span> Iterate</h4>
+<p>The bootstrap needs to run many times to determine how a subset of the data impacts</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run many iterations of the bootstrap procedure</span>
+analyze_many_iterations =<span class="st"> </span><span class="cf">function</span> (bootstrap_iteration_count) {
+  <span class="co"># each core needs to reload the libraries</span>
+  <span class="kw">library</span>(tidyverse)
+  <span class="kw">library</span>(afex)
+  <span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span>bootstrap_iteration_count, <span class="cf">function</span>(x) <span class="kw">analyze_one_iteration</span>(x)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">bind_rows</span>()
+}</code></pre></div>
+</div>
+<div id="parallelize" class="section level4">
+<h4><span class="header-section-number">2.3.5.4</span> Parallelize</h4>
+<p>Bootstrapping can be slow, especially with thousands of iterations. Splitting the iterations across processor cores cuts down on the wait time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BOOTSTRAP_COUNT &lt;-<span class="st"> </span><span class="dv">100</span> <span class="co"># at least 5k recommended. Use lower values for quicker testing.</span>
+
+<span class="co"># Initiate cluster</span>
+core_count &lt;-<span class="st"> </span><span class="kw">detectCores</span>() <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+core_count &lt;-<span class="st"> </span><span class="kw">ifelse</span>(core_count <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, core_count)
+my_cluster &lt;-<span class="st"> </span><span class="kw">makeCluster</span>(core_count)
+<span class="co"># make sure each core in the cluster defines these functions</span>
+<span class="kw">clusterExport</span>(my_cluster, <span class="st">&quot;analyze_one_iteration&quot;</span>)
+<span class="kw">clusterExport</span>(my_cluster, <span class="st">&quot;data_aggregated&quot;</span>)
+<span class="co"># how many times should each core iterate </span>
+bootstrap_iteration_count &lt;-<span class="st"> </span>BOOTSTRAP_COUNT <span class="op">/</span><span class="st"> </span>core_count
+<span class="co"># run the bootstrap and output the time</span>
+<span class="kw">system.time</span>(
+  boot_results &lt;-<span class="st"> </span><span class="kw">parLapply</span>(
+    my_cluster, <span class="co"># the cluster of cores</span>
+    <span class="kw">rep</span>(bootstrap_iteration_count, core_count), <span class="co"># how many runs for each core</span>
+    analyze_many_iterations) <span class="co"># the function to run in each core</span>
+)</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   0.003   0.000  11.117</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the cluster is no longer needed</span>
+<span class="kw">stopCluster</span>(my_cluster)
+<span class="co"># cleanup</span>
+<span class="kw">rm</span>(core_count, my_cluster, bootstrap_iteration_count, data_aggregated)</code></pre></div>
+</div>
+</div>
+<div id="getting-a-confidence-interval-from-a-bootstrap" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> Getting a confidence interval from a bootstrap</h3>
+<p>Each bootstrap iterations ran one anaylsis, so wwe now have many results. So for each effect size, we sort the results and find the range of the inner 95%.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># inner 95%</span>
+PERCENTILE_LO &lt;-<span class="st"> </span><span class="fl">0.025</span>
+PERCENTILE_HI &lt;-<span class="st"> </span><span class="fl">0.975</span>
+
+<span class="co"># put all the boostraped results together</span>
+boot_results &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(boot_results)
+boot_results &lt;-<span class="st"> </span>
+<span class="st">  </span>boot_results <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(effect) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">effectsize_conf_low =</span> <span class="kw">unname</span>(<span class="kw">quantile</span>(ges, <span class="dt">probs =</span> PERCENTILE_LO)),
+    <span class="dt">effectsize_conf_high =</span> <span class="kw">unname</span>(<span class="kw">quantile</span>(ges, <span class="dt">probs =</span> PERCENTILE_HI)))
+
+<span class="co"># add the low and hi end estimates to the effect size table</span>
+anova_results &lt;-<span class="st"> </span>
+<span class="st">  </span>anova_results <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(boot_results, <span class="dt">by =</span> <span class="st">&#39;effect&#39;</span>)
+<span class="co"># show the table</span>
+anova_results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.tibble</span>()</code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">effect</th>
+<th align="right">num Df</th>
+<th align="right">den Df</th>
+<th align="right">MSE</th>
+<th align="right">F</th>
+<th align="right">ges</th>
+<th align="right">effectsize_conf_low</th>
+<th align="right">effectsize_conf_high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">layout</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">86.61117</td>
+<td align="right">186.9153824</td>
+<td align="right">0.5489428</td>
+<td align="right">0.3771272</td>
+<td align="right">0.8402746</td>
+</tr>
+<tr class="even">
+<td align="left">size</td>
+<td align="right">2</td>
+<td align="right">10</td>
+<td align="right">51.97262</td>
+<td align="right">108.2961322</td>
+<td align="right">0.4583589</td>
+<td align="right">0.3194852</td>
+<td align="right">0.7699754</td>
+</tr>
+<tr class="odd">
+<td align="left">color</td>
+<td align="right">3</td>
+<td align="right">15</td>
+<td align="right">14.50618</td>
+<td align="right">0.9125176</td>
+<td align="right">0.0029764</td>
+<td align="right">0.0013143</td>
+<td align="right">0.0450325</td>
+</tr>
+<tr class="even">
+<td align="left">layout:size</td>
+<td align="right">2</td>
+<td align="right">10</td>
+<td align="right">31.84102</td>
+<td align="right">59.8437233</td>
+<td align="right">0.2226922</td>
+<td align="right">0.1223908</td>
+<td align="right">0.5574384</td>
+</tr>
+<tr class="odd">
+<td align="left">layout:color</td>
+<td align="right">3</td>
+<td align="right">15</td>
+<td align="right">19.24758</td>
+<td align="right">0.1492400</td>
+<td align="right">0.0006474</td>
+<td align="right">0.0002076</td>
+<td align="right">0.0301530</td>
+</tr>
+<tr class="even">
+<td align="left">size:color</td>
+<td align="right">6</td>
+<td align="right">30</td>
+<td align="right">21.02831</td>
+<td align="right">0.4695047</td>
+<td align="right">0.0044335</td>
+<td align="right">0.0022358</td>
+<td align="right">0.0609152</td>
+</tr>
+<tr class="odd">
+<td align="left">layout:size:color</td>
+<td align="right">6</td>
+<td align="right">30</td>
+<td align="right">20.73981</td>
+<td align="right">1.4065459</td>
+<td align="right">0.0129870</td>
+<td align="right">0.0063141</td>
+<td align="right">0.0938595</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="plot-the-effect-sizes" class="section level3">
+<h3><span class="header-section-number">2.3.7</span> Plot the effect sizes</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anova_results <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># reverse order the factors so that they appear in proper order in the plot</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">effect =</span> <span class="kw">fct_rev</span>(<span class="kw">fct_inorder</span>(effect))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>
+<span class="st">  </span><span class="co"># plot and mapping</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> effect, <span class="dt">y =</span> ges, <span class="dt">ymin =</span> effectsize_conf_low, <span class="dt">ymax =</span> effectsize_conf_high)) <span class="op">+</span>
+<span class="st">    </span><span class="co"># reference line of no-effect</span>
+<span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&#39;dotted&#39;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="co"># point- and interval-estimates</span>
+<span class="st">    </span><span class="kw">geom_pointrange</span>() <span class="op">+</span>
+<span class="st">    </span><span class="co"># ensures that we see the reference line</span>
+<span class="st">    </span><span class="kw">expand_limits</span>(<span class="dt">x =</span> <span class="dv">0</span>) <span class="op">+</span>
+<span class="st">    </span><span class="co"># labels</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Effect size &#39;</span>, eta[G]<span class="op">^</span><span class="dv">2</span>))) <span class="op">+</span>
+<span class="st">    </span><span class="co"># flip to horizontal plot and apply black-and-white theme</span>
+<span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/within-boostrap-4-1.png" width="672" /></p>
 </div>
 <div id="reporting-the-results" class="section level3">
-<h3><span class="header-section-number">2.3.5</span> Reporting the results</h3>
-<p>Looking at the <code>F</code> and <code>ges</code> (generalized eta squared) columns, there are clear main effects for <code>layout</code> and <code>size</code> and an interaction between <code>layout</code> and <code>size</code>. However <code>color</code> and the other 2-way and 3-way interactions show only negligeable effects.</p>
+<h3><span class="header-section-number">2.3.8</span> Reporting the results</h3>
+<p>Generalized eta squared (GES) represents the proportion of variance in the results explained by each variable. The previous graph shows clear main effects for <code>layout</code> and <code>size</code> and an interaction between <code>layout</code> and <code>size</code>. However <code>color</code> and the other 2-way and 3-way interactions are relatively much smaller, barely above zero. There is no useful cutoff for what counts as a “significant” effect, so think in terms of relative size – which variables best explain the variance in the results?</p>
+<p>Strong effects:</p>
 <ul>
-<li><strong>layout:</strong> F<sub>1,5</sub> = 416, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.458</li>
-<li><strong>size:</strong> F<sub>2,10</sub> = 105, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.357</li>
-<li><strong>layout</strong> × <strong>size:</strong> F<sub>2,10</sub> = 101, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.169</li>
-<li><strong>color</strong> did not have a substantive effect (F<sub>3,15</sub> = 1.27, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00353)</li>
+<li><strong>layout:</strong> F<sub>1,5</sub> = 187, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.549 95% CI [0.377, 0.84]</li>
+<li><strong>size:</strong> F<sub>2,10</sub> = 108, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.458 95% CI [0.319, 0.77]</li>
+<li><strong>layout</strong> × <strong>size:</strong> F<sub>2,10</sub> = 59.8, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.223 95% CI [0.122, 0.557]</li>
 </ul>
-<p>Report any interaction for which there is reason to believe an effect could occur. Otherwise, you can simply state that other 2-way and 3-way interactions did not have substantive effect sizes. However, when in doubt, report everything!</p>
+<p>Minimally impactful:</p>
+<ul>
+<li><strong>color</strong> F<sub>3,15</sub> = 0.913, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00298 95% CI [0.00131, 0.045]</li>
+<li><strong>layout</strong> × <strong>color:</strong> F<sub>3,15</sub> = 0.149, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.000647 95% CI [0.000208, 0.0302]</li>
+<li><strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 0.47, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00443 95% CI [0.00224, 0.0609]</li>
+<li><strong>layout</strong> × <strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 1.41, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.013 95% CI [0.00631, 0.0939]</li>
+</ul>
 
 </div>
 </div>
@@ -698,10 +960,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -725,9 +988,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
