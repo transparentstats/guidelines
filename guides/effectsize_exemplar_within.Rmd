@@ -6,37 +6,40 @@ If you would like to contribute, please see
 [Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
 </mark>
 
-Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times.
+Large individual differences can be a major source of noise. An effective way of accounting for that noise is for every subject to run in every combination of conditions multiple times. This "*within-subject*" experiment design combined with many repetitions per condition can substantially reduce any noise from individual differences, allowing for more precise measurements despite a small number of subjects.
 
-In this example, we'll compare two interfaces for visualizing data.
+In this example, we'll pretend we've run an experiment that compared different interfaces for visualizing data. Here are the parameters that we manipulate in the experiment:
 
 * Independent Variable **layout**: the two layouts of the interface
 * Independent Variable **size**: the size of the dataset visualized (small, medium, and large)
 * Independent Variable **color**: interface color, where we don't expect any effect
 
-We run each subject through each combination of these variables 20 times to get (2 interfaces) × (3 sizes) × (4 colors) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some reponse (e.g., reponse time) in each trial.
+We run each subject through each combination of these variables 20 times to get (2 layouts) × (3 sizes) × (4 colors) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some reponse (e.g., reponse time) in each trial.
 
 
 ### Libraries needed for this analysis
 
 ```{r es-within-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
-library(broom)      # for tidy()
 library(afex)       # for aov_ez()
+library(parallel)   # for parLapply()
 ```
 
 ```{r es-within-boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
+### Simulate a dataset
 
-### Subjects, conditions, and repetitions
-In this example, there are 10 subjects (`id` column). Because this is simulated data, we're using subject `id` to represent individual performance differences. Because within-subjects experiments partly account for individual differences, they often need far fewer subjects than between-subject designs. Repetitions also help reduce noise.
+#### Subjects, conditions, and repetitions
+In this example, there are 6 subjects (`subject` column).
 
 ```{r within-setup}
-set.seed(456) # make the output consistent
+set.seed(543) # make the output consistent
+SUBJECT_COUNT = 6
+
 data <- expand.grid(
-  id = rnorm(6, 5, 0.5), # individual differences
+  subject = paste('Subject', LETTERS[1:SUBJECT_COUNT]), # subject IDs
   layout = 0:1, # independent variable
   size = 0:2, # independent variable
   color = 0:3, # independent variable
@@ -44,24 +47,43 @@ data <- expand.grid(
 )
 ```
 
-### Simulate some noisy effects
+#### Individual differences
+Not all subjects behave the same way. Some people might be tired, bad at the task, or just not trying very hard. These performance differences can't be directly measured, but they can substantially impact the results. We'll simulate these individual differences by giving each subject a random performance handicap.
+
+```{r}
+# build a table of subject performance multipliers
+individualDifferences <- tibble(subject = unique(data$subject))
+individualDifferences$handicap <- rnorm(SUBJECT_COUNT, 20, 4) # individual differences
+
+# put it in the main dataset
+data <- data %>% left_join(individualDifferences, by = "subject")
+```
+
+#### Simulate some noisy effects
 We'll simulate an experiment with a main effect of `layout` and `size` and an interaction between them. However, `color` and its interactions will not have an impact.
 
 ```{r within-simulate}
+
+# simulate the response times with a clean model
 data <- 
   data %>% 
   mutate(
   response_time = 
-    id + # additive individual differences
     layout * .4 + # main effect of layout
     size * .2 + # main effect of size
     color * 0 + 
-    layout * size * .5 + # 2-way interaction
+    layout * size * .6 + # 2-way interaction
     size * color * 0 + 
     layout * color * 0 + 
-    layout * size * color * 0 + 
-    rnorm(n()) # noise
+    layout * size * color * 0
 )
+
+# add some reponse noise
+data <- data %>% mutate(response_time = response_time + rnorm(n()))
+
+# add noise from individual handicaps
+data <- data %>% mutate(response_time = 30 + handicap*2 + response_time * handicap)
+
 ```
 
 Even though we used numbers to simulate the model, the independent variables and subject ID are all factors.
@@ -69,75 +91,255 @@ Even though we used numbers to simulate the model, the independent variables and
 data <- 
   data %>% 
   mutate(
-    id = factor(id), 
+    subject = factor(subject), 
     layout = factor(layout), 
-    size = factor(size), 
     color = factor(color)
   )
 ```
 
+### A look at the data
+
+Let's get an overview of the results by graphing each subject's average response time for each condition.
+
+```{r within-sneak-peak}
+data %>% 
+  group_by(layout, size, color, subject) %>% 
+  summarize(response_time = mean(response_time)) %>% 
+ggplot() + 
+  aes(y=response_time, x=size, linetype=layout, color=color, 
+      group=paste(layout,color,subject)) + 
+  geom_line(size=1.5) + 
+  scale_color_brewer(palette='Set1') + 
+  facet_wrap(~subject) + 
+  labs(title='Response times for each subject') +
+  theme_bw()
+```
+
+Despite a lot of variability in raw values between subjects (individual differences), we can see some consistent patterns. The dashed lines are higher (main effect) and more sloped (interaction) than the solid lines. But there doesn't seem to be any consistent ordering of the colors.
+
 
 ### Compute effect sizes
-While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, more complex designs can be more consistently interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
+While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, repetition skews the measure to be very high. Experiment results with lots of repetition can be more reliably interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
 
 For those accustomed to Cohen's *d*, it's important to be aware that $\eta_{G}^{2}$ is typically smaller, with a Cohen's d of 0.2 being equivalent to a $\eta_{G}^{2}$ of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects. 
 
 ```{r within-anova}
 results = afex::aov_ez(
   data = data, 
-  id = 'id', # subject id column
+  id = 'subject', # subject id column
   dv = 'response_time', # dependent variable
   within = c('layout', 'size', 'color'), # within-subject independent variables
   between = NULL ,# between-subject independent variables
+  fun_aggregate = mean, # average multiple repetitions together for each subject*condition
   anova_table = list(es = 'ges') # effect size = generalized eta squared
 )
 ```
 
-*Note: the warning indicates that the aov_ez function automatically collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
+*Note: `fun_aggregate = mean` collapses repetitions into a mean, which may be a problem if an experiment is not fully counterbalanced. This example, however, has every subject running in every combination of conditions, so simple collapsing is the correct procedure.*
 
 ```{r  within-anova-cleanup}
-anovaResults <- 
+anova_results <- 
   results$anova_table %>% 
   rownames_to_column('effect') %>%  # put effect names in a column
   select(-`Pr(>F)`) # no need to show p-values
   
-anovaResults %>% 
-  tidy() %>% 
-  rename(F = statistic)
+anova_results %>% as.tibble()
 ```
 
-*Note that the fractional degrees of freedom result from a Greenhousse-Geisser sphericity correction.*
+Looking at the `F` and `ges` (generalized eta squared) columns, `layout` and `size` and the interaction between `layout` and `size` account for much more of the noise than `color` and the other 2-way and 3-way interactions do.
+
+
+### Bootstrapping
+
+<mark> Draft. Needs work. </mark>
+
+But that only gives us one one point estimate per effect, whereas we want a confidence interval.
+
+We'll use a technique called bootstrapping, which checks the effect size for many randomized samples of the data. Importantly, bootstrapping samples "with replacement", meaning that items can be sampled more than once or not at all. If a small subset of the observations are driving an effect, they won't impact all of the samples. Consequently, the spread of the bootstrapped confidence intervals shows how consistent the results are for different samples. 
+
+1. Randomly sample with replacement (meaning the same value might be sampled more than once) to build a new dataset
+1. Perform the analysis on this new dataset
+1. Do that many times
+1. Sort the results for each effect and find the 95% confidence interval
+
+#### Prepare for bootstrapping
+
+```{r}
+# data used for bootstrapping will collapse by each subject-condition combination
+data_aggregated <- data %>% 
+  group_by(layout, size, color, subject) %>% 
+  summarize(response_time = mean(response_time))
+```
+
+#### Each iteration
+
+Each iteration of the bootstrap samples the original dataset and runs the analysis on this permutation.
+
+```{r within-bootstrap-by-subject}
+
+# run one iteration of the bootstrap procedure
+analyze_one_iteration <- function(x) {
+  subjects <- unique(data_aggregated$subject)
+  
+  # select subjects at random with replacement
+  sampled_subjects <- sample(subjects, length(subjects), replace=TRUE)
+  
+  # get all the results for one subject
+  # and give them a new unique subject id
+  get_one_subjects_data <- function(i) {
+    data_aggregated %>% 
+      filter(subject == sampled_subjects[i]) %>% 
+      mutate(subject = paste(sampled_subjects[i], i))
+  }
+  
+  # get all of the boostrapped subjects' data
+  boot_data <- lapply(1:length(sampled_subjects), get_one_subjects_data) %>% 
+    bind_rows()
+  
+  # compute the effect sizes the same way we did without bootstrapping
+  afex::aov_ez(
+    data = boot_data, 
+    id = 'subject', # subject id column
+    dv = 'response_time', # dependent variable
+    within = c('layout', 'size', 'color'), # within-subject independent variables
+    between = NULL ,# between-subject independent variables
+    #fun_aggregate = mean,
+    anova_table = list(es = 'ges') # effect size = generalized eta squared
+  )$anova_table %>% 
+    as.tibble() %>% 
+    rownames_to_column('effect') %>% # put effect names in a column
+    return()
+}
+```
+
+#### Iterate
+
+The bootstrap needs to run many times to determine how a subset of the data impacts
+
+```{r within-bootstrap-bootstrap iterator}
+
+# run many iterations of the bootstrap procedure
+analyze_many_iterations = function (bootstrap_iteration_count) {
+  # each core needs to reload the libraries
+  library(tidyverse)
+  library(afex)
+  lapply(1:bootstrap_iteration_count, function(x) analyze_one_iteration(x)) %>% 
+    bind_rows()
+}
+```
+
+#### Parallelize
+
+Bootstrapping can be slow, especially with thousands of iterations. Splitting the iterations across processor cores cuts down on the wait time.
+
+```{r within-parallelize-boostrap, cache=TRUE}
+BOOTSTRAP_COUNT <- 100 # at least 5k recommended. Use lower values for quicker testing.
+
+# Initiate cluster
+core_count <- detectCores() - 1
+core_count <- ifelse(core_count < 1, 1, core_count)
+my_cluster <- makeCluster(core_count)
+# make sure each core in the cluster defines these functions
+clusterExport(my_cluster, "analyze_one_iteration")
+clusterExport(my_cluster, "data_aggregated")
+# how many times should each core iterate 
+bootstrap_iteration_count <- BOOTSTRAP_COUNT / core_count
+# run the bootstrap and output the time
+system.time(
+  boot_results <- parLapply(
+    my_cluster, # the cluster of cores
+    rep(bootstrap_iteration_count, core_count), # how many runs for each core
+    analyze_many_iterations) # the function to run in each core
+)
+# the cluster is no longer needed
+stopCluster(my_cluster)
+# cleanup
+rm(core_count, my_cluster, bootstrap_iteration_count, data_aggregated)
+```
+
+### Getting a confidence interval from a bootstrap
+
+Each bootstrap iterations ran one anaylsis, so wwe now have many results. So for each effect size, we sort the results and find the range of the inner 95%.
+
+```{r within-boostrap-3}
+# inner 95%
+PERCENTILE_LO <- 0.025
+PERCENTILE_HI <- 0.975
+
+# put all the boostraped results together
+boot_results <- bind_rows(boot_results)
+boot_results <- 
+  boot_results %>% 
+  group_by(effect) %>% 
+  summarize(
+    effectsize_conf_low = unname(quantile(ges, probs = PERCENTILE_LO)),
+    effectsize_conf_high = unname(quantile(ges, probs = PERCENTILE_HI)))
+
+# add the low and hi end estimates to the effect size table
+anova_results <- 
+  anova_results %>% 
+  left_join(boot_results, by = 'effect')
+# show the table
+anova_results %>% as.tibble()
+```
+
+### Plot the effect sizes
+
+```{r within-boostrap-4}
+
+anova_results %>% 
+  # reverse order the factors so that they appear in proper order in the plot
+  mutate(effect = fct_rev(fct_inorder(effect))) %>% 
+  
+  # plot and mapping
+  ggplot(aes(x = effect, y = ges, ymin = effectsize_conf_low, ymax = effectsize_conf_high)) +
+    # reference line of no-effect
+    geom_hline(yintercept = 0, linetype = 'dotted') +
+    # point- and interval-estimates
+    geom_pointrange() +
+    # ensures that we see the reference line
+    expand_limits(x = 0) +
+    # labels
+    labs(y = expression(paste('Effect size ', eta[G]^2))) +
+    # flip to horizontal plot and apply black-and-white theme
+    coord_flip() +
+    theme_bw()
 
 ```
-TODO: Boostrapped 95%CIs for effect sizes
-Pro: people should
-Con: would make the guide even longer
-Maybe push into another guideline?
-```
+
 
 ### Reporting the results
 
-Looking at the `F` and `ges` (generalized eta squared) columns, there are clear main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions show only negligeable effects.
+Generalized eta squared (GES) represents the proportion of variance in the results explained by each variable. The previous graph shows clear main effects for `layout` and `size` and an interaction between `layout` and `size`. However `color` and the other 2-way and 3-way interactions are relatively much smaller, barely above zero. There is no useful cutoff for what counts as a "significant" effect, so think in terms of relative size -- which variables best explain the variance in the results? 
 
 ```{r within-format, include=FALSE}
 # format the anova results for a report, and trim to 3 significant digits
-formatGES <- function(anovaTable, effectName) {
+formatGES <- function(anova_table, effectName) {
   cutoff = 0.01
-  row = (1:nrow(anovaTable))[anovaTable$effect == effectName]
+  row = (1:nrow(anova_table))[anova_table$effect == effectName]
   return(paste0(
     'F~',
-    signif(anovaTable[row, 'num Df'], 3), ',',
-    signif(anovaTable[row, 'den Df'], 3), '~ = ',
-    signif(anovaTable[row, 'F'], 3), ', $\\eta_{G}^{2}$ = ',
-    signif(anovaTable[row, 'ges'], 3)
+    signif(anova_table[row, 'num Df'], 3), ',',
+    signif(anova_table[row, 'den Df'], 3), '~ = ',
+    signif(anova_table[row, 'F'], 3), ', $\\eta_{G}^{2}$ = ',
+    signif(anova_table[row, 'ges'], 3), '  95% CI [',
+    signif(anova_table[row, 'effectsize_conf_low'], 3), ', ',
+    signif(anova_table[row, 'effectsize_conf_high'], 3), ']'
   ))
 }
 ```
 
 
- - **layout:** `r formatGES(anovaResults, 'layout')`
- - **size:** `r formatGES(anovaResults, 'size')`
- - **layout** × **size:** `r formatGES(anovaResults, 'layout:size')`
- - **color** did not have a substantive effect (`r formatGES(anovaResults, 'color')`)
+Strong effects:
 
-Report any interaction for which there is reason to believe an effect could occur. Otherwise, you can simply state that other 2-way and 3-way interactions did not have substantive effect sizes. However, when in doubt, report everything!
+ - **layout:** `r formatGES(anova_results, 'layout')`
+ - **size:** `r formatGES(anova_results, 'size')`
+ - **layout** × **size:** `r formatGES(anova_results, 'layout:size')`
+ 
+Minimally impactful:
+
+ - **color** `r formatGES(anova_results, 'color')`
+ - **layout** × **color:** `r formatGES(anova_results, 'layout:color')`
+ - **size** × **color:** `r formatGES(anova_results, 'size:color')`
+ - **layout** × **size** × **color:** `r formatGES(anova_results, 'layout:size:color')`
+
