@@ -28,6 +28,6 @@ This document grew out of a Special Interest Group and Workshop to develop guide
 We welcome help and feedback at all levels! If you would like to contribute, please see
 [Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
 
-To refer to this specific version, use this DOI: [10.5281/zenodo.1186170](https://doi.org/10.5281/zenodo.1186170).
+To refer to this specific version, use this DOI: [10.5281/zenodo.1228032](https://doi.org/10.5281/zenodo.1228032).
 
 For the most up-to-date version of the guideline, visit [the online guideline page](https://transparentstats.github.io/guidelines/) or [source on Github](https://github.com/transparentstats/guidelines).
