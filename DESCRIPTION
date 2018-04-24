@@ -2,6 +2,7 @@ Package: placeholder for Travis to install required packages
 Title: Does not matter.
 Version: 0.0.1
 Imports:
+    bookdown,
     tidyverse,
     forcats,
     broom,
@@ -16,6 +17,5 @@ Imports:
     import,
     brms
 Remotes: 
-    rstudio/bookdown,
     mjskay/tidybayes
     

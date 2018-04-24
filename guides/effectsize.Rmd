@@ -1,12 +1,12 @@
 # Effect size {#effectsize}
 <div style="text-align:center">
-```{r}
-knitr::include_graphics("figures/effectsize/teaser.png")
+```{r echo=FALSE}
+knitr::include_graphics("figures/effectsize/teaser.png", dpi = NA)
 # TODO: generate the teaser figure in code
 ```
 </div>
 
-**Version:** 1.0
+**Version:** 1.1
 
 **Contributed to the writing:** Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic, Jacob O. Wobbrock, Janne Lindqvist, Yea-Seul Kim, Amelia McNamara
 
