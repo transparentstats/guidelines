@@ -48,8 +48,9 @@ Ideally, an effect size report should include:
 
 - The direction of the effect if applicable (e.g., given a difference between two treatments `A` and `B`, indicate if the measured effect is `A - B` or `B - A`).
 - The type of point estimate reported (e.g., a sample mean difference)
-- The type of uncertainty information reported (e.g., a 95% CI)
+- The type of uncertainty information reported (e.g., a 95% confidence interval, or a credible interval, or the standard deviation, or standard error)
 - The units of the effect size if applicable (e.g., taps/minute or completion time in ms), or the type of standardized effect size if it is a unitless effect size. 
+
 
 This information can be reported either numerically or graphically. Both formats are acceptable, although plots tend to be easier to comprehend than numbers when more than one effect size needs to be conveyed [@Loftus1993; @Kastellec2007]. Unless precise numerical values are important, it is sufficient (and often preferable) to report all effect sizes graphically. Researchers should avoid plotting point estimates without also plotting uncertainty information (using, e.g., error bars).
 
@@ -88,8 +89,10 @@ It is generally advisable to avoid the use of arbitrary thresholds when deciding
 
 Nevertheless, more often than not in HCI, it is difficult to determine whether a certain effect is of practical importance. For example, a difference in pointing time of 100 ms between two pointing techniques can be large or small depending on the application, how often it is used, its context of use, etc. In such cases, forcing artificial interpretations of practical importance can hurt transparency. In many cases, it is sufficient to present effect sizes in a clear manner and leave the judgment of practical importance to the reader.
 
-Simple effect sizes are often a better choice, because they provide the information necessary for an expert in the area to use their judgment to assess the practical impact of an effect size. For example, a difference in reaction time of 100ms is above the threshold of human perception, and therefore likely of practical impact. A difference of 100ms in receiving a chat message in an asynchronous chat application is likely less impactful, as it is small compared to the amount of time a chat message is generally expected to take. A difference in pointing time of 100ms between two pointing techniques might be large or small depending on the application, how often it is used, the context of use, etc. Presenting simple effect sizes in a clear way---with units---allows the expert author to argue why the effect size may or may not have practical importance *and* allow the expert reader to make their own judgment.
+Simple effect sizes provide the information necessary for an expert in the area to use their judgment to assess the practical impact of an effect size. For example, a difference in reaction time of 100ms is above the threshold of human perception, and therefore likely of practical impact. A difference of 100ms in receiving a chat message in an asynchronous chat application is likely less impactful, as it is small compared to the amount of time a chat message is generally expected to take. 
+Presenting simple effect sizes in a clear way---with units---allows the expert author to argue why the effect size may or may not have practical importance *and* allow the expert reader to make their own judgment.
 
+For the judgement about standardized effect sizes, see the next section.
 
 ### What about Cohen's small, medium, and large effect sizes? {#effectsize_faq_small_medium_large}
 
@@ -106,4 +109,9 @@ is to be gained than lost by supplying a common conventional frame of
 reference which is recommended for use only when no better basis for estimating
 the ES index is available. [@Cohen1977]
 
-Cohen recommended the use of these thresholds only when no better frame of reference for assessing practical importance was available. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [@Baguley2004; @Lenth2001]; Lenth has called this usage "canned effect sizes" [@Lenth2001]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. Like Cummings [-@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
+Cohen recommended the use of these thresholds __only when no better frame of reference for assessing practical importance was available__. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [@Baguley2004; @Lenth2001]; Lenth has called this usage "canned effect sizes" [@Lenth2001]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. Like Cummings [-@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
+
+
+### How to use effect sizes in planning a study?
+
+See the [Experiment and analysis planning FAQ](#planning).

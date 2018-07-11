@@ -74,7 +74,9 @@ t_result
 ```
 
 The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
-
+95% of all intervals constructed in this manner will contain the "true" (population) value. 
+A 95% t-confidence interval is therefore a reasonable measure of uncertainty about our measured effect size. 
+The wider the confidence interval, the less certain we are about what we expect our true effect size to be.
 
 ### Reporting simple effect size
 
