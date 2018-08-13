@@ -14,7 +14,7 @@ In this example, we'll pretend we've run an experiment that compared different i
 * Independent Variable **size**: the size of the dataset visualized (small, medium, and large)
 * Independent Variable **color**: interface color, where we don't expect any effect
 
-We run each subject through each combination of these variables 20 times to get (2 layouts) × (3 sizes) × (4 colors) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some reponse (e.g., reponse time) in each trial.
+We run each subject through each combination of these variables 20 times to get (2 layouts) × (3 sizes) × (4 colors) × (20 repetitions) = `r 2*3*4*20` trials per subject. We measure some response (e.g., response time) in each trial.
 
 
 ### Libraries needed for this analysis
@@ -45,6 +45,9 @@ data <- expand.grid(
   color = 0:3, # independent variable
   repetition = 1:20 # each subject runs in each condition multiple times
 )
+
+# peak at the data
+head(data)
 ```
 
 #### Individual differences
@@ -119,7 +122,7 @@ Despite a lot of variability in raw values between subjects (individual differen
 
 
 ### Compute effect sizes
-While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, repetition skews the measure to be very high. Experiment results with lots of repetition can be more reliably interpretted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
+While **Cohen's *d* ** is often used for simple 2-factor, single-trial, between-subject designs, repetition skews the measure to be very high. Experiment results with lots of repetition can be more reliably interpreted with the **eta squared ($\eta^{2}$)** family of effect sizes, which represent the proportion of variance accounted for by a particular variable. A variant, **generalized eta squared ($\eta_{G}^{2}$)**, is particularly suited for providing comparable effect sizes in both between and within-subject designs [@Olejnik2003; @Bakeman2005]. This property makes it more easily applicable to meta-analyses.
 
 For those accustomed to Cohen's *d*, it's important to be aware that $\eta_{G}^{2}$ is typically smaller, with a Cohen's d of 0.2 being equivalent to a $\eta_{G}^{2}$ of around 0.02. Also, the actual number has little meaning beyond its scale relative to other effects. 
 
