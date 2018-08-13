@@ -1,6 +1,8 @@
 # Transparent Statistics Guiding Principles
 
-**Version:** 1.0
+**Version:** 1.0 
+
+**DOI:** [10.5281/zenodo.1344317](https://doi.org/10.5281/zenodo.1344317)
 
 **Contributed to the writing:** Pierre Dragicevic, Chat Wacharamanotham, Matthew Kay
 
