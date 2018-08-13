@@ -1,12 +1,17 @@
 # Transparent Statistics Guiding Principles
 
-**Version:** 1.0
+<a href="https://github.com/transparentstats/guidelines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+
+**Version:** 1.0 [![DOI current version](https://img.shields.io/badge/DOI%20current%20version-10.5281%2Fzenodo.1344317-green.svg)](https://doi.org/10.5281/zenodo.1344317) [![DOI all versions](https://img.shields.io/badge/DOI%20all%20versions-10.5281%2Fzenodo.1344316-blue.svg)](https://doi.org/10.5281/zenodo.1344316)  
+
+
 
 **Contributed to the writing:** Pierre Dragicevic, Chat Wacharamanotham, Matthew Kay
 
 **Gave feedback:** 
 
 **Endorsed:** 
+
 
 ## Introduction
 
@@ -109,4 +114,3 @@ Analysis and reporting strategies that waste statistical power and precision (e.
 ### 9. Material availability {-}
 
 Sharing as much study material as possible is a core part of transparent statistics, as it greatly facilitates peer scrutiny and replication. Being able to run the experimental software and examine what participants saw (the techniques, tasks, instructions, and questions asked) is essential in order for other researchers to understand the details of a study. In addition, sharing the source code of the experimental software greatly facilitates replication. Similarly, experimental data (all data files and if possible analysis scripts) is necessary for conducting re-analyses and meta-analyses. Although uploading supplementary material makes sense during the reviewing phase, to be really useful all material should be freely shared online upon paper acceptance, ideally on a website that can guarantee long-term accessibility.
-
