@@ -89,7 +89,7 @@ Second, study reports should ideally be accessible to most members of the HCI co
 * *Example:* Excessive numbers of significant digits are difficult to process thus they go against the principle of clarity [@Ehrenberg1977], in addition to giving a misleading impression of precision [@Taylor1997].
 
 
-### 6. Simplicity {-}
+### 6. Simplicity {-} {#principles_simplicity} 
 
 When choosing between two data analysis procedures, the simplest procedure should ideally be preferred even if it is slightly inferior in other respects. A focus on simplicity follows from the principles of clarity and ease of processing, and it makes both researcher mistakes and reader misinterpretations less likely to occur. In other words, the KISS principle (Keep It Simple, Stupid) is as relevant in transparent statistics as in any other domain.
 

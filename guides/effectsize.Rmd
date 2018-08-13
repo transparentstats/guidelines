@@ -64,21 +64,30 @@ A standardized effect size is a unitless measure of effect size. The most common
 
 ### Should simple or standardized effect sizes be reported?  {#effectsize_faq_simple_v_standardized}
 
-While the term *effect size* may conjure up the image of arcane statistical formulas, the most useful effect sizes are often much simpler, and more intuitive, than perhaps should even warrant a specialized term. An effect size is essentially any way to compute the practical size of an effect.
+#### Standardized effect sizes
+Standardized effect sizes are useful when effects obtained from different experiments and/or expressed in different units need to be combined or compared [@Cumming2014a], e.g., a metaanalysis of the literature. 
+However, even this practice is controversial, as it can rely on assumptions about the effects being measured that are difficult to verify [@Cummings2011]. 
 
-Standardized effect sizes are useful in some situations, for example when effects obtained from different experiments and/or expressed in different units need to be combined or compared [@Cumming2014a]. However, even this practice is controversial, as it can rely on assumptions about the effects being measured that are difficult to verify [@Cummings2011]. 
+However, interpretations of standardized effect sizes should be accompanied by an argument for its applicability to the domain. If there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, it should be accompanied by another assessment of the practical significance of the effect. 
+Cohen's rule of thumb for the small, mediuam, and large effect are specific to his domain and has been shown to not generalizable.
+See [What about Cohen's small, medium, and large effect sizes?](#effectsize_faq_small_medium_large)
 
-In most cases, simple effect sizes should be preferred over standardized effect sizes:
+
+
+#### Simple effect sizes
+
+Based on the [principle of simplicity](#principles_simplicity), simple effect sizes should be preferred over standardized effect sizes:
 
 > Only rarely will uncorrected standardized effect size be more useful than simple effect size. It is usually far better to report simple effect size. [@Baguley2009]
 
 Simple effect sizes are often easier to interpret and justify [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance [@Wilkinson1999a; @Cummings2011].
 
-Barring a strong, domain- or problem-specific argument for reporting a standardized effect size instead of a simple one, simple effect sizes should be preferred as being more transparent and easier to interpret.
-
-If a standardized effect size is reported, it should be accompanied by an argument for its applicability to the domain. If there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, it should be accompanied by another assessment of the practical significance of the effect.
+Reporting simple effect sizes also allow future researchers to estimate and interpret variance with Bayesian method.
+Reporting the simple effect size also consistent with the pinciple of simplicity
 
 ▸ Exemplar: [simple effect size](#effectsize_exemplar_simple) and [standardized effect size](#effectsize_exemplar_standardized)
+
+▸ For further discussion about the standardized vs. simple effect sizes, [see a blog post: Can we call mean differences "effect sizes"?](http://transparentstatistics.org/2018/07/05/meanings-effect-size/)
 
 
 ### How do I know my effect is large enough? {#effectsize_faq_large_enough}
@@ -92,7 +101,7 @@ Nevertheless, more often than not in HCI, it is difficult to determine whether a
 Simple effect sizes provide the information necessary for an expert in the area to use their judgment to assess the practical impact of an effect size. For example, a difference in reaction time of 100ms is above the threshold of human perception, and therefore likely of practical impact. A difference of 100ms in receiving a chat message in an asynchronous chat application is likely less impactful, as it is small compared to the amount of time a chat message is generally expected to take. 
 Presenting simple effect sizes in a clear way---with units---allows the expert author to argue why the effect size may or may not have practical importance *and* allow the expert reader to make their own judgment.
 
-For the judgement about standardized effect sizes, see the next section.
+For the judgement about standardized effect sizes, see the [next section](#effectsize_faq_small_medium_large).
 
 ### What about Cohen's small, medium, and large effect sizes? {#effectsize_faq_small_medium_large}
 
@@ -109,7 +118,13 @@ is to be gained than lost by supplying a common conventional frame of
 reference which is recommended for use only when no better basis for estimating
 the ES index is available. [@Cohen1977]
 
-Cohen recommended the use of these thresholds __only when no better frame of reference for assessing practical importance was available__. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [@Baguley2004; @Lenth2001]; Lenth has called this usage "canned effect sizes" [@Lenth2001]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. Like Cummings [-@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
+Cohen recommended the use of these thresholds __only when no better frame of reference for assessing practical importance was available__. However, hindsight has demonstrated that if such thresholds are offered, they will be adopted as a convenience, often without much thought to how they apply to the domain at hand [@Baguley2004; @Lenth2001]; Lenth has called this usage "canned effect sizes" [@Lenth2001]. Once adopted, these thresholds make reports more opaque, by standardizing away units of measurement and categorizing results into arbitrary classes. 
+Such classes can even be misleading.
+For example, a review of 92 experiments shows that effect sizes in software engineering are larger than Cohen's categories [@Kampenes2007].
+
+Like Cummings [-@Cummings2011], we recommend against assessing the importance of effects by labeling them using Cohen's thresholds.
+
+
 
 
 ### How to use effect sizes in planning a study?
