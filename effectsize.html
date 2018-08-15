@@ -264,22 +264,22 @@ So far, this document covers the effect sizes of the difference between means. T
 </div>
 <div id="effectsize_faq_standardized" class="section level3">
 <h3><span class="header-section-number">2.1.4</span> What is a standardized effect size?</h3>
-<p>A standardized effect size is a unitless measure of effect size. The most common measure of standardized effect size is Cohen’s <em>d</em>, where the mean difference is divided by the standard deviation of the pooled observations <span class="citation">(Cohen <a href="#ref-Cohen1988a">1988</a>)</span> <span class="math inline">\(frac{mean difference}{standard deviation}\)</span>. <a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/">Other approaches</a> to standardization exist [prefer citations]. To some extent, standardized effect sizes make it possible to compare different studies in terms of how “impressive” their results are (see <a href="effectsize.html#effectsize_faq_large_enough">How do I know my effect is large enough?</a>); however, this practice is not without criticism (see the section <em>Standardized mean differences let us compare and summarize results when studies use different outcome scales</em> of <span class="citation">(Cummings <a href="#ref-Cummings2011">2011</a>)</span>).</p>
+<p>A standardized effect size is a unitless measure of effect size. The most common measure of standardized effect size is Cohen’s <em>d</em>, where the mean difference is divided by the standard deviation of the pooled observations <span class="citation">(Cohen <a href="#ref-Cohen1988a">1988</a>)</span> <span class="math inline">\(\frac{\text{mean difference}}{\text{standard deviation}}\)</span>. <a href="http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/">Other approaches</a> to standardization exist [prefer citations]. To some extent, standardized effect sizes make it possible to compare different studies in terms of how “impressive” their results are (see <a href="effectsize.html#effectsize_faq_large_enough">How do I know my effect is large enough?</a>); however, this practice is not without criticism (see the section <em>Standardized mean differences let us compare and summarize results when studies use different outcome scales</em> of <span class="citation">(Cummings <a href="#ref-Cummings2011">2011</a>)</span>).</p>
 </div>
 <div id="effectsize_faq_simple_v_standardized" class="section level3">
 <h3><span class="header-section-number">2.1.5</span> Should simple or standardized effect sizes be reported?</h3>
 <div class="controversial">
 <p>
-This is a controversial issue. More pointers <a href="effectsize.html#effectsize_faq_controversial">here</a>
+This is a <a href="effectsize.html#effectsize_faq_controversial">controversial issue</a>
 </p>
 </div>
 <div id="standardized-effect-sizes" class="section level4">
 <h4><span class="header-section-number">2.1.5.1</span> Standardized effect sizes</h4>
-<p>Standardized effect sizes are useful when effects obtained from different experiments and/or expressed in different units need to be combined or compared <span class="citation">(Cumming <a href="#ref-Cumming2014a">2014</a>)</span>, e.g., a metaanalysis of the literature.
+<p>Standardized effect sizes are useful when effects expressed in different units need to be combined or compared <span class="citation">(Cumming <a href="#ref-Cumming2014a">2014</a>)</span>, e.g., a metaanalysis of a literature where results are reported using different units.
 However, even this practice is controversial, as it can rely on assumptions about the effects being measured that are difficult to verify <span class="citation">(Cummings <a href="#ref-Cummings2011">2011</a>)</span>.</p>
-<p>However, interpretations of standardized effect sizes should be accompanied by an argument for its applicability to the domain. If there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, it should be accompanied by another assessment of the practical significance of the effect.
-Cohen’s rule of thumb for the small, mediuam, and large effect are specific to his domain and has been shown to not generalizable.
-See <a href="effectsize.html#effectsize_faq_small_medium_large">What about Cohen’s small, medium, and large effect sizes?</a></p>
+<p>However, interpretations of standardized effect sizes should be accompanied by an argument for its applicability to the domain. If there is no inherent rationale for a particular interpretation of the practical significance of a standardized effect size, it should be accompanied by another assessment of the practical significance of the effect.
+Cohen’s rule of thumb for what constitutes a small, medium, or large effect size is specific to his domain and has been shown not to be generalizable.
+See <a href="effectsize.html#effectsize_faq_controversial">controversial issues about effect sizes</a></p>
 </div>
 <div id="simple-effect-sizes" class="section level4">
 <h4><span class="header-section-number">2.1.5.2</span> Simple effect sizes</h4>
@@ -288,10 +288,9 @@ See <a href="effectsize.html#effectsize_faq_small_medium_large">What about Cohen
 <p>Only rarely will uncorrected standardized effect size be more useful than simple effect size. It is usually far better to report simple effect size. <span class="citation">(Baguley <a href="#ref-Baguley2009">2009</a>)</span></p>
 </blockquote>
 <p>Simple effect sizes are often easier to interpret and justify <span class="citation">(Cumming <a href="#ref-Cumming2014a">2014</a>; Cummings <a href="#ref-Cummings2011">2011</a>)</span>. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance <span class="citation">(Wilkinson <a href="#ref-Wilkinson1999a">1999</a>; Cummings <a href="#ref-Cummings2011">2011</a>)</span>.</p>
-<p>Reporting simple effect sizes also allow future researchers to estimate and interpret variance with Bayesian method.
-Reporting the simple effect size also consistent with the pinciple of simplicity</p>
+<p>Reporting simple effect sizes also allow future researchers to estimate and interpret variance with Bayesian methods.
+Reporting the simple effect size also consistent with the principle of simplicity</p>
 <p>▸ Exemplar: <a href="effectsize.html#effectsize_exemplar_simple">simple effect size</a> and <a href="effectsize.html#effectsize_exemplar_standardized">standardized effect size</a></p>
-<p>▸ For further discussion about the standardized vs. simple effect sizes, <a href="http://transparentstatistics.org/2018/07/05/meanings-effect-size/">see a blog post: Can we call mean differences “effect sizes”?</a></p>
 </div>
 </div>
 <div id="effectsize_faq_large_enough" class="section level3">
@@ -815,7 +814,7 @@ If you would like to contribute, please see
 <a class="sourceLine" id="cb17-17" data-line-number="17">    analyze_many_iterations) <span class="co"># the function to run in each core</span></a>
 <a class="sourceLine" id="cb17-18" data-line-number="18">)</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.004   0.001  11.763</code></pre>
+##   0.003   0.001  15.539</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># the cluster is no longer needed</span></a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">stopCluster</span>(my_cluster)</a>
 <a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co"># cleanup</span></a>
@@ -866,8 +865,8 @@ If you would like to contribute, please see
 <td align="right">86.61117</td>
 <td align="right">186.9153824</td>
 <td align="right">0.5489428</td>
-<td align="right">0.3913573</td>
-<td align="right">0.8672247</td>
+<td align="right">0.4168166</td>
+<td align="right">0.8624000</td>
 </tr>
 <tr class="even">
 <td align="left">size</td>
@@ -876,8 +875,8 @@ If you would like to contribute, please see
 <td align="right">51.97262</td>
 <td align="right">108.2961322</td>
 <td align="right">0.4583589</td>
-<td align="right">0.3396110</td>
-<td align="right">0.8042147</td>
+<td align="right">0.3390162</td>
+<td align="right">0.7914655</td>
 </tr>
 <tr class="odd">
 <td align="left">color</td>
@@ -886,8 +885,8 @@ If you would like to contribute, please see
 <td align="right">14.50618</td>
 <td align="right">0.9125176</td>
 <td align="right">0.0029764</td>
-<td align="right">0.0014778</td>
-<td align="right">0.0472905</td>
+<td align="right">0.0013135</td>
+<td align="right">0.0453337</td>
 </tr>
 <tr class="even">
 <td align="left">layout:size</td>
@@ -896,8 +895,8 @@ If you would like to contribute, please see
 <td align="right">31.84102</td>
 <td align="right">59.8437233</td>
 <td align="right">0.2226922</td>
-<td align="right">0.1257899</td>
-<td align="right">0.6199248</td>
+<td align="right">0.1296266</td>
+<td align="right">0.6313147</td>
 </tr>
 <tr class="odd">
 <td align="left">layout:color</td>
@@ -906,8 +905,8 @@ If you would like to contribute, please see
 <td align="right">19.24758</td>
 <td align="right">0.1492400</td>
 <td align="right">0.0006474</td>
-<td align="right">0.0003481</td>
-<td align="right">0.0261474</td>
+<td align="right">0.0004529</td>
+<td align="right">0.0316985</td>
 </tr>
 <tr class="even">
 <td align="left">size:color</td>
@@ -916,8 +915,8 @@ If you would like to contribute, please see
 <td align="right">21.02831</td>
 <td align="right">0.4695047</td>
 <td align="right">0.0044335</td>
-<td align="right">0.0025717</td>
-<td align="right">0.0924793</td>
+<td align="right">0.0028526</td>
+<td align="right">0.0657242</td>
 </tr>
 <tr class="odd">
 <td align="left">layout:size:color</td>
@@ -926,8 +925,8 @@ If you would like to contribute, please see
 <td align="right">20.73981</td>
 <td align="right">1.4065459</td>
 <td align="right">0.0129870</td>
-<td align="right">0.0059333</td>
-<td align="right">0.1436785</td>
+<td align="right">0.0075744</td>
+<td align="right">0.0861544</td>
 </tr>
 </tbody>
 </table>
@@ -959,16 +958,16 @@ If you would like to contribute, please see
 <p>Generalized eta squared (GES) represents the proportion of variance in the results explained by each variable. The previous graph shows clear main effects for <code>layout</code> and <code>size</code> and an interaction between <code>layout</code> and <code>size</code>. However <code>color</code> and the other 2-way and 3-way interactions are relatively much smaller, barely above zero. There is no useful cutoff for what counts as a “significant” effect, so think in terms of relative size – which variables best explain the variance in the results?</p>
 <p>Strong effects:</p>
 <ul>
-<li><strong>layout:</strong> F<sub>1,5</sub> = 187, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.549 95% CI [0.391, 0.867]</li>
-<li><strong>size:</strong> F<sub>2,10</sub> = 108, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.458 95% CI [0.34, 0.804]</li>
-<li><strong>layout</strong> × <strong>size:</strong> F<sub>2,10</sub> = 59.8, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.223 95% CI [0.126, 0.62]</li>
+<li><strong>layout:</strong> F<sub>1,5</sub> = 187, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.549 95% CI [0.417, 0.862]</li>
+<li><strong>size:</strong> F<sub>2,10</sub> = 108, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.458 95% CI [0.339, 0.791]</li>
+<li><strong>layout</strong> × <strong>size:</strong> F<sub>2,10</sub> = 59.8, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.223 95% CI [0.13, 0.631]</li>
 </ul>
 <p>Minimally impactful:</p>
 <ul>
-<li><strong>color</strong> F<sub>3,15</sub> = 0.913, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00298 95% CI [0.00148, 0.0473]</li>
-<li><strong>layout</strong> × <strong>color:</strong> F<sub>3,15</sub> = 0.149, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.000647 95% CI [0.000348, 0.0261]</li>
-<li><strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 0.47, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00443 95% CI [0.00257, 0.0925]</li>
-<li><strong>layout</strong> × <strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 1.41, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.013 95% CI [0.00593, 0.144]</li>
+<li><strong>color</strong> F<sub>3,15</sub> = 0.913, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00298 95% CI [0.00131, 0.0453]</li>
+<li><strong>layout</strong> × <strong>color:</strong> F<sub>3,15</sub> = 0.149, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.000647 95% CI [0.000453, 0.0317]</li>
+<li><strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 0.47, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00443 95% CI [0.00285, 0.0657]</li>
+<li><strong>layout</strong> × <strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 1.41, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.013 95% CI [0.00757, 0.0862]</li>
 </ul>
 
 </div>
