@@ -14,6 +14,12 @@ knitr::include_graphics("figures/effectsize/teaser.png", dpi = NA)
 
 **Endorsed:** 
 
+```{block, type='note'}
+So far, this document covers the effect sizes of the difference between means. 
+There are other types of effect sizes such as correlation as well.
+If you are interested to contribute this part, [get in touch](mailto:core@transparentstatistics.org )!
+```
+
 ## FAQ
 
 ### What is an effect size?
@@ -24,11 +30,6 @@ In HCI, common examples of effect size include the mean difference (e.g., in sec
 
 More complex measures of effect size exist called *standardized effect sizes* (see [What is a standardized effect size?](#effectsize_faq_standardized)). Although the term *effect size* is often used to refer to standardized effect sizes only, using the term in a broader sense can avoid unnecessary confusion [@Cumming2013a; @Wilkinson1999a]. In this document, "effect size" refers to both simple and standardized effect sizes.
 
-
-```{block, type='note'}
-So far, this document covers the effect sizes of the difference between means. 
-There are other types of effect sizes such as correlation as well.
-```
 
 ### Why and when should effect sizes be reported? {#effectsize_faq_when_why}
 
