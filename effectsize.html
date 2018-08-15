@@ -217,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="effectsize" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Effect size</h1>
+<p><a href="https://github.com/transparentstats/guidelines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a></p>
 <div style="text-align:center">
 <p><img src="figures/effectsize/teaser.png" /><!-- --></p>
 </div>
@@ -224,6 +225,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Contributed to the writing:</strong> Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic, Jacob O. Wobbrock, Janne Lindqvist, Yea-Seul Kim, Amelia McNamara</p>
 <p><strong>Gave feedback:</strong> Fanny Chevalier, Petra Isenberg, Christian Cherek, Hendrik Heuer, Michael McGuffin, Krishna Subramanian, Philipp Wacker, Michael Correll, Jake Hofman, Lewis Chuang, Christian P. Janssen, Jeff Huang, Julie Schiller, Sayamindu Dasgupta, Benjamin Johansen, Gijs Huisman, Florian Echtler, Kai Lukoff, Jennifer Lee Carlson, Nediyana Daskalova, Jennifer J. McGrath, Emanuel Zgraggen</p>
 <p><strong>Endorsed:</strong></p>
+<div class="note">
+<p>
+So far, this document covers the effect sizes of the difference between means. There are other types of effect sizes such as correlation as well. If you are interested to contribute this part, <a href="mailto:core@transparentstatistics.org">get in touch</a>!
+</p>
+</div>
 <div id="faq" class="section level2">
 <h2><span class="header-section-number">2.1</span> FAQ</h2>
 <div id="what-is-an-effect-size" class="section level3">
@@ -231,11 +237,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Broadly speaking, an effect size is “anything that might be of interest” <span class="citation">(Cumming <a href="#ref-Cumming2013a">2013</a>)</span>; it is some quantity that captures the magnitude of the effect studied.</p>
 <p>In HCI, common examples of effect size include the mean difference (e.g., in seconds) in task completion times between two techniques (e.g., using a mouse vs. keyboard), or the mean difference in error rates (e.g., in percent). These are called <em>simple effect sizes</em> (or <em>unstandardized effect sizes</em>).</p>
 <p>More complex measures of effect size exist called <em>standardized effect sizes</em> (see <a href="effectsize.html#effectsize_faq_standardized">What is a standardized effect size?</a>). Although the term <em>effect size</em> is often used to refer to standardized effect sizes only, using the term in a broader sense can avoid unnecessary confusion <span class="citation">(Cumming <a href="#ref-Cumming2013a">2013</a>; Wilkinson <a href="#ref-Wilkinson1999a">1999</a>)</span>. In this document, “effect size” refers to both simple and standardized effect sizes.</p>
-<div class="note">
-<p>
-So far, this document covers the effect sizes of the difference between means. There are other types of effect sizes such as correlation as well.
-</p>
-</div>
 </div>
 <div id="effectsize_faq_when_why" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Why and when should effect sizes be reported?</h3>
@@ -814,7 +815,7 @@ If you would like to contribute, please see
 <a class="sourceLine" id="cb17-17" data-line-number="17">    analyze_many_iterations) <span class="co"># the function to run in each core</span></a>
 <a class="sourceLine" id="cb17-18" data-line-number="18">)</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.002   0.001   8.580</code></pre>
+##   0.004   0.001  11.763</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># the cluster is no longer needed</span></a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">stopCluster</span>(my_cluster)</a>
 <a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co"># cleanup</span></a>
@@ -865,8 +866,8 @@ If you would like to contribute, please see
 <td align="right">86.61117</td>
 <td align="right">186.9153824</td>
 <td align="right">0.5489428</td>
-<td align="right">0.4204160</td>
-<td align="right">0.8648450</td>
+<td align="right">0.3913573</td>
+<td align="right">0.8672247</td>
 </tr>
 <tr class="even">
 <td align="left">size</td>
@@ -875,8 +876,8 @@ If you would like to contribute, please see
 <td align="right">51.97262</td>
 <td align="right">108.2961322</td>
 <td align="right">0.4583589</td>
-<td align="right">0.3498418</td>
-<td align="right">0.8116639</td>
+<td align="right">0.3396110</td>
+<td align="right">0.8042147</td>
 </tr>
 <tr class="odd">
 <td align="left">color</td>
@@ -885,8 +886,8 @@ If you would like to contribute, please see
 <td align="right">14.50618</td>
 <td align="right">0.9125176</td>
 <td align="right">0.0029764</td>
-<td align="right">0.0010121</td>
-<td align="right">0.0500429</td>
+<td align="right">0.0014778</td>
+<td align="right">0.0472905</td>
 </tr>
 <tr class="even">
 <td align="left">layout:size</td>
@@ -895,8 +896,8 @@ If you would like to contribute, please see
 <td align="right">31.84102</td>
 <td align="right">59.8437233</td>
 <td align="right">0.2226922</td>
-<td align="right">0.1355233</td>
-<td align="right">0.5439404</td>
+<td align="right">0.1257899</td>
+<td align="right">0.6199248</td>
 </tr>
 <tr class="odd">
 <td align="left">layout:color</td>
@@ -905,8 +906,8 @@ If you would like to contribute, please see
 <td align="right">19.24758</td>
 <td align="right">0.1492400</td>
 <td align="right">0.0006474</td>
-<td align="right">0.0002416</td>
-<td align="right">0.0838645</td>
+<td align="right">0.0003481</td>
+<td align="right">0.0261474</td>
 </tr>
 <tr class="even">
 <td align="left">size:color</td>
@@ -915,8 +916,8 @@ If you would like to contribute, please see
 <td align="right">21.02831</td>
 <td align="right">0.4695047</td>
 <td align="right">0.0044335</td>
-<td align="right">0.0024160</td>
-<td align="right">0.1292213</td>
+<td align="right">0.0025717</td>
+<td align="right">0.0924793</td>
 </tr>
 <tr class="odd">
 <td align="left">layout:size:color</td>
@@ -925,8 +926,8 @@ If you would like to contribute, please see
 <td align="right">20.73981</td>
 <td align="right">1.4065459</td>
 <td align="right">0.0129870</td>
-<td align="right">0.0073052</td>
-<td align="right">0.1311094</td>
+<td align="right">0.0059333</td>
+<td align="right">0.1436785</td>
 </tr>
 </tbody>
 </table>
@@ -958,16 +959,16 @@ If you would like to contribute, please see
 <p>Generalized eta squared (GES) represents the proportion of variance in the results explained by each variable. The previous graph shows clear main effects for <code>layout</code> and <code>size</code> and an interaction between <code>layout</code> and <code>size</code>. However <code>color</code> and the other 2-way and 3-way interactions are relatively much smaller, barely above zero. There is no useful cutoff for what counts as a “significant” effect, so think in terms of relative size – which variables best explain the variance in the results?</p>
 <p>Strong effects:</p>
 <ul>
-<li><strong>layout:</strong> F<sub>1,5</sub> = 187, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.549 95% CI [0.42, 0.865]</li>
-<li><strong>size:</strong> F<sub>2,10</sub> = 108, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.458 95% CI [0.35, 0.812]</li>
-<li><strong>layout</strong> × <strong>size:</strong> F<sub>2,10</sub> = 59.8, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.223 95% CI [0.136, 0.544]</li>
+<li><strong>layout:</strong> F<sub>1,5</sub> = 187, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.549 95% CI [0.391, 0.867]</li>
+<li><strong>size:</strong> F<sub>2,10</sub> = 108, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.458 95% CI [0.34, 0.804]</li>
+<li><strong>layout</strong> × <strong>size:</strong> F<sub>2,10</sub> = 59.8, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.223 95% CI [0.126, 0.62]</li>
 </ul>
 <p>Minimally impactful:</p>
 <ul>
-<li><strong>color</strong> F<sub>3,15</sub> = 0.913, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00298 95% CI [0.00101, 0.05]</li>
-<li><strong>layout</strong> × <strong>color:</strong> F<sub>3,15</sub> = 0.149, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.000647 95% CI [0.000242, 0.0839]</li>
-<li><strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 0.47, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00443 95% CI [0.00242, 0.129]</li>
-<li><strong>layout</strong> × <strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 1.41, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.013 95% CI [0.00731, 0.131]</li>
+<li><strong>color</strong> F<sub>3,15</sub> = 0.913, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00298 95% CI [0.00148, 0.0473]</li>
+<li><strong>layout</strong> × <strong>color:</strong> F<sub>3,15</sub> = 0.149, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.000647 95% CI [0.000348, 0.0261]</li>
+<li><strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 0.47, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.00443 95% CI [0.00257, 0.0925]</li>
+<li><strong>layout</strong> × <strong>size</strong> × <strong>color:</strong> F<sub>6,30</sub> = 1.41, <span class="math inline">\(\eta_{G}^{2}\)</span> = 0.013 95% CI [0.00593, 0.144]</li>
 </ul>
 
 </div>
