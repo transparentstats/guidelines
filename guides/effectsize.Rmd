@@ -25,6 +25,11 @@ In HCI, common examples of effect size include the mean difference (e.g., in sec
 More complex measures of effect size exist called *standardized effect sizes* (see [What is a standardized effect size?](#effectsize_faq_standardized)). Although the term *effect size* is often used to refer to standardized effect sizes only, using the term in a broader sense can avoid unnecessary confusion [@Cumming2013a; @Wilkinson1999a]. In this document, "effect size" refers to both simple and standardized effect sizes.
 
 
+```{block, type='note'}
+So far, this document covers the effect sizes of the difference between means. 
+There are other types of effect sizes such as correlation as well.
+```
+
 ### Why and when should effect sizes be reported? {#effectsize_faq_when_why}
 
 In quantitative experiments, effect sizes are among the most elementary and essential summary statistics that can be reported. Identifying the effect size(s) of interest also allows the researcher to turn a vague research question into a precise, quantitative question [@Cumming2014a]. For example, if a researcher is interested in showing that their technique is faster than a baseline technique, an appropriate choice of effect size is the mean difference in completion times. The observed effect size will indicate not only the likely direction of the effect (e.g., whether the technique is faster or slower), but also whether the effect is large enough to care about. 
@@ -63,6 +68,10 @@ A standardized effect size is a unitless measure of effect size. The most common
 
 
 ### Should simple or standardized effect sizes be reported?  {#effectsize_faq_simple_v_standardized}
+
+```{block, type='controversial'}
+This is a controversial issue. More pointers [here](#effectsize_faq_controversial)
+```
 
 #### Standardized effect sizes
 Standardized effect sizes are useful when effects obtained from different experiments and/or expressed in different units need to be combined or compared [@Cumming2014a], e.g., a metaanalysis of the literature. 
@@ -103,6 +112,7 @@ Presenting simple effect sizes in a clear way---with units---allows the expert a
 
 For the judgement about standardized effect sizes, see the [next section](#effectsize_faq_small_medium_large).
 
+
 ### What about Cohen's small, medium, and large effect sizes? {#effectsize_faq_small_medium_large}
 
 Conventional thresholds are sometimes used for standardized effect sizes like Cohen’s *d*, labeling them "small", "medium", or "large". These thresholds are however largely arbitrary [@Cummings2011]. They were originally proposed by Cohen based on human heights and intelligence quotients [@Cohen1977], but Cohen, in the very text where he first introduced them, noted that these thresholds may not be directly applicable to other domains:
@@ -130,3 +140,11 @@ Like Cummings [-@Cummings2011], we recommend against assessing the importance of
 ### How to use effect sizes in planning a study?
 
 See the [Experiment and analysis planning FAQ](#planning).
+
+
+### What are controversial issues about effect sizes? {#effectsize_faq_controversial}
+
+* Are effect sizes practical for lab experiments?
+    * Read about [the argument](http://datacolada.org/20) and [a response](http://www.nicebread.de/a-comment-on-we-cannot-afford-to-study-effect-size-in-the-lab-from-the-datacolada-blog/).
+
+* Simple vs. standardized effect sizes: See further disucssion [here](http://transparentstatistics.org/2018/07/05/meanings-effect-size/).

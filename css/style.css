@@ -5,3 +5,10 @@ h1, h2, h3, h4, h5, h6 {
 h1.title {
   font-weight: 700;
 }
+
+
+.note {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #ffdf0563 5px center/3em no-repeat;
+}
