@@ -68,22 +68,22 @@ This information can be reported either numerically or graphically. Both formats
 
 ### What is a standardized effect size? {#effectsize_faq_standardized}
 
-A standardized effect size is a unitless measure of effect size. The most common measure of standardized effect size is Cohen’s *d*, where the mean difference is divided by the standard deviation of the pooled observations [@Cohen1988a] $frac{mean difference}{standard deviation}$. [Other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to standardization exist [prefer citations]. To some extent, standardized effect sizes make it possible to compare different studies in terms of how “impressive” their results are (see [How do I know my effect is large enough?](#effectsize_faq_large_enough)); however, this practice is not without criticism (see the section *Standardized mean differences let us compare and summarize results when studies use different outcome scales* of [@Cummings2011]).
+A standardized effect size is a unitless measure of effect size. The most common measure of standardized effect size is Cohen’s *d*, where the mean difference is divided by the standard deviation of the pooled observations [@Cohen1988a] $\frac{\text{mean difference}}{\text{standard deviation}}$. [Other approaches](http://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/) to standardization exist [prefer citations]. To some extent, standardized effect sizes make it possible to compare different studies in terms of how “impressive” their results are (see [How do I know my effect is large enough?](#effectsize_faq_large_enough)); however, this practice is not without criticism (see the section *Standardized mean differences let us compare and summarize results when studies use different outcome scales* of [@Cummings2011]).
 
 
 ### Should simple or standardized effect sizes be reported?  {#effectsize_faq_simple_v_standardized}
 
 ```{block, type='controversial'}
-This is a controversial issue. More pointers [here](#effectsize_faq_controversial)
+This is a [controversial issue](#effectsize_faq_controversial)
 ```
 
 #### Standardized effect sizes
-Standardized effect sizes are useful when effects obtained from different experiments and/or expressed in different units need to be combined or compared [@Cumming2014a], e.g., a metaanalysis of the literature. 
+Standardized effect sizes are useful when effects expressed in different units need to be combined or compared [@Cumming2014a], e.g., a metaanalysis of a literature where results are reported using different units. 
 However, even this practice is controversial, as it can rely on assumptions about the effects being measured that are difficult to verify [@Cummings2011]. 
 
-However, interpretations of standardized effect sizes should be accompanied by an argument for its applicability to the domain. If there is no inherent reasoning to argue for a particular interpretation of the practical significance of the standardized effect size, it should be accompanied by another assessment of the practical significance of the effect. 
-Cohen's rule of thumb for the small, mediuam, and large effect are specific to his domain and has been shown to not generalizable.
-See [What about Cohen's small, medium, and large effect sizes?](#effectsize_faq_small_medium_large)
+However, interpretations of standardized effect sizes should be accompanied by an argument for its applicability to the domain. If there is no inherent rationale for a particular interpretation of the practical significance of a standardized effect size, it should be accompanied by another assessment of the practical significance of the effect. 
+Cohen's rule of thumb for what constitutes a small, medium, or large effect size is specific to his domain and has been shown not to be generalizable.
+See [controversial issues about effect sizes](#effectsize_faq_controversial)
 
 
 
@@ -95,12 +95,10 @@ Based on the [principle of simplicity](#principles_simplicity), simple effect si
 
 Simple effect sizes are often easier to interpret and justify [@Cumming2014a; @Cummings2011]. When the units of the data are meaningful (e.g., seconds), reporting effect sizes expressed in their original units is more informative and can make it easier to judge whether the effect has a practical significance [@Wilkinson1999a; @Cummings2011].
 
-Reporting simple effect sizes also allow future researchers to estimate and interpret variance with Bayesian method.
-Reporting the simple effect size also consistent with the pinciple of simplicity
+Reporting simple effect sizes also allow future researchers to estimate and interpret variance with Bayesian methods.
+Reporting the simple effect size also consistent with the principle of simplicity
 
 ▸ Exemplar: [simple effect size](#effectsize_exemplar_simple) and [standardized effect size](#effectsize_exemplar_standardized)
-
-▸ For further discussion about the standardized vs. simple effect sizes, [see a blog post: Can we call mean differences "effect sizes"?](http://transparentstatistics.org/2018/07/05/meanings-effect-size/)
 
 
 ### How do I know my effect is large enough? {#effectsize_faq_large_enough}
