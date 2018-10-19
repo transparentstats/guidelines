@@ -17,5 +17,5 @@ rmd_files:
   - "guides/pvalues.Rmd"
   - "guides/transformation.Rmd"
   - "guides/appendix.Rmd"
-#  - "guides/appendix_effectsize.Rmd"
+  - "guides/appendix_effectsize.Rmd"
   - "guides/references.Rmd"
