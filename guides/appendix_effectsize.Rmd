@@ -9,43 +9,20 @@ The [simple effect size exemplar](#effectsize_exemplar_simple) demonstrates one 
 
 
 ### Libraries needed for this analysis
-```{r, message=FALSE, warning=FALSE, include=FALSE}
-# which libraries are needed
-list.of.libraries = c("tidyverse", "ggstance", "brms", "rstan", "import", "devtools")
-# check if libraries are installed
-new.packages = list.of.libraries[!(list.of.libraries %in% installed.packages()[,"Package"])]
-# install missing libraries
-if(length(new.packages) > 0) 
-  install.packages(new.packages, repos = "http://cran.us.r-project.org")
-# special case for github libraries
-list.of.libraries = tibble::tribble(
-  ~name, ~repository,
-  "tidybayes", "mjskay/tidybayes"
-)
-# check which libraries are installed
-new.packages = dplyr::filter(list.of.libraries, !(name %in% installed.packages()[,"Package"]))
-# install missing libraries
-for (p in new.packages$repository)
-  devtools::install_github(p)
-
-```
-
 
 ```{r appendix-es-setup, warning = FALSE, message = FALSE}
+# See here for rstan installation instructions: 
+# https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
+library(rstan)
+
 library(tidyverse)
 library(forcats)    # for fct_...()
 library(broom)      # for tidy()
 library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
-
-# See here for rstan installation instructions: 
-# https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
-library(rstan)
 library(brms)       # for brm() (requires rstan)
+library(tidybayes)  # for mean_qi()
 
-# for mean_qi(). Use devtools::install_github("mjskay/tidybayes") to install.
-library(tidybayes)
-
-# requires `import` package to be installed: use install.packages("import")
+# requires `import` and `MASS` packages to be installed
 import::from(MASS, mvrnorm)
 ```
 

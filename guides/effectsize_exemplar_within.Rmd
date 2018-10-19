@@ -262,7 +262,7 @@ rm(core_count, my_cluster, bootstrap_iteration_count, data_aggregated)
 
 ### Getting a confidence interval from a bootstrap
 
-Each bootstrap iterations ran one anaylsis, so wwe now have many results. So for each effect size, we sort the results and find the range of the inner 95%.
+Each bootstrap iterations ran one anaylsis, so wwe now have many results. So for each effect size, we sort the results and find the range of the inner 95% percentiles.
 
 ```{r within-boostrap-3}
 # inner 95%
