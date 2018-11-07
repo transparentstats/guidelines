@@ -19,7 +19,11 @@ contributor [Code of Conduct](https://github.com/transparentstats/guidelines/wik
 
 ## How to build the guidelines
 
+Required software: R (3.5 or higher), RStudio (for Mac OS X: [XQuartz](https://www.xquartz.org/))
+
 1. Open `guidelines.Rproj`. Rstudio won't show necessary tools unless you open the project.
+
+    * Some exemplars will require additional packages. These are indicated at the beginning of each exemplars.
 
 1. Install/update package dependencies:
 
