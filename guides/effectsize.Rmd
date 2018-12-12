@@ -10,12 +10,13 @@ knitr::include_graphics("figures/effectsize/teaser.png", dpi = NA)
 </div>
 
 **Version:** 1.1
+[(How to cite)](#citing)
 
 **Contributed to the writing:** Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic, Jacob O. Wobbrock, Janne Lindqvist, Yea-Seul Kim, Amelia McNamara
 
 **Gave feedback:** Fanny Chevalier, Petra Isenberg, Christian Cherek, Hendrik Heuer, Michael McGuffin, Krishna Subramanian, Philipp Wacker, Michael Correll, Jake Hofman, Lewis Chuang, Christian P. Janssen, Jeff Huang, Julie Schiller, Sayamindu Dasgupta, Benjamin Johansen, Gijs Huisman, Florian Echtler, Kai Lukoff, Jennifer Lee Carlson, Nediyana Daskalova, Jennifer J. McGrath, Emanuel Zgraggen
 
-**Endorsed:** 
+**Endorsed:** (Pending)
 
 ```{block, type='note'}
 So far, this document covers the effect sizes of the difference between means. 

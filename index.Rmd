@@ -25,7 +25,9 @@ github-repo: transparentstats/guidelines
 
 <a href="https://github.com/transparentstats/guidelines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 
-[![DOI current version](https://img.shields.io/badge/DOI%20current%20version-10.5281%2Fzenodo.1228032-green.svg)](https://doi.org/10.5281/zenodo.1228032) [![DOI all versions](https://img.shields.io/badge/DOI%20all%20versions-10.5281%2Fzenodo.1186169-blue.svg)](https://doi.org/10.5281/zenodo.1186169)  
+[![DOI current version](https://img.shields.io/badge/DOI%20current%20version-10.5281%2Fzenodo.1228032-green.svg)](https://doi.org/10.5281/zenodo.2226616) 
+[![DOI all versions](https://img.shields.io/badge/DOI%20all%20versions-10.5281%2Fzenodo.1186169-blue.svg)](https://doi.org/10.5281/zenodo.1186169) 
+[(How to cite)](#citing)
 
 This document grew out of a Special Interest Group and Workshop to develop guidelines for transparent statistical communication in Human-Computer Interaction research. 
 The recommendations in this guideline are chosen to encourage transparency in the practice of statistics.
@@ -61,6 +63,27 @@ Therefore, the scope and focus of this document is far narrower than being a com
 As the consensus in statistical practice evolves (as science evolves), this document is a living document.
 For the most up-to-date version of the guideline, visit [the online guideline page](https://transparentstats.github.io/guidelines/) or [source on Github](https://github.com/transparentstats/guidelines).
 
+## Citing {-}
+
+You can cite this guideline with the following ACM reference format.
+If you wish to cite a specific version, replace the DOI with the version-specific DOI and the date of publication as stated at the top of this webpage.
+
+```
+Transparent Statistics in Human–Computer Interaction working group. 2018. Transparent Statistics Guidelines. (Dec 2018). DOI:http://dx.doi.org/10.5281/zenodo.1186169 Available at https://transparentstats.github.io/guidelines.
+```
+
+Here's the same thing in BibTeX format
+
+```
+@misc{TransparentStats2018, 
+	title={Transparent Statistics Guidelines}, 
+	note={Available at https://transparentstats.github.io/guidelines}, 
+	DOI = {10.5281/zenodo.1186169},
+	author={Transparent Statistics in Human–Computer Interaction working group}, 
+	year={2018}, 
+	month={Dec}
+}
+```
 
 ## Contributing {-}
 
