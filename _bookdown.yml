@@ -3,6 +3,7 @@ language:
     chapter_name: "Chapter "
 new_session: no
 after_chapter_script: clear_vars_and_pkgs.R
+delete_merged_file: true
 rmd_files:
   - "index.Rmd"
   - "guides/principles.Rmd"
