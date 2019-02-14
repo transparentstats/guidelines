@@ -25,7 +25,7 @@
 <meta name="author" content="Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)">
 
 
-<meta name="date" content="2018-04-24">
+<meta name="date" content="2019-02-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,41 +50,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -103,19 +131,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./index.html">Transparent Statistics Guidelines</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html"><i class="fa fa-check"></i><b>1</b> Transparent Statistics Guiding Principles</a><ul>
-<li class="chapter" data-level="1.1" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
-<li class="chapter" data-level="1.2" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#guiding-principles"><i class="fa fa-check"></i><b>1.2</b> Guiding Principles</a><ul>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#faithfulness"><i class="fa fa-check"></i>1. Faithfulness</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#robustness"><i class="fa fa-check"></i>2. Robustness</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#resilience"><i class="fa fa-check"></i>3. Resilience</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#process-transparency"><i class="fa fa-check"></i>4. Process Transparency</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#clarity"><i class="fa fa-check"></i>5. Clarity</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#simplicity"><i class="fa fa-check"></i>6. Simplicity</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#non-contingency"><i class="fa fa-check"></i>7. Non-contingency</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#precision-and-economy"><i class="fa fa-check"></i>8. Precision and economy</a></li>
-<li class="chapter" data-level="" data-path="transparent-statistics-guiding-principles.html"><a href="transparent-statistics-guiding-principles.html#material-availability"><i class="fa fa-check"></i>9. Material availability</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization"><i class="fa fa-check"></i>Organization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#using"><i class="fa fa-check"></i>Using</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#limitations"><i class="fa fa-check"></i>Limitations</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions"><i class="fa fa-check"></i>Versions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#citing"><i class="fa fa-check"></i>Citing</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="principles.html"><a href="principles.html"><i class="fa fa-check"></i><b>1</b> Transparent Statistics Guiding Principles</a><ul>
+<li class="chapter" data-level="1.1" data-path="principles.html"><a href="principles.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="principles.html"><a href="principles.html#guiding-principles"><i class="fa fa-check"></i><b>1.2</b> Guiding Principles</a><ul>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#faithfulness"><i class="fa fa-check"></i>1. Faithfulness</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#robustness"><i class="fa fa-check"></i>2. Robustness</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#resilience"><i class="fa fa-check"></i>3. Resilience</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#process-transparency"><i class="fa fa-check"></i>4. Process Transparency</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#clarity"><i class="fa fa-check"></i>5. Clarity</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#principles_simplicity"><i class="fa fa-check"></i>6. Simplicity</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#non-contingency"><i class="fa fa-check"></i>7. Non-contingency</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#precision-and-economy"><i class="fa fa-check"></i>8. Precision and economy</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#material-availability"><i class="fa fa-check"></i>9. Material availability</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="effectsize.html"><a href="effectsize.html"><i class="fa fa-check"></i><b>2</b> Effect size</a><ul>
@@ -127,6 +162,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.5" data-path="effectsize.html"><a href="effectsize.html#effectsize_faq_simple_v_standardized"><i class="fa fa-check"></i><b>2.1.5</b> Should simple or standardized effect sizes be reported?</a></li>
 <li class="chapter" data-level="2.1.6" data-path="effectsize.html"><a href="effectsize.html#effectsize_faq_large_enough"><i class="fa fa-check"></i><b>2.1.6</b> How do I know my effect is large enough?</a></li>
 <li class="chapter" data-level="2.1.7" data-path="effectsize.html"><a href="effectsize.html#effectsize_faq_small_medium_large"><i class="fa fa-check"></i><b>2.1.7</b> What about Cohen’s small, medium, and large effect sizes?</a></li>
+<li class="chapter" data-level="2.1.8" data-path="effectsize.html"><a href="effectsize.html#how-to-use-effect-sizes-in-planning-a-study"><i class="fa fa-check"></i><b>2.1.8</b> How to use effect sizes in planning a study?</a></li>
+<li class="chapter" data-level="2.1.9" data-path="effectsize.html"><a href="effectsize.html#effectsize_faq_controversial"><i class="fa fa-check"></i><b>2.1.9</b> What are controversial issues about effect sizes?</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_simple"><i class="fa fa-check"></i><b>2.2</b> Exemplar: Simple effect size</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis"><i class="fa fa-check"></i><b>2.2.1</b> Libraries needed for this analysis</a></li>
@@ -161,6 +198,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6" data-path="pvalues.html"><a href="pvalues.html"><i class="fa fa-check"></i><b>6</b> p values</a></li>
 <li class="chapter" data-level="7" data-path="transformation.html"><a href="transformation.html"><i class="fa fa-check"></i><b>7</b> Data transformation</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html"><i class="fa fa-check"></i><b>A</b> Effect size appendix</a><ul>
+<li class="chapter" data-level="A.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#appendix_effectsize_simple"><i class="fa fa-check"></i><b>A.1</b> Alternative approaches for simple effect size exemplar</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#libraries-needed-for-this-analysis-4"><i class="fa fa-check"></i><b>A.1.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="A.1.2" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#data-1"><i class="fa fa-check"></i><b>A.1.2</b> Data</a></li>
+<li class="chapter" data-level="A.1.3" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#calculating-simple-effect-size-1"><i class="fa fa-check"></i><b>A.1.3</b> Calculating simple effect size</a></li>
+<li class="chapter" data-level="A.1.4" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#comparing-approaches"><i class="fa fa-check"></i><b>A.1.4</b> Comparing approaches</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -181,7 +226,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="bayesian" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Bayesian inference</h1>
-<p><mark> This section is currently under draft on this <a href="https://docs.google.com/document/d/1FI-6Bb5pTCNm84xFfpaeoPdbwVTYtfmeAdOkiKIIJ7Q/edit">Google Doc</a>. We welcome help and feedback at all levels! If you would like to contribute, please see <a href="https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines">Contributing to the Guidelines</a>. </mark></p>
+<p><mark>
+This section is currently under draft on this <a href="https://docs.google.com/document/d/1FI-6Bb5pTCNm84xFfpaeoPdbwVTYtfmeAdOkiKIIJ7Q/edit">Google Doc</a>.
+We welcome help and feedback at all levels!
+If you would like to contribute, please see
+<a href="https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines">Contributing to the Guidelines</a>.
+</mark></p>
 
 </div>
             </section>
@@ -236,7 +286,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
