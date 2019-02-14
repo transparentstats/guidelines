@@ -89,4 +89,5 @@ Here's the same thing in BibTeX format
 ## Contributing {-}
 
 We welcome help and feedback at all levels! If you would like to contribute, please see
-[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines). Especially, please have a look at the [Style Guide](https://github.com/transparentstats/guidelines/wiki/Style-Guide) and a 
+contributor [Code of Conduct](https://github.com/transparentstats/guidelines/wiki/Code-of-Conduct).

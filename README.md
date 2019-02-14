@@ -13,7 +13,8 @@ The [master](https://github.com/transparentstats/guidelines) branch contains the
 
 We welcome contributions in all forms: comments, suggestions, edits, and proposed topics. To learn how to contribute,
 read [Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines)
-on the wiki. We also have a [Style Guide](https://github.com/transparentstats/guidelines/wiki/Style-Guide) and a 
+on the wiki. 
+Especially, please have a look at the [Style Guide](https://github.com/transparentstats/guidelines/wiki/Style-Guide) and a 
 contributor [Code of Conduct](https://github.com/transparentstats/guidelines/wiki/Code-of-Conduct).
 
 
