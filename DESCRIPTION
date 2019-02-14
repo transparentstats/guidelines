@@ -15,7 +15,6 @@ Imports:
     ggstance,
     afex,
     import,
-    brms
-Remotes: 
-    mjskay/tidybayes
+    brms,
+    tidybayes
     

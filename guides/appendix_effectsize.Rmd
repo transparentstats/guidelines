@@ -9,43 +9,20 @@ The [simple effect size exemplar](#effectsize_exemplar_simple) demonstrates one 
 
 
 ### Libraries needed for this analysis
-```{r, message=FALSE, warning=FALSE, include=FALSE}
-# which libraries are needed
-list.of.libraries = c("tidyverse", "ggstance", "brms", "rstan", "import", "devtools")
-# check if libraries are installed
-new.packages = list.of.libraries[!(list.of.libraries %in% installed.packages()[,"Package"])]
-# install missing libraries
-if(length(new.packages) > 0) 
-  install.packages(new.packages, repos = "http://cran.us.r-project.org")
-# special case for github libraries
-list.of.libraries = tibble::tribble(
-  ~name, ~repository,
-  "tidybayes", "mjskay/tidybayes"
-)
-# check which libraries are installed
-new.packages = dplyr::filter(list.of.libraries, !(name %in% installed.packages()[,"Package"]))
-# install missing libraries
-for (p in new.packages$repository)
-  devtools::install_github(p)
-
-```
-
 
 ```{r appendix-es-setup, warning = FALSE, message = FALSE}
-library(tidyverse)
-library(forcats)    # for fct_...()
-library(broom)      # for tidy()
-library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
-
 # See here for rstan installation instructions: 
 # https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
 library(rstan)
+
+library(tidyverse)
+library(modelr)     # for data_grid()
+library(broom)      # for tidy()
+library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
 library(brms)       # for brm() (requires rstan)
+library(tidybayes)  # for mean_qi()
 
-# for mean_qi(). Use devtools::install_github("mjskay/tidybayes") to install.
-library(tidybayes)
-
-# requires `import` package to be installed: use install.packages("import")
+# requires `import` and `MASS` packages to be installed
 import::from(MASS, mvrnorm)
 ```
 
@@ -104,7 +81,7 @@ log_t_interval <-
 log_t_interval
 ```
 
-We can transform this difference (in the log scale) into a ratio of geometric mean response times:
+We can also transform this difference (in the log scale) into a ratio of geometric mean response times:
 
 ```{r log_t_to_ratio}
 log_t_ratios <- log_t_interval %>%
@@ -112,7 +89,7 @@ log_t_ratios <- log_t_interval %>%
 log_t_ratios
 ```
 
-This output shows the estimated geometric mean response times (`estimate1` and `estimate2`), and an estimate of the ratio between them (`estimate = estimate1/estimate2`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval of that ratio. This allows us to estimate how many times slower or faster a given condition is. 
+This output shows the estimated geometric mean response times (`estimate1` and `estimate2`), and an estimate of the ratio between them (`estimate = estimate1/estimate2`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval of that ratio. This allows us to estimate how many times slower or faster one condition is compared to another. 
 
 However, since we have some sense in this context of how large or small we might want response times to be on the original scale (e.g., people tend to perceive differences on the order of 100ms), it may be easier to interpret effect sizes if we calculate them on that scale.
 
@@ -125,7 +102,7 @@ We can run a linear regression that is equivalent to approach 2a:
 
 ```{r}
 m_log <- lm(log(completion_time_ms) ~ group, data = data)
-m_log
+summary(m_log)
 ```
 
 This model estimates the geometric means in each group. However, we want to know the difference in means on the original (time) scale, not on the log scale.
@@ -170,11 +147,12 @@ log_interval <-
     estimate = mean_A - mean_B
   ) %>%
   mean_qi(estimate) %>%
+  to_broom_names() %>%  # makes the column names the same as those returned by broom::tidy
   mutate(method = "lognormal regression")
 log_interval
 ```
 
-This approach does not account for non-constant variance on the log scale, however. The next approach does.
+This approach does not account for non-constant variance on the log scale, however; i.e., the fact that the variances of the two groups are different. The next approach does.
 
 
 #### Approach 3a: log-normal regression with marginal estimate of difference in means using Bayesian regression (uninformed priors)
@@ -183,7 +161,7 @@ For this approach, we will use a Bayesian log-normal regression model to estimat
 
 For this approach, we will use a Bayesian log-normal regression with uninformed priors. This model is the same as the `lm` model in approach 2, except that it also allows the variance to be different in each group (in other words, it does not assume *constant variance* between groups, also known as *homoskedasticity*).
 
-```{r, results = "hide"}
+```{r, results = "hide", cache = TRUE, message = FALSE, warning = FALSE}
 m_log_bayes <- brm(brmsformula(
     completion_time_ms ~ group,
     sigma ~ group    # allow variance to be different in each group
@@ -195,7 +173,7 @@ Similar to approach 2b, we will derive samples of the mean difference, this time
 ```{r}
 log_bayes_samples <- 
   m_log_bayes %>%
-  as_sample_tibble() %>%
+  tidy_draws() %>%
   mutate(
     mu_A = b_Intercept,
     sigma_A = exp(b_sigma_Intercept),
@@ -206,17 +184,37 @@ log_bayes_samples <-
     mean_B = exp(mu_B + sigma_B^2 / 2),
     
     estimate = mean_A - mean_B
-  ) %>%
-  mutate(method = "lognormal regression (Bayesian, uninformed)") %>%
-  group_by(method)
+  ) 
 
 log_bayes_interval <- 
   log_bayes_samples %>%
-  mean_qi(estimate)
+  mean_qi(estimate) %>%
+  to_broom_names() %>%
+  mutate(method = "lognormal regression (Bayesian, uninformed)")
 log_bayes_interval
 ```
 
-This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that ratio.
+Alternatively, we could use `tidybayes::add_fitted_draws`, which internally calls `brmsfit::posterior_linpred`, which does the same math as above to calculate the posterior distribution for the mean on the response scale. This saves us some math (and makes sure we did not do that math incorrectly):
+
+```{r}
+log_bayes_samples <- 
+  data %>%
+  # reverse the order of group so that the output is A - B instead of B - A
+  data_grid(group = fct_rev(group)) %>%
+  add_fitted_draws(m_log_bayes, value = "estimate") %>%
+  ungroup() %>%
+  compare_levels(estimate, by = group) %>%
+  mutate(method = "lognormal regression (Bayesian, uninformed)") %>%
+  group_by(method)
+
+log_bayes_interval <-
+  log_bayes_samples %>%
+  mean_qi(estimate) %>%
+  to_broom_names()
+log_bayes_interval
+```
+
+This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that difference.
 
 
 #### Approach 3b: log-normal regression with marginal estimate of difference in means using Bayesian regression (weakly informed priors)
@@ -225,8 +223,11 @@ Finally, let's run the same analysis with weakly informed priors based on what w
 
 ```{r}
 get_prior(brmsformula(
-    completion_time_ms ~ group,
-    sigma ~ group
+    # for using informed priors, the `0 + intercept` formula can be helpful: otherwise,
+    # brm re-centers the data on 0, which can make it harder to set an informed prior.
+    # see help("set_prior") for more information.
+    completion_time_ms ~ group + 0 + intercept,
+    sigma ~ group + 0 + intercept
   ), data = data, family = lognormal)
 ```
 
@@ -244,20 +245,20 @@ These priors can be specified as follows:
 
 ```{r}
 log_bayes_priors <- c(
-    prior(normal(5.5, 1.75), coef = Intercept),
+    prior(normal(5.5, 1.75), class = b, coef = intercept),
     prior(normal(0, 2.3), class = b, coef = groupB),
-    prior(normal(-0.75, 0.825), coef = Intercept, nlpar = sigma),
-    prior(normal(0, 0.825), class = b, coef = groupB, nlpar = sigma)
+    prior(normal(-0.75, 0.825), class = b, coef = intercept, dpar = sigma),
+    prior(normal(0, 0.825), class = b, coef = groupB, dpar = sigma)
   )
 log_bayes_priors
 ```
 
 Then we can re-run the model from approach 3a with those priors:
 
-```{r, results = "hide"}
+```{r, results = "hide", cache = TRUE, message = FALSE, warning = FALSE}
 m_log_bayes_informed <- brm(brmsformula(
-    completion_time_ms ~ group,
-    sigma ~ group
+    completion_time_ms ~ group + 0 + intercept,
+    sigma ~ group + 0 + intercept
   ), data = data, family = lognormal, prior = log_bayes_priors)
 ```
 
@@ -265,30 +266,23 @@ Similar to approach 2b, we will derive samples of the mean difference, this time
 
 ```{r}
 log_bayes_informed_samples <- 
-  m_log_bayes_informed %>%
-  as_sample_tibble() %>%
-  mutate(
-    mu_A = b_Intercept,
-    sigma_A = exp(b_sigma_Intercept),
-    mean_A = exp(mu_A + sigma_A^2 / 2),
-    
-    mu_B = b_Intercept + b_groupB,
-    sigma_B = exp(b_sigma_Intercept + b_sigma_groupB),
-    mean_B = exp(mu_B + sigma_B^2 / 2),
-    
-    estimate = mean_A - mean_B
-  ) %>%
+  data %>%
+  # reverse the order of group so that the output is A - B instead of B - A
+  data_grid(group = fct_rev(group)) %>%
+  add_fitted_draws(m_log_bayes_informed, value = "estimate") %>%
+  ungroup() %>%
+  compare_levels(estimate, by = group) %>%
   mutate(method = "lognormal regression (Bayesian, weakly informed)") %>%
   group_by(method)
 
-log_bayes_informed_interval <- 
+log_bayes_informed_interval <-
   log_bayes_informed_samples %>%
-  mean_qi(estimate)
-
+  mean_qi(estimate) %>%
+  to_broom_names()
 log_bayes_informed_interval
 ```
 
-This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that ratio.
+This gives the estimated mean difference between conditions in milliseconds (`estimate`), as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% quantile credible interval of that difference.
 
 
 
@@ -296,7 +290,7 @@ This gives the estimated mean difference between conditions in milliseconds (`es
 
 All approaches that give estimates for the difference in means give very similar results:
 
-```{r model_comparison, fig.height = 2.5, fig.width = 6, warning = FALSE}
+```{r model_comparison, fig.height = 2.5, fig.width = 6}
 bayes_samples = bind_rows(log_bayes_samples, log_bayes_informed_samples)
 
 bind_rows(t_interval, log_interval, log_bayes_interval, log_bayes_informed_interval) %>%

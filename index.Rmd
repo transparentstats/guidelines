@@ -20,16 +20,74 @@ link-citations: yes
 github-repo: transparentstats/guidelines
 ---
 
-# Preface {-}
-<!-- TODO: consider content from https://docs.google.com/document/d/1HAZ3IzV8NDs87MfHxqpjPGgRIoH15Eop3hs57BIccJg -->
 
-This document grew out of a Special Interest Group and Workshop to develop guidelines for transparent statistical communication in Human-Computer Interaction research.
+
+# Preface {-}
+
+<a href="https://github.com/transparentstats/guidelines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+
+This document grew out of a Special Interest Group and Workshop to develop guidelines for transparent statistical communication in Human-Computer Interaction research. 
+The recommendations in this guideline are chosen to encourage transparency in the practice of statistics.
+For more details on this position, see our [guiding principles](#principles).
+
+```{r child = 'guides/doi.Rmd'}
+```
+
+
+## Organization {-}
+This document is organized according to statistical topics. 
+Each chapter splits into two sections: FAQ and Exemplars.
+The __FAQ section__ lists questions that are relevant to transparency practice.
+We strive to allow random-access, to allow each reader to quickly find a compact answers to specific questions he/she has in mind.
+Thus, this guideline assumes some knowledge about the topic.
+We summarize such knowledge in earlier questions, but this is by no means exhaustive.
+Whenever you found yourself disoriented, it might be helpful to skim one or two earlier questions or lookup definitions of statistical terms over the internet.
+Whenever appropriate, we also point to other questions and parts of exemplars that are relevant.
+
+The __Exemplars section__ supplements the FAQ by showing concrete cases in code and their interpretation(s).
+In contrast to the FAQ, the exemplars should be read top-to-bottom: the earlier examples are building blocks of the latter.
+
+
+## Using {-}
+
+The text in this guideline is under CC-BY license, and the code is under MIT license.
+These license choices mean that you can use any code from this guideline in your analysis and can release your code (even under other licenses).
+
+## Limitations {-}
+
+We focus on addressing issues that are commonly misunderstood and suboptimally practiced—intentionally or unintentionally.
+Therefore, the scope and focus of this document is far narrower than being a complete textbook in statistics.
+
+
+## Versions {-}
+
+As the consensus in statistical practice evolves (as science evolves), this document is a living document.
+For the most up-to-date version of the guideline, visit [the online guideline page](https://transparentstats.github.io/guidelines/) or [source on Github](https://github.com/transparentstats/guidelines).
+
+## Citing {-}
+
+You can cite this guideline with the following ACM reference format.
+If you wish to cite a specific version, replace the DOI with the version-specific DOI and the date of publication as stated at the top of this webpage.
+
+```
+Transparent Statistics in Human–Computer Interaction working group. `r format(Sys.Date(), "%Y")`. Transparent Statistics Guidelines. (`r format(Sys.Date(), "%b %Y")`). DOI: http://dx.doi.org/10.5281/zenodo.`r doi_suffix` (Available at https://transparentstats.github.io/guidelines)
+```
+
+Here's the same thing in BibTeX format
+
+```
+@misc{TransparentStats`r format(Sys.Date(), "%b%Y")`, 
+	title={{Transparent} {Statistics} {Guidelines}}, 
+	author={{Transparent} {Statistics} in {Human}–{Computer} {Interaction} {Working} {Group}}, 
+	DOI = {10.5281/zenodo.`r doi_suffix`},
+	month={`r format(Sys.Date(), "%b")`},
+	year={`r format(Sys.Date(), "%Y")`},
+	note={({Available} at https://transparentstats.github.io/guidelines)}
+}
+```
+
+## Contributing {-}
 
 We welcome help and feedback at all levels! If you would like to contribute, please see
-[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
-
-To refer to this specific version, use this DOI: [10.5281/zenodo.1228032](https://doi.org/10.5281/zenodo.1228032).
-
-To refer to all versions, use this DOI: [10.5281/zenodo.1186169](https://doi.org/10.5281/zenodo.1186169).
-
-For the most up-to-date version of the guideline, visit [the online guideline page](https://transparentstats.github.io/guidelines/) or [source on Github](https://github.com/transparentstats/guidelines).
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines). Especially, please have a look at the [Style Guide](https://github.com/transparentstats/guidelines/wiki/Style-Guide) and a 
+contributor [Code of Conduct](https://github.com/transparentstats/guidelines/wiki/Code-of-Conduct).
