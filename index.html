@@ -25,7 +25,7 @@
 <meta name="author" content="Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)">
 
 
-<meta name="date" content="2018-08-15">
+<meta name="date" content="2019-02-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -136,6 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#using"><i class="fa fa-check"></i>Using</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#limitations"><i class="fa fa-check"></i>Limitations</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions"><i class="fa fa-check"></i>Versions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#citing"><i class="fa fa-check"></i>Citing</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="principles.html"><a href="principles.html"><i class="fa fa-check"></i><b>1</b> Transparent Statistics Guiding Principles</a><ul>
@@ -146,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#resilience"><i class="fa fa-check"></i>3. Resilience</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#process-transparency"><i class="fa fa-check"></i>4. Process Transparency</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#clarity"><i class="fa fa-check"></i>5. Clarity</a></li>
-<li class="chapter" data-level="1.2.1" data-path="principles.html"><a href="principles.html#principles_simplicity"><i class="fa fa-check"></i><b>1.2.1</b> 6. Simplicity {-}</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#principles_simplicity"><i class="fa fa-check"></i>6. Simplicity</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#non-contingency"><i class="fa fa-check"></i>7. Non-contingency</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#precision-and-economy"><i class="fa fa-check"></i>8. Precision and economy</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#material-availability"><i class="fa fa-check"></i>9. Material availability</a></li>
@@ -197,6 +198,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="pvalues.html"><a href="pvalues.html"><i class="fa fa-check"></i><b>6</b> p values</a></li>
 <li class="chapter" data-level="7" data-path="transformation.html"><a href="transformation.html"><i class="fa fa-check"></i><b>7</b> Data transformation</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html"><i class="fa fa-check"></i><b>A</b> Effect size appendix</a><ul>
+<li class="chapter" data-level="A.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#appendix_effectsize_simple"><i class="fa fa-check"></i><b>A.1</b> Alternative approaches for simple effect size exemplar</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#libraries-needed-for-this-analysis-4"><i class="fa fa-check"></i><b>A.1.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="A.1.2" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#data-1"><i class="fa fa-check"></i><b>A.1.2</b> Data</a></li>
+<li class="chapter" data-level="A.1.3" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#calculating-simple-effect-size-1"><i class="fa fa-check"></i><b>A.1.3</b> Calculating simple effect size</a></li>
+<li class="chapter" data-level="A.1.4" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#comparing-approaches"><i class="fa fa-check"></i><b>A.1.4</b> Comparing approaches</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -218,15 +227,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Transparent Statistics Guidelines</h1>
 <h4 class="author"><em>Transparent Statistics in HCI Working Group (<a href="http://transparentstatistics.org/" class="uri">http://transparentstatistics.org/</a>)</em></h4>
-<h4 class="date"><em>2018-08-15</em></h4>
+<h4 class="date"><em>2019-02-14</em></h4>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
 <p><a href="https://github.com/transparentstats/guidelines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a></p>
-<p><a href="https://doi.org/10.5281/zenodo.1228032"><img src="https://img.shields.io/badge/DOI%20current%20version-10.5281%2Fzenodo.1228032-green.svg" alt="DOI current version" /></a> <a href="https://doi.org/10.5281/zenodo.1186169"><img src="https://img.shields.io/badge/DOI%20all%20versions-10.5281%2Fzenodo.1186169-blue.svg" alt="DOI all versions" /></a></p>
 <p>This document grew out of a Special Interest Group and Workshop to develop guidelines for transparent statistical communication in Human-Computer Interaction research.
 The recommendations in this guideline are chosen to encourage transparency in the practice of statistics.
 For more details on this position, see our <a href="principles.html#principles">guiding principles</a>.</p>
+<p><a href="https://doi.org/10.5281/zenodo.2226616"><img src="https://img.shields.io/badge/this%20version-10.5281%2Fzenodo.2226616-green.svg" alt="DOI this version" /></a>
+<a href="https://doi.org/10.5281/zenodo.1186169"><img src="https://img.shields.io/badge/all%20versions-10.5281%2Fzenodo.1186169-blue.svg" alt="DOI all versions" /></a>
+<a href="index.html#citing"><img src="https://img.shields.io/badge/-cite%20or%20contribute-lightgrey.svg" alt="Citing or contribute" /></a></p>
 <div id="organization" class="section level2 unnumbered">
 <h2>Organization</h2>
 <p>This document is organized according to statistical topics.
@@ -255,10 +266,26 @@ Therefore, the scope and focus of this document is far narrower than being a com
 <p>As the consensus in statistical practice evolves (as science evolves), this document is a living document.
 For the most up-to-date version of the guideline, visit <a href="https://transparentstats.github.io/guidelines/">the online guideline page</a> or <a href="https://github.com/transparentstats/guidelines">source on Github</a>.</p>
 </div>
+<div id="citing" class="section level2 unnumbered">
+<h2>Citing</h2>
+<p>You can cite this guideline with the following ACM reference format.
+If you wish to cite a specific version, replace the DOI with the version-specific DOI and the date of publication as stated at the top of this webpage.</p>
+<pre><code>Transparent Statistics in Human–Computer Interaction working group. 2019. Transparent Statistics Guidelines. (Feb 2019). DOI: http://dx.doi.org/10.5281/zenodo.1186169 (Available at https://transparentstats.github.io/guidelines)</code></pre>
+<p>Here’s the same thing in BibTeX format</p>
+<pre><code>@misc{TransparentStatsFeb2019, 
+    title={{Transparent} {Statistics} {Guidelines}}, 
+    author={{Transparent} {Statistics} in {Human}–{Computer} {Interaction} {Working} {Group}}, 
+    DOI = {10.5281/zenodo.1186169},
+    month={Feb},
+    year={2019},
+    note={({Available} at https://transparentstats.github.io/guidelines)}
+}</code></pre>
+</div>
 <div id="contributing" class="section level2 unnumbered">
 <h2>Contributing</h2>
 <p>We welcome help and feedback at all levels! If you would like to contribute, please see
-<a href="https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines">Contributing to the Guidelines</a>.</p>
+<a href="https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines">Contributing to the Guidelines</a>. Especially, please have a look at the <a href="https://github.com/transparentstats/guidelines/wiki/Style-Guide">Style Guide</a> and a
+contributor <a href="https://github.com/transparentstats/guidelines/wiki/Code-of-Conduct">Code of Conduct</a>.</p>
 
 </div>
 </div>
