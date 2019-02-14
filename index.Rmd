@@ -21,17 +21,18 @@ github-repo: transparentstats/guidelines
 ---
 
 
+
 # Preface {-}
 
 <a href="https://github.com/transparentstats/guidelines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 
-[![DOI current version](https://img.shields.io/badge/DOI%20current%20version-10.5281%2Fzenodo.1228032-green.svg)](https://doi.org/10.5281/zenodo.2226616) 
-[![DOI all versions](https://img.shields.io/badge/DOI%20all%20versions-10.5281%2Fzenodo.1186169-blue.svg)](https://doi.org/10.5281/zenodo.1186169) 
-[(How to cite)](#citing)
-
 This document grew out of a Special Interest Group and Workshop to develop guidelines for transparent statistical communication in Human-Computer Interaction research. 
 The recommendations in this guideline are chosen to encourage transparency in the practice of statistics.
 For more details on this position, see our [guiding principles](#principles).
+
+```{r child = 'guides/doi.Rmd'}
+```
+
 
 ## Organization {-}
 This document is organized according to statistical topics. 

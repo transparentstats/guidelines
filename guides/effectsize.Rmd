@@ -9,8 +9,10 @@ knitr::include_graphics("figures/effectsize/teaser.png", dpi = NA)
 ```
 </div>
 
+<div class="preamble">
 **Version:** 1.1
-[(How to cite)](#citing)
+```{r child = 'guides/doi.Rmd'}
+```
 
 **Contributed to the writing:** Matthew Kay, Chat Wacharamanotham, Steve Haroz, Pierre Dragicevic, Jacob O. Wobbrock, Janne Lindqvist, Yea-Seul Kim, Amelia McNamara
 
@@ -23,6 +25,7 @@ So far, this document covers the effect sizes of the difference between means.
 There are other types of effect sizes such as correlation as well.
 If you are interested to contribute this part, [get in touch](mailto:core@transparentstatistics.org )!
 ```
+</div>
 
 ## FAQ
 

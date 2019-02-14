@@ -1,0 +1,8 @@
+```{r, include=FALSE}
+doi_suffix <- "1186169"         # for all versions (this variable is used in the preface)
+doi_suffix_current <- "2226616" # for current versions
+```
+
+[![DOI this version](https://img.shields.io/badge/this%20version-10.5281%2Fzenodo.`r doi_suffix_current`-green.svg)](https://doi.org/10.5281/zenodo.`r doi_suffix_current`)
+[![DOI all versions](https://img.shields.io/badge/all%20versions-10.5281%2Fzenodo.`r doi_suffix`-blue.svg)](https://doi.org/10.5281/zenodo.`r doi_suffix`)
+[![Citing or contribute](https://img.shields.io/badge/-cite%20or%20contribute-lightgrey.svg)](#citing)
