@@ -70,19 +70,19 @@ You can cite this guideline with the following ACM reference format.
 If you wish to cite a specific version, replace the DOI with the version-specific DOI and the date of publication as stated at the top of this webpage.
 
 ```
-Transparent Statistics in Human–Computer Interaction working group. 2018. Transparent Statistics Guidelines. (Dec 2018). DOI:http://dx.doi.org/10.5281/zenodo.1186169 Available at https://transparentstats.github.io/guidelines.
+Transparent Statistics in Human–Computer Interaction working group. `r format(Sys.Date(), "%Y")`. Transparent Statistics Guidelines. (`r format(Sys.Date(), "%b %Y")`). DOI: http://dx.doi.org/10.5281/zenodo.`r doi_suffix` (Available at https://transparentstats.github.io/guidelines)
 ```
 
 Here's the same thing in BibTeX format
 
 ```
-@misc{TransparentStats2018, 
-	title={Transparent Statistics Guidelines}, 
-	note={Available at https://transparentstats.github.io/guidelines}, 
-	DOI = {10.5281/zenodo.1186169},
-	author={Transparent Statistics in Human–Computer Interaction working group}, 
-	year={2018}, 
-	month={Dec}
+@misc{TransparentStats`r format(Sys.Date(), "%b%Y")`, 
+	title={{Transparent} {Statistics} {Guidelines}}, 
+	author={{Transparent} {Statistics} in {Human}–{Computer} {Interaction} {Working} {Group}}, 
+	DOI = {10.5281/zenodo.`r doi_suffix`},
+	month={`r format(Sys.Date(), "%b")`},
+	year={`r format(Sys.Date(), "%Y")`},
+	note={({Available} at https://transparentstats.github.io/guidelines)}
 }
 ```
 
