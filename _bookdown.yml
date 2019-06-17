@@ -12,6 +12,7 @@ rmd_files:
   - "guides/effectsize_exemplar_within.Rmd"
   - "guides/effectsize_exemplar_standardized.Rmd"
   - "guides/effectsize_exemplar_nonparametric.Rmd"
+  - "guides/inference.Rmd"
   - "guides/bayesian.Rmd"
   - "guides/likert.Rmd"
   - "guides/planning.Rmd"
