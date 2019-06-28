@@ -6,25 +6,41 @@ If you would like to contribute, please see
 [Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
 </mark>
 
+
+```{r es-simple-setup, message=FALSE, warning=FALSE, include=FALSE}
 ### Libraries needed for this analysis
 
-```{r es-simple-setup, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(forcats)    # for fct_...()
 library(broom)      # for tidy()
 library(ggstance)   # for geom_pointrangeh(), stat_summaryh()
+library(tidybayes)
+library(cowplot)
+library(modelr)
+library(magrittr)
+library(ggridges)
+
+theme_set(
+  theme_tidybayes() +
+  theme(
+    panel.grid.minor.x = element_line(color = "gray95"),
+    panel.grid.major.x = element_line(color = "gray95"),
+    #strip.background = element_rect(color = "gray65"),
+    axis.title.x = element_text(hjust = 0)
+  ) 
+)  
+  
 ```
 
 ```{r simple-boilerplate, include = FALSE}
 format_num <- function(nums, sigdigits = 3) gsub("\\.$", "", formatC(nums, sigdigits, format = "fg", flag="#"))
 ```
 
+```{r es-simple-data_generation, include = FALSE}
+### Data generation
+# We assume a log-normal model of completion times, which is a commonly-used model of completion time [@Sauro2010]
+# and ensures completion times are all positive.
 
-### Data
-
-Imagine a between-subjects design, with completion time (in milliseconds) measured in two groups, `A` and `B`, with 20 subjects each.
-
-```{r es-simple-data_generation}
 set.seed(12)
 n <- 20
 data <- tibble(
@@ -36,25 +52,40 @@ data <- tibble(
 )
 ```
 
-We assume a log-normal model of completion times, which is a commonly-used model of completion time [@Sauro2010] and ensures completion times are all positive.
 
-A good first step in any analysis is always to visualize the data:
+### Data
 
-```{r es-simple-data_plot, fig.height = 2, fig.width = 4}
+Imagine a between-subjects design, with completion time (in milliseconds) measured in two groups, `A` and `B`, with 20 subjects each.
+
+
+A good first step in any analysis is always to visualize the raw data along with some relvant descriptive statistics (see the [Statistical Inference](#inference) chapter). In this case, we will use a dotplot [@Wilkinson1999] to show all the raw data, and we will indicate the mean completion time as a red dotted vertical line:
+
+```{r es-simple-data_plot, fig.height = 2, fig.width = 4, echo = FALSE}
+min_x = 0
+max_x = ceiling(max(data$completion_time_ms)) + 5
+
 p_data <-  # save for the teaser figure
   data %>% 
   ggplot(aes(x = completion_time_ms)) +
+  geom_hline(yintercept = 0, color = "gray70") +
+  geom_vline(xintercept = 0, color = "gray70") +
   geom_dotplot(binwidth=5) +
   stat_summaryh(aes(y = 0, xintercept = ..x..), fun.x = mean, geom = "vline", color = "red", linetype = "dashed") +
+  stat_summaryh(aes(y = .8, label = paste0("mean(", group, ")")), fun.x = mean, geom = "text", color = "red", 
+    hjust = 0, position = position_nudge(x = 7), size = 3.5) +
   facet_grid(group ~ ., switch="y") +
   scale_y_continuous(breaks = NULL) +
-  geom_vline(xintercept = 0) +
   xlab("Completion time (ms)") +
-  ylab("Group")
+  ylab(NULL) +
+  coord_cartesian(expand = FALSE, clip = "off") +
+  scale_x_continuous(limits = c(min_x, max_x)) +
+  theme(
+    axis.line.y = element_blank(),
+    strip.background = element_blank(),
+    strip.text.y = element_text(angle = 180, vjust = 0.5, hjust = 0)
+  ) 
 p_data
 ```
-
-This plot shows all observed completion times in each group (black dots) along with the mean in each group (dashed red lines).
 
 ### Calculating simple effect size
 
@@ -62,48 +93,107 @@ Since we have meaningful units (milliseconds), we will use the *difference* in m
 
 There are several possible approaches to estimating the uncertainty in the difference between the two groups. For simplicity, we show one possible approach in this exemplar, but we provide a non-exhaustive comparison of a few other approaches in the [effect size guideline appendix](#appendix_effectsize_simple).
 
-### Difference in means with Student's t confidence interval
+While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on $(-\infty, +\infty)$ and approximately symmetrical (per the central limit theorem), so we will compute a *Student's t distribution confidence interval* for the difference in means.
 
-While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on $(-\infty, +\infty)$ and approximately symmetrical (per the central limit theorem), so we can compute a *Student's t distribution confidence interval* for the difference in means.
-
-```{r es-simple-t_test}
-t_result <- 
+```{r es-simple-t_test, include=FALSE}
+t_result_95 <- 
   t.test(completion_time_ms ~ group, data = data) %>%
-  tidy()    # put result in tidy tabular format
-t_result
-```
+  tidy() %>%
+  mutate(.width = .95)
 
-The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
-95% of all intervals constructed in this manner will contain the "true" (population) value. 
-A 95% t-confidence interval is therefore a reasonable measure of uncertainty about our measured effect size. 
-The wider the confidence interval, the less certain we are about what we expect our true effect size to be.
+t_result_66 <- 
+  t.test(completion_time_ms ~ group, data = data, conf.level = .66) %>%
+  tidy() %>%
+  mutate(.width = .66)
+
+t_result = bind_rows(t_result_95, t_result_66) %>%
+  tidybayes::from_broom_names()
+
+t_result
+
+#The `tidy()`ed output of the `t.test()` function includes an estimate of the mean difference in milliseconds (`estimate`) as well #as the lower (`conf.low`) and upper (`conf.high`) bounds of the 95% confidence interval. 
+#95% of all intervals constructed in this manner will contain the "true" (population) value. 
+#A 95% t-confidence interval is therefore a reasonable measure of uncertainty about our measured effect size. 
+#The wider the confidence interval, the less certain we are about what we expect our true effect size to be.
+```
 
 ### Reporting simple effect size
 
-Ideally, we would have space in our paper to report the effect size graphically:
+#### Graphical report
 
-```{r es-simple-ci_plot, fig.height = 1, fig.width = 5}
+Ideally, we would have space in our paper to report the effect size graphically. Here, we will show 66% and 95% confidence intervals around the mean difference, along with a sampling distribution for the mean difference:
+
+```{r es-simple-ci_plot, fig.height = 1.4, fig.width = 4.75, echo = FALSE}
+t_density = t_result_95 %>%
+  data_grid(x = seq(0, 150, length.out = 101), mu = estimate, sigma = estimate / statistic, nu = parameter) %>%
+  mutate(
+    d = dt((x - mu) / sigma, nu),
+    d = d / max(d)
+  )
+
+B_mean = data %>%
+  filter(group == "B") %$%
+  mean(completion_time_ms)
+
 p_simple_effect_size <-   # save for the teaser figure
   t_result %>% 
-  ggplot(aes(y = "A - B", x = estimate, xmin = conf.low, xmax = conf.high)) +
-  geom_pointrangeh() +
-  geom_vline(xintercept = 0, linetype="dashed") +
-  xlab("Mean difference in completion time (ms) with 95% CI") +
-  ylab("")
-p_simple_effect_size
+  ggplot(aes(y = 0, x = .value)) +
+  geom_density_ridges(aes(x = x, height = d), stat = "identity", data = t_density, color = NA) +
+  geom_pointintervalh() +
+  xlab("Estimated mean difference in completion time (ms)\nwith 66% CI, 95% CI, and Student's t sampling distribution") +
+  ylab(NULL) +
+  scale_y_continuous(breaks = NULL) +
+  coord_cartesian(ylim = c(-.4, 2), expand = FALSE, clip = "off") +
+  facet_grid("A - B" ~ ., switch="y") +
+  theme(
+    axis.line.y = element_blank(),
+    strip.background = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    strip.text.y = element_text(angle = 180, vjust = 0.5, hjust = 0)
+  ) +
+  scale_x_continuous(limits = c(min_x, max_x) - B_mean) 
+  
+
+p_simple_effect_size +
+  geom_vline(xintercept = 0, color = "gray70")
 ```
 
 This graphical report includes all of the [elements of an effect size report that we recommend](#effectsize_faq_how_reporting):
 
 - The direction of the difference (indicated by the label `A - B`)
 - The type of estimate reported (mean difference)
-- The type of uncertainty indicated (95% CI)
+- The type of uncertainty reported (66% CI, 95% CI, and sampling distribution)
 - The units (ms)
 
-Space may not always permit the graphical report. While it can be less easy to interpret, an alternative is a textual report. **Such a report should still include all of the four elements listed above.** For example:
+Space permitting, the raw data and the effect size may be combined into a single plot with align scales, so that the effect size and its uncertainty have the full context of the raw data:
 
-> Group `A` had a greater mean completion time than group `B` by `r format_num(t_result$estimate, 2)` milliseconds (95% CI: [`r format_num(t_result$conf.low, 2)`, `r format_num(t_result$conf.high, 2)`]).
+```{r, fig.width = 5, fig.height = 3.5, echo = FALSE}
+p_simple_effect_size_aligned = p_simple_effect_size +
+  annotate("segment", x = 0, xend = 0, y = -.4, yend = 3, linetype="dashed", color = "red") +
+  geom_segment(aes(xend = .value, y = -.4, yend = 5.5), linetype="dashed", color = "gray75") +
+  geom_text(aes(y = 2.05, label = "mean(A - B)"), color = "gray50", hjust = 0, 
+    position = position_nudge(x = 7), size = 3.5) 
 
+
+plot_grid(ncol = 1, align = "hv", axis = "lr", rel_heights = c(2,1.5),
+  p_data + labs(subtitle = "Completion time (ms)", x = NULL),
+  p_simple_effect_size_aligned
+)
+```
+
+#### Textual report
+
+Space may not always permit a graphical report. While it can be less easy to interpret, an alternative is a textual report. **Such a report should still include all of the four elements listed above.** For example:
+
+> Group `A` had a greater mean completion time than group `B` by `r format_num(t_result_95$estimate, 2)` milliseconds (95% CI: [`r format_num(t_result_95$conf.low, 2)`, `r format_num(t_result_95$conf.high, 2)`]).
+
+This report includes:
+
+- The direction of the difference (indicated by "Group `A` had **greater** mean...")
+- The type of estimate reported (difference in mean completion time)
+- The type of uncertainty (95% CI)
+- The units (milliseconds)
 
 ### Interpreting effect size: same result, different domains = different interpretations
 
@@ -116,14 +206,14 @@ To illustrate the effect of domain on interpreting effect size, we will imagine 
 
 Imagine the above study was from the comparison of a novel physical user interface prototyping system (treatment `B`) to the previous state of the art (`A`), and the completion time referred to the time for feedback to be given to the user after they perform an input action. We might report the following interpretation of the results:
 
-> Technique `B` offers a **large** improvement in feedback time (~`r format_num(t_result$conf.low, 2)` -- `r format_num(t_result$conf.high, 2)`ms mean decrease), resulting in feedback times that tend to be less than the threshold of human perception (less than about 100ms). By contrast, the larger feedback times offered by technique `A` tended to be above that threshold, possibly degrading users' experience of the prototypes built using that technique.
+> Technique `B` offers a **large** improvement in feedback time (~`r format_num(t_result_95$conf.low, 2)` -- `r format_num(t_result_95$conf.high, 2)`ms mean decrease), resulting in feedback times that tend to be less than the threshold of human perception (less than about 100ms). By contrast, the larger feedback times offered by technique `A` tended to be above that threshold, possibly degrading users' experience of the prototypes built using that technique.
 
 
 #### Domain 2: Chatbots
 
 Imagine the same quantitative results, now in the context of a natural language chat bot designed to answer users' questions. Here, technique `A` will be the novel system, with improved natural language capabilities compared to the previous state-of-the-art technique, `B`. We might report the following interpretation of the results:
 
-> While technique `A` takes longer to respond to chat messages (~`r format_num(t_result$conf.low, 2)`--`r format_num(t_result$conf.high, 2)`ms increase in mean response time), we believe this difference is acceptable in the context of an asynchronous chat interface in which users do not expect instantaneous responses. When weighed against the improved natural language capabilites of technique `A`, we believe this **small** increase in response time for messages is worth the improved message content.
+> While technique `A` takes longer to respond to chat messages (~`r format_num(t_result_95$conf.low, 2)`--`r format_num(t_result_95$conf.high, 2)`ms increase in mean response time), we believe this difference is acceptable in the context of an asynchronous chat interface in which users do not expect instantaneous responses. When weighed against the improved natural language capabilites of technique `A`, we believe this **small** increase in response time for messages is worth the improved message content.
 
 The same effect size is plausibly described as **large** in domain 1 and **small** in domain 2, illustrating the importance of expert interpretation to reporting and understanding effect size and the difficulty in applying pre-defined thresholds across domains.
 
