@@ -1,0 +1,8 @@
+# Model selection and evaluation {#modelselection}
+
+<mark>
+This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1Ksz26VyGSVu30n-52gcsbB6wvqP4kCoFT6egxDIIDCs/edit).
+We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>
