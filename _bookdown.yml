@@ -13,7 +13,7 @@ rmd_files:
   - "guides/effectsize_exemplar_standardized.Rmd"
   - "guides/effectsize_exemplar_nonparametric.Rmd"
   - "guides/pvalues.Rmd"
-  - "guides/inferential.Rmd"
+  - "guides/inference.Rmd"
   - "guides/interpretations.Rmd"
   - "guides/preregistration.Rmd"
   - "guides/multiplecomparisons.Rmd"
