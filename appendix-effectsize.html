@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Transparent Statistics Guidelines</title>
-  <meta name="description" content="Guidelines, FAQ, and exemplar analyses">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Effect size appendix | Transparent Statistics Guidelines</title>
+  <meta name="description" content="Guidelines, FAQ, and exemplar analyses" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Transparent Statistics Guidelines" />
+  <meta property="og:title" content="A Effect size appendix | Transparent Statistics Guidelines" />
   <meta property="og:type" content="book" />
   
   
@@ -17,25 +16,26 @@
   <meta name="github-repo" content="transparentstats/guidelines" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Transparent Statistics Guidelines" />
+  <meta name="twitter:title" content="A Effect size appendix | Transparent Statistics Guidelines" />
   
   <meta name="twitter:description" content="Guidelines, FAQ, and exemplar analyses" />
   
 
-<meta name="author" content="Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)">
+<meta name="author" content="Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)" />
 
 
-<meta name="date" content="2019-02-14">
+<meta name="date" content="2019-06-29" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="transformation.html">
+<link rel="prev" href="assumptions.html">
 <link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,69 +50,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -166,15 +138,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.9" data-path="effectsize.html"><a href="effectsize.html#effectsize_faq_controversial"><i class="fa fa-check"></i><b>2.1.9</b> What are controversial issues about effect sizes?</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_simple"><i class="fa fa-check"></i><b>2.2</b> Exemplar: Simple effect size</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis"><i class="fa fa-check"></i><b>2.2.1</b> Libraries needed for this analysis</a></li>
-<li class="chapter" data-level="2.2.2" data-path="effectsize.html"><a href="effectsize.html#data"><i class="fa fa-check"></i><b>2.2.2</b> Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="effectsize.html"><a href="effectsize.html#calculating-simple-effect-size"><i class="fa fa-check"></i><b>2.2.3</b> Calculating simple effect size</a></li>
-<li class="chapter" data-level="2.2.4" data-path="effectsize.html"><a href="effectsize.html#difference-in-means-with-students-t-confidence-interval"><i class="fa fa-check"></i><b>2.2.4</b> Difference in means with Student’s t confidence interval</a></li>
-<li class="chapter" data-level="2.2.5" data-path="effectsize.html"><a href="effectsize.html#reporting-simple-effect-size"><i class="fa fa-check"></i><b>2.2.5</b> Reporting simple effect size</a></li>
-<li class="chapter" data-level="2.2.6" data-path="effectsize.html"><a href="effectsize.html#interpreting-effect-size-same-result-different-domains-different-interpretations"><i class="fa fa-check"></i><b>2.2.6</b> Interpreting effect size: same result, different domains = different interpretations</a></li>
+<li class="chapter" data-level="2.2.1" data-path="effectsize.html"><a href="effectsize.html#data"><i class="fa fa-check"></i><b>2.2.1</b> Data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="effectsize.html"><a href="effectsize.html#calculating-simple-effect-size"><i class="fa fa-check"></i><b>2.2.2</b> Calculating simple effect size</a></li>
+<li class="chapter" data-level="2.2.3" data-path="effectsize.html"><a href="effectsize.html#reporting-simple-effect-size"><i class="fa fa-check"></i><b>2.2.3</b> Reporting simple effect size</a></li>
+<li class="chapter" data-level="2.2.4" data-path="effectsize.html"><a href="effectsize.html#interpreting-effect-size-same-result-different-domains-different-interpretations"><i class="fa fa-check"></i><b>2.2.4</b> Interpreting effect size: same result, different domains = different interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_within"><i class="fa fa-check"></i><b>2.3</b> Exemplar: Within-subjects experiment</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-1"><i class="fa fa-check"></i><b>2.3.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="2.3.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis"><i class="fa fa-check"></i><b>2.3.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="2.3.2" data-path="effectsize.html"><a href="effectsize.html#simulate-a-dataset"><i class="fa fa-check"></i><b>2.3.2</b> Simulate a dataset</a></li>
 <li class="chapter" data-level="2.3.3" data-path="effectsize.html"><a href="effectsize.html#a-look-at-the-data"><i class="fa fa-check"></i><b>2.3.3</b> A look at the data</a></li>
 <li class="chapter" data-level="2.3.4" data-path="effectsize.html"><a href="effectsize.html#compute-effect-sizes"><i class="fa fa-check"></i><b>2.3.4</b> Compute effect sizes</a></li>
@@ -184,23 +154,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.8" data-path="effectsize.html"><a href="effectsize.html#reporting-the-results"><i class="fa fa-check"></i><b>2.3.8</b> Reporting the results</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_standardized"><i class="fa fa-check"></i><b>2.4</b> Exemplar: Standardized effect size</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-2"><i class="fa fa-check"></i><b>2.4.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="2.4.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-1"><i class="fa fa-check"></i><b>2.4.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="2.4.2" data-path="effectsize.html"><a href="effectsize.html#standardized-effect-size"><i class="fa fa-check"></i><b>2.4.2</b> Standardized effect size</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_nonparametric"><i class="fa fa-check"></i><b>2.5</b> Exemplar: Nonparametric effect size</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-3"><i class="fa fa-check"></i><b>2.5.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="2.5.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-2"><i class="fa fa-check"></i><b>2.5.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="2.5.2" data-path="effectsize.html"><a href="effectsize.html#nonparametric-effect-size"><i class="fa fa-check"></i><b>2.5.2</b> Nonparametric effect size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>3</b> Bayesian inference</a></li>
-<li class="chapter" data-level="4" data-path="likert.html"><a href="likert.html"><i class="fa fa-check"></i><b>4</b> Likert-scale data</a></li>
-<li class="chapter" data-level="5" data-path="planning.html"><a href="planning.html"><i class="fa fa-check"></i><b>5</b> Experiment and analysis planning</a></li>
-<li class="chapter" data-level="6" data-path="pvalues.html"><a href="pvalues.html"><i class="fa fa-check"></i><b>6</b> p values</a></li>
-<li class="chapter" data-level="7" data-path="transformation.html"><a href="transformation.html"><i class="fa fa-check"></i><b>7</b> Data transformation</a></li>
+<li class="chapter" data-level="3" data-path="pvalues.html"><a href="pvalues.html"><i class="fa fa-check"></i><b>3</b> p values</a></li>
+<li class="chapter" data-level="4" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>4</b> Inferential statistics</a></li>
+<li class="chapter" data-level="5" data-path="interpretations.html"><a href="interpretations.html"><i class="fa fa-check"></i><b>5</b> Interpretations and Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="preregistration.html"><a href="preregistration.html"><i class="fa fa-check"></i><b>6</b> Preregistration and prespecification</a></li>
+<li class="chapter" data-level="7" data-path="multiplecomparisons.html"><a href="multiplecomparisons.html"><i class="fa fa-check"></i><b>7</b> Multiple comparisons</a></li>
+<li class="chapter" data-level="8" data-path="interrater.html"><a href="interrater.html"><i class="fa fa-check"></i><b>8</b> Inter-rater reliability</a></li>
+<li class="chapter" data-level="9" data-path="modelselection.html"><a href="modelselection.html"><i class="fa fa-check"></i><b>9</b> Model selection and evaluation</a></li>
+<li class="chapter" data-level="10" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>10</b> Bayesian inference</a></li>
+<li class="chapter" data-level="11" data-path="likert.html"><a href="likert.html"><i class="fa fa-check"></i><b>11</b> Likert-scale data</a></li>
+<li class="chapter" data-level="12" data-path="assumptions.html"><a href="assumptions.html"><i class="fa fa-check"></i><b>12</b> Assumptions and robustness</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html"><i class="fa fa-check"></i><b>A</b> Effect size appendix</a><ul>
 <li class="chapter" data-level="A.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#appendix_effectsize_simple"><i class="fa fa-check"></i><b>A.1</b> Alternative approaches for simple effect size exemplar</a><ul>
-<li class="chapter" data-level="A.1.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#libraries-needed-for-this-analysis-4"><i class="fa fa-check"></i><b>A.1.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="A.1.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#libraries-needed-for-this-analysis-3"><i class="fa fa-check"></i><b>A.1.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="A.1.2" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#data-1"><i class="fa fa-check"></i><b>A.1.2</b> Data</a></li>
 <li class="chapter" data-level="A.1.3" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#calculating-simple-effect-size-1"><i class="fa fa-check"></i><b>A.1.3</b> Calculating simple effect size</a></li>
 <li class="chapter" data-level="A.1.4" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#comparing-approaches"><i class="fa fa-check"></i><b>A.1.4</b> Comparing approaches</a></li>
@@ -230,34 +205,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="appendix_effectsize_simple" class="section level2">
 <h2><span class="header-section-number">A.1</span> Alternative approaches for simple effect size exemplar</h2>
 <p>The <a href="effectsize.html#effectsize_exemplar_simple">simple effect size exemplar</a> demonstrates one common technique for esitmating mean differences in resposne time and the uncertainty around them (Student’s t confidence intervals). This supplement demonstrates several possible approaches one might take to calculate differences in response time, and compares them. It is not intended to be exhaustive.</p>
-<div id="libraries-needed-for-this-analysis-4" class="section level3">
+<div id="libraries-needed-for-this-analysis-3" class="section level3">
 <h3><span class="header-section-number">A.1.1</span> Libraries needed for this analysis</h3>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># See here for rstan installation instructions: </span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="co"># https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started</span></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="kw">library</span>(rstan)</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="kw">library</span>(modelr)     <span class="co"># for data_grid()</span></a>
-<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="kw">library</span>(broom)      <span class="co"># for tidy()</span></a>
-<a class="sourceLine" id="cb32-8" data-line-number="8"><span class="kw">library</span>(ggstance)   <span class="co"># for geom_pointrangeh(), stat_summaryh()</span></a>
-<a class="sourceLine" id="cb32-9" data-line-number="9"><span class="kw">library</span>(brms)       <span class="co"># for brm() (requires rstan)</span></a>
-<a class="sourceLine" id="cb32-10" data-line-number="10"><span class="kw">library</span>(tidybayes)  <span class="co"># for mean_qi()</span></a>
-<a class="sourceLine" id="cb32-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb32-12" data-line-number="12"><span class="co"># requires `import` and `MASS` packages to be installed</span></a>
-<a class="sourceLine" id="cb32-13" data-line-number="13">import<span class="op">::</span><span class="kw">from</span>(MASS, mvrnorm)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># See here for rstan installation instructions: </span>
+<span class="co"># https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started</span>
+<span class="kw">library</span>(rstan)
+
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(modelr)     <span class="co"># for data_grid()</span>
+<span class="kw">library</span>(broom)      <span class="co"># for tidy()</span>
+<span class="kw">library</span>(ggstance)   <span class="co"># for geom_pointrangeh(), stat_summaryh()</span>
+<span class="kw">library</span>(brms)       <span class="co"># for brm() (requires rstan)</span>
+<span class="kw">library</span>(tidybayes)  <span class="co"># for mean_qi()</span>
+
+<span class="co"># requires `import` and `MASS` packages to be installed</span>
+import<span class="op">::</span><span class="kw">from</span>(MASS, mvrnorm)</code></pre></div>
 </div>
 <div id="data-1" class="section level3">
 <h3><span class="header-section-number">A.1.2</span> Data</h3>
 <p>We will use the same data as the simple effect size exemplar:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">n &lt;-<span class="st"> </span><span class="dv">20</span></a>
-<a class="sourceLine" id="cb33-3" data-line-number="3">data &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb33-4" data-line-number="4">  <span class="dt">group =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dt">each =</span> n),</a>
-<a class="sourceLine" id="cb33-5" data-line-number="5">  <span class="dt">completion_time_ms =</span> <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb33-6" data-line-number="6">    <span class="kw">rlnorm</span>(n, <span class="dt">meanlog =</span> <span class="kw">log</span>(<span class="dv">170</span>), <span class="dt">sdlog =</span> <span class="fl">0.3</span>),</a>
-<a class="sourceLine" id="cb33-7" data-line-number="7">    <span class="kw">rlnorm</span>(n, <span class="dt">meanlog =</span> <span class="kw">log</span>(<span class="dv">50</span>), <span class="dt">sdlog =</span> <span class="fl">0.4</span>)</a>
-<a class="sourceLine" id="cb33-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb33-9" data-line-number="9">)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">12</span>)
+n &lt;-<span class="st"> </span><span class="dv">20</span>
+data &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">group =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dt">each =</span> n),
+  <span class="dt">completion_time_ms =</span> <span class="kw">c</span>(
+    <span class="kw">rlnorm</span>(n, <span class="dt">meanlog =</span> <span class="kw">log</span>(<span class="dv">170</span>), <span class="dt">sdlog =</span> <span class="fl">0.3</span>),
+    <span class="kw">rlnorm</span>(n, <span class="dt">meanlog =</span> <span class="kw">log</span>(<span class="dv">50</span>), <span class="dt">sdlog =</span> <span class="fl">0.4</span>)
+  )
+)</code></pre></div>
 <p>See that exemplar for more information.</p>
 </div>
 <div id="calculating-simple-effect-size-1" class="section level3">
@@ -265,10 +240,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="approach-1-difference-in-means-with-students-t-confidence-interval" class="section level4">
 <h4><span class="header-section-number">A.1.3.1</span> Approach 1: Difference in means with Student’s t confidence interval</h4>
 <p>This is the approach used in the exemplar. While the response distributions are non-normal, the sampling distribution of the difference in means will still be defined on <span class="math inline">\((-\infty, +\infty)\)</span> and approximately symmetrical (per the central limit theorem), so we can compute a <em>Student’s t distribution confidence interval</em> for the difference in means.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">t_interval &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">t.test</span>(completion_time_ms <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="st">  </span><span class="kw">tidy</span>()    <span class="co"># put result in tidy tabular format</span></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">t_interval</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_interval &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">t.test</span>(completion_time_ms <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tidy</span>()    <span class="co"># put result in tidy tabular format</span>
+t_interval</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -305,11 +280,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="approach-2a-ratio-of-geometric-means-with-students-t-confidence-interval-on-log-scale" class="section level4">
 <h4><span class="header-section-number">A.1.3.2</span> Approach 2a: Ratio of geometric means with Student’s t confidence interval on log-scale</h4>
-<p>For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the <a href="transformation.html#transformation">data transformation</a> guideline for more information.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">log_t_interval &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">  </span><span class="kw">t.test</span>(<span class="kw">log</span>(completion_time_ms) <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="st">  </span><span class="kw">tidy</span>()    <span class="co"># put result in tidy tabular format</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">log_t_interval</a></code></pre></div>
+<p>For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the <a href="#transformation">data transformation</a> guideline for more information.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_t_interval &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">t.test</span>(<span class="kw">log</span>(completion_time_ms) <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tidy</span>()    <span class="co"># put result in tidy tabular format</span>
+log_t_interval</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -343,9 +318,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <p>We can also transform this difference (in the log scale) into a ratio of geometric mean response times:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">log_t_ratios &lt;-<span class="st"> </span>log_t_interval <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(estimate, estimate1, estimate2, conf.low, conf.high), exp)</a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">log_t_ratios</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_t_ratios &lt;-<span class="st"> </span>log_t_interval <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(estimate, estimate1, estimate2, conf.low, conf.high), exp)
+log_t_ratios</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -385,8 +360,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="approach-2b-log-normal-regression-with-marginal-estimate-of-difference-in-means-using-simulation" class="section level4">
 <h4><span class="header-section-number">A.1.3.3</span> Approach 2b: log-normal regression with marginal estimate of difference in means using simulation</h4>
 <p>We can run a linear regression that is equivalent to approach 2a:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">m_log &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(completion_time_ms) <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data)</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">summary</span>(m_log)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_log &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(completion_time_ms) <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data)
+<span class="kw">summary</span>(m_log)</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(completion_time_ms) ~ group, data = data)
@@ -417,30 +392,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will use the sampling distribution of the coefficients of <code>m_log</code> to generate samples of <span class="math inline">\(\mu\)</span> in each group, then translate these samples (along with an estimate of <span class="math inline">\(\sigma\)</span>) onto the outcome scale. Given an estimate of the coefficients (<span class="math inline">\(\boldsymbol{\hat\beta}\)</span>) and an estimate of the covariance matrix (<span class="math inline">\(\boldsymbol{\hat\Sigma}\)</span>), the sampling distribution of the coefficients on a log scale is a multivariate normal distribution:</p>
 <p><span class="math display">\[
 \mathrm{Normal}(\boldsymbol{\hat\beta}, \boldsymbol{\hat\Sigma})
-\]</span>
-We can sample from that distribution and use the estimated log-scale standard deviation (<span class="math inline">\(\hat\sigma\)</span>) to generate sample means on the untransformed scale, which we can use to derive a difference of means on the original scale and a confidence interval around that difference (this is sort of treating the sampling distribution as a Bayesian posterior):</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">log_interval &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="st">  </span><span class="kw">mvrnorm</span>(<span class="dv">10000</span>, <span class="dt">mu =</span> <span class="kw">coef</span>(m_log), <span class="dt">Sigma =</span> <span class="kw">vcov</span>(m_log)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">    <span class="dt">sigma =</span> <span class="kw">sigma</span>(m_log), <span class="co"># Using MLE estimate of residual SD. Could also sample from </span></a>
-<a class="sourceLine" id="cb39-6" data-line-number="6">                          <span class="co"># sqrt(rgamma(nrow(.), (n - 1)/2, ((n - 1)/sigma(m_log)^2)/2))</span></a>
-<a class="sourceLine" id="cb39-7" data-line-number="7">                          <span class="co"># but results are similar</span></a>
-<a class="sourceLine" id="cb39-8" data-line-number="8">    </a>
-<a class="sourceLine" id="cb39-9" data-line-number="9">    <span class="co"># get samples of means for each group on the original scale</span></a>
-<a class="sourceLine" id="cb39-10" data-line-number="10">    <span class="dt">mu_A =</span> <span class="st">`</span><span class="dt">(Intercept)</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb39-11" data-line-number="11">    <span class="dt">mean_A =</span> <span class="kw">exp</span>(mu_A <span class="op">+</span><span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb39-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb39-13" data-line-number="13">    <span class="dt">mu_B =</span> <span class="st">`</span><span class="dt">(Intercept)</span><span class="st">`</span> <span class="op">+</span><span class="st"> </span>groupB,</a>
-<a class="sourceLine" id="cb39-14" data-line-number="14">    <span class="dt">mean_B =</span> <span class="kw">exp</span>(mu_B <span class="op">+</span><span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb39-15" data-line-number="15">    </a>
-<a class="sourceLine" id="cb39-16" data-line-number="16">    <span class="co"># get samples of the difference in means on the original scale</span></a>
-<a class="sourceLine" id="cb39-17" data-line-number="17">    <span class="dt">estimate =</span> mean_A <span class="op">-</span><span class="st"> </span>mean_B</a>
-<a class="sourceLine" id="cb39-18" data-line-number="18">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb39-19" data-line-number="19"><span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb39-20" data-line-number="20"><span class="st">  </span><span class="kw">to_broom_names</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># makes the column names the same as those returned by broom::tidy</span></a>
-<a class="sourceLine" id="cb39-21" data-line-number="21"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression&quot;</span>)</a>
-<a class="sourceLine" id="cb39-22" data-line-number="22">log_interval</a></code></pre></div>
+\]</span> We can sample from that distribution and use the estimated log-scale standard deviation (<span class="math inline">\(\hat\sigma\)</span>) to generate sample means on the untransformed scale, which we can use to derive a difference of means on the original scale and a confidence interval around that difference (this is sort of treating the sampling distribution as a Bayesian posterior):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_interval &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">mvrnorm</span>(<span class="dv">10000</span>, <span class="dt">mu =</span> <span class="kw">coef</span>(m_log), <span class="dt">Sigma =</span> <span class="kw">vcov</span>(m_log)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">sigma =</span> <span class="kw">sigma</span>(m_log), <span class="co"># Using MLE estimate of residual SD. Could also sample from </span>
+                          <span class="co"># sqrt(rgamma(nrow(.), (n - 1)/2, ((n - 1)/sigma(m_log)^2)/2))</span>
+                          <span class="co"># but results are similar</span>
+    
+    <span class="co"># get samples of means for each group on the original scale</span>
+    <span class="dt">mu_A =</span> <span class="st">`</span><span class="dt">(Intercept)</span><span class="st">`</span>,
+    <span class="dt">mean_A =</span> <span class="kw">exp</span>(mu_A <span class="op">+</span><span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),
+    
+    <span class="dt">mu_B =</span> <span class="st">`</span><span class="dt">(Intercept)</span><span class="st">`</span> <span class="op">+</span><span class="st"> </span>groupB,
+    <span class="dt">mean_B =</span> <span class="kw">exp</span>(mu_B <span class="op">+</span><span class="st"> </span>sigma<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),
+    
+    <span class="co"># get samples of the difference in means on the original scale</span>
+    <span class="dt">estimate =</span> mean_A <span class="op">-</span><span class="st"> </span>mean_B
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">to_broom_names</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># makes the column names the same as those returned by broom::tidy</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression&quot;</span>)</code></pre></div>
+<pre><code>## Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
+## This warning is displayed once per session.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_interval</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -473,32 +449,32 @@ We can sample from that distribution and use the estimated log-scale standard de
 <h4><span class="header-section-number">A.1.3.4</span> Approach 3a: log-normal regression with marginal estimate of difference in means using Bayesian regression (uninformed priors)</h4>
 <p>For this approach, we will use a Bayesian log-normal regression model to estimate the mean and variance of the response distribution in each group on a log scale. We will then transform these parameters into a difference in means on the original (millisecond) scale, as in approach 2b.</p>
 <p>For this approach, we will use a Bayesian log-normal regression with uninformed priors. This model is the same as the <code>lm</code> model in approach 2, except that it also allows the variance to be different in each group (in other words, it does not assume <em>constant variance</em> between groups, also known as <em>homoskedasticity</em>).</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">m_log_bayes &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">brmsformula</span>(</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">    completion_time_ms <span class="op">~</span><span class="st"> </span>group,</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">    sigma <span class="op">~</span><span class="st"> </span>group    <span class="co"># allow variance to be different in each group</span></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">  ), <span class="dt">data =</span> data, <span class="dt">family =</span> lognormal)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_log_bayes &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">brmsformula</span>(
+    completion_time_ms <span class="op">~</span><span class="st"> </span>group,
+    sigma <span class="op">~</span><span class="st"> </span>group    <span class="co"># allow variance to be different in each group</span>
+  ), <span class="dt">data =</span> data, <span class="dt">family =</span> lognormal)</code></pre></div>
 <p>Similar to approach 2b, we will derive samples of the mean difference, this time from the posterior distribution. We will use these to derive a credible interval (Bayesian analog to a confidence interval) around the mean difference:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">log_bayes_samples &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="st">  </span>m_log_bayes <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="st">  </span><span class="kw">tidy_draws</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">    <span class="dt">mu_A =</span> b_Intercept,</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">    <span class="dt">sigma_A =</span> <span class="kw">exp</span>(b_sigma_Intercept),</a>
-<a class="sourceLine" id="cb41-7" data-line-number="7">    <span class="dt">mean_A =</span> <span class="kw">exp</span>(mu_A <span class="op">+</span><span class="st"> </span>sigma_A<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb41-8" data-line-number="8">    </a>
-<a class="sourceLine" id="cb41-9" data-line-number="9">    <span class="dt">mu_B =</span> b_Intercept <span class="op">+</span><span class="st"> </span>b_groupB,</a>
-<a class="sourceLine" id="cb41-10" data-line-number="10">    <span class="dt">sigma_B =</span> <span class="kw">exp</span>(b_sigma_Intercept <span class="op">+</span><span class="st"> </span>b_sigma_groupB),</a>
-<a class="sourceLine" id="cb41-11" data-line-number="11">    <span class="dt">mean_B =</span> <span class="kw">exp</span>(mu_B <span class="op">+</span><span class="st"> </span>sigma_B<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb41-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb41-13" data-line-number="13">    <span class="dt">estimate =</span> mean_A <span class="op">-</span><span class="st"> </span>mean_B</a>
-<a class="sourceLine" id="cb41-14" data-line-number="14">  ) </a>
-<a class="sourceLine" id="cb41-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb41-16" data-line-number="16">log_bayes_interval &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb41-17" data-line-number="17"><span class="st">  </span>log_bayes_samples <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-18" data-line-number="18"><span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-19" data-line-number="19"><span class="st">  </span><span class="kw">to_broom_names</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-20" data-line-number="20"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression (Bayesian, uninformed)&quot;</span>)</a>
-<a class="sourceLine" id="cb41-21" data-line-number="21">log_bayes_interval</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_bayes_samples &lt;-<span class="st"> </span>
+<span class="st">  </span>m_log_bayes <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tidy_draws</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">mu_A =</span> b_Intercept,
+    <span class="dt">sigma_A =</span> <span class="kw">exp</span>(b_sigma_Intercept),
+    <span class="dt">mean_A =</span> <span class="kw">exp</span>(mu_A <span class="op">+</span><span class="st"> </span>sigma_A<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),
+    
+    <span class="dt">mu_B =</span> b_Intercept <span class="op">+</span><span class="st"> </span>b_groupB,
+    <span class="dt">sigma_B =</span> <span class="kw">exp</span>(b_sigma_Intercept <span class="op">+</span><span class="st"> </span>b_sigma_groupB),
+    <span class="dt">mean_B =</span> <span class="kw">exp</span>(mu_B <span class="op">+</span><span class="st"> </span>sigma_B<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>),
+    
+    <span class="dt">estimate =</span> mean_A <span class="op">-</span><span class="st"> </span>mean_B
+  ) 
+
+log_bayes_interval &lt;-<span class="st"> </span>
+<span class="st">  </span>log_bayes_samples <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">to_broom_names</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression (Bayesian, uninformed)&quot;</span>)
+log_bayes_interval</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -514,9 +490,9 @@ We can sample from that distribution and use the estimated log-scale standard de
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">104.2499</td>
-<td align="right">83.27925</td>
-<td align="right">127.6903</td>
+<td align="right">103.923</td>
+<td align="right">82.73573</td>
+<td align="right">128.301</td>
 <td align="right">0.95</td>
 <td align="left">mean</td>
 <td align="left">qi</td>
@@ -526,21 +502,21 @@ We can sample from that distribution and use the estimated log-scale standard de
 </table>
 </div>
 <p>Alternatively, we could use <code>tidybayes::add_fitted_draws</code>, which internally calls <code>brmsfit::posterior_linpred</code>, which does the same math as above to calculate the posterior distribution for the mean on the response scale. This saves us some math (and makes sure we did not do that math incorrectly):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">log_bayes_samples &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="st">  </span>data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="st">  </span><span class="co"># reverse the order of group so that the output is A - B instead of B - A</span></a>
-<a class="sourceLine" id="cb42-4" data-line-number="4"><span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">group =</span> <span class="kw">fct_rev</span>(group)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-5" data-line-number="5"><span class="st">  </span><span class="kw">add_fitted_draws</span>(m_log_bayes, <span class="dt">value =</span> <span class="st">&quot;estimate&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-7" data-line-number="7"><span class="st">  </span><span class="kw">compare_levels</span>(estimate, <span class="dt">by =</span> group) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression (Bayesian, uninformed)&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-9" data-line-number="9"><span class="st">  </span><span class="kw">group_by</span>(method)</a>
-<a class="sourceLine" id="cb42-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb42-11" data-line-number="11">log_bayes_interval &lt;-</a>
-<a class="sourceLine" id="cb42-12" data-line-number="12"><span class="st">  </span>log_bayes_samples <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-13" data-line-number="13"><span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb42-14" data-line-number="14"><span class="st">  </span><span class="kw">to_broom_names</span>()</a>
-<a class="sourceLine" id="cb42-15" data-line-number="15">log_bayes_interval</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_bayes_samples &lt;-<span class="st"> </span>
+<span class="st">  </span>data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># reverse the order of group so that the output is A - B instead of B - A</span>
+<span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">group =</span> <span class="kw">fct_rev</span>(group)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_fitted_draws</span>(m_log_bayes, <span class="dt">value =</span> <span class="st">&quot;estimate&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">compare_levels</span>(estimate, <span class="dt">by =</span> group) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression (Bayesian, uninformed)&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(method)
+
+log_bayes_interval &lt;-
+<span class="st">  </span>log_bayes_samples <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">to_broom_names</span>()
+log_bayes_interval</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -557,9 +533,9 @@ We can sample from that distribution and use the estimated log-scale standard de
 <tbody>
 <tr class="odd">
 <td align="left">lognormal regression (Bayesian, uninformed)</td>
-<td align="right">104.2499</td>
-<td align="right">83.27925</td>
-<td align="right">127.6903</td>
+<td align="right">103.923</td>
+<td align="right">82.73573</td>
+<td align="right">128.301</td>
 <td align="right">0.95</td>
 <td align="left">mean</td>
 <td align="left">qi</td>
@@ -572,13 +548,13 @@ We can sample from that distribution and use the estimated log-scale standard de
 <div id="approach-3b-log-normal-regression-with-marginal-estimate-of-difference-in-means-using-bayesian-regression-weakly-informed-priors" class="section level4">
 <h4><span class="header-section-number">A.1.3.5</span> Approach 3b: log-normal regression with marginal estimate of difference in means using Bayesian regression (weakly informed priors)</h4>
 <p>Finally, let’s run the same analysis with weakly informed priors based on what we might believe reasonable ranges of the effect are. To see what priors we can set in <code>brm</code> models, we can use the <code>get_prior()</code> function:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">get_prior</span>(<span class="kw">brmsformula</span>(</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">    <span class="co"># for using informed priors, the `0 + intercept` formula can be helpful: otherwise,</span></a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">    <span class="co"># brm re-centers the data on 0, which can make it harder to set an informed prior.</span></a>
-<a class="sourceLine" id="cb43-4" data-line-number="4">    <span class="co"># see help(&quot;set_prior&quot;) for more information.</span></a>
-<a class="sourceLine" id="cb43-5" data-line-number="5">    completion_time_ms <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept,</a>
-<a class="sourceLine" id="cb43-6" data-line-number="6">    sigma <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept</a>
-<a class="sourceLine" id="cb43-7" data-line-number="7">  ), <span class="dt">data =</span> data, <span class="dt">family =</span> lognormal)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_prior</span>(<span class="kw">brmsformula</span>(
+    <span class="co"># for using informed priors, the `0 + intercept` formula can be helpful: otherwise,</span>
+    <span class="co"># brm re-centers the data on 0, which can make it harder to set an informed prior.</span>
+    <span class="co"># see help(&quot;set_prior&quot;) for more information.</span>
+    completion_time_ms <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept,
+    sigma <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept
+  ), <span class="dt">data =</span> data, <span class="dt">family =</span> lognormal)</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -663,13 +639,13 @@ We can sample from that distribution and use the estimated log-scale standard de
 <p>Since the standard deviation is estimated using a submodel that itself uses a log link, we have to make a prior on the log scale of log standard deviation. For standard deviation on the log scale, let’s assume a baseline of around 100ms response time. Then, our prior on standard deviation on the log scale could reasonbly be as small as one reflecting individual differences on the order of 10ms: <span class="math inline">\(log(110) - log(100) \approx 0.1 \approx e^-2.4\)</span>, or as large as one reflecting a difference of 1 second: <span class="math inline">\(log(1100) - log(100) \approx 2.4 \approx e^0.9\)</span>. So we’ll center our log log sd prior at <span class="math inline">\((0.9 + -2.4)/2\)</span> and give it a 95% interval that covers them (sd of <span class="math inline">\((0.9 - -2.4)/4\)</span>): <span class="math inline">\(\mathrm{Normal}(-0.75, 0.825)\)</span>.</p>
 <p>Finally, for differences in log log standard deviation, we’ll assume zero-centered with similar magnitude to the intercept: <span class="math inline">\(\mathrm{Normal}(0, 0.825)\)</span>.</p>
 <p>These priors can be specified as follows:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">log_bayes_priors &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="fl">5.5</span>, <span class="fl">1.75</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> intercept),</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">2.3</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> groupB),</a>
-<a class="sourceLine" id="cb44-4" data-line-number="4">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="op">-</span><span class="fl">0.75</span>, <span class="fl">0.825</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> intercept, <span class="dt">dpar =</span> sigma),</a>
-<a class="sourceLine" id="cb44-5" data-line-number="5">    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.825</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> groupB, <span class="dt">dpar =</span> sigma)</a>
-<a class="sourceLine" id="cb44-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb44-7" data-line-number="7">log_bayes_priors</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_bayes_priors &lt;-<span class="st"> </span><span class="kw">c</span>(
+    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="fl">5.5</span>, <span class="fl">1.75</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> intercept),
+    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">2.3</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> groupB),
+    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="op">-</span><span class="fl">0.75</span>, <span class="fl">0.825</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> intercept, <span class="dt">dpar =</span> sigma),
+    <span class="kw">prior</span>(<span class="kw">normal</span>(<span class="dv">0</span>, <span class="fl">0.825</span>), <span class="dt">class =</span> b, <span class="dt">coef =</span> groupB, <span class="dt">dpar =</span> sigma)
+  )
+log_bayes_priors</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -729,26 +705,26 @@ We can sample from that distribution and use the estimated log-scale standard de
 </table>
 </div>
 <p>Then we can re-run the model from approach 3a with those priors:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">m_log_bayes_informed &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">brmsformula</span>(</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">    completion_time_ms <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept,</a>
-<a class="sourceLine" id="cb45-3" data-line-number="3">    sigma <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept</a>
-<a class="sourceLine" id="cb45-4" data-line-number="4">  ), <span class="dt">data =</span> data, <span class="dt">family =</span> lognormal, <span class="dt">prior =</span> log_bayes_priors)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m_log_bayes_informed &lt;-<span class="st"> </span><span class="kw">brm</span>(<span class="kw">brmsformula</span>(
+    completion_time_ms <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept,
+    sigma <span class="op">~</span><span class="st"> </span>group <span class="op">+</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>intercept
+  ), <span class="dt">data =</span> data, <span class="dt">family =</span> lognormal, <span class="dt">prior =</span> log_bayes_priors)</code></pre></div>
 <p>Similar to approach 2b, we will derive samples of the mean difference, this time from the posterior distribution. We will use these to derive a credible interval (Bayesian analog to a confidence interval) around the mean difference:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">log_bayes_informed_samples &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span>data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="st">  </span><span class="co"># reverse the order of group so that the output is A - B instead of B - A</span></a>
-<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">group =</span> <span class="kw">fct_rev</span>(group)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="st">  </span><span class="kw">add_fitted_draws</span>(m_log_bayes_informed, <span class="dt">value =</span> <span class="st">&quot;estimate&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-6" data-line-number="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-7" data-line-number="7"><span class="st">  </span><span class="kw">compare_levels</span>(estimate, <span class="dt">by =</span> group) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression (Bayesian, weakly informed)&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-9" data-line-number="9"><span class="st">  </span><span class="kw">group_by</span>(method)</a>
-<a class="sourceLine" id="cb46-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">log_bayes_informed_interval &lt;-</a>
-<a class="sourceLine" id="cb46-12" data-line-number="12"><span class="st">  </span>log_bayes_informed_samples <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-13" data-line-number="13"><span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-14" data-line-number="14"><span class="st">  </span><span class="kw">to_broom_names</span>()</a>
-<a class="sourceLine" id="cb46-15" data-line-number="15">log_bayes_informed_interval</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_bayes_informed_samples &lt;-<span class="st"> </span>
+<span class="st">  </span>data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># reverse the order of group so that the output is A - B instead of B - A</span>
+<span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">group =</span> <span class="kw">fct_rev</span>(group)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_fitted_draws</span>(m_log_bayes_informed, <span class="dt">value =</span> <span class="st">&quot;estimate&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">compare_levels</span>(estimate, <span class="dt">by =</span> group) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="st">&quot;lognormal regression (Bayesian, weakly informed)&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(method)
+
+log_bayes_informed_interval &lt;-
+<span class="st">  </span>log_bayes_informed_samples <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mean_qi</span>(estimate) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">to_broom_names</span>()
+log_bayes_informed_interval</code></pre></div>
 <div class="kable-table">
 <table>
 <thead>
@@ -765,9 +741,9 @@ We can sample from that distribution and use the estimated log-scale standard de
 <tbody>
 <tr class="odd">
 <td align="left">lognormal regression (Bayesian, weakly informed)</td>
-<td align="right">104.7182</td>
-<td align="right">83.38947</td>
-<td align="right">128.4844</td>
+<td align="right">104.4916</td>
+<td align="right">82.77971</td>
+<td align="right">129.5219</td>
 <td align="right">0.95</td>
 <td align="left">mean</td>
 <td align="left">qi</td>
@@ -781,13 +757,13 @@ We can sample from that distribution and use the estimated log-scale standard de
 <div id="comparing-approaches" class="section level3">
 <h3><span class="header-section-number">A.1.4</span> Comparing approaches</h3>
 <p>All approaches that give estimates for the difference in means give very similar results:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">bayes_samples =<span class="st"> </span><span class="kw">bind_rows</span>(log_bayes_samples, log_bayes_informed_samples)</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="kw">bind_rows</span>(t_interval, log_interval, log_bayes_interval, log_bayes_informed_interval) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> estimate, <span class="dt">y =</span> method)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb47-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_violinh</span>(<span class="dt">data =</span> bayes_samples, <span class="dt">color =</span> <span class="ot">NA</span>, <span class="dt">fill =</span> <span class="st">&quot;gray65&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb47-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_pointrangeh</span>(<span class="kw">aes</span>(<span class="dt">xmin =</span> conf.low, <span class="dt">xmax =</span> conf.high)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb47-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bayes_samples =<span class="st"> </span><span class="kw">bind_rows</span>(log_bayes_samples, log_bayes_informed_samples)
+
+<span class="kw">bind_rows</span>(t_interval, log_interval, log_bayes_interval, log_bayes_informed_interval) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> estimate, <span class="dt">y =</span> method)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_violinh</span>(<span class="dt">data =</span> bayes_samples, <span class="dt">color =</span> <span class="ot">NA</span>, <span class="dt">fill =</span> <span class="st">&quot;gray65&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrangeh</span>(<span class="kw">aes</span>(<span class="dt">xmin =</span> conf.low, <span class="dt">xmax =</span> conf.high)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/model_comparison-1.png" width="576" /></p>
 <p>The Bayesian estimates include posterior distributions shown as violin plots in gray.</p>
 
@@ -799,7 +775,7 @@ We can sample from that distribution and use the estimated log-scale standard de
           </div>
         </div>
       </div>
-<a href="transformation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="assumptions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -820,7 +796,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -832,6 +808,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/transparentstats/guidelines/edit/master/guides/appendix_effectsize.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -846,8 +826,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
