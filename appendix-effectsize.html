@@ -108,6 +108,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#using"><i class="fa fa-check"></i>Using</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#limitations"><i class="fa fa-check"></i>Limitations</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions"><i class="fa fa-check"></i>Versions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#citing"><i class="fa fa-check"></i>Citing</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="principles.html"><a href="principles.html"><i class="fa fa-check"></i><b>1</b> Transparent Statistics Guiding Principles</a><ul>
@@ -118,7 +119,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#resilience"><i class="fa fa-check"></i>3. Resilience</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#process-transparency"><i class="fa fa-check"></i>4. Process Transparency</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#clarity"><i class="fa fa-check"></i>5. Clarity</a></li>
-<li class="chapter" data-level="1.2.1" data-path="principles.html"><a href="principles.html#principles_simplicity"><i class="fa fa-check"></i><b>1.2.1</b> 6. Simplicity {-}</a></li>
+<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#principles_simplicity"><i class="fa fa-check"></i>6. Simplicity</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#non-contingency"><i class="fa fa-check"></i>7. Non-contingency</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#precision-and-economy"><i class="fa fa-check"></i>8. Precision and economy</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#material-availability"><i class="fa fa-check"></i>9. Material availability</a></li>
@@ -162,7 +163,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="pvalues.html"><a href="pvalues.html"><i class="fa fa-check"></i><b>3</b> p values</a></li>
-<li class="chapter" data-level="4" data-path="inferential.html"><a href="inferential.html"><i class="fa fa-check"></i><b>4</b> Inferential statistics</a></li>
+<li class="chapter" data-level="4" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>4</b> Inferential statistics</a></li>
 <li class="chapter" data-level="5" data-path="interpretations.html"><a href="interpretations.html"><i class="fa fa-check"></i><b>5</b> Interpretations and Conclusion</a></li>
 <li class="chapter" data-level="6" data-path="preregistration.html"><a href="preregistration.html"><i class="fa fa-check"></i><b>6</b> Preregistration and prespecification</a></li>
 <li class="chapter" data-level="7" data-path="multiplecomparisons.html"><a href="multiplecomparisons.html"><i class="fa fa-check"></i><b>7</b> Multiple comparisons</a></li>
@@ -279,7 +280,7 @@ t_interval</code></pre></div>
 </div>
 <div id="approach-2a-ratio-of-geometric-means-with-students-t-confidence-interval-on-log-scale" class="section level4">
 <h4><span class="header-section-number">A.1.3.2</span> Approach 2a: Ratio of geometric means with Student’s t confidence interval on log-scale</h4>
-<p>For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the <a href="assumptions.html#assumptions">Assumptions and Robustness</a> guideline for more information.</p>
+<p>For responses that are assumed to be log-normal, one alternative is to calculate the mean difference on the log scale. Because the mean on the log scale corresponds to the geometric mean of the untransformed responses, this is equivalent to calculating a ratio of geometric means on the untransformed scale (in this case, a ratio of geometric mean response times). See the <a href="#transformation">data transformation</a> guideline for more information.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_t_interval &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">t.test</span>(<span class="kw">log</span>(completion_time_ms) <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> data) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tidy</span>()    <span class="co"># put result in tidy tabular format</span>
@@ -489,9 +490,9 @@ log_bayes_interval</code></pre></div>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">104.1443</td>
-<td align="right">82.37689</td>
-<td align="right">127.9494</td>
+<td align="right">103.923</td>
+<td align="right">82.73573</td>
+<td align="right">128.301</td>
 <td align="right">0.95</td>
 <td align="left">mean</td>
 <td align="left">qi</td>
@@ -532,9 +533,9 @@ log_bayes_interval</code></pre></div>
 <tbody>
 <tr class="odd">
 <td align="left">lognormal regression (Bayesian, uninformed)</td>
-<td align="right">104.1443</td>
-<td align="right">82.37689</td>
-<td align="right">127.9494</td>
+<td align="right">103.923</td>
+<td align="right">82.73573</td>
+<td align="right">128.301</td>
 <td align="right">0.95</td>
 <td align="left">mean</td>
 <td align="left">qi</td>
@@ -740,9 +741,9 @@ log_bayes_informed_interval</code></pre></div>
 <tbody>
 <tr class="odd">
 <td align="left">lognormal regression (Bayesian, weakly informed)</td>
-<td align="right">104.4641</td>
-<td align="right">82.795</td>
-<td align="right">129.7881</td>
+<td align="right">104.4916</td>
+<td align="right">82.77971</td>
+<td align="right">129.5219</td>
 <td align="right">0.95</td>
 <td align="left">mean</td>
 <td align="left">qi</td>
