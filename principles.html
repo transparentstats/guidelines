@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Transparent Statistics Guidelines</title>
-  <meta name="description" content="Guidelines, FAQ, and exemplar analyses">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Transparent Statistics Guiding Principles | Transparent Statistics Guidelines</title>
+  <meta name="description" content="Guidelines, FAQ, and exemplar analyses" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Transparent Statistics Guidelines" />
+  <meta property="og:title" content="Chapter 1 Transparent Statistics Guiding Principles | Transparent Statistics Guidelines" />
   <meta property="og:type" content="book" />
   
   
@@ -17,25 +16,26 @@
   <meta name="github-repo" content="transparentstats/guidelines" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Transparent Statistics Guidelines" />
+  <meta name="twitter:title" content="Chapter 1 Transparent Statistics Guiding Principles | Transparent Statistics Guidelines" />
   
   <meta name="twitter:description" content="Guidelines, FAQ, and exemplar analyses" />
   
 
-<meta name="author" content="Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)">
+<meta name="author" content="Transparent Statistics in HCI Working Group (http://transparentstatistics.org/)" />
 
 
-<meta name="date" content="2019-02-14">
+<meta name="date" content="2019-06-29" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="index.html">
 <link rel="next" href="effectsize.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,69 +50,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -136,7 +108,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#using"><i class="fa fa-check"></i>Using</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#limitations"><i class="fa fa-check"></i>Limitations</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#versions"><i class="fa fa-check"></i>Versions</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#citing"><i class="fa fa-check"></i>Citing</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="principles.html"><a href="principles.html"><i class="fa fa-check"></i><b>1</b> Transparent Statistics Guiding Principles</a><ul>
@@ -147,7 +118,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#resilience"><i class="fa fa-check"></i>3. Resilience</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#process-transparency"><i class="fa fa-check"></i>4. Process Transparency</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#clarity"><i class="fa fa-check"></i>5. Clarity</a></li>
-<li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#principles_simplicity"><i class="fa fa-check"></i>6. Simplicity</a></li>
+<li class="chapter" data-level="1.2.1" data-path="principles.html"><a href="principles.html#principles_simplicity"><i class="fa fa-check"></i><b>1.2.1</b> 6. Simplicity {-}</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#non-contingency"><i class="fa fa-check"></i>7. Non-contingency</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#precision-and-economy"><i class="fa fa-check"></i>8. Precision and economy</a></li>
 <li class="chapter" data-level="" data-path="principles.html"><a href="principles.html#material-availability"><i class="fa fa-check"></i>9. Material availability</a></li>
@@ -166,15 +137,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.9" data-path="effectsize.html"><a href="effectsize.html#effectsize_faq_controversial"><i class="fa fa-check"></i><b>2.1.9</b> What are controversial issues about effect sizes?</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_simple"><i class="fa fa-check"></i><b>2.2</b> Exemplar: Simple effect size</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis"><i class="fa fa-check"></i><b>2.2.1</b> Libraries needed for this analysis</a></li>
-<li class="chapter" data-level="2.2.2" data-path="effectsize.html"><a href="effectsize.html#data"><i class="fa fa-check"></i><b>2.2.2</b> Data</a></li>
-<li class="chapter" data-level="2.2.3" data-path="effectsize.html"><a href="effectsize.html#calculating-simple-effect-size"><i class="fa fa-check"></i><b>2.2.3</b> Calculating simple effect size</a></li>
-<li class="chapter" data-level="2.2.4" data-path="effectsize.html"><a href="effectsize.html#difference-in-means-with-students-t-confidence-interval"><i class="fa fa-check"></i><b>2.2.4</b> Difference in means with Student’s t confidence interval</a></li>
-<li class="chapter" data-level="2.2.5" data-path="effectsize.html"><a href="effectsize.html#reporting-simple-effect-size"><i class="fa fa-check"></i><b>2.2.5</b> Reporting simple effect size</a></li>
-<li class="chapter" data-level="2.2.6" data-path="effectsize.html"><a href="effectsize.html#interpreting-effect-size-same-result-different-domains-different-interpretations"><i class="fa fa-check"></i><b>2.2.6</b> Interpreting effect size: same result, different domains = different interpretations</a></li>
+<li class="chapter" data-level="2.2.1" data-path="effectsize.html"><a href="effectsize.html#data"><i class="fa fa-check"></i><b>2.2.1</b> Data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="effectsize.html"><a href="effectsize.html#calculating-simple-effect-size"><i class="fa fa-check"></i><b>2.2.2</b> Calculating simple effect size</a></li>
+<li class="chapter" data-level="2.2.3" data-path="effectsize.html"><a href="effectsize.html#reporting-simple-effect-size"><i class="fa fa-check"></i><b>2.2.3</b> Reporting simple effect size</a></li>
+<li class="chapter" data-level="2.2.4" data-path="effectsize.html"><a href="effectsize.html#interpreting-effect-size-same-result-different-domains-different-interpretations"><i class="fa fa-check"></i><b>2.2.4</b> Interpreting effect size: same result, different domains = different interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_within"><i class="fa fa-check"></i><b>2.3</b> Exemplar: Within-subjects experiment</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-1"><i class="fa fa-check"></i><b>2.3.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="2.3.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis"><i class="fa fa-check"></i><b>2.3.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="2.3.2" data-path="effectsize.html"><a href="effectsize.html#simulate-a-dataset"><i class="fa fa-check"></i><b>2.3.2</b> Simulate a dataset</a></li>
 <li class="chapter" data-level="2.3.3" data-path="effectsize.html"><a href="effectsize.html#a-look-at-the-data"><i class="fa fa-check"></i><b>2.3.3</b> A look at the data</a></li>
 <li class="chapter" data-level="2.3.4" data-path="effectsize.html"><a href="effectsize.html#compute-effect-sizes"><i class="fa fa-check"></i><b>2.3.4</b> Compute effect sizes</a></li>
@@ -184,23 +153,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.8" data-path="effectsize.html"><a href="effectsize.html#reporting-the-results"><i class="fa fa-check"></i><b>2.3.8</b> Reporting the results</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_standardized"><i class="fa fa-check"></i><b>2.4</b> Exemplar: Standardized effect size</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-2"><i class="fa fa-check"></i><b>2.4.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="2.4.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-1"><i class="fa fa-check"></i><b>2.4.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="2.4.2" data-path="effectsize.html"><a href="effectsize.html#standardized-effect-size"><i class="fa fa-check"></i><b>2.4.2</b> Standardized effect size</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="effectsize.html"><a href="effectsize.html#effectsize_exemplar_nonparametric"><i class="fa fa-check"></i><b>2.5</b> Exemplar: Nonparametric effect size</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-3"><i class="fa fa-check"></i><b>2.5.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="2.5.1" data-path="effectsize.html"><a href="effectsize.html#libraries-needed-for-this-analysis-2"><i class="fa fa-check"></i><b>2.5.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="2.5.2" data-path="effectsize.html"><a href="effectsize.html#nonparametric-effect-size"><i class="fa fa-check"></i><b>2.5.2</b> Nonparametric effect size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>3</b> Bayesian inference</a></li>
-<li class="chapter" data-level="4" data-path="likert.html"><a href="likert.html"><i class="fa fa-check"></i><b>4</b> Likert-scale data</a></li>
-<li class="chapter" data-level="5" data-path="planning.html"><a href="planning.html"><i class="fa fa-check"></i><b>5</b> Experiment and analysis planning</a></li>
-<li class="chapter" data-level="6" data-path="pvalues.html"><a href="pvalues.html"><i class="fa fa-check"></i><b>6</b> p values</a></li>
-<li class="chapter" data-level="7" data-path="transformation.html"><a href="transformation.html"><i class="fa fa-check"></i><b>7</b> Data transformation</a></li>
+<li class="chapter" data-level="3" data-path="pvalues.html"><a href="pvalues.html"><i class="fa fa-check"></i><b>3</b> p values</a></li>
+<li class="chapter" data-level="4" data-path="inferential.html"><a href="inferential.html"><i class="fa fa-check"></i><b>4</b> Inferential statistics</a></li>
+<li class="chapter" data-level="5" data-path="interpretations.html"><a href="interpretations.html"><i class="fa fa-check"></i><b>5</b> Interpretations and Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="preregistration.html"><a href="preregistration.html"><i class="fa fa-check"></i><b>6</b> Preregistration and prespecification</a></li>
+<li class="chapter" data-level="7" data-path="multiplecomparisons.html"><a href="multiplecomparisons.html"><i class="fa fa-check"></i><b>7</b> Multiple comparisons</a></li>
+<li class="chapter" data-level="8" data-path="interrater.html"><a href="interrater.html"><i class="fa fa-check"></i><b>8</b> Inter-rater reliability</a></li>
+<li class="chapter" data-level="9" data-path="modelselection.html"><a href="modelselection.html"><i class="fa fa-check"></i><b>9</b> Model selection and evaluation</a></li>
+<li class="chapter" data-level="10" data-path="bayesian.html"><a href="bayesian.html"><i class="fa fa-check"></i><b>10</b> Bayesian inference</a></li>
+<li class="chapter" data-level="11" data-path="likert.html"><a href="likert.html"><i class="fa fa-check"></i><b>11</b> Likert-scale data</a></li>
+<li class="chapter" data-level="12" data-path="assumptions.html"><a href="assumptions.html"><i class="fa fa-check"></i><b>12</b> Assumptions and robustness</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html"><i class="fa fa-check"></i><b>A</b> Effect size appendix</a><ul>
 <li class="chapter" data-level="A.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#appendix_effectsize_simple"><i class="fa fa-check"></i><b>A.1</b> Alternative approaches for simple effect size exemplar</a><ul>
-<li class="chapter" data-level="A.1.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#libraries-needed-for-this-analysis-4"><i class="fa fa-check"></i><b>A.1.1</b> Libraries needed for this analysis</a></li>
+<li class="chapter" data-level="A.1.1" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#libraries-needed-for-this-analysis-3"><i class="fa fa-check"></i><b>A.1.1</b> Libraries needed for this analysis</a></li>
 <li class="chapter" data-level="A.1.2" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#data-1"><i class="fa fa-check"></i><b>A.1.2</b> Data</a></li>
 <li class="chapter" data-level="A.1.3" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#calculating-simple-effect-size-1"><i class="fa fa-check"></i><b>A.1.3</b> Calculating simple effect size</a></li>
 <li class="chapter" data-level="A.1.4" data-path="appendix-effectsize.html"><a href="appendix-effectsize.html#comparing-approaches"><i class="fa fa-check"></i><b>A.1.4</b> Comparing approaches</a></li>
@@ -227,15 +201,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="principles" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Transparent Statistics Guiding Principles</h1>
 <p><a href="https://github.com/transparentstats/guidelines"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a></p>
-<div class="preamble">
-<p><strong>Version:</strong> 1.0</p>
-<p><a href="https://doi.org/10.5281/zenodo.2226616"><img src="https://img.shields.io/badge/this%20version-10.5281%2Fzenodo.2226616-green.svg" alt="DOI this version" /></a>
-<a href="https://doi.org/10.5281/zenodo.1186169"><img src="https://img.shields.io/badge/all%20versions-10.5281%2Fzenodo.1186169-blue.svg" alt="DOI all versions" /></a>
-<a href="index.html#citing"><img src="https://img.shields.io/badge/-cite%20or%20contribute-lightgrey.svg" alt="Citing or contribute" /></a></p>
+<p><strong>Version:</strong> 1.0 <a href="https://doi.org/10.5281/zenodo.1344317"><img src="https://img.shields.io/badge/DOI%20current%20version-10.5281%2Fzenodo.1344317-green.svg" alt="DOI current version" /></a> <a href="https://doi.org/10.5281/zenodo.1344316"><img src="https://img.shields.io/badge/DOI%20all%20versions-10.5281%2Fzenodo.1344316-blue.svg" alt="DOI all versions" /></a></p>
 <p><strong>Contributed to the writing:</strong> Pierre Dragicevic, Chat Wacharamanotham, Matthew Kay</p>
 <p><strong>Gave feedback:</strong></p>
 <p><strong>Endorsed:</strong></p>
-</div>
 <div id="introduction" class="section level2">
 <h2><span class="header-section-number">1.1</span> Introduction</h2>
 <p>Human-computer interaction (HCI) is a large, multidisciplinary field drawing on a variety of approaches for analyzing quantitative data. However, many of our existing practices have drawn increasing criticism, such as our overreliance on mechanical statistical testing procedures, our lack of replications and meta-analyses, and our unwillingness to share data and study materials. These issues have been discussed within HCI <span class="citation">(Wilson et al. <a href="#ref-Wilson2011">2011</a>; Kaptein and Robertson <a href="#ref-Kaptein2012">2012</a>; Dragicevic <a href="#ref-Dragicevic2016">2016</a>; Kay, Nelson, and Hekler <a href="#ref-Kay2016">2016</a>; Cockburn, Gutwin, and Dix <a href="#ref-Cockburn2018">2018</a>)</span> and (to a much larger extent) in other fields <span class="citation">(Cohen <a href="#ref-Cohen1994">1994</a>; Gigerenzer <a href="#ref-Gigerenzer2004">2004</a>; Ioannidis <a href="#ref-Ioannidis2005">2005</a>; Simmons, Nelson, and Simonsohn <a href="#ref-Simmons2011">2011</a>; Giner-Sorolla <a href="#ref-Giner2012">2012</a>; Cumming <a href="#ref-Cumming2014a">2014</a>; Nosek et al. <a href="#ref-Nosek2017">2017</a>)</span>. Poor statistical practice and the lack of transparency in statistical reporting hamper the progress of knowledge and undermine the scientific credibility of affected disciplines, as witnessed by the growing number of press articles reporting a “crisis of confidence” in the most visible of these disciplines <span class="citation">(Earp and Trafimow <a href="#ref-Earp2015">2015</a>)</span>.</p>
@@ -299,8 +268,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>Example:</em> Excessive numbers of significant digits are difficult to process thus they go against the principle of clarity <span class="citation">(Ehrenberg <a href="#ref-Ehrenberg1977">1977</a>)</span>, in addition to giving a misleading impression of precision <span class="citation">(Taylor <a href="#ref-Taylor1997">1997</a>)</span>.</li>
 </ul>
 </div>
-<div id="principles_simplicity" class="section level3 unnumbered">
-<h3>6. Simplicity</h3>
+<div id="principles_simplicity" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> 6. Simplicity {-}</h3>
 <p>When choosing between two data analysis procedures, the simplest procedure should ideally be preferred even if it is slightly inferior in other respects. A focus on simplicity follows from the principles of clarity and ease of processing, and it makes both researcher mistakes and reader misinterpretations less likely to occur. In other words, the KISS principle (Keep It Simple, Stupid) is as relevant in transparent statistics as in any other domain.</p>
 </div>
 <div id="non-contingency" class="section level3 unnumbered">
@@ -326,107 +295,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-Wilson2011">
-<p>Wilson, Max L, Wendy Mackay, Ed Chi, Michael Bernstein, Dan Russell, and Harold Thimbleby. 2011. “RepliCHI-Chi Should Be Replicating and Validating Results More: Discuss.” In <em>CHI’11 Extended Abstracts on Human Factors in Computing Systems</em>, 463–66. ACM. <a href="https://hal.inria.fr/file/index/docid/1000423/filename/RepliCHI-panel-2011.pdf" class="uri">https://hal.inria.fr/file/index/docid/1000423/filename/RepliCHI-panel-2011.pdf</a>.</p>
-</div>
-<div id="ref-Kaptein2012">
-<p>Kaptein, Maurits, and Judy Robertson. 2012. “Rethinking Statistical Analysis Methods for Chi.” In <em>Proceedings of the Sigchi Conference on Human Factors in Computing Systems</em>, 1105–14. ACM. <a href="http://judyrobertson.typepad.com/files/chi2012_submission_final.pdf" class="uri">http://judyrobertson.typepad.com/files/chi2012_submission_final.pdf</a>.</p>
-</div>
-<div id="ref-Dragicevic2016">
-<p>Dragicevic, Pierre. 2016. “Fair Statistical Communication in Hci.” In <em>Modern Statistical Methods for Hci</em>, 291–330. Springer. <a href="https://hal.inria.fr/hal-01377894/document" class="uri">https://hal.inria.fr/hal-01377894/document</a>.</p>
-</div>
-<div id="ref-Kay2016">
-<p>Kay, Matthew, Gregory L Nelson, and Eric B Hekler. 2016. “Researcher-Centered Design of Statistics: Why Bayesian Statistics Better Fit the Culture and Incentives of Hci.” In <em>Proceedings of the 2016 Chi Conference on Human Factors in Computing Systems</em>, 4521–32. ACM. <a href="http://www.mjskay.com/papers/chi_2016_bayes.pdf" class="uri">http://www.mjskay.com/papers/chi_2016_bayes.pdf</a>.</p>
-</div>
 <div id="ref-Cockburn2018">
 <p>Cockburn, Andy, Karl Gutwin, and Alan Dix. 2018. “HARK No More: On the Preregistration of Chi Experiments.” ACM.</p>
 </div>
 <div id="ref-Cohen1994">
 <p>Cohen, Jacob. 1994. “The Earth Is Round (P&lt;.05).” <em>American Psychologist</em> 49 (12). American Psychological Association: 997. <a href="http://ist-socrates.berkeley.edu/~maccoun/PP279_Cohen1.pdf" class="uri">http://ist-socrates.berkeley.edu/~maccoun/PP279_Cohen1.pdf</a>.</p>
 </div>
-<div id="ref-Gigerenzer2004">
-<p>Gigerenzer, Gerd. 2004. “Mindless Statistics.” <em>The Journal of Socio-Economics</em> 33 (5). Elsevier: 587–606. <a href="http://pubman.mpdl.mpg.de/pubman/item/escidoc:2101336/component/escidoc:2101335/GG_Mindless_2004.pdf" class="uri">http://pubman.mpdl.mpg.de/pubman/item/escidoc:2101336/component/escidoc:2101335/GG_Mindless_2004.pdf</a>.</p>
-</div>
-<div id="ref-Ioannidis2005">
-<p>Ioannidis, John PA. 2005. “Why Most Published Research Findings Are False.” <em>PLoS Medicine</em> 2 (8). Public Library of Science: e124. <a href="http://robotics.cs.tamu.edu/RSS2015NegativeResults/pmed.0020124.pdf" class="uri">http://robotics.cs.tamu.edu/RSS2015NegativeResults/pmed.0020124.pdf</a>.</p>
-</div>
-<div id="ref-Simmons2011">
-<p>Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. “False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.” <em>Psychological Science</em> 22 (11). Sage Publications Sage CA: Los Angeles, CA: 1359–66. <a href="http://opim.wharton.upenn.edu/DPlab/papers/publishedPapers/Simmons_2011_False-Positive%20Psychology.pdf">http://opim.wharton.upenn.edu/DPlab/papers/publishedPapers/Simmons_2011_False-Positive%20Psychology.pdf</a>.</p>
-</div>
-<div id="ref-Giner2012">
-<p>Giner-Sorolla, Roger. 2012. “Science or Art? How Aesthetic Standards Grease the Way Through the Publication Bottleneck but Undermine Science.” <em>Perspectives on Psychological Science</em> 7 (6). Sage Publications Sage CA: Los Angeles, CA: 562–71. <a href="http://journals.sagepub.com/doi/full/10.1177/1745691612457576" class="uri">http://journals.sagepub.com/doi/full/10.1177/1745691612457576</a>.</p>
-</div>
-<div id="ref-Cumming2014a">
-<p>Cumming, Geoff. 2014. “The New Statistics: Why and How.” <em>Psychological Science</em> 25 (1): 7–29. <a href="https://doi.org/10.1177/0956797613504966" class="uri">https://doi.org/10.1177/0956797613504966</a>.</p>
-</div>
-<div id="ref-Nosek2017">
-<p>Nosek, Brian A, Charles R Ebersole, Alexander DeHaven, and David Mellor. 2017. “The Preregistration Revolution.” Open Science Framework. <a href="https://osf.io/2dxu5/download?format=pdf" class="uri">https://osf.io/2dxu5/download?format=pdf</a>.</p>
-</div>
-<div id="ref-Earp2015">
-<p>Earp, Brian D, and David Trafimow. 2015. “Replication, Falsification, and the Crisis of Confidence in Social Psychology.” <em>Frontiers in Psychology</em> 6. Frontiers Media SA. <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00621/full" class="uri">https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00621/full</a>.</p>
-</div>
-<div id="ref-Gigerenzer2015">
-<p>Gigerenzer, Gerd, and Julian N Marewski. 2015. “Surrogate Science: The Idol of a Universal Method for Scientific Inference.” <em>Journal of Management</em> 41 (2). Sage Publications Sage CA: Los Angeles, CA: 421–40. <a href="http://www.dcscience.net/Gigerenzer-Journal-of-Management-2015.pdf" class="uri">http://www.dcscience.net/Gigerenzer-Journal-of-Management-2015.pdf</a>.</p>
-</div>
-<div id="ref-Transparent2017">
-<p>“Transparent Statistics Website.” 2017. <a href="http://transparentstatistics.org/" class="uri">http://transparentstatistics.org/</a>.</p>
-</div>
-<div id="ref-Open2017">
-<p>“Open Science Badges.” 2017. <a href="https://cos.io/our-services/open-science-badges/" class="uri">https://cos.io/our-services/open-science-badges/</a>. <a href="https://cos.io/our-services/open-science-badges/" class="uri">https://cos.io/our-services/open-science-badges/</a>.</p>
-</div>
-<div id="ref-Fisher1955">
-<p>Fisher, Ronald. 1955. “Statistical Methods and Scientific Induction.” <em>Journal of the Royal Statistical Society. Series B (Methodological)</em>. JSTOR, 69–78. <a href="http://www.ssnpstudents.com/wp/wp-content/uploads/2015/02/Fisher-1955.pdf" class="uri">http://www.ssnpstudents.com/wp/wp-content/uploads/2015/02/Fisher-1955.pdf</a>.</p>
-</div>
-<div id="ref-Norman2010">
-<p>Norman, Geoff. 2010. “Likert Scales, Levels of Measurement and the ‘Laws’ of Statistics.” <em>Advances in Health Sciences Education</em> 15 (5). Springer: 625–32. <a href="https://pdfs.semanticscholar.org/6dc0/0756ab722370b815df1223f4044dd63841a8.pdf" class="uri">https://pdfs.semanticscholar.org/6dc0/0756ab722370b815df1223f4044dd63841a8.pdf</a>.</p>
-</div>
-<div id="ref-Kirby2013">
-<p>Kirby, Kris N, and Daniel Gerlanc. 2013. “BootES: An R Package for Bootstrap Confidence Intervals on Effect Sizes.” <em>Behavior Research Methods</em> 45 (4). Springer: 905–27. <a href="http://web.williams.edu/Psychology/Faculty/Kirby/bootes-kirby-gerlanc-in-press.pdf" class="uri">http://web.williams.edu/Psychology/Faculty/Kirby/bootes-kirby-gerlanc-in-press.pdf</a>.</p>
-</div>
-<div id="ref-Dixon2003">
-<p>Dixon, Peter. 2003. “The P-Value Fallacy and How to Avoid It.” <em>Canadian Journal of Experimental Psychology/Revue Canadienne de Psychologie Experimentale</em> 57 (3). Canadian Psychological Association: 189. <a href="https://www.ncbi.nlm.nih.gov/pubmed/14596477" class="uri">https://www.ncbi.nlm.nih.gov/pubmed/14596477</a>.</p>
-</div>
-<div id="ref-Dragicevic2017">
-<p>“Statistical Dances: Why No Statistical Analysis Is Reliable and What to Do About It.” 2017. <a href="https://tinyurl.com/gricad-dance" class="uri">https://tinyurl.com/gricad-dance</a>. <a href="https://tinyurl.com/gricad-dance" class="uri">https://tinyurl.com/gricad-dance</a>.</p>
-</div>
 <div id="ref-Cumming2013a">
 <p>Cumming, Geoff. 2013. <em>Understanding the New Statistics: Effect Sizes, Confidence Intervals, and Meta-Analysis</em>. Routledge.</p>
+</div>
+<div id="ref-Cumming2014a">
+<p>Cumming, Geoff. 2014. “The New Statistics: Why and How.” <em>Psychological Science</em> 25 (1): 7–29. doi:<a href="https://doi.org/10.1177/0956797613504966">10.1177/0956797613504966</a>.</p>
 </div>
 <div id="ref-Lakens2016">
 <p>“Dance of the Bayes Factors.” 2016. <a href="http://daniellakens.blogspot.fr/2016/07/dance-of-bayes-factors.html" class="uri">http://daniellakens.blogspot.fr/2016/07/dance-of-bayes-factors.html</a>. <a href="http://daniellakens.blogspot.fr/2016/07/dance-of-bayes-factors.html" class="uri">http://daniellakens.blogspot.fr/2016/07/dance-of-bayes-factors.html</a>.</p>
 </div>
-<div id="ref-Gelman2013">
-<p>Gelman, Andrew, and Eric Loken. 2013. “The Garden of Forking Paths: Why Multiple Comparisons Can Be a Problem, Even When There Is No ‘Fishing Expedition’ or ‘P-Hacking’ and the Research Hypothesis Was Posited Ahead of Time.” <em>Department of Statistics, Columbia University</em>. <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf" class="uri">http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf</a>.</p>
+<div id="ref-Dixon2003">
+<p>Dixon, Peter. 2003. “The P-Value Fallacy and How to Avoid It.” <em>Canadian Journal of Experimental Psychology/Revue Canadienne de Psychologie Experimentale</em> 57 (3). Canadian Psychological Association: 189. <a href="https://www.ncbi.nlm.nih.gov/pubmed/14596477" class="uri">https://www.ncbi.nlm.nih.gov/pubmed/14596477</a>.</p>
 </div>
-<div id="ref-Kerr1998">
-<p>Kerr, Norbert L. 1998. “HARKing: Hypothesizing After the Results Are Known.” <em>Personality and Social Psychology Review</em> 2 (3). Sage Publications Sage CA: Los Angeles, CA: 196–217. <a href="http://www.socialrelationslab.com/uploads/1/8/9/6/18966149/harkingkerr1998.pdf" class="uri">http://www.socialrelationslab.com/uploads/1/8/9/6/18966149/harkingkerr1998.pdf</a>.</p>
+<div id="ref-Dragicevic2016">
+<p>Dragicevic, Pierre. 2016. “Fair Statistical Communication in Hci.” In <em>Modern Statistical Methods for Hci</em>, 291–330. Springer. <a href="https://hal.inria.fr/hal-01377894/document" class="uri">https://hal.inria.fr/hal-01377894/document</a>.</p>
 </div>
-<div id="ref-Tukey1977">
-<p>Tukey, John W. 1977. “Exploratory Data Analysis.” Reading, Mass.</p>
-</div>
-<div id="ref-Loftus1993">
-<p>Loftus, Geoffrey R. 1993. “A Picture Is Worth a Thousand P Values: On the Irrelevance of Hypothesis Testing in the Microcomputer Age.” <em>Behavior Research Methods, Instruments, &amp; Computers</em> 25 (2). Springer: 250–56. <a href="https://faculty.washington.edu/gloftus/Research/Publications/Manuscript.pdf/Loftus%20p-values%201993.pdf">https://faculty.washington.edu/gloftus/Research/Publications/Manuscript.pdf/Loftus%20p-values%201993.pdf</a>.</p>
-</div>
-<div id="ref-Gelman2002">
-<p>Gelman, Andrew, Cristian Pasarica, and Rahul Dodhia. 2002. “Let’s Practice What We Preach: Turning Tables into Graphs.” <em>The American Statistician</em> 56 (2). Taylor &amp; Francis: 121–30. <a href="https://pdfs.semanticscholar.org/202c/fec06a87fc96d3d56b6ad2ba4237b3fde141.pdf" class="uri">https://pdfs.semanticscholar.org/202c/fec06a87fc96d3d56b6ad2ba4237b3fde141.pdf</a>.</p>
+<div id="ref-Earp2015">
+<p>Earp, Brian D, and David Trafimow. 2015. “Replication, Falsification, and the Crisis of Confidence in Social Psychology.” <em>Frontiers in Psychology</em> 6. Frontiers Media SA. <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00621/full" class="uri">https://www.frontiersin.org/articles/10.3389/fpsyg.2015.00621/full</a>.</p>
 </div>
 <div id="ref-Ehrenberg1977">
 <p>Ehrenberg, ASC. 1977. “Rudiments of Numeracy.” <em>Journal of the Royal Statistical Society. Series A (General)</em>. JSTOR, 277–97. <a href="http://www1.maths.leeds.ac.uk/~sta6ajb/math1910/p4.pdf" class="uri">http://www1.maths.leeds.ac.uk/~sta6ajb/math1910/p4.pdf</a>.</p>
 </div>
-<div id="ref-Taylor1997">
-<p>Taylor, John. 1997. <em>Introduction to Error Analysis, the Study of Uncertainties in Physical Measurements</em>. University Science Books.</p>
-</div>
-<div id="ref-Stewart1995">
-<p>Stewart-Oaten, Allan. 1995. “Rules and Judgments in Statistics: Three Examples.” <em>Ecology</em> 76 (6). Wiley Online Library: 2001–9. <a href="http://onlinelibrary.wiley.com/doi/10.2307/1940736/full" class="uri">http://onlinelibrary.wiley.com/doi/10.2307/1940736/full</a>.</p>
-</div>
-<div id="ref-Wierdsma2013">
-<p>Wierdsma, A. 2013. “What Is Wrong with Tests of Normality?” <a href="http://tinyurl.com/normality-wrong" class="uri">http://tinyurl.com/normality-wrong</a>. <a href="http://tinyurl.com/normality-wrong" class="uri">http://tinyurl.com/normality-wrong</a>.</p>
+<div id="ref-Fisher1955">
+<p>Fisher, Ronald. 1955. “Statistical Methods and Scientific Induction.” <em>Journal of the Royal Statistical Society. Series B (Methodological)</em>. JSTOR, 69–78. <a href="http://www.ssnpstudents.com/wp/wp-content/uploads/2015/02/Fisher-1955.pdf" class="uri">http://www.ssnpstudents.com/wp/wp-content/uploads/2015/02/Fisher-1955.pdf</a>.</p>
 </div>
 <div id="ref-Gelman2017">
 <p>Gelman, Andrew. 2017. “Ethics and Statistics: Honesty and Transparency Are Not Enough.” <em>Chance</em> 30 (1). Taylor &amp; Francis: 37–39. <a href="http://www.stat.columbia.edu/~gelman/research/published/ChanceEthics14.pdf" class="uri">http://www.stat.columbia.edu/~gelman/research/published/ChanceEthics14.pdf</a>.</p>
 </div>
+<div id="ref-Gelman2013">
+<p>Gelman, Andrew, and Eric Loken. 2013. “The Garden of Forking Paths: Why Multiple Comparisons Can Be a Problem, Even When There Is No ‘Fishing Expedition’ or ‘P-Hacking’ and the Research Hypothesis Was Posited Ahead of Time.” <em>Department of Statistics, Columbia University</em>. <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf" class="uri">http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf</a>.</p>
+</div>
+<div id="ref-Gelman2002">
+<p>Gelman, Andrew, Cristian Pasarica, and Rahul Dodhia. 2002. “Let’s Practice What We Preach: Turning Tables into Graphs.” <em>The American Statistician</em> 56 (2). Taylor &amp; Francis: 121–30. <a href="https://pdfs.semanticscholar.org/202c/fec06a87fc96d3d56b6ad2ba4237b3fde141.pdf" class="uri">https://pdfs.semanticscholar.org/202c/fec06a87fc96d3d56b6ad2ba4237b3fde141.pdf</a>.</p>
+</div>
+<div id="ref-Gigerenzer2004">
+<p>Gigerenzer, Gerd. 2004. “Mindless Statistics.” <em>The Journal of Socio-Economics</em> 33 (5). Elsevier: 587–606. <a href="http://pubman.mpdl.mpg.de/pubman/item/escidoc:2101336/component/escidoc:2101335/GG_Mindless_2004.pdf" class="uri">http://pubman.mpdl.mpg.de/pubman/item/escidoc:2101336/component/escidoc:2101335/GG_Mindless_2004.pdf</a>.</p>
+</div>
+<div id="ref-Gigerenzer2015">
+<p>Gigerenzer, Gerd, and Julian N Marewski. 2015. “Surrogate Science: The Idol of a Universal Method for Scientific Inference.” <em>Journal of Management</em> 41 (2). Sage Publications Sage CA: Los Angeles, CA: 421–40. <a href="http://www.dcscience.net/Gigerenzer-Journal-of-Management-2015.pdf" class="uri">http://www.dcscience.net/Gigerenzer-Journal-of-Management-2015.pdf</a>.</p>
+</div>
+<div id="ref-Giner2012">
+<p>Giner-Sorolla, Roger. 2012. “Science or Art? How Aesthetic Standards Grease the Way Through the Publication Bottleneck but Undermine Science.” <em>Perspectives on Psychological Science</em> 7 (6). Sage Publications Sage CA: Los Angeles, CA: 562–71. <a href="http://journals.sagepub.com/doi/full/10.1177/1745691612457576" class="uri">http://journals.sagepub.com/doi/full/10.1177/1745691612457576</a>.</p>
+</div>
+<div id="ref-Ioannidis2005">
+<p>Ioannidis, John PA. 2005. “Why Most Published Research Findings Are False.” <em>PLoS Medicine</em> 2 (8). Public Library of Science: e124. <a href="http://robotics.cs.tamu.edu/RSS2015NegativeResults/pmed.0020124.pdf" class="uri">http://robotics.cs.tamu.edu/RSS2015NegativeResults/pmed.0020124.pdf</a>.</p>
+</div>
+<div id="ref-Kaptein2012">
+<p>Kaptein, Maurits, and Judy Robertson. 2012. “Rethinking Statistical Analysis Methods for Chi.” In <em>Proceedings of the Sigchi Conference on Human Factors in Computing Systems</em>, 1105–14. ACM. <a href="http://judyrobertson.typepad.com/files/chi2012_submission_final.pdf" class="uri">http://judyrobertson.typepad.com/files/chi2012_submission_final.pdf</a>.</p>
+</div>
+<div id="ref-Kay2016">
+<p>Kay, Matthew, Gregory L Nelson, and Eric B Hekler. 2016. “Researcher-Centered Design of Statistics: Why Bayesian Statistics Better Fit the Culture and Incentives of Hci.” In <em>Proceedings of the 2016 Chi Conference on Human Factors in Computing Systems</em>, 4521–32. ACM. <a href="http://www.mjskay.com/papers/chi_2016_bayes.pdf" class="uri">http://www.mjskay.com/papers/chi_2016_bayes.pdf</a>.</p>
+</div>
+<div id="ref-Kerr1998">
+<p>Kerr, Norbert L. 1998. “HARKing: Hypothesizing After the Results Are Known.” <em>Personality and Social Psychology Review</em> 2 (3). Sage Publications Sage CA: Los Angeles, CA: 196–217. <a href="http://www.socialrelationslab.com/uploads/1/8/9/6/18966149/harkingkerr1998.pdf" class="uri">http://www.socialrelationslab.com/uploads/1/8/9/6/18966149/harkingkerr1998.pdf</a>.</p>
+</div>
+<div id="ref-Kirby2013">
+<p>Kirby, Kris N, and Daniel Gerlanc. 2013. “BootES: An R Package for Bootstrap Confidence Intervals on Effect Sizes.” <em>Behavior Research Methods</em> 45 (4). Springer: 905–27. <a href="http://web.williams.edu/Psychology/Faculty/Kirby/bootes-kirby-gerlanc-in-press.pdf" class="uri">http://web.williams.edu/Psychology/Faculty/Kirby/bootes-kirby-gerlanc-in-press.pdf</a>.</p>
+</div>
 <div id="ref-Kruschke2017">
 <p>Kruschke, John K, and Torrin M Liddell. 2017. “The Bayesian New Statistics: Hypothesis Testing, Estimation, Meta-Analysis, and Power Analysis from a Bayesian Perspective.” <em>Psychonomic Bulletin &amp; Review</em>. Springer, 1–29. <a href="https://osf.io/ksfyr/download?format=pdf" class="uri">https://osf.io/ksfyr/download?format=pdf</a>.</p>
+</div>
+<div id="ref-Loftus1993">
+<p>Loftus, Geoffrey R. 1993. “A Picture Is Worth a Thousand P Values: On the Irrelevance of Hypothesis Testing in the Microcomputer Age.” <em>Behavior Research Methods, Instruments, &amp; Computers</em> 25 (2). Springer: 250–56. <a href="https://faculty.washington.edu/gloftus/Research/Publications/Manuscript.pdf/Loftus%20p-values%201993.pdf">https://faculty.washington.edu/gloftus/Research/Publications/Manuscript.pdf/Loftus%20p-values%201993.pdf</a>.</p>
+</div>
+<div id="ref-Norman2010">
+<p>Norman, Geoff. 2010. “Likert Scales, Levels of Measurement and the ‘Laws’ of Statistics.” <em>Advances in Health Sciences Education</em> 15 (5). Springer: 625–32. <a href="https://pdfs.semanticscholar.org/6dc0/0756ab722370b815df1223f4044dd63841a8.pdf" class="uri">https://pdfs.semanticscholar.org/6dc0/0756ab722370b815df1223f4044dd63841a8.pdf</a>.</p>
+</div>
+<div id="ref-Nosek2017">
+<p>Nosek, Brian A, Charles R Ebersole, Alexander DeHaven, and David Mellor. 2017. “The Preregistration Revolution.” Open Science Framework. <a href="https://osf.io/2dxu5/download?format=pdf" class="uri">https://osf.io/2dxu5/download?format=pdf</a>.</p>
+</div>
+<div id="ref-Open2017">
+<p>“Open Science Badges.” 2017. <a href="https://cos.io/our-services/open-science-badges/" class="uri">https://cos.io/our-services/open-science-badges/</a>. <a href="https://cos.io/our-services/open-science-badges/" class="uri">https://cos.io/our-services/open-science-badges/</a>.</p>
+</div>
+<div id="ref-Simmons2011">
+<p>Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. “False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.” <em>Psychological Science</em> 22 (11). Sage Publications Sage CA: Los Angeles, CA: 1359–66. <a href="http://opim.wharton.upenn.edu/DPlab/papers/publishedPapers/Simmons_2011_False-Positive%20Psychology.pdf">http://opim.wharton.upenn.edu/DPlab/papers/publishedPapers/Simmons_2011_False-Positive%20Psychology.pdf</a>.</p>
+</div>
+<div id="ref-Dragicevic2017">
+<p>“Statistical Dances: Why No Statistical Analysis Is Reliable and What to Do About It.” 2017. <a href="https://tinyurl.com/gricad-dance" class="uri">https://tinyurl.com/gricad-dance</a>. <a href="https://tinyurl.com/gricad-dance" class="uri">https://tinyurl.com/gricad-dance</a>.</p>
+</div>
+<div id="ref-Stewart1995">
+<p>Stewart-Oaten, Allan. 1995. “Rules and Judgments in Statistics: Three Examples.” <em>Ecology</em> 76 (6). Wiley Online Library: 2001–9. <a href="http://onlinelibrary.wiley.com/doi/10.2307/1940736/full" class="uri">http://onlinelibrary.wiley.com/doi/10.2307/1940736/full</a>.</p>
+</div>
+<div id="ref-Taylor1997">
+<p>Taylor, John. 1997. <em>Introduction to Error Analysis, the Study of Uncertainties in Physical Measurements</em>. University Science Books.</p>
+</div>
+<div id="ref-Transparent2017">
+<p>“Transparent Statistics Website.” 2017. <a href="http://transparentstatistics.org/" class="uri">http://transparentstatistics.org/</a>.</p>
+</div>
+<div id="ref-Tukey1977">
+<p>Tukey, John W. 1977. “Exploratory Data Analysis.” Reading, Mass.</p>
+</div>
+<div id="ref-Wierdsma2013">
+<p>Wierdsma, A. 2013. “What Is Wrong with Tests of Normality?” <a href="http://tinyurl.com/normality-wrong" class="uri">http://tinyurl.com/normality-wrong</a>. <a href="http://tinyurl.com/normality-wrong" class="uri">http://tinyurl.com/normality-wrong</a>.</p>
+</div>
+<div id="ref-Wilson2011">
+<p>Wilson, Max L, Wendy Mackay, Ed Chi, Michael Bernstein, Dan Russell, and Harold Thimbleby. 2011. “RepliCHI-Chi Should Be Replicating and Validating Results More: Discuss.” In <em>CHI’11 Extended Abstracts on Human Factors in Computing Systems</em>, 463–66. ACM. <a href="https://hal.inria.fr/file/index/docid/1000423/filename/RepliCHI-panel-2011.pdf" class="uri">https://hal.inria.fr/file/index/docid/1000423/filename/RepliCHI-panel-2011.pdf</a>.</p>
 </div>
 </div>
             </section>
@@ -455,7 +424,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -467,6 +436,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/transparentstats/guidelines/edit/master/guides/principles.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -481,8 +454,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
