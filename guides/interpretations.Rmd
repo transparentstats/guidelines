@@ -1,0 +1,8 @@
+# Interpretations and Conclusion {#interpretations}
+
+<mark>
+This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1ZXcp5Az1bH8lVAgPvq0J1LKgJc-wOfFflWn4pG0ZZAw/edit).
+We welcome help and feedback at all levels!
+If you would like to contribute, please see
+[Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).
+</mark>

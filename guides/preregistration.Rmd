@@ -1,7 +1,7 @@
-# Data transformation {#transformation}
+# Preregistration and prespecification {#preregistration}
 
 <mark>
-This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1ZmtMWnSi_4OqVxiP85Obyu6ddbzYP_p-HIqzmCyc_3s/edit#heading=h.ijmbziunc7d8).
+This section is currently under draft on this [Google Doc](https://docs.google.com/document/d/1Qyp3WbFuD-99PttCo4ZPNHwlDs5cqMYL_YB8EWAful0/edit).
 We welcome help and feedback at all levels!
 If you would like to contribute, please see
 [Contributing to the Guidelines](https://github.com/transparentstats/guidelines/wiki/Contributing-to-the-Guidelines).

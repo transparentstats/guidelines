@@ -55,7 +55,7 @@ The first choice is on whether to report simple effect sizes or standardized eff
 
 It is rarely sufficient to report an effect size as a single quantity. This is because a single quantity like a difference in means or a Cohen's *d* is typically only a *point estimate*, i.e., it is merely a best guess of the true effect size. It is crucial to also assess and report the statistical uncertainty about this point estimate.
 
-For more on assessing and reporting statistical uncertainty, see the [inferential statistics FAQ](#inferential).
+For more on assessing and reporting statistical uncertainty, see the [inferential statistics FAQ](#inference).
 
 Ideally, an effect size report should include:
 
